@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " a ",
+        " a ",
+        " s "
+    ],
+    "key": {
+        "a": {
+            "item": "magiksmostevile:amethyst"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "magiksmostevile:amethyst_sword"
+    }
+}

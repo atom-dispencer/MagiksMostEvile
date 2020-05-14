@@ -1,0 +1,6 @@
+{
+   "parent": "block/cube_all",
+   "textures": {
+       "all": "magiksmostevile:blocks/amethyst_ore/amethyst_ore_overworld"
+   }
+}

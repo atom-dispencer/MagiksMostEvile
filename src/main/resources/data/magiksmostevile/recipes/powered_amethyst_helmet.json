@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "AAA",
+        "A A",
+        "   "
+    ],
+    "key": {
+        "A": {
+            "item": "magiksmostevile:powered_amethyst"
+        }
+    },
+    "result": {
+        "item": "magiksmostevile:powered_amethyst_helmet"
+    }
+}
