@@ -38,7 +38,7 @@ public class Main {
 	
 	@SubscribeEvent
 	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-		evileRegistryEventHandler.eventCalled(event);
+		evileRegistryEventHandler.features(event);
 	}
 
 	@SubscribeEvent

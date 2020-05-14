@@ -1,5 +1,5 @@
 {
-   "parent": "magiksmostevile:block/amethyst_crystal",
+   "parent": "magiksmostevile:block/altar",
    "display": {
        "thirdperson": {
            "rotation": [ 10, -45, 170 ],

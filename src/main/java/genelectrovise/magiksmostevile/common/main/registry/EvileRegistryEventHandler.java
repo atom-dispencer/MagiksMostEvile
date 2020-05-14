@@ -29,12 +29,14 @@ public class EvileRegistryEventHandler {
 		modEventBus.addListener(this::addShrineToBiomes);
 	}
 
+	//////////////////////////////// FEATURES
+
 	/**
 	 * Calls other methods to register and add structures.
 	 * 
 	 * @param event
 	 */
-	public void eventCalled(Register<Feature<?>> event) {
+	public void features(Register<Feature<?>> event) {
 		registerShrines(event);
 	}
 
@@ -51,9 +53,7 @@ public class EvileRegistryEventHandler {
 			biomes.forEachRemaining((biome) -> {
 				Main.LOGGER.debug(" > Adding shrine to Biome : " + biome);
 				biome.addStructure(SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-				biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES,
-						SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
-								.withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+				biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 			});
 		});
 	}
@@ -65,10 +65,9 @@ public class EvileRegistryEventHandler {
 	 */
 	public void registerShrines(RegistryEvent.Register<Feature<?>> event) {
 		Main.LOGGER.debug("Registering shrines ==2==");
-		Shrine2.CENTRE_PIECE = Registry.register(Registry.STRUCTURE_PIECE, StructureReference.SHRINE_LOC,
-				ShrinePiece.ShrineCentrePiece::new);
-		event.getRegistry()
-				.register(new Shrine2(NoFeatureConfig::deserialize).setRegistryName(StructureReference.SHRINE_LOC));
+		Shrine2.CENTRE_PIECE = Registry.register(Registry.STRUCTURE_PIECE, StructureReference.SHRINE_LOC, ShrinePiece.ShrineCentrePiece::new);
+		event.getRegistry().register(new Shrine2(NoFeatureConfig::deserialize).setRegistryName(StructureReference.SHRINE_LOC));
 
 	}
+	
 }
