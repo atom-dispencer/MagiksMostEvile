@@ -1,7 +1,6 @@
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import genelectrovise.magiksmostevile.common.main.Main;
-import net.minecraft.advancements.criterion.MobEffectsPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -13,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.pathfinding.PathType;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
@@ -30,7 +28,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 
 public class AltarBlock extends ContainerBlock {
@@ -114,7 +111,7 @@ public class AltarBlock extends ContainerBlock {
 					serverWorld.addLightningBolt(lightning);
 
 					PlayerEntity player = serverWorld.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
-					
+
 					if (player != null) {
 						serverWorld.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), 2, true, Explosion.Mode.BREAK);
 					}
@@ -122,6 +119,7 @@ public class AltarBlock extends ContainerBlock {
 			}
 		}
 	}
+	
 	// Gui
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {

@@ -16,6 +16,7 @@ import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
 import genelectrovise.magiksmostevile.common.main.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarBlock;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
+import genelectrovise.magiksmostevile.common.tileentity.altar.AltarScreenManager;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
@@ -25,6 +26,7 @@ import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreGeneration;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ContainerType;
@@ -125,6 +127,10 @@ public class EvileDeferredRegistry {
 
 //=========CONTAINERS==================================================================================================================
 	public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER = CONTAINERS.register("altar_container", () -> new ContainerType<AltarContainer>(AltarContainer::new));
+
+	public static void createContainerFactories() {
+		ScreenManager.registerFactory(ALTAR_CONTAINER.get(), new AltarScreenManager());
+	}
 
 //=========ENTITIES====================================================================================================================
 
