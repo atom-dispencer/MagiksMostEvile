@@ -4,7 +4,6 @@ import genelectrovise.magiksmostevile.common.main.Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
@@ -30,7 +29,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-public class AltarBlock extends ContainerBlock {
+public class AltarBlock extends Block {
 	public static AxisAlignedBB ALTAR_AABB = new AxisAlignedBB(0.0625D, 0D, 0.0625D, 0.9375D, 0.625D, 0.9375D);
 
 	// double x1, double y1, double z1, double x2, double y2, double z2
@@ -55,13 +54,6 @@ public class AltarBlock extends ContainerBlock {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.minecraft.block.Block#allowsMovement(net.minecraft.block.BlockState,
-	 * net.minecraft.world.IBlockReader, net.minecraft.util.math.BlockPos,
-	 * net.minecraft.pathfinding.PathType)
-	 */
 	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return true;
@@ -86,8 +78,8 @@ public class AltarBlock extends ContainerBlock {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		return new AltarTileEntity();
+	public boolean hasTileEntity() {
+		return true;
 	}
 
 	@Override
@@ -119,7 +111,7 @@ public class AltarBlock extends ContainerBlock {
 			}
 		}
 	}
-	
+
 	// Gui
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {

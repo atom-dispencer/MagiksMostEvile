@@ -73,20 +73,6 @@ public class AltarScreen extends ContainerScreen<AltarContainer> {
 		this.font.drawString(this.title.getFormattedText(), 72.0F, 46.0F, 4210752);
 	}
 
-	/**
-	 * @param adjustedX
-	 * 
-	 */
-	private void drawPlayerInventory(int posX_main, int posY_main) {
-		/*getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.PLAYER_INVENTORY_VERTICAL);
-
-		
-		int distanceBuffer = 5;
-		int posY = posY_main + ((MAIN_HEIGHT - PLAYER_INVENTORY_VERTICAL_HEIGHT) / 2);
-
-		blit(posX_main + distanceBuffer + MAIN_WIDTH, posY, 0, ZERO, ZERO, PLAYER_INVENTORY_VERTICAL_WIDTH, PLAYER_INVENTORY_VERTICAL_HEIGHT, PLAYER_INVENTORY_VERTICAL_HEIGHT, PLAYER_INVENTORY_VERTICAL_WIDTH);
-	*/}
-
 	private void drawMain(int posX, int posY) {
 		getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.MAIN);
 
