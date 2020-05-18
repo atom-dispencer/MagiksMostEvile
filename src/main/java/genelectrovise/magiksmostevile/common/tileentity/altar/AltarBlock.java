@@ -1,6 +1,7 @@
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -8,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.pathfinding.PathType;
@@ -28,6 +30,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class AltarBlock extends Block {
 	public static AxisAlignedBB ALTAR_AABB = new AxisAlignedBB(0.0625D, 0D, 0.0625D, 0.9375D, 0.625D, 0.9375D);
@@ -115,29 +118,16 @@ public class AltarBlock extends Block {
 	// Gui
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
-		if (worldIn.isRemote) {
-			Main.LOGGER.debug("Activated -- world remote (server)");
-			return ActionResultType.SUCCESS;
-		} else {
+		if (!worldIn.isRemote) {
 			Main.LOGGER.debug("Activated -- world not remote (client)");
-			player.openContainer(state.getContainer(worldIn, pos));
+			
+			final ICustomContainer tileEntity = (ICustomContainer) worldIn.getTileEntity(pos);
+			tileEntity.openGUI((ServerPlayerEntity) player);
+
 			return ActionResultType.SUCCESS;
 		}
-	}
 
-	@Override
-	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-
-		if (tileentity instanceof AltarTileEntity) {
-			ITextComponent itextcomponent = ((INameable) tileentity).getDisplayName();
-			return new SimpleNamedContainerProvider((id, playerInv, textComponent) -> {
-				return new AltarContainer(id, playerInv);
-			}, itextcomponent);
-
-		} else {
-			return null;
-		}
+		return ActionResultType.FAIL;
 	}
 
 }

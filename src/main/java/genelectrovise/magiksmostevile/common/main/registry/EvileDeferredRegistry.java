@@ -126,7 +126,7 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<TileEntityType<AltarTileEntity>> TILE_ENTITY_ALTAR = TILE_ENTITIES.register("tile_entity_altar", () -> TileEntityType.Builder.create(AltarTileEntity::new, EvileDeferredRegistry.ALTAR.get()).build(null));
 
 //=========CONTAINERS==================================================================================================================
-	public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER = CONTAINERS.register("altar_container", () -> new ContainerType<AltarContainer>(AltarContainer::new));
+	public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER = CONTAINERS.register("altar_container", () -> new ContainerType<AltarContainer>(AltarContainer::new)));
 
 	public static void createContainerFactories() {
 		ScreenManager.registerFactory(ALTAR_CONTAINER.get(), new AltarScreenManager());

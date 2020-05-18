@@ -2,10 +2,16 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import genelectrovise.magiksmostevile.common.main.Main;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.client.gui.screen.EnchantmentScreen;
 import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.EnchantmentContainer;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.EnchantingTableTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -16,6 +22,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -29,7 +36,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
  * @see EnchantingTableTileEntity
  * @author GenElectrovise 14 May 2020
  */
-public class AltarTileEntity extends TileEntity implements ITickableTileEntity, INameable {
+public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
 	protected ItemStackHandler slot_0;
 	protected ItemStackHandler slot_1;
 	protected ItemStackHandler slot_2;
@@ -119,25 +126,25 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	}
 
-	// INameable
-	@Override
-	public boolean hasCustomName() {
-		return true;
-	}
-
-	@Override
-	public ITextComponent getCustomName() {
-		return (ITextComponent) customName;
-	}
-
 	public void setCustomName(ITextComponent customName) {
 		this.customName = customName;
 	}
 
 	@Override
-	public ITextComponent getName() {
-		return (ITextComponent) (this.customName != null ? this.customName : new TranslationTextComponent("container.altar"));
+	public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+		return new AltarContainer(p_createMenu_1_, p_createMenu_2_, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this);
 	}
-	
-	
+
+	@Override
+	public void openGUI(ServerPlayerEntity player) {
+		if (!world.isRemote) {
+			NetworkHooks.openGui(player, this, getPos());
+		}
+	}
+
+	@Override
+	public ITextComponent getDisplayName() {
+		return new TranslationTextComponent(Main.MODID + ":container.altar");
+	}
+
 }
