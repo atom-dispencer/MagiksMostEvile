@@ -13,6 +13,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.INameable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * @see EnchantmentTable
@@ -22,7 +26,10 @@ import net.minecraft.util.text.TranslationTextComponent;
  * @see EnchantingTableTileEntity
  * @author GenElectrovise 14 May 2020
  */
-public class AltarTileEntity extends TileEntity implements ITickableTileEntity, INameable {
+public class AltarTileEntity extends TileEntity implements ITickableTileEntity, INameable, ICapabilityProvider {
+
+	@CapabilityInject(IItemHandler.class)
+	static Capability<IItemHandler> ITEM_HANDLER_CAPABILITY = null;
 
 	private ITextComponent customName;
 
@@ -30,6 +37,11 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		super(EvileDeferredRegistry.TILE_ENTITY_ALTAR.get());
 		Main.LOGGER.debug("Constructing class : AltarTileEntity");
 	}
+
+	// IItemHandler
+	
+
+	// Generic stuff for tile entities
 
 	@Override
 	public void read(CompoundNBT compound) {
@@ -69,6 +81,6 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	@Override
 	public ITextComponent getName() {
-		return (ITextComponent)(this.customName != null ? this.customName : new TranslationTextComponent("container.altar"));
+		return (ITextComponent) (this.customName != null ? this.customName : new TranslationTextComponent("container.altar"));
 	}
 }
