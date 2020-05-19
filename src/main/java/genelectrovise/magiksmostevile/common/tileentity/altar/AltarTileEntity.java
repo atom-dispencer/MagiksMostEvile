@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import net.minecraft.block.EnchantingTableBlock;
@@ -11,13 +11,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.EnchantmentContainer;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.EnchantingTableTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.INameable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -49,11 +47,9 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	private final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
-	private ITextComponent customName;
-
 	public AltarTileEntity() {
 		super(EvileDeferredRegistry.TILE_ENTITY_ALTAR.get());
-		Main.LOGGER.debug("Constructing class : AltarTileEntity");
+		MagiksMostEvile.LOGGER.debug("Constructing class : AltarTileEntity");
 
 		slot_0 = new ItemStackHandler();
 		slot_1 = new ItemStackHandler();
@@ -99,19 +95,19 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	@Override
 	public void read(CompoundNBT tag) {
 		super.read(tag);
-		slot_0.deserializeNBT(tag.getCompound(Main.MODID + ":slot_0"));
-		slot_1.deserializeNBT(tag.getCompound(Main.MODID + ":slot_1"));
-		slot_2.deserializeNBT(tag.getCompound(Main.MODID + ":slot_2"));
-		slot_3.deserializeNBT(tag.getCompound(Main.MODID + ":slot_3"));
+		slot_0.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_0"));
+		slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
+		slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
+		slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag) {
 		tag = super.write(tag);
-		tag.put(Main.MODID + ":slot_0", slot_0.serializeNBT());
-		tag.put(Main.MODID + ":slot_1", slot_1.serializeNBT());
-		tag.put(Main.MODID + ":slot_2", slot_2.serializeNBT());
-		tag.put(Main.MODID + ":slot_3", slot_3.serializeNBT());
+		tag.put(MagiksMostEvile.MODID + ":slot_0", slot_0.serializeNBT());
+		tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
+		tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
+		tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
 		return tag;
 	}
 
@@ -124,10 +120,6 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	@Override
 	public void tick() {
 
-	}
-
-	public void setCustomName(ITextComponent customName) {
-		this.customName = customName;
 	}
 
 	@Override
@@ -144,7 +136,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TranslationTextComponent(Main.MODID + ":container.altar");
+		return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar");
 	}
 
 }

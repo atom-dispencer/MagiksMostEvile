@@ -5,7 +5,7 @@ package genelectrovise.magiksmostevile.common.world.gen.structure.shrine2;
 
 import java.util.Random;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.world.gen.structure.BlockReplacementList;
 import genelectrovise.magiksmostevile.common.world.gen.structure.BlockWeightPair;
@@ -70,7 +70,7 @@ public class ShrineDecorationDictionary extends StructureDecorationDictionary {
 
 	public ShrineDecorationDictionary(Random random, Biome biome, IWorld world) {
 		super(random, world);
-		Main.LOGGER.debug("New ShrineBlockReplacementDictionary in biome " + biome);
+		MagiksMostEvile.LOGGER.debug("New ShrineBlockReplacementDictionary in biome " + biome);
 
 		add(Blocks.INFESTED_STONE_BRICKS, new BlockReplacementList(random).addPair(INFESTED_MOSSY_STONE_BRICKS).addPair(INFESTED_CRACKED_STONE_BRICKS).addPair(CHISLED_STONE_BRICKS).addPair(INFESTED_COBBLESTONE).addPair(AIR));
 		add(Blocks.INFESTED_COBBLESTONE, new BlockReplacementList(random).addPair(MOSSY_COBBLESTONE).addPair(STONE_BRICKS).addPair(STONE));
@@ -82,9 +82,9 @@ public class ShrineDecorationDictionary extends StructureDecorationDictionary {
 	@Override
 	public BlockState decorate(BlockState state, BlockPos pos) {
 
-		Main.LOGGER.debug("state=" + state + " pos=" + pos);
+		MagiksMostEvile.LOGGER.debug("state=" + state + " pos=" + pos);
 		if (state.getBlock() instanceof ChestBlock) {
-			Main.LOGGER.debug("==8== Found chest! state=" + state + " pos=" + pos);
+			MagiksMostEvile.LOGGER.debug("==8== Found chest! state=" + state + " pos=" + pos);
 			return handleChest(state, pos);
 		}
 
@@ -104,7 +104,7 @@ public class ShrineDecorationDictionary extends StructureDecorationDictionary {
 			if (j + 1 == chanceToAddItemStack) {
 
 				ItemStack stackToAdd = stacks[random.nextInt(stacks.length)];
-				Main.LOGGER.debug("Adding : " + stackToAdd + " from " + stacks);
+				MagiksMostEvile.LOGGER.debug("Adding : " + stackToAdd + " from " + stacks);
 				tileEntity.setInventorySlotContents(random.nextInt(tileEntity.getSizeInventory()), stackToAdd);
 			}
 		}

@@ -9,7 +9,7 @@ import genelectrovise.magiksmostevile.common.item.glowing.GlowingItem;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingPickaxe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingShovel;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingSword;
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.ContainerReference;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileArmorMaterial;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
@@ -53,12 +53,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class EvileDeferredRegistry {
 	// https://github.com/McJty/YouTubeModding14/blob/master/src/main/java/com/mcjty/mytutorial/setup/Registration.java
 
-	private static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Main.MODID);
-	private static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Main.MODID);
-	private static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, Main.MODID);
-	private static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, Main.MODID);
-	private static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, Main.MODID);
-	private static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, Main.MODID);
+	private static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, MagiksMostEvile.MODID);
+	private static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, MagiksMostEvile.MODID);
+	private static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, MagiksMostEvile.MODID);
+	private static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, MagiksMostEvile.MODID);
+	private static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
+	private static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
 
 	// =========BLOCKS======================================================================================================================
 	public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block", () -> new Block(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).lightValue(5 / 16).hardnessAndResistance(3F, 3F)));
@@ -126,7 +126,8 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<TileEntityType<AltarTileEntity>> TILE_ENTITY_ALTAR = TILE_ENTITIES.register("tile_entity_altar", () -> TileEntityType.Builder.create(AltarTileEntity::new, EvileDeferredRegistry.ALTAR.get()).build(null));
 
 //=========CONTAINERS==================================================================================================================
-	public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER = CONTAINERS.register("altar_container", () -> new ContainerType<AltarContainer>(AltarContainer::new)));
+
+	public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER = CONTAINERS.register("altar", () -> IForgeContainerType.create(AltarContainer::new));
 
 	public static void createContainerFactories() {
 		ScreenManager.registerFactory(ALTAR_CONTAINER.get(), new AltarScreenManager());
@@ -147,8 +148,8 @@ public class EvileDeferredRegistry {
 //=========CONSTRUCTOR=================================================================================================================
 
 	public EvileDeferredRegistry() {
-		Main.LOGGER.debug("Constructing EvileRegistry!");
-		Main.LOGGER.debug("Log Key 182727012020 : FMLJavaModLoadingContext = " + FMLJavaModLoadingContext.get());
+		MagiksMostEvile.LOGGER.debug("Constructing EvileRegistry!");
+		MagiksMostEvile.LOGGER.debug("Log Key 182727012020 : FMLJavaModLoadingContext = " + FMLJavaModLoadingContext.get());
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());

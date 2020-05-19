@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.TreeMap;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -77,7 +77,7 @@ public class StructureDecorationDictionary extends HashMap<Block, BlockReplaceme
 			decrementedWeight = decrementedWeight - list.get(selection).weight;
 		}
 
-		Main.LOGGER.debug("selection=" + selection);
+		MagiksMostEvile.LOGGER.debug("selection=" + selection);
 
 		if (selection < 1) {
 			selection = 1;

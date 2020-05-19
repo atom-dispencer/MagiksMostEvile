@@ -2,7 +2,7 @@ package genelectrovise.magiksmostevile.common.world.gen.structure.shrine2;
 
 import java.util.Random;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.StructureReference;
 import genelectrovise.magiksmostevile.common.world.gen.structure.EvileStructureType;
 import genelectrovise.magiksmostevile.common.world.gen.structure.StructureDecorator;
@@ -28,19 +28,19 @@ public class ShrinePiece {
 
 		public ShrineCentrePiece(TemplateManager templateManager, CompoundNBT nbt) {
 			super(Shrine2.CENTRE_PIECE, nbt);
-			Main.LOGGER.debug("==6== New ShrinePiece.Piece (Constructor 1)");
+			MagiksMostEvile.LOGGER.debug("==6== New ShrinePiece.Piece (Constructor 1)");
 			this.setupTemplate(templateManager);
 		}
 
 		public ShrineCentrePiece(TemplateManager templateMgr, ResourceLocation resLoc, BlockPos blockPos, Rotation rot, int offsetY) {
 			super(Shrine2.CENTRE_PIECE, 0);
-			Main.LOGGER.debug("==6== New ShrinePiece.Piece (Constructor 2)");
+			MagiksMostEvile.LOGGER.debug("==6== New ShrinePiece.Piece (Constructor 2)");
 			this.templatePosition = new BlockPos(blockPos.getX(), blockPos.getY() + offsetY, blockPos.getZ());
 			this.setupTemplate(templateMgr);
 		}
 
 		private void setupTemplate(TemplateManager templateManager) {
-			Main.LOGGER.debug("==7== Setting up template");
+			MagiksMostEvile.LOGGER.debug("==7== Setting up template");
 			Template template = templateManager.getTemplateDefaulted(StructureReference.SHRINE_LOC);
 			PlacementSettings settings = (new PlacementSettings()).setRotation(Rotation.NONE).setMirror(Mirror.NONE).setCenterOffset(BlockPos.ZERO).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 			this.setup(template, this.templatePosition, settings);
@@ -48,7 +48,7 @@ public class ShrinePiece {
 
 		@Override
 		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> generator, Random rand, MutableBoundingBox mutableBB, ChunkPos pos) {
-			Main.LOGGER.debug("==4== Generating shrine at ChunkPos : " + pos);
+			MagiksMostEvile.LOGGER.debug("==4== Generating shrine at ChunkPos : " + pos);
 
 			PlacementSettings placementSettings = new PlacementSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setCenterOffset(BlockPos.ZERO).addProcessor(BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK);
 
@@ -72,7 +72,7 @@ public class ShrinePiece {
 
 		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand, MutableBoundingBox sbb) {
-			Main.LOGGER.debug("handleDataMarker is an unnecessary method, but must implement!");
+			MagiksMostEvile.LOGGER.debug("handleDataMarker is an unnecessary method, but must implement!");
 		}
 
 	}

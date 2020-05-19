@@ -2,7 +2,7 @@ package genelectrovise.magiksmostevile.common.main.support;
 
 import java.util.function.Supplier;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier.EvileItemTags;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
@@ -14,15 +14,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum EnumEvileArmorMaterial implements IArmorMaterial {
-	AMETHYST(Main.MODID + ":" + "amethyst", 25, new int[] { 3, 5, 4, 2 }, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
+	AMETHYST(MagiksMostEvile.MODID + ":" + "amethyst", 25, new int[] { 3, 5, 4, 2 }, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
 			1.0F, () -> {
 				return Ingredient.fromTag(EvileItemTags.AMETHYST);
 			}),
-	POWERED_AMETHYST(Main.MODID + ":" + "powered_amethyst", 33, new int[] { 4, 6, 5, 3 }, 100,
+	POWERED_AMETHYST(MagiksMostEvile.MODID + ":" + "powered_amethyst", 33, new int[] { 4, 6, 5, 3 }, 100,
 			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> {
 				return Ingredient.fromTag(EvileItemTags.POWERED_AMETHYST);
 			}),
-	OVER_POWERED_AMETHYST(Main.MODID + ":" + "over_powered_amethyst", 40, new int[] { 5, 7, 6, 4 }, 150,
+	OVER_POWERED_AMETHYST(MagiksMostEvile.MODID + ":" + "over_powered_amethyst", 40, new int[] { 5, 7, 6, 4 }, 150,
 			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3.0F, () -> {
 				return Ingredient.fromTag(EvileItemTags.OVER_POWERED_AMETHYST);
 			});

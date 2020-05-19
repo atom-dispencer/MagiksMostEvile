@@ -5,7 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.ResourceLocationException;
 import net.minecraft.util.Rotation;
@@ -23,7 +23,7 @@ import net.minecraft.world.server.ServerWorld;
 @Deprecated
 public class ShrineFeature extends Feature<IFeatureConfig> {
 
-	private static final ResourceLocation SHRINE_TEMPLATE = new ResourceLocation(Main.MODID, "structure/shrine/shrine_template");
+	private static final ResourceLocation SHRINE_TEMPLATE = new ResourceLocation(MagiksMostEvile.MODID, "structure/shrine/shrine_template");
 
 	public ShrineFeature(Function<Dynamic<?>, ? extends ShrineFeatureConfig> config) {
 		super(config);
@@ -39,11 +39,11 @@ public class ShrineFeature extends Feature<IFeatureConfig> {
 			Template template;
 			try {
 				// manager.func_227458_a_(); //Requires the nbt data as a compound tag
-				Main.LOGGER.debug("Generating Shrine using template at " + SHRINE_TEMPLATE);
-				Main.LOGGER.debug("Template file : " + SHRINE_TEMPLATE.getPath());
-				Main.LOGGER.debug("Namespace : " + SHRINE_TEMPLATE.getNamespace());
+				MagiksMostEvile.LOGGER.debug("Generating Shrine using template at " + SHRINE_TEMPLATE);
+				MagiksMostEvile.LOGGER.debug("Template file : " + SHRINE_TEMPLATE.getPath());
+				MagiksMostEvile.LOGGER.debug("Namespace : " + SHRINE_TEMPLATE.getNamespace());
 
-				Main.LOGGER.debug("TemplateManager attempting to get template from file " + SHRINE_TEMPLATE + " : " + manager.getTemplate(SHRINE_TEMPLATE));
+				MagiksMostEvile.LOGGER.debug("TemplateManager attempting to get template from file " + SHRINE_TEMPLATE + " : " + manager.getTemplate(SHRINE_TEMPLATE));
 				template = manager.getTemplate(SHRINE_TEMPLATE);
 			} catch (ResourceLocationException r) {
 				System.err.println("The resource " + SHRINE_TEMPLATE + " does not exist!");

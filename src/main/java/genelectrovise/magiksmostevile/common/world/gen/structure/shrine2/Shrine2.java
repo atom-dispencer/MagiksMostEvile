@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.StructureReference;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -50,12 +50,12 @@ public class Shrine2 extends ScatteredStructure<NoFeatureConfig> {
 
 		public Start(Structure<?> structureIn, int int_1, int int_2, MutableBoundingBox mutableBB, int int_3, long long_1) {
 			super(structureIn, int_1, int_2, mutableBB, int_3, long_1);
-			Main.LOGGER.debug("==5a== Starting shrine structure!");
+			MagiksMostEvile.LOGGER.debug("==5a== Starting shrine structure!");
 		}
 
 		@Override
 		public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
-			Main.LOGGER.debug("==5b== Init shrine structure!");
+			MagiksMostEvile.LOGGER.debug("==5b== Init shrine structure!");
 			int worldX = chunkX * 16;
 			int worldZ = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(worldX, 0, worldZ);

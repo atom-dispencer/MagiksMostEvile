@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal;
 
-import genelectrovise.magiksmostevile.common.main.Main;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,7 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
 
 	public AmethystCrystalTileEntity() {
 		super(EvileDeferredRegistry.TILE_ENTITY_AMETHYST_CRYSTAL.get());
-		Main.LOGGER.debug("Constructing class : TileEntityAmethystCrystal");
+		MagiksMostEvile.LOGGER.debug("Constructing class : TileEntityAmethystCrystal");
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
 				}
 				iteration = 1;
 			} catch (NullPointerException e) {
-				Main.LOGGER.debug("NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
+				MagiksMostEvile.LOGGER.debug("NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
