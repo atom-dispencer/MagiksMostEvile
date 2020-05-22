@@ -40,6 +40,8 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		this.altarContainer = altarContainer;
 		this.completetedRitualAdvancements = this.altarContainer.completedAdvancements;
 	}
+	
+	
 
 	// Logic
 	private ArrayList<Ritual> createAvailableRitualsList() {
