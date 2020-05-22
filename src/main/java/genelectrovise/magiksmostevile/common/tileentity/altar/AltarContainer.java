@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
 import genelectrovise.magiksmostevile.common.tileentity.CommonContainer;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementManager;
@@ -19,7 +20,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -29,26 +29,28 @@ import net.minecraftforge.items.ItemStackHandler;
 public class AltarContainer extends CommonContainer {
 	protected ArrayList<Advancement> completedAdvancements = new ArrayList<Advancement>();
 	protected ArrayList<String> possibleAdvancements = new ArrayList<String>();
-	private int messageId = 1;
 
 	protected AltarTileEntity altar;
-	protected int currentAmethystFlux;
-	protected int maxAmethystFlux;
+	protected TrackableIntegerHolder currentAmethystFlux;
+	protected TrackableIntegerHolder maxAmethystFlux;
 
 	protected PlayerInventory inv;
 
 	public AltarContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()));
+		this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()), new AmethystFluxEnergyStorage(50, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage"));
 	}
 
-	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar) {
+	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar, AmethystFluxEnergyStorage energy) {
 		super(EvileDeferredRegistry.ALTAR_CONTAINER.get(), windowId, 4);
 		MagiksMostEvile.LOGGER.debug("Constructing AltarContainer! (Constructor 3 : id, inv, callable)");
 
 		this.altar = altar;
-		this.maxAmethystFlux = altar.energyStorage.getMaxEnergyStored();
-		this.currentAmethystFlux = altar.energyStorage.getEnergyStored();
+		this.maxAmethystFlux = energy.maxAmethystFlux;
+		this.currentAmethystFlux = energy.currentAmethystFlux;
 		this.inv = inv;
+
+		trackInt(maxAmethystFlux);
+		trackInt(currentAmethystFlux);
 
 		addPossibleAdvancements();
 		getCastableRitualsByAdvancements(inv.player);
@@ -59,16 +61,6 @@ public class AltarContainer extends CommonContainer {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-
-		// Check and update AF values
-		// If stored value is not equal to the true value
-		if (!(this.currentAmethystFlux == altar.energyStorage.getEnergyStored())) {
-
-			// Update values
-			this.currentAmethystFlux = altar.energyStorage.getEnergyStored();
-			this.maxAmethystFlux = altar.energyStorage.getMaxEnergyStored();
-			MagiksMostEvile.LOGGER.dev("amethyst_flux in container: " + currentAmethystFlux + "/" + maxAmethystFlux);
-		}
 	}
 
 	private void addPossibleAdvancements() {

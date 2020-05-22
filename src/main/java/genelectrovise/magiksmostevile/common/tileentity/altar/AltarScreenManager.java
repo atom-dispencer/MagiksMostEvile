@@ -7,11 +7,11 @@ import net.minecraft.util.text.ITextComponent;
 /**
  * @author GenElectrovise 14 May 2020
  */
-public class AltarScreenManager implements IScreenFactory<AltarContainer, AltarScreen> {
+public class AltarScreenManager implements IScreenFactory<AltarContainer, AltarContainerScreen> {
 
 	@Override
-	public AltarScreen create(AltarContainer altarContainer, PlayerInventory playerInventory, ITextComponent title) {
-		return new AltarScreen(altarContainer, playerInventory, title);
+	public AltarContainerScreen create(AltarContainer altarContainer, PlayerInventory playerInventory, ITextComponent title) {
+		return new AltarContainerScreen(altarContainer, playerInventory, title);
 	}
 
 }

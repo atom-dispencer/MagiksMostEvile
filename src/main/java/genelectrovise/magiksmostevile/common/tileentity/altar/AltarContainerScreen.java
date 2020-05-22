@@ -19,10 +19,8 @@ import net.minecraft.util.text.ITextComponent;
 /**
  * @author GenElectrovise 14 May 2020
  */
-public class AltarScreen extends ContainerScreen<AltarContainer> {
+public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	private AltarContainer altarContainer;
-	protected int currentAmethystFlux;
-	protected int maxAmethystFlux;
 
 	protected ArrayList<Advancement> completetedRitualAdvancements = new ArrayList<Advancement>();
 	protected ArrayList<Ritual> castableRituals = new ArrayList<Ritual>();
@@ -37,11 +35,9 @@ public class AltarScreen extends ContainerScreen<AltarContainer> {
 	 * @param inv
 	 * @param titleIn
 	 */
-	public AltarScreen(AltarContainer altarContainer, PlayerInventory inv, ITextComponent titleIn) {
+	public AltarContainerScreen(AltarContainer altarContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(altarContainer, inv, titleIn);
 		this.altarContainer = altarContainer;
-		this.currentAmethystFlux = altarContainer.currentAmethystFlux;
-		this.maxAmethystFlux = altarContainer.maxAmethystFlux;
 		this.completetedRitualAdvancements = this.altarContainer.completedAdvancements;
 	}
 
@@ -99,9 +95,7 @@ public class AltarScreen extends ContainerScreen<AltarContainer> {
 		drawMain(posX_main, posY_main);
 
 		// Draw text
-		this.currentAmethystFlux = altarContainer.currentAmethystFlux;
-		this.maxAmethystFlux = altarContainer.maxAmethystFlux;
-		this.font.drawString(this.title.getFormattedText() + " Amethyst Flux: " + currentAmethystFlux + "/" + maxAmethystFlux, 72.0F, 46.0F, 4210752);
+		this.font.drawString(this.title.getFormattedText() + " Amethyst Flux: " + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(), 72.0F, 46.0F, 4210752);
 	}
 
 	private void drawMain(int posX, int posY) {

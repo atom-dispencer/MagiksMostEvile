@@ -10,7 +10,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.client.gui.screen.EnchantmentScreen;
 import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
-import net.minecraft.command.impl.TimeCommand;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -25,7 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -69,7 +67,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	private final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
 	// IEnergyStorage
-	protected AltarEnergyStorage energyStorage;
+	protected AmethystFluxEnergyStorage energyStorage;
 
 	private final LazyOptional<IEnergyStorage> energyStorageLazyOptional = LazyOptional.of(() -> energyStorage);
 
@@ -109,11 +107,9 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		};
 
 		// IEnergyStorage
-		energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0) {
+		energyStorage = new AmethystFluxEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage") {
 
 		};
-
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	// IItemHandler
@@ -166,8 +162,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
 		slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
 		slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
-		energyStorage.receiveEnergy(tag.getInt(MagiksMostEvile.MODID + ":amethyst_flux"), false);
-		energyStorage.setCapacity(tag.getInt(MagiksMostEvile.MODID + ":maximum_amethyst_flux"));
+
+		energyStorage.fromNbt(tag.getCompound(energyStorage.nbtKey));
 	}
 
 	@Override
@@ -177,8 +173,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
 		tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
 		tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
-		tag.putInt(MagiksMostEvile.MODID + ":current_amethyst_flux", energyStorage.getEnergyStored());
-		tag.putInt(MagiksMostEvile.MODID + ":maximum_amethyst_flux", energyStorage.getEnergyStored());
+		tag.put(energyStorage.nbtKey, energyStorage.toNbt());
 		return tag;
 	}
 
@@ -242,7 +237,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	@Override
 	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
-		return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this);
+		return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this, energyStorage);
 	}
 
 	@Override
