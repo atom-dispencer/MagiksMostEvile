@@ -3,9 +3,14 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
+import java.util.ArrayList;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
+import genelectrovise.magiksmostevile.common.ritual.Ritual;
+import genelectrovise.magiksmostevile.common.ritual.Rituals;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,13 +20,15 @@ import net.minecraft.util.text.ITextComponent;
  * @author GenElectrovise 14 May 2020
  */
 public class AltarScreen extends ContainerScreen<AltarContainer> {
+	private AltarContainer altarContainer;
+	protected int currentAmethystFlux;
+	protected int maxAmethystFlux;
+
+	protected ArrayList<Advancement> completetedRitualAdvancements = new ArrayList<Advancement>();
+	protected ArrayList<Ritual> castableRituals = new ArrayList<Ritual>();
 
 	private final int ZERO = 0;
-	//private final int PLAYER_INVENTORY_VERTICAL_WIDTH = 90;
-	//private final int PLAYER_INVENTORY_VERTICAL_HEIGHT = 175;
-	//private final int MAIN_WIDTH = 255;
-	//private final int MAIN_HEIGHT = 179;
-	
+
 	private final int MAIN_WIDTH = 356;
 	private final int MAIN_HEIGHT = 179;
 
@@ -32,7 +39,31 @@ public class AltarScreen extends ContainerScreen<AltarContainer> {
 	 */
 	public AltarScreen(AltarContainer altarContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(altarContainer, inv, titleIn);
+		this.altarContainer = altarContainer;
+		this.currentAmethystFlux = altarContainer.currentAmethystFlux;
+		this.maxAmethystFlux = altarContainer.maxAmethystFlux;
+		this.completetedRitualAdvancements = this.altarContainer.completedAdvancements;
 	}
+
+	// Logic
+	private ArrayList<Ritual> createAvailableRitualsList() {
+		ArrayList<Ritual> rituals = new ArrayList<Ritual>();
+
+		try {
+			for (Advancement adv : completetedRitualAdvancements) {
+				ITextComponent itcName = adv.getDisplay().getTitle();
+				String name = itcName.getString();
+
+				rituals.add(Rituals.ALL.get(name).newInstance());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return rituals;
+	}
+
+	// Drawing
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
@@ -58,7 +89,6 @@ public class AltarScreen extends ContainerScreen<AltarContainer> {
 		// Find dimensions
 		int scaledWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
 		int halfWidth = scaledWidth / 2;
-		//int posX_main = halfWidth - ((MAIN_WIDTH + PLAYER_INVENTORY_VERTICAL_WIDTH) / 2);
 		int posX_main = halfWidth - (MAIN_WIDTH / 2);
 
 		int scaledHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
@@ -67,10 +97,9 @@ public class AltarScreen extends ContainerScreen<AltarContainer> {
 
 		// Draw images
 		drawMain(posX_main, posY_main);
-		//drawPlayerInventory(posX_main, posY_main);
 
 		// Draw text
-		this.font.drawString(this.title.getFormattedText(), 72.0F, 46.0F, 4210752);
+		this.font.drawString(this.title.getFormattedText() + " Amethyst Flux: " + currentAmethystFlux + "/" + maxAmethystFlux, 72.0F, 46.0F, 4210752);
 	}
 
 	private void drawMain(int posX, int posY) {

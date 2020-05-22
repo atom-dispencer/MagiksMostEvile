@@ -1,11 +1,16 @@
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
+import java.util.ArrayList;
+
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
+import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.client.gui.screen.EnchantmentScreen;
 import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
+import net.minecraft.command.impl.TimeCommand;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -16,10 +21,15 @@ import net.minecraft.tileentity.EnchantingTableTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -35,6 +45,17 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
  * @author GenElectrovise 14 May 2020
  */
 public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
+
+	private static final int BASE_ENERGY_CAPACITY = 50;
+	private static final int ADDITIONAL_STORAGE_PER_CRYSTAL = 50;
+	private static final int DAY_ENERGY_PER_CRYSTAL = 1;
+	private static final int NIGHT_ENERGY_PER_CRYSTAL = 3;
+
+	private int tickIncr = 0;
+	private int recieveFluxCountdown = 0;
+	private ArrayList<AmethystCrystalTileEntity> crystals = new ArrayList<AmethystCrystalTileEntity>();
+
+	// IItemHandler
 	protected ItemStackHandler slot_0;
 	protected ItemStackHandler slot_1;
 	protected ItemStackHandler slot_2;
@@ -47,19 +68,58 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	private final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
+	// IEnergyStorage
+	protected AltarEnergyStorage energyStorage;
+
+	private final LazyOptional<IEnergyStorage> energyStorageLazyOptional = LazyOptional.of(() -> energyStorage);
+
+	// Constructor
+
 	public AltarTileEntity() {
 		super(EvileDeferredRegistry.TILE_ENTITY_ALTAR.get());
 		MagiksMostEvile.LOGGER.debug("Constructing class : AltarTileEntity");
 
-		slot_0 = new ItemStackHandler();
-		slot_1 = new ItemStackHandler();
-		slot_2 = new ItemStackHandler();
-		slot_3 = new ItemStackHandler();
+		// IItemHandler
+		slot_0 = new ItemStackHandler() {
+			@Override
+			protected void onContentsChanged(int slot) {
+				markDirty();
+			}
+		};
+
+		slot_1 = new ItemStackHandler() {
+			@Override
+			protected void onContentsChanged(int slot) {
+				markDirty();
+			}
+		};
+
+		slot_2 = new ItemStackHandler() {
+			@Override
+			protected void onContentsChanged(int slot) {
+				markDirty();
+			}
+		};
+
+		slot_3 = new ItemStackHandler() {
+			@Override
+			protected void onContentsChanged(int slot) {
+				markDirty();
+			}
+		};
+
+		// IEnergyStorage
+		energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0) {
+
+		};
+
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	// IItemHandler
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
+		// IItemHandler
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			this.markDirty();
 			if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if the block at myself isn't myself, allow full access (Block Broken)
@@ -68,15 +128,20 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 			if (facing == null) {
 				return allSlots.cast();
 			}
-
-			/*
-			 * if (world == null) { if (facing == Direction.UP) { return
-			 * slot_0_holder.cast(); } if (facing == Direction.DOWN) { return
-			 * slot_1_holder.cast(); } return super.getCapability(capability, facing); } if
-			 * (facing == Direction.UP) { return slot_2_holder.cast(); } if (facing ==
-			 * Direction.DOWN) { return slot_3_holder.cast(); }
-			 */
 		}
+
+		// IEnergyStorage
+		if (capability == CapabilityEnergy.ENERGY) {
+			this.markDirty();
+
+			if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if the block at myself isn't myself, allow full access (Block Broken)
+				return energyStorageLazyOptional.cast();
+			}
+			if (facing == null) {
+				return energyStorageLazyOptional.cast();
+			}
+		}
+
 		return super.getCapability(capability, facing);
 	}
 
@@ -90,6 +155,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		slot_2_holder.invalidate();
 		slot_3_holder.invalidate();
 		allSlots.invalidate();
+
+		energyStorageLazyOptional.invalidate();
 	}
 
 	@Override
@@ -99,6 +166,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
 		slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
 		slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
+		energyStorage.receiveEnergy(tag.getInt(MagiksMostEvile.MODID + ":amethyst_flux"), false);
+		energyStorage.setCapacity(tag.getInt(MagiksMostEvile.MODID + ":maximum_amethyst_flux"));
 	}
 
 	@Override
@@ -108,6 +177,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
 		tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
 		tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
+		tag.putInt(MagiksMostEvile.MODID + ":current_amethyst_flux", energyStorage.getEnergyStored());
+		tag.putInt(MagiksMostEvile.MODID + ":maximum_amethyst_flux", energyStorage.getEnergyStored());
 		return tag;
 	}
 
@@ -120,11 +191,54 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	@Override
 	public void tick() {
 
+		// Test for crystals nearby
+		if (tickIncr % 100 == 0) {
+			crystals.clear();
+
+			for (int x = -4; x < 4; x++) {
+				for (int y = -4; y < 4; y++) {
+					for (int z = -4; z < 4; z++) {
+						BlockPos position = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+						BlockState state = world.getBlockState(position);
+						if (state.getBlock() == EvileDeferredRegistry.AMETHYST_CRYSTAL.get() || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
+							crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
+							//MagiksMostEvile.LOGGER.dev("added: " + world.getTileEntity(position));
+						}
+					}
+				}
+			}
+
+			// Increase energy capacity
+			energyStorage.setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
+			MagiksMostEvile.LOGGER.dev("new energy capacity: " + energyStorage.getMaxEnergyStored());
+		}
+
+		// Receive amethyst flux
+		if (recieveFluxCountdown > 20) {
+			if (world instanceof ServerWorld && !world.isDaytime()) {
+				energyStorage.receiveEnergy(1, false);
+				energyStorage.receiveEnergy(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL, false);
+				recieveFluxCountdown = 0;
+			} else {
+				energyStorage.receiveEnergy(crystals.size() * DAY_ENERGY_PER_CRYSTAL, false);
+			}
+		} else {
+			recieveFluxCountdown++;
+		}
+
+		// Should reset tickIncr
+		if (tickIncr > 100) {
+			tickIncr = 0;
+		} else {
+			tickIncr++;
+		}
+
+		MagiksMostEvile.LOGGER.dev("rfc:" + recieveFluxCountdown + " energyCurrent:" + energyStorage.getEnergyStored() + " energyMax:" + energyStorage.getMaxEnergyStored() + " tickIncr:" + tickIncr + " crystals:" + crystals);
 	}
 
 	@Override
-	public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-		return new AltarContainer(p_createMenu_1_, p_createMenu_2_, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this);
+	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
+		return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this);
 	}
 
 	@Override

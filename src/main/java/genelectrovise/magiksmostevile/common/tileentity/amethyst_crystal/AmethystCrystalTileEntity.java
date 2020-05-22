@@ -14,6 +14,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class AmethystCrystalTileEntity extends TileEntity implements ITickableTileEntity {
 
@@ -63,7 +64,7 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
 				}
 				iteration = 1;
 			} catch (NullPointerException e) {
-				MagiksMostEvile.LOGGER.debug("NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
+				MagiksMostEvile.LOGGER.error("NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -96,8 +97,7 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
 
 	private void spawnEntityItemAmethystPotato(BlockPos blockPos) {
 		if (!world.isRemote) {
-			Entity entity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-					new ItemStack(EvileDeferredRegistry.AMETHYST_POTATO.get(), 1));
+			Entity entity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(EvileDeferredRegistry.AMETHYST_POTATO.get(), 1));
 			world.addEntity(entity);
 		}
 	}

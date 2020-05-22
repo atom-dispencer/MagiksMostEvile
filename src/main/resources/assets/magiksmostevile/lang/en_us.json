@@ -47,10 +47,7 @@
 	"tile entities": "tile entities",
 	"magiksmostevile.altar_tile_entity": "Altar Tile Entity see lang",
 	"containers": "containers",
-	"magiksmostevile.altar_container": "Altar Container see lang",
-	"container.altar": "Container Altar",
-	"magiksmostevile:container.altar": "MagiksMostEvile Container Altar",
-	"container.magiksmostevile.altar": "Container MagiksMostEvile Altar",
+	"magiksmostevile:container.altar": "Altar",
 	"features": "features",
 	"structure.magiksmostevile.shrine": "Ancient Shrine"
 }
