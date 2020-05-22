@@ -191,49 +191,53 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	@Override
 	public void tick() {
 
-		// Test for crystals nearby
-		if (tickIncr % 100 == 0) {
-			crystals.clear();
+		if (!world.isRemote) {
+			// Test for crystals nearby
+			if (tickIncr % 100 == 0) {
+				crystals.clear();
 
-			for (int x = -4; x < 4; x++) {
-				for (int y = -4; y < 4; y++) {
-					for (int z = -4; z < 4; z++) {
-						BlockPos position = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-						BlockState state = world.getBlockState(position);
-						if (state.getBlock() == EvileDeferredRegistry.AMETHYST_CRYSTAL.get() || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
-							crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
-							//MagiksMostEvile.LOGGER.dev("added: " + world.getTileEntity(position));
+				for (int x = -4; x < 4; x++) {
+					for (int y = -4; y < 4; y++) {
+						for (int z = -4; z < 4; z++) {
+							BlockPos position = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+							BlockState state = world.getBlockState(position);
+							if (state.getBlock() == EvileDeferredRegistry.AMETHYST_CRYSTAL.get() || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
+								crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
+								// MagiksMostEvile.LOGGER.dev("added: " + world.getTileEntity(position));
+							}
 						}
 					}
 				}
+
+				// Increase energy capacity
+				energyStorage.setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
+				MagiksMostEvile.LOGGER.dev("new energy capacity: " + energyStorage.getMaxEnergyStored());
 			}
 
-			// Increase energy capacity
-			energyStorage.setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
-			MagiksMostEvile.LOGGER.dev("new energy capacity: " + energyStorage.getMaxEnergyStored());
-		}
-
-		// Receive amethyst flux
-		if (recieveFluxCountdown > 20) {
-			if (world instanceof ServerWorld && !world.isDaytime()) {
-				energyStorage.receiveEnergy(1, false);
-				energyStorage.receiveEnergy(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL, false);
-				recieveFluxCountdown = 0;
+			// Receive amethyst flux
+			if (recieveFluxCountdown > 20) {
+				if (world instanceof ServerWorld && !world.isDaytime()) {
+					energyStorage.receiveEnergy(1, false);
+					energyStorage.receiveEnergy(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL, false);
+					recieveFluxCountdown = 0;
+					MagiksMostEvile.LOGGER.dev("Recieved night energy");
+				} else {
+					energyStorage.receiveEnergy(crystals.size() * DAY_ENERGY_PER_CRYSTAL, false);
+					MagiksMostEvile.LOGGER.dev("Recieved day energy per crystal");
+				}
 			} else {
-				energyStorage.receiveEnergy(crystals.size() * DAY_ENERGY_PER_CRYSTAL, false);
+				recieveFluxCountdown++;
 			}
-		} else {
-			recieveFluxCountdown++;
-		}
 
-		// Should reset tickIncr
-		if (tickIncr > 100) {
-			tickIncr = 0;
-		} else {
-			tickIncr++;
-		}
+			// Should reset tickIncr
+			if (tickIncr > 100) {
+				tickIncr = 0;
+			} else {
+				tickIncr++;
+			}
 
-		MagiksMostEvile.LOGGER.dev("rfc:" + recieveFluxCountdown + " energyCurrent:" + energyStorage.getEnergyStored() + " energyMax:" + energyStorage.getMaxEnergyStored() + " tickIncr:" + tickIncr + " crystals:" + crystals);
+			MagiksMostEvile.LOGGER.dev("rfc:" + recieveFluxCountdown + " energyCurrent:" + energyStorage.getEnergyStored() + " energyMax:" + energyStorage.getMaxEnergyStored() + " tickIncr:" + tickIncr + " crystals:" + crystals);
+		}
 	}
 
 	@Override

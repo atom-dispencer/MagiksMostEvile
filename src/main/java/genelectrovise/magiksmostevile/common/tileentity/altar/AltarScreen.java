@@ -99,6 +99,8 @@ public class AltarScreen extends ContainerScreen<AltarContainer> {
 		drawMain(posX_main, posY_main);
 
 		// Draw text
+		this.currentAmethystFlux = altarContainer.currentAmethystFlux;
+		this.maxAmethystFlux = altarContainer.maxAmethystFlux;
 		this.font.drawString(this.title.getFormattedText() + " Amethyst Flux: " + currentAmethystFlux + "/" + maxAmethystFlux, 72.0F, 46.0F, 4210752);
 	}
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import net.minecraft.client.gui.ScreenManager.IScreenFactory;

@@ -46,8 +46,8 @@ public class AltarContainer extends CommonContainer {
 		MagiksMostEvile.LOGGER.debug("Constructing AltarContainer! (Constructor 3 : id, inv, callable)");
 
 		this.altar = altar;
-		this.currentAmethystFlux = altar.energyStorage.getEnergyStored();
 		this.maxAmethystFlux = altar.energyStorage.getMaxEnergyStored();
+		this.currentAmethystFlux = altar.energyStorage.getEnergyStored();
 		this.inv = inv;
 
 		addPossibleAdvancements();
