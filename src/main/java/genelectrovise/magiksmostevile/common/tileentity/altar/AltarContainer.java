@@ -37,10 +37,10 @@ public class AltarContainer extends CommonContainer {
 	protected PlayerInventory inv;
 
 	public AltarContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()), new AmethystFluxEnergyStorage(50, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage"));
+		this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()), new AltarEnergyStorage(50, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage"));
 	}
 
-	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar, AmethystFluxEnergyStorage energy) {
+	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar, AltarEnergyStorage energy) {
 		super(EvileDeferredRegistry.ALTAR_CONTAINER.get(), windowId, 4);
 		MagiksMostEvile.LOGGER.debug("Constructing AltarContainer! (Constructor 3 : id, inv, callable)");
 

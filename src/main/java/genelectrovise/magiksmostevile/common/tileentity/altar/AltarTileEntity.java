@@ -67,7 +67,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	private final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
 	// IEnergyStorage
-	protected AmethystFluxEnergyStorage energyStorage;
+	protected AltarEnergyStorage energyStorage;
 
 	private final LazyOptional<IEnergyStorage> energyStorageLazyOptional = LazyOptional.of(() -> energyStorage);
 
@@ -107,7 +107,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		};
 
 		// IEnergyStorage
-		energyStorage = new AmethystFluxEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage") {
+		energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage") {
 
 		};
 	}

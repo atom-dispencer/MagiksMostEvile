@@ -1,7 +1,7 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.tileentity.altar;
+package genelectrovise.magiksmostevile.common.tileentity;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
@@ -13,8 +13,8 @@ import net.minecraftforge.energy.EnergyStorage;
  */
 public class AmethystFluxEnergyStorage extends EnergyStorage {
 
-	protected TrackableIntegerHolder maxAmethystFlux;
-	protected TrackableIntegerHolder currentAmethystFlux;
+	public TrackableIntegerHolder maxAmethystFlux;
+	public TrackableIntegerHolder currentAmethystFlux;
 	public String nbtKey;
 
 	/**
