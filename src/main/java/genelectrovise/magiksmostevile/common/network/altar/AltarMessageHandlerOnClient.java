@@ -3,8 +3,9 @@
  */
 package genelectrovise.magiksmostevile.common.network.altar;
 
+import java.util.function.Supplier;
+
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import io.netty.util.internal.shaded.org.jctools.queues.MessagePassingQueue.Supplier;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -22,23 +23,23 @@ public class AltarMessageHandlerOnClient {
 		MagiksMostEvile.LOGGER.dev("Message recieved on client!");
 
 		ctxSupplier.get().setPacketHandled(true);
-		
+
 		if (!message.isValid()) {
 			MagiksMostEvile.LOGGER.warn("Invalid message received on client.");
 			return;
 		}
-		
+
 		if (ctxSupplier.get().getDirection().getReceptionSide() != LogicalSide.CLIENT) {
 			MagiksMostEvile.LOGGER.warn("Message recieved on incorrect side. (client) ");
 		}
 
 		// Creates a new task for the client for next tick
-		ctxSupplier.get().enqueueWork(() -> processMessage(message));
+		ctxSupplier.get().enqueueWork(() -> processMessage(message, ctxSupplier));
 	}
 
 	// This message is called from the Client thread.
-	private static void processMessage(AltarEnergyUpdateMessageToClient message) {
-
+	private static void processMessage(AltarEnergyUpdateMessageToClient message, Supplier<NetworkEvent.Context> ctxSupplier) {
+		
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {

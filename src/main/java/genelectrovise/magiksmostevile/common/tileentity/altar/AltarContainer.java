@@ -4,10 +4,13 @@
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
+import genelectrovise.magiksmostevile.common.network.altar.AltarEnergyUpdateMessageToClient;
+import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.tileentity.CommonContainer;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementManager;
@@ -20,6 +23,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -61,6 +66,12 @@ public class AltarContainer extends CommonContainer {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
+		if (inv.player instanceof ServerPlayerEntity) {
+			PacketTarget target = PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) inv.player);
+			AltarEnergyUpdateMessageToClient message = new AltarEnergyUpdateMessageToClient(currentAmethystFlux.get(), maxAmethystFlux.get(), altar.getPos());
+			
+			AltarNetworkingManager.channel.send(target, message);
+		}
 	}
 
 	private void addPossibleAdvancements() {

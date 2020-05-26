@@ -4,7 +4,9 @@
 package genelectrovise.magiksmostevile.common.network.altar;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * This Network Message is sent from the client to the server, to tell it to
@@ -29,8 +31,15 @@ public class AltarEnergyUpdateMessageToClient {
 
 	private static boolean messageIsValid;
 
-	public AltarEnergyUpdateMessageToClient() {
+	int currentAmethystFlux;
+	int maxAmethystFlux;
+	BlockPos blockPos;
+
+	public AltarEnergyUpdateMessageToClient(int currentAmethystFlux, int maxAmethystFlux, BlockPos blockPos) {
 		messageIsValid = true;
+		this.currentAmethystFlux = currentAmethystFlux;
+		this.maxAmethystFlux = maxAmethystFlux;
+		this.blockPos = blockPos;
 	}
 
 	public boolean isMessageValid() {
@@ -40,25 +49,27 @@ public class AltarEnergyUpdateMessageToClient {
 	/**
 	 * Called by the network code. Used to write the contents of your message member
 	 * variables into the ByteBuf, ready for transmission over the network.
-	 * 
+	 *
 	 * @param buf
 	 */
-	public static void encode(AltarEnergyUpdateMessageToClient message, PacketBuffer buf) {
+	public void encode(PacketBuffer buf) {
 		MagiksMostEvile.LOGGER.dev("Encoding message to client");
 		if (!messageIsValid)
 			return;
-		buf.writeString("example");
+		buf.writeInt(currentAmethystFlux);
+		buf.writeInt(maxAmethystFlux);
+		buf.writeBlockPos(blockPos);
 	}
 
 	/**
 	 * Called by the network code once it has received the message bytes over the
 	 * network. Used to read the ByteBuf contents into your member variables
-	 * 
+	 *
 	 * @param buf
 	 */
 	public static AltarEnergyUpdateMessageToClient decode(PacketBuffer buf) {
 		MagiksMostEvile.LOGGER.dev("Decoding message to client");
-		return new AltarEnergyUpdateMessageToClient();
+		return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos());
 	}
 
 	public String toString() {

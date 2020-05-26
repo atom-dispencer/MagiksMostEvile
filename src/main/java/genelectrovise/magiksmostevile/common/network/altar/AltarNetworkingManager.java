@@ -3,14 +3,10 @@
  */
 package genelectrovise.magiksmostevile.common.network.altar;
 
-import com.google.common.base.Optional;
-
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import net.minecraft.network.play.server.SWindowPropertyPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
@@ -26,11 +22,11 @@ public class AltarNetworkingManager {
 														// zero!
 	public static final int ALTAR_ENERGY_TO_CLIENT = 63;
 
-	@SubscribeEvent
 	public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
+		MagiksMostEvile.LOGGER.dev("FMLCommonSetupEvent heard by AltarNetworkingManager");
 		channel = NetworkRegistry.newSimpleChannel(channelRL, () -> MESSAGE_PROTOCOL_VERSION, AltarMessageHandlerOnClient::isProtocolAccepted, AltarMessageHandlerOnServer::isProtocolAccepted);
 
-		//channel.registerMessage(ALTAR_ENERGY_TO_SERVER, AltarEnergyUpdateMessageToServer.class, AltarEnergyUpdateMessageToServer::encode, AltarEnergyUpdateMessageToServer::decode, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+		channel.registerMessage(ALTAR_ENERGY_TO_SERVER, AltarEnergyUpdateMessageToServer.class, AltarEnergyUpdateMessageToServer::encode, AltarEnergyUpdateMessageToServer::decode, AltarMessageHandlerOnServer::onMessageReceived);
 		channel.registerMessage(ALTAR_ENERGY_TO_CLIENT, AltarEnergyUpdateMessageToClient.class, AltarEnergyUpdateMessageToClient::encode, AltarEnergyUpdateMessageToClient::decode, AltarMessageHandlerOnClient::onMessageReceived);
 	}
 }

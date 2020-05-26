@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.network.altar.AltarEnergyUpdateMessageToClient;
+import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EnchantingTableBlock;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.EnchantmentScreen;
 import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,7 +31,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -108,7 +113,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 		// IEnergyStorage
 		energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage") {
-
+			
 		};
 	}
 
