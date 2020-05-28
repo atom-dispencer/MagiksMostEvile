@@ -6,6 +6,7 @@ package genelectrovise.magiksmostevile.common.network.altar;
 import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -31,7 +32,11 @@ public class AltarMessageHandlerOnClient {
 
 		if (ctxSupplier.get().getDirection().getReceptionSide() != LogicalSide.CLIENT) {
 			MagiksMostEvile.LOGGER.warn("Message recieved on incorrect side. (client) ");
+			return;
 		}
+
+		// Now we know that this is on the client of the player who is viewing the
+		// container! (logic actually happening on the network thread still!)
 
 		// Creates a new task for the client for next tick
 		ctxSupplier.get().enqueueWork(() -> processMessage(message, ctxSupplier));
@@ -39,7 +44,9 @@ public class AltarMessageHandlerOnClient {
 
 	// This message is called from the Client thread.
 	private static void processMessage(AltarEnergyUpdateMessageToClient message, Supplier<NetworkEvent.Context> ctxSupplier) {
-		
+
+		// Here I need to get an instance of the world or player so I can access things
+		ctxSupplier.get().getPacketDispatcher();
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {

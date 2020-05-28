@@ -3,8 +3,11 @@
  */
 package genelectrovise.magiksmostevile.common.network.altar;
 
+import java.util.UUID;
+
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 
@@ -34,12 +37,14 @@ public class AltarEnergyUpdateMessageToClient {
 	int currentAmethystFlux;
 	int maxAmethystFlux;
 	BlockPos blockPos;
+	UUID playerUUID;
 
-	public AltarEnergyUpdateMessageToClient(int currentAmethystFlux, int maxAmethystFlux, BlockPos blockPos) {
+	public AltarEnergyUpdateMessageToClient(int currentAmethystFlux, int maxAmethystFlux, BlockPos blockPos, UUID playerUUID) {
 		messageIsValid = true;
 		this.currentAmethystFlux = currentAmethystFlux;
 		this.maxAmethystFlux = maxAmethystFlux;
 		this.blockPos = blockPos;
+		this.playerUUID = playerUUID;
 	}
 
 	public boolean isMessageValid() {
@@ -59,6 +64,7 @@ public class AltarEnergyUpdateMessageToClient {
 		buf.writeInt(currentAmethystFlux);
 		buf.writeInt(maxAmethystFlux);
 		buf.writeBlockPos(blockPos);
+		buf.writeUniqueId(playerUUID);
 	}
 
 	/**
@@ -69,7 +75,7 @@ public class AltarEnergyUpdateMessageToClient {
 	 */
 	public static AltarEnergyUpdateMessageToClient decode(PacketBuffer buf) {
 		MagiksMostEvile.LOGGER.dev("Decoding message to client");
-		return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos());
+		return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUniqueId());
 	}
 
 	public String toString() {

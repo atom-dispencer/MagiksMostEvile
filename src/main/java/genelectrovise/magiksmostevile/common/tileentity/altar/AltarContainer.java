@@ -20,6 +20,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -66,10 +67,12 @@ public class AltarContainer extends CommonContainer {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
+
 		if (inv.player instanceof ServerPlayerEntity) {
+			// Sends direct to the player in question
 			PacketTarget target = PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) inv.player);
-			AltarEnergyUpdateMessageToClient message = new AltarEnergyUpdateMessageToClient(currentAmethystFlux.get(), maxAmethystFlux.get(), altar.getPos());
-			
+			AltarEnergyUpdateMessageToClient message = new AltarEnergyUpdateMessageToClient(currentAmethystFlux.get(), maxAmethystFlux.get(), altar.getPos(), inv.player.getUniqueID());
+
 			AltarNetworkingManager.channel.send(target, message);
 		}
 	}
