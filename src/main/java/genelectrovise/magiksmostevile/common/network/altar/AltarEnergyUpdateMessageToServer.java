@@ -6,6 +6,7 @@ import net.minecraft.network.PacketBuffer;
 /**
  * @author GenElectrovise 24 May 2020
  */
+@Deprecated
 public class AltarEnergyUpdateMessageToServer {
 
 	private static boolean messageIsValid;

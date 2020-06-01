@@ -242,7 +242,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	@Override
 	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
-		return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this, energyStorage);
+		return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this);
 	}
 
 	@Override

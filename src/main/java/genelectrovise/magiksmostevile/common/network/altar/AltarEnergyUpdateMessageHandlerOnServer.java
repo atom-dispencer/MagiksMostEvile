@@ -12,7 +12,8 @@ import net.minecraftforge.fml.network.NetworkEvent;
 /**
  * @author GenElectrovise 24 May 2020
  */
-public class AltarMessageHandlerOnServer {
+@Deprecated
+public class AltarEnergyUpdateMessageHandlerOnServer {
 
 	public static void onMessageReceived(final AltarEnergyUpdateMessageToServer message, Supplier<NetworkEvent.Context> ctxSupplier) {
 		MagiksMostEvile.LOGGER.dev("Message recieved by server!");

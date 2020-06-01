@@ -30,6 +30,7 @@ import net.minecraft.util.math.BlockPos;
  * 
  * @author GenElectrovise 24 May 2020
  */
+@Deprecated
 public class AltarEnergyUpdateMessageToClient {
 
 	private static boolean messageIsValid;

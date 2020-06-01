@@ -24,9 +24,9 @@ public class AltarNetworkingManager {
 
 	public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
 		MagiksMostEvile.LOGGER.dev("FMLCommonSetupEvent heard by AltarNetworkingManager");
-		channel = NetworkRegistry.newSimpleChannel(channelRL, () -> MESSAGE_PROTOCOL_VERSION, AltarMessageHandlerOnClient::isProtocolAccepted, AltarMessageHandlerOnServer::isProtocolAccepted);
+		channel = NetworkRegistry.newSimpleChannel(channelRL, () -> MESSAGE_PROTOCOL_VERSION, AltarEnergyUpdateMessageHandlerOnClient::isProtocolAccepted, AltarEnergyUpdateMessageHandlerOnServer::isProtocolAccepted);
 
-		channel.registerMessage(ALTAR_ENERGY_TO_SERVER, AltarEnergyUpdateMessageToServer.class, AltarEnergyUpdateMessageToServer::encode, AltarEnergyUpdateMessageToServer::decode, AltarMessageHandlerOnServer::onMessageReceived);
-		channel.registerMessage(ALTAR_ENERGY_TO_CLIENT, AltarEnergyUpdateMessageToClient.class, AltarEnergyUpdateMessageToClient::encode, AltarEnergyUpdateMessageToClient::decode, AltarMessageHandlerOnClient::onMessageReceived);
+		channel.registerMessage(ALTAR_ENERGY_TO_SERVER, AltarEnergyUpdateMessageToServer.class, AltarEnergyUpdateMessageToServer::encode, AltarEnergyUpdateMessageToServer::decode, AltarEnergyUpdateMessageHandlerOnServer::onMessageReceived);
+		channel.registerMessage(ALTAR_ENERGY_TO_CLIENT, AltarEnergyUpdateMessageToClient.class, AltarEnergyUpdateMessageToClient::encode, AltarEnergyUpdateMessageToClient::decode, AltarEnergyUpdateMessageHandlerOnClient::onMessageReceived);
 	}
 }

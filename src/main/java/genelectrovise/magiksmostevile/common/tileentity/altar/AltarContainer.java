@@ -21,6 +21,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.FurnaceContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -43,16 +44,16 @@ public class AltarContainer extends CommonContainer {
 	protected PlayerInventory inv;
 
 	public AltarContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-		this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()), new AltarEnergyStorage(50, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage"));
+		this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()));
 	}
 
-	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar, AltarEnergyStorage energy) {
+	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar) {
 		super(EvileDeferredRegistry.ALTAR_CONTAINER.get(), windowId, 4);
 		MagiksMostEvile.LOGGER.debug("Constructing AltarContainer! (Constructor 3 : id, inv, callable)");
 
 		this.altar = altar;
-		this.maxAmethystFlux = energy.maxAmethystFlux;
-		this.currentAmethystFlux = energy.currentAmethystFlux;
+		this.maxAmethystFlux = altar.energyStorage.maxAmethystFlux;
+		this.currentAmethystFlux = altar.energyStorage.currentAmethystFlux;
 		this.inv = inv;
 
 		trackInt(maxAmethystFlux);
@@ -68,6 +69,7 @@ public class AltarContainer extends CommonContainer {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
+		//Not actually necessary, but will keep for the moment as the messages are very lightweight and will be helpful for future!
 		if (inv.player instanceof ServerPlayerEntity) {
 			// Sends direct to the player in question
 			PacketTarget target = PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) inv.player);
@@ -132,6 +134,34 @@ public class AltarContainer extends CommonContainer {
 			Slot hotbarSlot = new Slot(playerInventory, k, 242, 8 + k * 18 - 5);
 			addSlot(hotbarSlot);
 		}
+	}
+
+	/**
+	 * @return the currentAmethystFlux
+	 */
+	public TrackableIntegerHolder getCurrentAmethystFlux() {
+		return currentAmethystFlux;
+	}
+
+	/**
+	 * @param currentAmethystFlux the currentAmethystFlux to set
+	 */
+	public void setCurrentAmethystFlux(int currentAmethystFlux) {
+		this.currentAmethystFlux.set(currentAmethystFlux);
+	}
+
+	/**
+	 * @return the maxAmethystFlux
+	 */
+	public TrackableIntegerHolder getMaxAmethystFlux() {
+		return maxAmethystFlux;
+	}
+
+	/**
+	 * @param maxAmethystFlux the maxAmethystFlux to set
+	 */
+	public void setMaxAmethystFlux(int maxAmethystFlux) {
+		this.maxAmethystFlux.set(maxAmethystFlux);
 	}
 
 }
