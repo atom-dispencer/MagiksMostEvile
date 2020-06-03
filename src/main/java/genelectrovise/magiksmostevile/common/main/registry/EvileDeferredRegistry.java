@@ -1,5 +1,7 @@
 package genelectrovise.magiksmostevile.common.main.registry;
 
+import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
+import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatRenderer;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.AmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.OverPoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.PoweredAmethystArmorBase;
@@ -27,6 +29,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ContainerType;
@@ -46,6 +49,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -134,6 +139,11 @@ public class EvileDeferredRegistry {
 	}
 
 //=========ENTITIES====================================================================================================================
+	public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT = ENTITIES.register("vampire_bat", () -> EntityType.Builder.create(VampireBatEntity::new, EntityClassification.MONSTER).build("vampire_bat"));
+
+	public static void renderers(FMLClientSetupEvent event) {
+		RenderingRegistry.registerEntityRenderingHandler(VAMPIRE_BAT.get(), VampireBatRenderer::new);
+	}
 
 //=========GENERATION (structures should be done via registry events) =================================================================
 
@@ -150,6 +160,7 @@ public class EvileDeferredRegistry {
 	public EvileDeferredRegistry() {
 		MagiksMostEvile.LOGGER.debug("Constructing EvileRegistry!");
 		MagiksMostEvile.LOGGER.debug("Log Key 182727012020 : FMLJavaModLoadingContext = " + FMLJavaModLoadingContext.get());
+
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());

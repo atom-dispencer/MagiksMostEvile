@@ -45,9 +45,11 @@
 	"food": "food",
 	"item.magiksmostevile.amethyst_potato": "Amethyst Potato",
 	"tile entities": "tile entities",
-	"magiksmostevile.altar_tile_entity": "Altar Tile Entity see lang",
+	"magiksmostevile.altar_tile_entity": "Altar Tile Entity",
 	"containers": "containers",
 	"magiksmostevile:container.altar": "Altar",
 	"features": "features",
-	"structure.magiksmostevile.shrine": "Ancient Shrine"
+	"structure.magiksmostevile.shrine": "Ancient Shrine",
+	"entity": "entity",
+	"entity.magiksmostevile.vampire_bat": "Vampire Bat"
 }
