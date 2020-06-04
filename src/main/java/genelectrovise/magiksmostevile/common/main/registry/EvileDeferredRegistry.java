@@ -139,7 +139,7 @@ public class EvileDeferredRegistry {
 	}
 
 //=========ENTITIES====================================================================================================================
-	public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT = ENTITIES.register("vampire_bat", () -> EntityType.Builder.create(VampireBatEntity::new, EntityClassification.MONSTER).build("vampire_bat"));
+	public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT = ENTITIES.register("vampire_bat", () -> EntityType.Builder.create(VampireBatEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("vampire_bat"));
 
 	public static void renderers(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(VAMPIRE_BAT.get(), VampireBatRenderer::new);

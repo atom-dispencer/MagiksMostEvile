@@ -8,10 +8,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-// Made with Blockbench 3.5.4
-// Exported for Minecraft version 1.15
-// Paste this class into your mod and generate all required imports
-
 @OnlyIn(Dist.CLIENT)
 public class VampireBatModel extends SegmentedModel<VampireBatEntity> {
 	private final ModelRenderer batHead;

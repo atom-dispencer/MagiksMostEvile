@@ -9,6 +9,10 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import genelectrovise.magiksmostevile.common.entity.goal.VampireBatFlapGoal;
+import genelectrovise.magiksmostevile.common.entity.goal.VampireBatHangGoal;
+import genelectrovise.magiksmostevile.common.entity.goal.VampireBatAttackGoal;
+import genelectrovise.magiksmostevile.common.entity.goal.VampireBatBiteGoal;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -18,8 +22,16 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.BatEntity;
+import net.minecraft.entity.passive.BeeEntity;
+import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -35,12 +47,14 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 /**
+ * @see CreeperEntity for AI examples
+ * @see BeeEntity for more examples!
  * @author GenElectrovise 1 Jun 2020
  */
 public class VampireBatEntity extends MonsterEntity {
-	private static final DataParameter<Byte> HANGING = EntityDataManager.createKey(BatEntity.class, DataSerializers.BYTE);
-	private static final EntityPredicate field_213813_c = (new EntityPredicate()).setDistance(4.0D).allowFriendlyFire();
-	private BlockPos spawnPosition;
+	private static final DataParameter<Byte> HANGING = EntityDataManager.createKey(VampireBatEntity.class, DataSerializers.BYTE);
+	public static final EntityPredicate entityPredicate = new EntityPredicate().setDistance(4.0D).allowFriendlyFire();
+	public BlockPos spawnPosition;
 
 	public VampireBatEntity(EntityType<? extends VampireBatEntity> entityType, World world) {
 		super(entityType, world);
@@ -94,8 +108,16 @@ public class VampireBatEntity extends MonsterEntity {
 	}
 
 	protected void registerAttributes() {
+		// Register
 		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+
+		// Set
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
+		this.getAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(1.0f);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5f);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(3.0f);
 	}
 
 	public boolean getIsBatHanging() {
@@ -126,55 +148,30 @@ public class VampireBatEntity extends MonsterEntity {
 
 	}
 
-	/**
-	 * TODO Rewrite this hateful thing. Adds AI tasks to this entity. Or just flaps
-	 * randomly that works too.
-	 */
+	@Override
+	protected void registerGoals() {
+		MagiksMostEvile.LOGGER.debug("Registering goals for new vampire bat!");
+		this.goalSelector.addGoal(0, new VampireBatBiteGoal(this));
+
+		this.goalSelector.addGoal(3, new VampireBatAttackGoal<PlayerEntity>(this, PlayerEntity.class, false));
+		this.goalSelector.addGoal(4, new VampireBatAttackGoal<VillagerEntity>(this, VillagerEntity.class, false));
+		this.goalSelector.addGoal(5, new VampireBatAttackGoal<CowEntity>(this, CowEntity.class, false));
+		this.goalSelector.addGoal(5, new VampireBatAttackGoal<SheepEntity>(this, SheepEntity.class, false));
+		this.goalSelector.addGoal(5, new VampireBatAttackGoal<PigEntity>(this, PigEntity.class, false));
+		this.goalSelector.addGoal(5, new VampireBatAttackGoal<ChickenEntity>(this, ChickenEntity.class, false));
+		this.goalSelector.addGoal(6, new VampireBatAttackGoal<WolfEntity>(this, WolfEntity.class, false));
+
+		this.goalSelector.addGoal(19, new VampireBatHangGoal(this));
+		this.goalSelector.addGoal(20, new VampireBatFlapGoal(this));
+	}
+
 	protected void updateAITasks() {
 		super.updateAITasks();
 
-		MagiksMostEvile.LOGGER.dev("I hate this bat AI. It's not even an AI but it goes in the update AI tasks method. ALL IT DOES IS FLAP RANDOMLY!!");
+	}
 
-		BlockPos blockpos = new BlockPos(this);
-		BlockPos blockpos1 = blockpos.up();
-		if (this.getIsBatHanging()) {
-			if (this.world.getBlockState(blockpos1).isNormalCube(this.world, blockpos)) {
-				if (this.rand.nextInt(200) == 0) {
-					this.rotationYawHead = (float) this.rand.nextInt(360);
-				}
-
-				if (this.world.getClosestPlayer(field_213813_c, this) != null) {
-					this.setIsBatHanging(false);
-					this.world.playEvent((PlayerEntity) null, 1025, blockpos, 0);
-				}
-			} else {
-				this.setIsBatHanging(false);
-				this.world.playEvent((PlayerEntity) null, 1025, blockpos, 0);
-			}
-		} else {
-			if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1)) {
-				this.spawnPosition = null;
-			}
-
-			if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.withinDistance(this.getPositionVec(), 2.0D)) {
-				this.spawnPosition = new BlockPos(this.getPosX() + (double) this.rand.nextInt(7) - (double) this.rand.nextInt(7), this.getPosY() + (double) this.rand.nextInt(6) - 2.0D, this.getPosZ() + (double) this.rand.nextInt(7) - (double) this.rand.nextInt(7));
-			}
-
-			double d0 = (double) this.spawnPosition.getX() + 0.5D - this.getPosX();
-			double d1 = (double) this.spawnPosition.getY() + 0.1D - this.getPosY();
-			double d2 = (double) this.spawnPosition.getZ() + 0.5D - this.getPosZ();
-			Vec3d vec3d = this.getMotion();
-			Vec3d vec3d1 = vec3d.add((Math.signum(d0) * 0.5D - vec3d.x) * (double) 0.1F, (Math.signum(d1) * (double) 0.7F - vec3d.y) * (double) 0.1F, (Math.signum(d2) * 0.5D - vec3d.z) * (double) 0.1F);
-			this.setMotion(vec3d1);
-			float f = (float) (MathHelper.atan2(vec3d1.z, vec3d1.x) * (double) (180F / (float) Math.PI)) - 90.0F;
-			float f1 = MathHelper.wrapDegrees(f - this.rotationYaw);
-			this.moveForward = 0.5F;
-			this.rotationYaw += f1;
-			if (this.rand.nextInt(100) == 0 && this.world.getBlockState(blockpos1).isNormalCube(this.world, blockpos1)) {
-				this.setIsBatHanging(true);
-			}
-		}
-
+	public Random getRandom() {
+		return rand;
 	}
 
 	/**
