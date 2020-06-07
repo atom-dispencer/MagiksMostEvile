@@ -14,7 +14,6 @@ import genelectrovise.magiksmostevile.common.entity.goal.VampireBatBiteGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatFlapGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatHangGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatNearestAttackableTargetGoal;
-import genelectrovise.magiksmostevile.common.entity.goal.VampireBatSummonAidGoal;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -169,6 +168,11 @@ public class VampireBatEntity extends MonsterEntity {
 	 */
 	public void tick() {
 		super.tick();
+		
+		if(this.isInDaylight() && this.isAlive()) {
+			this.setFire(2);
+		}
+		
 		if (this.getIsBatHanging()) {
 			this.setMotion(Vec3d.ZERO);
 			this.setRawPosition(this.getPosX(), (double) MathHelper.floor(this.getPosY()) + 1.0D - (double) this.getHeight(), this.getPosZ());
@@ -181,8 +185,7 @@ public class VampireBatEntity extends MonsterEntity {
 	@Override
 	protected void registerGoals() {
 		MagiksMostEvile.LOGGER.debug("Registering goals for new vampire bat!");
-		this.goalSelector.addGoal(1, new VampireBatSummonAidGoal(this, 100, 8));
-		this.goalSelector.addGoal(2, new VampireBatBiteGoal(this));
+		this.goalSelector.addGoal(1, new VampireBatBiteGoal(this));
 		this.goalSelector.addGoal(19, new VampireBatHangGoal(this));
 		this.goalSelector.addGoal(20, new VampireBatFlapGoal(this));
 

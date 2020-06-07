@@ -11,7 +11,6 @@ import genelectrovise.magiksmostevile.common.item.glowing.GlowingItem;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingPickaxe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingShovel;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingSword;
-import genelectrovise.magiksmostevile.common.item.spawn_egg.EvileSpawnEgg;
 import genelectrovise.magiksmostevile.common.item.spawn_egg.VampireBatSpawnEgg;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileArmorMaterial;
@@ -123,7 +122,7 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<Item> OVER_POWERED_AMETHYST_BOOTS = ITEMS.register("over_powered_amethyst_boots", () -> new OverPoweredAmethystArmorBase(EnumEvileArmorMaterial.OVER_POWERED_AMETHYST, EquipmentSlotType.FEET, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
 //=========FOOD========================================================================================================================
-	public static final RegistryObject<Item> AMETHYST_POTATO = ITEMS.register("amethyst_potato", () -> new Item(new Item.Properties().food((new Food.Builder()).hunger(3).saturation(0.8F).effect(new EffectInstance(Effects.SPEED, 400, 1), 1.0F).fastToEat().build()).group(EvileItemGroup.ITEMGROUP_EVILE)));
+	public static final RegistryObject<Item> AMETHYST_POTATO = ITEMS.register("amethyst_potato", () -> new Item(new Item.Properties().food((new Food.Builder()).hunger(3).saturation(0.8F).effect(() -> new EffectInstance(Effects.SPEED, 400, 1), 1.0F).fastToEat().build()).group(EvileItemGroup.ITEMGROUP_EVILE)));
 
 //=========TILE ENTITIES===============================================================================================================
 	public static final RegistryObject<TileEntityType<AmethystCrystalTileEntity>> TILE_ENTITY_AMETHYST_CRYSTAL = TILE_ENTITIES.register("tile_entity_amethyst_crystal", () -> TileEntityType.Builder.create(AmethystCrystalTileEntity::new, EvileDeferredRegistry.AMETHYST_CRYSTAL.get()).build(null));

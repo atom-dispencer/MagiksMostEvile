@@ -6,8 +6,6 @@ import javax.annotation.Nonnull;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.StructureReference;
-import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
-import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine2.Shrine2;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine2.ShrinePiece;
 import net.minecraft.inventory.container.ContainerType;
@@ -20,7 +18,6 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -60,6 +57,15 @@ public class EvileRegistryEventHandler {
 				MagiksMostEvile.LOGGER.debug(" > Adding shrine to Biome : " + biome);
 				biome.addStructure(SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 				biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+			});
+		});
+		
+		DeferredWorkQueue.runLater(() -> {
+			MagiksMostEvile.LOGGER.debug("Adding vampire bats to Biomes!");
+			Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
+			biomes.forEachRemaining((biome) -> {
+				MagiksMostEvile.LOGGER.debug(" > Adding vampire bat to Biome : " + biome);
+				
 			});
 		});
 	}

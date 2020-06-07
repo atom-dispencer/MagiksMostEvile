@@ -7,12 +7,15 @@ import java.util.ArrayList;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.ritual.Rituals;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screen.inventory.CraftingScreen;
+import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 
@@ -40,8 +43,6 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		this.altarContainer = altarContainer;
 		this.completetedRitualAdvancements = this.altarContainer.completedAdvancements;
 	}
-	
-	
 
 	// Logic
 	private ArrayList<Ritual> createAvailableRitualsList() {
@@ -96,6 +97,9 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		// Draw images
 		drawMain(posX_main, posY_main);
 
+		// Add cast button
+		addCastButton(posX_main, posY_main);
+
 		// Draw text
 		this.font.drawString(this.title.getFormattedText() + " Amethyst Flux: " + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(), 72.0F, 46.0F, 4210752);
 	}
@@ -104,6 +108,20 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.MAIN);
 
 		blit(posX, posY, 0, ZERO, ZERO, MAIN_WIDTH, MAIN_HEIGHT, MAIN_HEIGHT, MAIN_WIDTH);
+	}
+
+	private void addCastButton(int posX, int posY) {
+		getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.MAIN);
+
+		addButton(new ImageButton(posX + 60, posY + 30, 60, 30, 0, 0, 0, BACKGROUND_LOCATION, (btn) -> {
+			castButtonPressd();
+		}));
+
+		blit(posX, posY, 0, ZERO, ZERO, MAIN_WIDTH, MAIN_HEIGHT, MAIN_HEIGHT, MAIN_WIDTH);
+	}
+
+	private void castButtonPressd() {
+		MagiksMostEvile.LOGGER.debug("Button pressed!");
 	}
 
 }
