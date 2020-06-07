@@ -11,8 +11,9 @@ import genelectrovise.magiksmostevile.common.item.glowing.GlowingItem;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingPickaxe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingShovel;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingSword;
+import genelectrovise.magiksmostevile.common.item.spawn_egg.EvileSpawnEgg;
+import genelectrovise.magiksmostevile.common.item.spawn_egg.VampireBatSpawnEgg;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.reference.ContainerReference;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileArmorMaterial;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
 import genelectrovise.magiksmostevile.common.main.support.EvileItemGroup;
@@ -95,9 +96,7 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<Item> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(EnumEvileItemTier.AMETHYST, 1, -0.5F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(EnumEvileItemTier.AMETHYST, 1, -0.5F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(EnumEvileItemTier.AMETHYST, 1, -0.5F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-	public static final RegistryObject<Item> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(EnumEvileItemTier.AMETHYST, -0.5F,
-			//
-			new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+	public static final RegistryObject<Item> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(EnumEvileItemTier.AMETHYST, -0.5F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> POWERED_AMETHYST_SWORD = ITEMS.register("powered_amethyst_sword", () -> new GlowingSword(EnumEvileItemTier.POWERED_AMETHYST, 2, -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> POWERED_AMETHYST_AXE = ITEMS.register("powered_amethyst_axe", () -> new GlowingAxe(EnumEvileItemTier.POWERED_AMETHYST, 2, -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> POWERED_AMETHYST_PICKAXE = ITEMS.register("powered_amethyst_pickaxe", () -> new GlowingPickaxe(EnumEvileItemTier.POWERED_AMETHYST, 2, -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
@@ -140,6 +139,7 @@ public class EvileDeferredRegistry {
 
 //=========ENTITIES====================================================================================================================
 	public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT = ENTITIES.register("vampire_bat", () -> EntityType.Builder.create(VampireBatEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("vampire_bat"));
+	public static final RegistryObject<Item> VAMPIRE_BAT_EGG = ITEMS.register("vampire_bat_egg", () -> new VampireBatSpawnEgg(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(64)));
 
 	public static void renderers(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(VAMPIRE_BAT.get(), VampireBatRenderer::new);

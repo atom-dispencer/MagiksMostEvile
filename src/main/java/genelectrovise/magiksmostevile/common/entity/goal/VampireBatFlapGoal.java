@@ -26,19 +26,23 @@ public class VampireBatFlapGoal extends Goal {
 	@Override
 	public boolean shouldExecute() {
 
-			// If the bat is hanging, return false.
-			if (vampireBat.getIsBatHanging()) {
-				return false;
-			}
+		if (!vampireBat.isInActiveLightLevel() && vampireBat.getIsBatHanging()) {
+			return false;
+		}
 
-			// If has a target, return false.
-			if (vampireBat.getAttackTarget() != null) {
-				return false;
-			}
+		// If the bat is hanging, return false.
+		if (vampireBat.getIsBatHanging()) {
+			return false;
+		}
 
-			// If block above can be hung on, return false.
-			if (vampireBat.world.getBlockState(vampireBat.getPosition().up()).isNormalCube(vampireBat.world, vampireBat.getPosition().up())) {
-				return false;
+		// If has a target, return false.
+		if (vampireBat.getAttackTarget() != null) {
+			return false;
+		}
+
+		// If block above can be hung on, return false.
+		if (vampireBat.world.getBlockState(vampireBat.getPosition().up()).isNormalCube(vampireBat.world, vampireBat.getPosition().up())) {
+			return false;
 		}
 
 		// Otherwise, return true.

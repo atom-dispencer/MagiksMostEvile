@@ -51,5 +51,6 @@
 	"features": "features",
 	"structure.magiksmostevile.shrine": "Ancient Shrine",
 	"entity": "entity",
-	"entity.magiksmostevile.vampire_bat": "Vampire Bat"
+	"entity.magiksmostevile.vampire_bat": "Vampire Bat",
+	"item.magiksmostevile.vampire_bat_egg":"Spawn Vampire Bat"
 }

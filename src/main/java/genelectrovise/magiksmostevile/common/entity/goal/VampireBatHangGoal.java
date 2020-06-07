@@ -29,6 +29,11 @@ public class VampireBatHangGoal extends Goal {
 
 	@Override
 	public boolean shouldExecute() {
+		
+		if(!vampireBat.isInActiveLightLevel()) {
+			return false;
+		}
+		
 		if (!blockAboveIsHangable()) {
 			return false;
 		}

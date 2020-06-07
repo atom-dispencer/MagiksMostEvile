@@ -5,26 +5,35 @@ package genelectrovise.magiksmostevile.common.entity.vampire_bat;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import genelectrovise.magiksmostevile.common.entity.goal.VampireBatBiteGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatFlapGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatHangGoal;
-import genelectrovise.magiksmostevile.common.entity.goal.VampireBatAttackGoal;
-import genelectrovise.magiksmostevile.common.entity.goal.VampireBatBiteGoal;
+import genelectrovise.magiksmostevile.common.entity.goal.VampireBatNearestAttackableTargetGoal;
+import genelectrovise.magiksmostevile.common.entity.goal.VampireBatSummonAidGoal;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.FlyingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.PhantomEntity;
+import net.minecraft.entity.monster.VexEntity;
+import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.ChickenEntity;
@@ -37,18 +46,26 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
 /**
- * @see CreeperEntity for AI examples
- * @see BeeEntity for more examples!
+ * @see CreeperEntity
+ * @see BeeEntity
+ * @see VexEntity
+ * @see PhantomEntity
+ * @see FlyingEntity
+ * @see FlyingMovementController
+ * @see ZombieEntity
  * @author GenElectrovise 1 Jun 2020
  */
 public class VampireBatEntity extends MonsterEntity {
@@ -56,9 +73,21 @@ public class VampireBatEntity extends MonsterEntity {
 	public static final EntityPredicate entityPredicate = new EntityPredicate().setDistance(4.0D).allowFriendlyFire();
 	public BlockPos spawnPosition;
 
+	public static final int REINFORCEMENT_CHANCE = 2;
+	public static final int REINFORCEMENT_COOLDOWN = 100;
+	public static final int MAX_REINFORCEMENTS = 10;
+	public static final int REINFORCEMENT_DETECTION_RADIUS = 15;
+	public static final int REINFORCEMENT_CALLING_RADIUS = 25;
+	public static final int MINIMUM_REINFORCEMENTS = 5;
+
 	public VampireBatEntity(EntityType<? extends VampireBatEntity> entityType, World world) {
 		super(entityType, world);
-		this.setIsBatHanging(true);
+		this.setIsBatHanging(false);
+		this.moveController = new VampireBatMoveHelperController(this, 60, true);
+		this.navigator = new FlyingPathNavigator(this, this.world);
+
+		navigator.setSpeed(this.getAttribute(SharedMonsterAttributes.FLYING_SPEED).getValue());
+		navigator.setCanSwim(false);
 	}
 
 	protected void registerData() {
@@ -115,9 +144,10 @@ public class VampireBatEntity extends MonsterEntity {
 
 		// Set
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
-		this.getAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(1.0f);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5f);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(3.0f);
+		this.getAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(2.0f);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0f);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(5.0f);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0f);
 	}
 
 	public boolean getIsBatHanging() {
@@ -151,23 +181,25 @@ public class VampireBatEntity extends MonsterEntity {
 	@Override
 	protected void registerGoals() {
 		MagiksMostEvile.LOGGER.debug("Registering goals for new vampire bat!");
-		this.goalSelector.addGoal(0, new VampireBatBiteGoal(this));
-
-		this.goalSelector.addGoal(3, new VampireBatAttackGoal<PlayerEntity>(this, PlayerEntity.class, false));
-		this.goalSelector.addGoal(4, new VampireBatAttackGoal<VillagerEntity>(this, VillagerEntity.class, false));
-		this.goalSelector.addGoal(5, new VampireBatAttackGoal<CowEntity>(this, CowEntity.class, false));
-		this.goalSelector.addGoal(5, new VampireBatAttackGoal<SheepEntity>(this, SheepEntity.class, false));
-		this.goalSelector.addGoal(5, new VampireBatAttackGoal<PigEntity>(this, PigEntity.class, false));
-		this.goalSelector.addGoal(5, new VampireBatAttackGoal<ChickenEntity>(this, ChickenEntity.class, false));
-		this.goalSelector.addGoal(6, new VampireBatAttackGoal<WolfEntity>(this, WolfEntity.class, false));
-
+		this.goalSelector.addGoal(1, new VampireBatSummonAidGoal(this, 100, 8));
+		this.goalSelector.addGoal(2, new VampireBatBiteGoal(this));
 		this.goalSelector.addGoal(19, new VampireBatHangGoal(this));
 		this.goalSelector.addGoal(20, new VampireBatFlapGoal(this));
+
+		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setCallsForHelp(VampireBatEntity.class));
+		this.targetSelector.addGoal(3, new VampireBatNearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
+		this.targetSelector.addGoal(4, new VampireBatNearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
+		this.targetSelector.addGoal(5, new VampireBatNearestAttackableTargetGoal<CowEntity>(this, CowEntity.class, false));
+		this.targetSelector.addGoal(5, new VampireBatNearestAttackableTargetGoal<SheepEntity>(this, SheepEntity.class, false));
+		this.targetSelector.addGoal(5, new VampireBatNearestAttackableTargetGoal<PigEntity>(this, PigEntity.class, false));
+		this.targetSelector.addGoal(5, new VampireBatNearestAttackableTargetGoal<ChickenEntity>(this, ChickenEntity.class, false));
+		this.targetSelector.addGoal(6, new VampireBatNearestAttackableTargetGoal<WolfEntity>(this, WolfEntity.class, false));
 	}
 
 	protected void updateAITasks() {
 		super.updateAITasks();
 
+		MagiksMostEvile.LOGGER.dev("Speed: " + this.moveController.getSpeed());
 	}
 
 	public Random getRandom() {
@@ -266,6 +298,36 @@ public class VampireBatEntity extends MonsterEntity {
 
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
 		return sizeIn.height / 2.0F;
+	}
+
+	public boolean isInActiveLightLevel() {
+		return this.world.getLightFor(LightType.SKY, getPosition()) < 8 || this.isInDaylight() == false;
+	}
+
+	/**
+	 * Extends {@link FlyingMovementController}.
+	 * 
+	 * @author GenElectrovise 5 Jun 2020
+	 */
+	class VampireBatMoveHelperController extends FlyingMovementController {
+
+		/**
+		 * @param vampireBat
+		 * @param unknownInt
+		 * @param unknownBool
+		 */
+		public VampireBatMoveHelperController(MobEntity vampireBat, int unknownInt, boolean unknownBool) {
+			super(vampireBat, unknownInt, unknownBool);
+		}
+
+	}
+
+	/**
+	 * @return
+	 */
+	public List<VampireBatEntity> batsWithinArea(double radius) {
+		AxisAlignedBB bounds = new AxisAlignedBB(this.getPosX() + radius, this.getPosY() + radius, this.getPosZ() + radius, this.getPosX() - radius, this.getPosY() - radius, this.getPosZ() - radius);
+		return world.getEntitiesWithinAABB(VampireBatEntity.class, bounds);
 	}
 
 }

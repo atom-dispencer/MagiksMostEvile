@@ -49,7 +49,7 @@ public class AltarContainer extends CommonContainer {
 
 	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar) {
 		super(EvileDeferredRegistry.ALTAR_CONTAINER.get(), windowId, 4);
-		MagiksMostEvile.LOGGER.debug("Constructing AltarContainer! (Constructor 3 : id, inv, callable)");
+		MagiksMostEvile.LOGGER.dev("Constructing AltarContainer! (Constructor 3 : id, inv, callable)");
 
 		this.altar = altar;
 		this.maxAmethystFlux = altar.energyStorage.maxAmethystFlux;
