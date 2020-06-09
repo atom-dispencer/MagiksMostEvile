@@ -6,6 +6,7 @@ import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.altar.AltarEnergyUpdateMessageToClient;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
+import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
 import net.minecraft.block.BlockState;
@@ -57,6 +58,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	private int tickIncr = 0;
 	private int recieveFluxCountdown = 0;
 	private ArrayList<AmethystCrystalTileEntity> crystals = new ArrayList<AmethystCrystalTileEntity>();
+	public boolean isCasting;
 
 	// IItemHandler
 	protected ItemStackHandler slot_0;
@@ -113,7 +115,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 		// IEnergyStorage
 		energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage") {
-			
+
 		};
 	}
 
@@ -203,7 +205,6 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 							BlockState state = world.getBlockState(position);
 							if (state.getBlock() == EvileDeferredRegistry.AMETHYST_CRYSTAL.get() || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
 								crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
-								// MagiksMostEvile.LOGGER.dev("added: " + world.getTileEntity(position));
 							}
 						}
 					}
@@ -211,7 +212,6 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 				// Increase energy capacity
 				energyStorage.setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
-				MagiksMostEvile.LOGGER.dev("new energy capacity: " + energyStorage.getMaxEnergyStored());
 			}
 
 			// Receive amethyst flux
@@ -220,10 +220,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 					energyStorage.receiveEnergy(1, false);
 					energyStorage.receiveEnergy(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL, false);
 					recieveFluxCountdown = 0;
-					MagiksMostEvile.LOGGER.dev("Recieved night energy");
 				} else {
 					energyStorage.receiveEnergy(crystals.size() * DAY_ENERGY_PER_CRYSTAL, false);
-					MagiksMostEvile.LOGGER.dev("Recieved day energy per crystal");
 				}
 			} else {
 				recieveFluxCountdown++;
@@ -235,8 +233,6 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 			} else {
 				tickIncr++;
 			}
-
-			MagiksMostEvile.LOGGER.dev("rfc:" + recieveFluxCountdown + " energyCurrent:" + energyStorage.getEnergyStored() + " energyMax:" + energyStorage.getMaxEnergyStored() + " tickIncr:" + tickIncr + " crystals:" + crystals);
 		}
 	}
 
@@ -255,6 +251,36 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	@Override
 	public ITextComponent getDisplayName() {
 		return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar");
+	}
+
+	// Ritual handling
+
+	/**
+	 * @return the isCasting
+	 */
+	public boolean isCasting() {
+		return isCasting;
+	}
+
+	/**
+	 * @param isCasting the isCasting to set
+	 */
+	public void setCasting(boolean isCasting) {
+		this.isCasting = isCasting;
+	}
+
+	/**
+	 * @param ritualClass
+	 */
+	public <T extends Ritual> void castRitual(Class<T> ritualClass) {
+		try {
+			T ritual = (T) ritualClass.newInstance();
+			ritual.begin();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

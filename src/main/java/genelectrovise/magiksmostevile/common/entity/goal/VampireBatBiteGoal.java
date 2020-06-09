@@ -58,6 +58,7 @@ public class VampireBatBiteGoal extends MeleeAttackGoal {
 	}
 
 	private boolean shouldSummonAid() {
+		
 		if (cooldown == 0) {
 
 			if (vampireBat.getRNG().nextInt(VampireBatEntity.REINFORCEMENT_CHANCE) == 0 && vampireBat.batsWithinArea(VampireBatEntity.REINFORCEMENT_DETECTION_RADIUS).size() < VampireBatEntity.MINIMUM_REINFORCEMENTS) {

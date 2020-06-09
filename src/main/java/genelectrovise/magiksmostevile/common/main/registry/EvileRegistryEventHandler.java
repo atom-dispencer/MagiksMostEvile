@@ -8,9 +8,11 @@ import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.StructureReference;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine2.Shrine2;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine2.ShrinePiece;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
@@ -29,7 +31,7 @@ import net.minecraftforge.registries.ObjectHolder;
 public class EvileRegistryEventHandler {
 
 	public EvileRegistryEventHandler(IEventBus modEventBus) {
-		modEventBus.addListener(this::addShrineToBiomes);
+		modEventBus.addListener(this::setupBiomesWithEvileThings);
 	}
 
 	//////////////////////////////// FEATURES
@@ -49,7 +51,9 @@ public class EvileRegistryEventHandler {
 	public static Structure<NoFeatureConfig> SHRINE_CENTRE;
 
 	@SuppressWarnings("deprecation")
-	public void addShrineToBiomes(FMLCommonSetupEvent event) {
+	public void setupBiomesWithEvileThings(FMLCommonSetupEvent event) {
+
+		// Add shrines
 		DeferredWorkQueue.runLater(() -> {
 			MagiksMostEvile.LOGGER.debug("Adding shrines to Biomes! ==1==");
 			Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
@@ -59,13 +63,16 @@ public class EvileRegistryEventHandler {
 				biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 			});
 		});
-		
+
+		// Add vampire bat spawns
 		DeferredWorkQueue.runLater(() -> {
-			MagiksMostEvile.LOGGER.debug("Adding vampire bats to Biomes!");
+			MagiksMostEvile.LOGGER.debug("Adding vampire bats to Biomes! (will skip Biome.Category == OCEAN, NETHER, THEEND)");
 			Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
 			biomes.forEachRemaining((biome) -> {
-				MagiksMostEvile.LOGGER.debug(" > Adding vampire bat to Biome : " + biome);
-				
+				if (biome.getCategory() != Biome.Category.OCEAN || biome.getCategory() != Biome.Category.NETHER | biome.getCategory() != Biome.Category.THEEND) {
+					MagiksMostEvile.LOGGER.debug(" > Adding vampire bat spawn list entry to Biome : " + biome);
+					biome.getSpawns(EntityClassification.MONSTER).add(new SpawnListEntry(EvileDeferredRegistry.VAMPIRE_BAT.get(), 5, 2, 10));
+				}
 			});
 		});
 	}
@@ -80,10 +87,6 @@ public class EvileRegistryEventHandler {
 		Shrine2.CENTRE_PIECE = Registry.register(Registry.STRUCTURE_PIECE, StructureReference.SHRINE_LOC, ShrinePiece.ShrineCentrePiece::new);
 		event.getRegistry().register(new Shrine2(NoFeatureConfig::deserialize).setRegistryName(StructureReference.SHRINE_LOC));
 
-	}
-
-	public void containers(@Nonnull final RegistryEvent.Register<ContainerType<?>> event) {
-		
 	}
 
 }

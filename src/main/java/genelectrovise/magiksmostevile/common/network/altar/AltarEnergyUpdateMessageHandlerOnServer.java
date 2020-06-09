@@ -36,6 +36,6 @@ public class AltarEnergyUpdateMessageHandlerOnServer {
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {
-		return AltarNetworkingManager.MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
+		return AltarNetworkingManager.ENERGY_UPDATE_MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
 	}
 }

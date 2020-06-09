@@ -3,20 +3,25 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
+import static genelectrovise.magiksmostevile.common.main.reference.GuiReference.ZERO;
+
 import java.util.ArrayList;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
+import genelectrovise.magiksmostevile.common.network.altar.AltarCastButtonPressedMessageToServer;
+import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.ritual.Rituals;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.screen.inventory.CraftingScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 /**
@@ -28,10 +33,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	protected ArrayList<Advancement> completetedRitualAdvancements = new ArrayList<Advancement>();
 	protected ArrayList<Ritual> castableRituals = new ArrayList<Ritual>();
 
-	private final int ZERO = 0;
-
-	private final int MAIN_WIDTH = 356;
-	private final int MAIN_HEIGHT = 179;
+	protected Ritual selectedRitual;
 
 	/**
 	 * @param altarContainer
@@ -88,11 +90,11 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		// Find dimensions
 		int scaledWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
 		int halfWidth = scaledWidth / 2;
-		int posX_main = halfWidth - (MAIN_WIDTH / 2);
+		int posX_main = halfWidth - (GuiReference.Altar.Main.MAIN_WIDTH / 2);
 
 		int scaledHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
 		int halfHeight = scaledHeight / 2;
-		int posY_main = halfHeight - (MAIN_HEIGHT / 2);
+		int posY_main = halfHeight - (GuiReference.Altar.Main.MAIN_HEIGHT / 2);
 
 		// Draw images
 		drawMain(posX_main, posY_main);
@@ -105,23 +107,24 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	}
 
 	private void drawMain(int posX, int posY) {
-		getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.MAIN);
+		getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.Main.MAIN_TEXTURE);
 
-		blit(posX, posY, 0, ZERO, ZERO, MAIN_WIDTH, MAIN_HEIGHT, MAIN_HEIGHT, MAIN_WIDTH);
+		blit(posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_WIDTH);
 	}
 
 	private void addCastButton(int posX, int posY) {
-		getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.MAIN);
-
-		addButton(new ImageButton(posX + 60, posY + 30, 60, 30, 0, 0, 0, BACKGROUND_LOCATION, (btn) -> {
+		addButton(new ImageButton(posX + 60, posY + 30, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
 			castButtonPressd();
 		}));
 
-		blit(posX, posY, 0, ZERO, ZERO, MAIN_WIDTH, MAIN_HEIGHT, MAIN_HEIGHT, MAIN_WIDTH);
+		blit(posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_WIDTH);
+
 	}
 
 	private void castButtonPressd() {
 		MagiksMostEvile.LOGGER.debug("Button pressed!");
+
+		AltarNetworkingManager.CAltarCastButtonPressed.sendToServer(new AltarCastButtonPressedMessageToServer(selectedRitual.getRegistryName(), altarContainer.altar.getPos()));
 	}
 
 }

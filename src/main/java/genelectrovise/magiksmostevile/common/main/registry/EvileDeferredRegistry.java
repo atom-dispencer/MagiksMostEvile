@@ -16,6 +16,8 @@ import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileArmorMaterial;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
 import genelectrovise.magiksmostevile.common.main.support.EvileItemGroup;
+import genelectrovise.magiksmostevile.common.ritual.Ritual;
+import genelectrovise.magiksmostevile.common.ritual.ConvertAmethystRitual;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarBlock;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarScreenManager;
@@ -48,12 +50,15 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryManager;
 
 public class EvileDeferredRegistry {
 	// https://github.com/McJty/YouTubeModding14/blob/master/src/main/java/com/mcjty/mytutorial/setup/Registration.java
@@ -64,6 +69,7 @@ public class EvileDeferredRegistry {
 	private static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, MagiksMostEvile.MODID);
 	private static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
 	private static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
+	private static final DeferredRegister<Ritual> RITUALS = new DeferredRegister<Ritual>(LazyForgeRegistry.of(Ritual.class), MagiksMostEvile.MODID);
 
 	// =========BLOCKS======================================================================================================================
 	public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block", () -> new Block(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).lightValue(5 / 16).hardnessAndResistance(3F, 3F)));
@@ -154,17 +160,31 @@ public class EvileDeferredRegistry {
 		EvileOreGeneration.addNetherOres();
 	}
 
+//=========RITUALS=====================================================================================================================
+	public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());
+
 //=========CONSTRUCTOR=================================================================================================================
 
-	public EvileDeferredRegistry() {
+	private static boolean isInitialised = false;
+
+	/**
+	 * Should be called during mod construction
+	 */
+	public static void init(final IEventBus eventBus) {
+
+		if (isInitialised) {
+			throw new IllegalStateException("MagiksMostEvile is already initialised!");
+		}
+
 		MagiksMostEvile.LOGGER.debug("Constructing EvileRegistry!");
 		MagiksMostEvile.LOGGER.debug("Log Key 182727012020 : FMLJavaModLoadingContext = " + FMLJavaModLoadingContext.get());
 
-		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-		FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		BLOCKS.register(eventBus);
+		ITEMS.register(eventBus);
+		FEATURES.register(eventBus);
+		TILE_ENTITIES.register(eventBus);
+		ENTITIES.register(eventBus);
+		CONTAINERS.register(eventBus);
+		RITUALS.register(eventBus);
 	}
 }

@@ -5,7 +5,8 @@ import org.apache.logging.log4j.LogManager;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.main.registry.EvileRegistryEventHandler;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
-import net.minecraft.inventory.container.ContainerType;
+import genelectrovise.magiksmostevile.common.ritual.Ritual;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -16,6 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegistryBuilder;
 
 @Mod(MagiksMostEvile.MODID)
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -33,19 +35,19 @@ public class MagiksMostEvile {
 		MagiksMostEvile.LOGGER.debug("Log Key 182927012020 : FMLJavaModLoadingContext = " + FMLJavaModLoadingContext.get());
 
 		registerEventListeners(MinecraftForge.EVENT_BUS);
-		new EvileDeferredRegistry();
+		EvileDeferredRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
 		evileRegistryEventHandler = new EvileRegistryEventHandler(FMLJavaModLoadingContext.get().getModEventBus());
 
 	}
 
 	@SubscribeEvent
-	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-		evileRegistryEventHandler.features(event);
+	public static void createRegistries(RegistryEvent.NewRegistry event) {
+		new RegistryBuilder<Ritual>().setType(Ritual.class).setName(new ResourceLocation(MODID, "ritual")).create();
 	}
 
 	@SubscribeEvent
-	public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
-		evileRegistryEventHandler.containers(event);
+	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
+		evileRegistryEventHandler.features(event);
 	}
 
 	@SubscribeEvent
@@ -63,7 +65,7 @@ public class MagiksMostEvile {
 	public static void networking(FMLCommonSetupEvent event) {
 		AltarNetworkingManager.onCommonSetupEvent(event);
 	}
-	
+
 	@SubscribeEvent
 	public static void renderers(FMLClientSetupEvent event) {
 		EvileDeferredRegistry.renderers(event);
