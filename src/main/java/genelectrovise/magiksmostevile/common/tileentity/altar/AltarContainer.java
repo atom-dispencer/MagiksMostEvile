@@ -40,7 +40,7 @@ public class AltarContainer extends CommonContainer {
 	protected AltarTileEntity altar;
 	protected TrackableIntegerHolder currentAmethystFlux;
 	protected TrackableIntegerHolder maxAmethystFlux;
-	public TrackableIntegerHolder isCasting;
+	public TrackableIntegerHolder isCasting = new TrackableIntegerHolder(0);
 
 	protected PlayerInventory inv;
 
@@ -60,7 +60,7 @@ public class AltarContainer extends CommonContainer {
 		trackInt(maxAmethystFlux);
 		trackInt(currentAmethystFlux);
 		trackInt(isCasting);
-		
+
 		isCasting.set(altar.isCasting ? 1 : 0);
 
 		addPossibleAdvancements();
@@ -77,15 +77,17 @@ public class AltarContainer extends CommonContainer {
 			this.isCasting.set(altar.isCasting ? 1 : 0);
 		}
 
-		// Not actually necessary, but will keep for the moment as the messages are very
-		// lightweight and will be helpful for future!
-		if (inv.player instanceof ServerPlayerEntity) {
-			// Sends direct to the player in question
-			PacketTarget target = PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) inv.player);
-			AltarEnergyUpdateMessageToClient message = new AltarEnergyUpdateMessageToClient(currentAmethystFlux.get(), maxAmethystFlux.get(), altar.getPos(), inv.player.getUniqueID());
-
-			AltarNetworkingManager.CAltarEnergyUpdate.send(target, message);
-		}
+		/*
+		 * // Not actually necessary, but will keep for the moment as the messages are
+		 * very // lightweight and will be helpful for future! if (inv.player instanceof
+		 * ServerPlayerEntity) { // Sends direct to the player in question PacketTarget
+		 * target = PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity)
+		 * inv.player); AltarEnergyUpdateMessageToClient message = new
+		 * AltarEnergyUpdateMessageToClient(currentAmethystFlux.get(),
+		 * maxAmethystFlux.get(), altar.getPos(), inv.player.getUniqueID());
+		 * 
+		 * AltarNetworkingManager.CAltarEnergyUpdate.send(target, message); }
+		 */
 	}
 
 	private void addPossibleAdvancements() {

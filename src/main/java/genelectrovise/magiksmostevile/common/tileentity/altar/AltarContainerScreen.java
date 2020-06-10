@@ -18,6 +18,7 @@ import genelectrovise.magiksmostevile.common.ritual.Rituals;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screen.inventory.CraftingScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -35,6 +36,14 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 
 	protected Ritual selectedRitual;
 
+	private int scaledWidth;
+	private int halfWidth;
+	private int posX_main;
+
+	private int halfHeight;
+	private int scaledHeight;
+	private int posY_main;
+
 	/**
 	 * @param altarContainer
 	 * @param inv
@@ -46,22 +55,14 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		this.completetedRitualAdvancements = this.altarContainer.completedAdvancements;
 	}
 
-	// Logic
-	private ArrayList<Ritual> createAvailableRitualsList() {
-		ArrayList<Ritual> rituals = new ArrayList<Ritual>();
+	@Override
+	public void init(Minecraft p_init_1_, int p_init_2_, int p_init_3_) {
+		super.init(p_init_1_, p_init_2_, p_init_3_);
 
-		try {
-			for (Advancement adv : completetedRitualAdvancements) {
-				ITextComponent itcName = adv.getDisplay().getTitle();
-				String name = itcName.getString();
+		evaluateDimensions();
 
-				rituals.add(Rituals.ALL.get(name).newInstance());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return rituals;
+		// Add cast button
+		addCastButton(posX_main, posY_main);
 	}
 
 	// Drawing
@@ -87,23 +88,24 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		// Flush the colour buffer
 		RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-		// Find dimensions
-		int scaledWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
-		int halfWidth = scaledWidth / 2;
-		int posX_main = halfWidth - (GuiReference.Altar.Main.MAIN_WIDTH / 2);
-
-		int scaledHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
-		int halfHeight = scaledHeight / 2;
-		int posY_main = halfHeight - (GuiReference.Altar.Main.MAIN_HEIGHT / 2);
+		evaluateDimensions();
 
 		// Draw images
 		drawMain(posX_main, posY_main);
 
-		// Add cast button
-		addCastButton(posX_main, posY_main);
-
 		// Draw text
 		this.font.drawString(this.title.getFormattedText() + " Amethyst Flux: " + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(), 72.0F, 46.0F, 4210752);
+	}
+
+	private void evaluateDimensions() {
+		// Find dimensions
+		scaledWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
+		halfWidth = scaledWidth / 2;
+		posX_main = halfWidth - (GuiReference.Altar.Main.MAIN_WIDTH / 2);
+
+		scaledHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
+		halfHeight = scaledHeight / 2;
+		posY_main = halfHeight - (GuiReference.Altar.Main.MAIN_HEIGHT / 2);
 	}
 
 	private void drawMain(int posX, int posY) {
@@ -113,18 +115,16 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	}
 
 	private void addCastButton(int posX, int posY) {
-		addButton(new ImageButton(posX + 60, posY + 30, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
+		addButton(new ImageButton(posX + 9, posY + 72, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
 			castButtonPressd();
 		}));
-
-		blit(posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_WIDTH);
 
 	}
 
 	private void castButtonPressd() {
 		MagiksMostEvile.LOGGER.debug("Button pressed!");
 
-		AltarNetworkingManager.CAltarCastButtonPressed.sendToServer(new AltarCastButtonPressedMessageToServer(selectedRitual.getRegistryName(), altarContainer.altar.getPos()));
+		AltarNetworkingManager.CAltarCastButtonPressed.sendToServer(new AltarCastButtonPressedMessageToServer(selectedRitual.getRegistryName() != null ? selectedRitual.getRegistryName() : new ResourceLocation(MagiksMostEvile.MODID, "ritual"), altarContainer.altar.getPos()));
 	}
 
 }

@@ -1,17 +1,15 @@
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
-import genelectrovise.magiksmostevile.common.network.altar.AltarEnergyUpdateMessageToClient;
-import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EnchantingTableBlock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.EnchantmentScreen;
 import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,9 +30,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -58,7 +54,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	private int tickIncr = 0;
 	private int recieveFluxCountdown = 0;
 	private ArrayList<AmethystCrystalTileEntity> crystals = new ArrayList<AmethystCrystalTileEntity>();
-	public boolean isCasting;
+	public boolean isCasting = false;
 
 	// IItemHandler
 	protected ItemStackHandler slot_0;
@@ -218,10 +214,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 			if (recieveFluxCountdown > 20) {
 				if (world instanceof ServerWorld && !world.isDaytime()) {
 					energyStorage.receiveEnergy(1, false);
-					energyStorage.receiveEnergy(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL, false);
+
+					if (new Random().nextInt(15) == 0) {
+						energyStorage.receiveEnergy(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL, false);
+					}
+
 					recieveFluxCountdown = 0;
 				} else {
-					energyStorage.receiveEnergy(crystals.size() * DAY_ENERGY_PER_CRYSTAL, false);
+					if (new Random().nextInt(25) == 0) {
+						energyStorage.receiveEnergy(crystals.size() * DAY_ENERGY_PER_CRYSTAL, false);
+					}
 				}
 			} else {
 				recieveFluxCountdown++;

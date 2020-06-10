@@ -201,8 +201,6 @@ public class VampireBatEntity extends MonsterEntity {
 
 	protected void updateAITasks() {
 		super.updateAITasks();
-
-		MagiksMostEvile.LOGGER.dev("Speed: " + this.moveController.getSpeed());
 	}
 
 	public Random getRandom() {

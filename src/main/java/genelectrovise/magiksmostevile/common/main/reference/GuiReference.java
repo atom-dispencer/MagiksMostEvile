@@ -25,7 +25,7 @@ public class GuiReference {
 
 		public static class Button {
 			public static final ResourceLocation CAST_TEXTURE = new ResourceLocation(MagiksMostEvile.MODID, "textures/container/altar/cast_button.png");
-			public static final int CAST_WIDTH = 28;
+			public static final int CAST_WIDTH = 29;
 			public static final int CAST_HEIGHT = 16;
 			public static final int CAST_UNPRESSED_X = 0;
 			public static final int CAST_UNPRESSED_Y = 0;
