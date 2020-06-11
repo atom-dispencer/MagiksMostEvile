@@ -14,15 +14,13 @@ import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
 import genelectrovise.magiksmostevile.common.network.altar.AltarCastButtonPressedMessageToServer;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
-import genelectrovise.magiksmostevile.common.ritual.Rituals;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.screen.inventory.CraftingScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 
 /**
@@ -33,8 +31,6 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 
 	protected ArrayList<Advancement> completetedRitualAdvancements = new ArrayList<Advancement>();
 	protected ArrayList<Ritual> castableRituals = new ArrayList<Ritual>();
-
-	protected Ritual selectedRitual;
 
 	private int scaledWidth;
 	private int halfWidth;
@@ -52,7 +48,6 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	public AltarContainerScreen(AltarContainer altarContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(altarContainer, inv, titleIn);
 		this.altarContainer = altarContainer;
-		this.completetedRitualAdvancements = this.altarContainer.completedAdvancements;
 	}
 
 	@Override
@@ -122,9 +117,19 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	}
 
 	private void castButtonPressd() {
-		MagiksMostEvile.LOGGER.debug("Button pressed!");
+		try {
+			MagiksMostEvile.LOGGER.debug("Button pressed!");
 
-		AltarNetworkingManager.CAltarCastButtonPressed.sendToServer(new AltarCastButtonPressedMessageToServer(selectedRitual.getRegistryName() != null ? selectedRitual.getRegistryName() : new ResourceLocation(MagiksMostEvile.MODID, "ritual"), altarContainer.altar.getPos()));
+			ResourceLocation registryName = altarContainer.selector.getSelectedIndex().get().getRegistryName();
+
+			BlockPos pos = altarContainer.altar.getPos();
+			AltarCastButtonPressedMessageToServer message = new AltarCastButtonPressedMessageToServer(registryName, pos);
+
+			AltarNetworkingManager.CAltarCastButtonPressed.sendToServer(message);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
@@ -22,6 +23,7 @@ import net.minecraft.tileentity.EnchantingTableTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -272,17 +274,26 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	}
 
 	/**
-	 * @param ritualClass
+	 * @param resourceLocation
 	 */
-	public <T extends Ritual> void castRitual(Class<T> ritualClass) {
-		try {
-			T ritual = (T) ritualClass.newInstance();
-			ritual.begin();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+	public void castRitual(ResourceLocation resourceLocation) {
+		MagiksMostEvile.LOGGER.dev("getting ritual by resource location! : " + resourceLocation);
+		
+		ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
+		EvileDeferredRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
+
+		for (Supplier<Ritual> ritualSupplier : all) {
+			if (ritualSupplier.get().getRegistryName().toString().equalsIgnoreCase(resourceLocation.toString())) {
+				castRitual(ritualSupplier.get());
+				break;
+			}
 		}
+	}
+
+	public void castRitual(Ritual ritual) {
+		MagiksMostEvile.LOGGER.dev("casting Ritual!");
+		ritual.init(this);
+		ritual.tryStart();
 	}
 
 }

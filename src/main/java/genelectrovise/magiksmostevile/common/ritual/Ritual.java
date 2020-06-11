@@ -3,6 +3,7 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
+import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -10,9 +11,10 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 /**
  * @author GenElectrovise 19 May 2020
  */
-public abstract class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializable<CompoundNBT> {
+public abstract class Ritual extends ForgeRegistryEntry<Ritual> {
 	protected String displayName;
 	protected String description;
+	private AltarTileEntity altar;
 
 	@Override
 	public String toString() {
@@ -26,6 +28,37 @@ public abstract class Ritual extends ForgeRegistryEntry<Ritual> implements INBTS
 		this.displayName = displayName;
 		this.description = description;
 	}
+
+	/**
+	 * Starts casting the ritual
+	 */
+	public abstract void begin();
+
+	/**
+	 * Equivalent of a constructor, where one isn't easy to implement.
+	 * 
+	 * @param altarTileEntity
+	 */
+	public abstract void init(AltarTileEntity altarTileEntity);
+
+	/**
+	 * Attempts to start the ritual. Should do some preliminary checks here, then
+	 * call <code>super.tryStart()</code> to run
+	 * <code>if(this.canBegin){this.begin}</code>, if no custom implementation is
+	 * needed.
+	 */
+	public void tryStart() {
+		if (this.canStart()) {
+			this.begin();
+		}
+	}
+
+	/**
+	 * @return Whether the ritual is able to start.
+	 */
+	protected abstract boolean canStart();
+
+	// Get and set
 
 	/**
 	 * @return The name
@@ -42,7 +75,9 @@ public abstract class Ritual extends ForgeRegistryEntry<Ritual> implements INBTS
 	}
 
 	/**
-	 * Starts casting the ritual
+	 * @return the altar
 	 */
-	public abstract void begin();
+	public final AltarTileEntity getAltar() {
+		return altar;
+	}
 }
