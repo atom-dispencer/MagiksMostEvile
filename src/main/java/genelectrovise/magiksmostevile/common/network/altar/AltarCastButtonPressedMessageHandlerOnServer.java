@@ -6,9 +6,6 @@ package genelectrovise.magiksmostevile.common.network.altar;
 import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -34,22 +31,7 @@ public class AltarCastButtonPressedMessageHandlerOnServer {
 	}
 
 	private static void processMessage(AltarCastButtonPressedMessageToServer message, Supplier<NetworkEvent.Context> ctxSupplier) {
-		ServerWorld world = ctxSupplier.get().getSender().getServerWorld();
-
 		MagiksMostEvile.LOGGER.dev("processing message!");
-
-		TileEntity tileEntity = world.getTileEntity(message.getPos());
-		if (tileEntity instanceof AltarTileEntity) {
-			MagiksMostEvile.LOGGER.dev("TileEntity valid! We are go for launch!");
-			
-			AltarTileEntity te = (AltarTileEntity) tileEntity;
-
-			te.castRitual(message.getRitualResourceLocation());
-			
-			return;
-		}
-		
-		MagiksMostEvile.LOGGER.dev("TileEntity invalid! Ritual cancelled... :(");
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {

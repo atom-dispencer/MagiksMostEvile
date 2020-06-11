@@ -11,16 +11,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
-import genelectrovise.magiksmostevile.common.network.altar.AltarCastButtonPressedMessageToServer;
-import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 
 /**
@@ -56,7 +52,6 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 
 		evaluateDimensions();
 
-		// Add cast button
 		addCastButton(posX_main, posY_main);
 	}
 
@@ -117,19 +112,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	}
 
 	private void castButtonPressd() {
-		try {
-			MagiksMostEvile.LOGGER.debug("Button pressed!");
-
-			ResourceLocation registryName = altarContainer.selector.getSelectedIndex().get().getRegistryName();
-
-			BlockPos pos = altarContainer.altar.getPos();
-			AltarCastButtonPressedMessageToServer message = new AltarCastButtonPressedMessageToServer(registryName, pos);
-
-			AltarNetworkingManager.CAltarCastButtonPressed.sendToServer(message);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		MagiksMostEvile.LOGGER.debug("Button pressed!");
 	}
 
 }

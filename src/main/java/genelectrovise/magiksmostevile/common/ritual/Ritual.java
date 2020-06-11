@@ -4,8 +4,6 @@
 package genelectrovise.magiksmostevile.common.ritual;
 
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
