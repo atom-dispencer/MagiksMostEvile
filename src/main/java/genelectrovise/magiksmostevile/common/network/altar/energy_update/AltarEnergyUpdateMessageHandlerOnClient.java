@@ -1,11 +1,12 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.network.altar;
+package genelectrovise.magiksmostevile.common.network.altar.energy_update;
 
 import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;

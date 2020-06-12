@@ -1,11 +1,12 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.network.altar;
+package genelectrovise.magiksmostevile.common.network.altar.cast_button;
 
 import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 /**
@@ -24,6 +25,6 @@ public class AltarCastButtonPressedMessageHandlerOnClient {
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {
-		return AltarNetworkingManager.ENERGY_UPDATE_MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
+		return AltarNetworkingManager.CAST_BUTTON_PRESSED_MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
 	}
 }

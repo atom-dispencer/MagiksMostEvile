@@ -1,15 +1,10 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.network.altar;
-
-import java.util.UUID;
+package genelectrovise.magiksmostevile.common.network.altar.cast_button;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
 
 /**
  * This Network Message is sent from the client to the server, to tell it to
@@ -30,22 +25,13 @@ import net.minecraft.util.math.BlockPos;
  * 
  * @author GenElectrovise 24 May 2020
  */
-@Deprecated
-public class AltarEnergyUpdateMessageToClient {
+public class AltarCastButtonPressedMessageToClient {
 
 	private static boolean messageIsValid;
 
-	int currentAmethystFlux;
-	int maxAmethystFlux;
-	BlockPos blockPos;
-	UUID playerUUID;
-
-	public AltarEnergyUpdateMessageToClient(int currentAmethystFlux, int maxAmethystFlux, BlockPos blockPos, UUID playerUUID) {
-		messageIsValid = true;
-		this.currentAmethystFlux = currentAmethystFlux;
-		this.maxAmethystFlux = maxAmethystFlux;
-		this.blockPos = blockPos;
-		this.playerUUID = playerUUID;
+	public AltarCastButtonPressedMessageToClient() {
+		messageIsValid = false;
+		MagiksMostEvile.LOGGER.warn("A AltarCastButtonPressedMessageToClient is being constructed! Why is this happening! Have invalidated message as this should not occur!!");
 	}
 
 	public boolean isMessageValid() {
@@ -62,10 +48,6 @@ public class AltarEnergyUpdateMessageToClient {
 		MagiksMostEvile.LOGGER.dev("Encoding message to client");
 		if (!messageIsValid)
 			return;
-		buf.writeInt(currentAmethystFlux);
-		buf.writeInt(maxAmethystFlux);
-		buf.writeBlockPos(blockPos);
-		buf.writeUniqueId(playerUUID);
 	}
 
 	/**
@@ -74,13 +56,9 @@ public class AltarEnergyUpdateMessageToClient {
 	 *
 	 * @param buf
 	 */
-	public static AltarEnergyUpdateMessageToClient decode(PacketBuffer buf) {
+	public static AltarCastButtonPressedMessageToClient decode(PacketBuffer buf) {
 		MagiksMostEvile.LOGGER.dev("Decoding message to client");
-		return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUniqueId());
-	}
-
-	public String toString() {
-		return "AltarEnergyUpdateMessageToClient{TODO toString}";
+		return new AltarCastButtonPressedMessageToClient();
 	}
 
 	public boolean isValid() {

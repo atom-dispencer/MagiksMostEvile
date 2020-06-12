@@ -3,7 +3,6 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
 import genelectrovise.magiksmostevile.common.tileentity.CommonContainer;
@@ -25,6 +24,8 @@ public class AltarContainer extends CommonContainer {
 	public TrackableIntegerHolder isCasting = new TrackableIntegerHolder(0);
 
 	protected PlayerInventory inv;
+	
+	private RitualSelector selector;
 
 	public AltarContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
 		this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()));
@@ -32,7 +33,6 @@ public class AltarContainer extends CommonContainer {
 
 	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar) {
 		super(EvileDeferredRegistry.ALTAR_CONTAINER.get(), windowId, 4);
-		MagiksMostEvile.LOGGER.dev("Constructing AltarContainer! (Constructor 3 : id, inv, callable)");
 
 		this.altar = altar;
 		this.maxAmethystFlux = altar.energyStorage.maxAmethystFlux;
@@ -44,6 +44,8 @@ public class AltarContainer extends CommonContainer {
 		trackInt(isCasting);
 
 		isCasting.set(altar.isCasting ? 1 : 0);
+		
+		selector = new RitualSelector(inv.player);
 
 		addSlots(inv, handler);
 	}

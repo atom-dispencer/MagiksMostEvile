@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.common.network.altar;
+package genelectrovise.magiksmostevile.common.network.altar.energy_update;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.network.PacketBuffer;

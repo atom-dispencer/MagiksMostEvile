@@ -11,6 +11,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
+import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
+import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer;
+import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
@@ -53,6 +56,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 		evaluateDimensions();
 
 		addCastButton(posX_main, posY_main);
+		addArrowToggles(posX_main, posY_main);
 	}
 
 	// Drawing
@@ -106,12 +110,25 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 
 	private void addCastButton(int posX, int posY) {
 		addButton(new ImageButton(posX + 9, posY + 72, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
-			castButtonPressd();
+			castButtonPressed();
+			altarContainer.inv.player.closeScreen();
 		}));
 
 	}
 
-	private void castButtonPressd() {
+	private void addArrowToggles(int posX, int posY) {
+		// Left
+		addButton(new ImageButton(posX + 9 + 10, posY + 72 + 10, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
+			AltarNetworkingManager.CAltarCastButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.LEFT));
+		}));
+
+		// Right
+		addButton(new ImageButton(posX + 9 + 20, posY + 72 + 20, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
+			AltarNetworkingManager.CAltarCastButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.RIGHT));
+		}));
+	}
+
+	private void castButtonPressed() {
 		MagiksMostEvile.LOGGER.debug("Button pressed!");
 	}
 
