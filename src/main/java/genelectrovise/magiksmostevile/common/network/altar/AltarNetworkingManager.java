@@ -5,6 +5,8 @@ package genelectrovise.magiksmostevile.common.network.altar;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -12,6 +14,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 /**
  * @author GenElectrovise 23 May 2020
  */
+@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AltarNetworkingManager {
 
 	// Energy update
@@ -28,6 +31,7 @@ public class AltarNetworkingManager {
 	public static final int ALTAR_CAST_BUTTON_PRESSED_TO_SERVER = 21;
 	public static final int ALTAR_CAST_BUTTON_PRESSED_TO_CLIENT = 22;
 
+	@SubscribeEvent
 	public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
 		MagiksMostEvile.LOGGER.dev("FMLCommonSetupEvent heard by AltarNetworkingManager!");
 		CAltarEnergyUpdate = NetworkRegistry.newSimpleChannel(RLEnergyUpdate, () -> ENERGY_UPDATE_MESSAGE_PROTOCOL_VERSION, AltarEnergyUpdateMessageHandlerOnClient::isProtocolAccepted, AltarEnergyUpdateMessageHandlerOnServer::isProtocolAccepted);

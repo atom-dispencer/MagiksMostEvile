@@ -136,27 +136,13 @@ public class EvileDeferredRegistry {
 
 	public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER = CONTAINERS.register("altar", () -> IForgeContainerType.create(AltarContainer::new));
 
-	public static void createContainerFactories() {
-		ScreenManager.registerFactory(ALTAR_CONTAINER.get(), new AltarScreenManager());
-	}
-
 //=========ENTITIES====================================================================================================================
 	public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT = ENTITIES.register("vampire_bat", () -> EntityType.Builder.create(VampireBatEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("vampire_bat"));
 	public static final RegistryObject<Item> VAMPIRE_BAT_EGG = ITEMS.register("vampire_bat_egg", () -> new VampireBatSpawnEgg(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(64)));
 
-	public static void renderers(FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(VAMPIRE_BAT.get(), VampireBatRenderer::new);
-	}
-
 //=========GENERATION (structures should be done via registry events) =================================================================
 
 	public static final RegistryObject<EvileOreFeature> AMETHYST_ORE_OVERWORLD_GEN = FEATURES.register("amethyst_ore_overworld_gen", () -> new EvileOreFeature(EvileOreFeatureConfig::deserialize));
-
-	public static void addOres() {
-		EvileOreGeneration.addOverworldOres();
-		// EvileOreGeneration.addEndOres();
-		EvileOreGeneration.addNetherOres();
-	}
 
 //=========RITUALS=====================================================================================================================
 	public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());
