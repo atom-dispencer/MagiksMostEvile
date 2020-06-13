@@ -62,7 +62,7 @@ public class AltarNetworkingManager {
 		CAltarCastButton.registerMessage(ALTAR_CAST_BUTTON_PRESSED_TO_CLIENT, AltarCastButtonPressedMessageToClient.class, AltarCastButtonPressedMessageToClient::encode, AltarCastButtonPressedMessageToClient::decode, AltarCastButtonPressedMessageHandlerOnClient::onMessageReceived);
 
 		CAltarToggleButton = NetworkRegistry.newSimpleChannel(RLToggleButton, () -> TOGGLE_BUTTON_MESSAGE_PROTOCOL_VERSION, AltarToggleButtonMessageHandlerOnClient::isProtocolAccepted, AltarToggleButtonMessageHandlerOnServer::isProtocolAccepted);
-		CAltarCastButton.registerMessage(ALTAR_TOGGLE_BUTTON_TO_SERVER, AltarToggleButtonMessageToServer.class, AltarToggleButtonMessageToServer::encode, AltarToggleButtonMessageToServer::decode, AltarToggleButtonMessageHandlerOnServer::onMessageReceived);
-		CAltarCastButton.registerMessage(ALTAR_TOGGLE_BUTTON_TO_CLIENT, AltarToggleButtonMessageToClient.class, AltarToggleButtonMessageToClient::encode, AltarToggleButtonMessageToClient::decode, AltarToggleButtonMessageHandlerOnClient::onMessageReceived);
+		CAltarToggleButton.registerMessage(ALTAR_TOGGLE_BUTTON_TO_SERVER, AltarToggleButtonMessageToServer.class, AltarToggleButtonMessageToServer::encode, AltarToggleButtonMessageToServer::decode, AltarToggleButtonMessageHandlerOnServer::onMessageReceived);
+		CAltarToggleButton.registerMessage(ALTAR_TOGGLE_BUTTON_TO_CLIENT, AltarToggleButtonMessageToClient.class, AltarToggleButtonMessageToClient::encode, AltarToggleButtonMessageToClient::decode, AltarToggleButtonMessageHandlerOnClient::onMessageReceived);
 	}
 }

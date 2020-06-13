@@ -7,6 +7,11 @@ import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
+import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
+import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -33,6 +38,27 @@ public class AltarCastButtonPressedMessageHandlerOnServer {
 
 	private static void processMessage(AltarCastButtonPressedMessageToServer message, Supplier<NetworkEvent.Context> ctxSupplier) {
 		MagiksMostEvile.LOGGER.dev("processing message!");
+
+		// Get and check container
+		Container container = ctxSupplier.get().getSender().openContainer;
+
+		if (!(container instanceof AltarContainer)) {
+			return;
+		}
+
+		AltarContainer altarContainer = (AltarContainer) container;
+		BlockPos pos = altarContainer.getAltar().getPos();
+
+		
+		// Get and check tile entity
+		TileEntity tileEntity = ctxSupplier.get().getSender().world.getTileEntity(pos);
+		
+		if(!(tileEntity instanceof AltarTileEntity)) {
+			return;
+		}
+		
+		AltarTileEntity altarTileEntity = (AltarTileEntity) tileEntity;
+		altarTileEntity.castRitual(message.getRitualResourceLocation(), ctxSupplier.get().getSender());
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {

@@ -7,6 +7,7 @@ import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry
 import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
 import genelectrovise.magiksmostevile.common.tileentity.CommonContainer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.network.PacketBuffer;
@@ -18,13 +19,13 @@ import net.minecraftforge.items.ItemStackHandler;
  */
 public class AltarContainer extends CommonContainer {
 
-	protected AltarTileEntity altar;
+	private AltarTileEntity altar;
 	protected TrackableIntegerHolder currentAmethystFlux;
 	protected TrackableIntegerHolder maxAmethystFlux;
 	public TrackableIntegerHolder isCasting = new TrackableIntegerHolder(0);
 
 	protected PlayerInventory inv;
-	
+
 	private RitualSelector selector;
 
 	public AltarContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
@@ -34,7 +35,7 @@ public class AltarContainer extends CommonContainer {
 	public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar) {
 		super(EvileDeferredRegistry.ALTAR_CONTAINER.get(), windowId, 4);
 
-		this.altar = altar;
+		this.setAltar(altar);
 		this.maxAmethystFlux = altar.energyStorage.maxAmethystFlux;
 		this.currentAmethystFlux = altar.energyStorage.currentAmethystFlux;
 		this.inv = inv;
@@ -44,8 +45,8 @@ public class AltarContainer extends CommonContainer {
 		trackInt(isCasting);
 
 		isCasting.set(altar.isCasting ? 1 : 0);
-		
-		selector = new RitualSelector(inv.player);
+
+		this.selector = new RitualSelector();
 
 		addSlots(inv, handler);
 	}
@@ -54,8 +55,8 @@ public class AltarContainer extends CommonContainer {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		if ((altar.isCasting ? 1 : 0) != isCasting.get()) {
-			this.isCasting.set(altar.isCasting ? 1 : 0);
+		if ((getAltar().isCasting ? 1 : 0) != isCasting.get()) {
+			this.isCasting.set(getAltar().isCasting ? 1 : 0);
 		}
 
 	}
@@ -87,6 +88,13 @@ public class AltarContainer extends CommonContainer {
 	}
 
 	/**
+	 * @return the selector
+	 */
+	public RitualSelector getSelector() {
+		return selector;
+	}
+
+	/**
 	 * @return the currentAmethystFlux
 	 */
 	public TrackableIntegerHolder getCurrentAmethystFlux() {
@@ -112,6 +120,30 @@ public class AltarContainer extends CommonContainer {
 	 */
 	public void setMaxAmethystFlux(int maxAmethystFlux) {
 		this.maxAmethystFlux.set(maxAmethystFlux);
+	}
+
+	/**
+	 * @return the altar
+	 */
+	public AltarTileEntity getAltar() {
+		return altar;
+	}
+
+	/**
+	 * @param altar the altar to set
+	 */
+	public void setAltar(AltarTileEntity altar) {
+		this.altar = altar;
+	}
+
+	@Override
+	public boolean canInteractWith(PlayerEntity playerIn) {
+
+		if (altar.isCasting()) {
+			return false;
+		}
+
+		return super.canInteractWith(playerIn);
 	}
 
 }

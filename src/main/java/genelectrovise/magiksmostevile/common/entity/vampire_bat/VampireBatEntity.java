@@ -28,6 +28,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.PhantomEntity;
@@ -40,6 +41,7 @@ import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.passive.horse.TraderLlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -190,6 +192,8 @@ public class VampireBatEntity extends MonsterEntity {
 		this.goalSelector.addGoal(20, new VampireBatFlapGoal(this));
 
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setCallsForHelp(VampireBatEntity.class));
+		this.targetSelector.addGoal(2, new VampireBatNearestAttackableTargetGoal<WanderingTraderEntity>(this, WanderingTraderEntity.class, false));
+		this.targetSelector.addGoal(2, new VampireBatNearestAttackableTargetGoal<TraderLlamaEntity>(this, TraderLlamaEntity.class, false));
 		this.targetSelector.addGoal(3, new VampireBatNearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.targetSelector.addGoal(4, new VampireBatNearestAttackableTargetGoal<VillagerEntity>(this, VillagerEntity.class, false));
 		this.targetSelector.addGoal(5, new VampireBatNearestAttackableTargetGoal<CowEntity>(this, CowEntity.class, false));

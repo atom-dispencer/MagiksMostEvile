@@ -57,6 +57,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	private int recieveFluxCountdown = 0;
 	private ArrayList<AmethystCrystalTileEntity> crystals = new ArrayList<AmethystCrystalTileEntity>();
 	public boolean isCasting = false;
+	public Ritual currentRitual;
 
 	// IItemHandler
 	protected ItemStackHandler slot_0;
@@ -238,6 +239,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 				tickIncr++;
 			}
 		}
+
+		tickRitual();
 	}
 
 	@Override
@@ -275,25 +278,33 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	/**
 	 * @param resourceLocation
+	 * @param serverPlayerEntity
 	 */
-	public void castRitual(ResourceLocation resourceLocation) {
+	public void castRitual(ResourceLocation resourceLocation, ServerPlayerEntity serverPlayerEntity) {
 		MagiksMostEvile.LOGGER.dev("getting ritual by resource location! : " + resourceLocation);
-		
+
 		ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
 		EvileDeferredRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
 
 		for (Supplier<Ritual> ritualSupplier : all) {
 			if (ritualSupplier.get().getRegistryName().toString().equalsIgnoreCase(resourceLocation.toString())) {
-				castRitual(ritualSupplier.get());
+				castRitual(ritualSupplier.get(), serverPlayerEntity);
 				break;
 			}
 		}
 	}
 
-	public void castRitual(Ritual ritual) {
+	public void castRitual(Ritual ritual, ServerPlayerEntity serverPlayerEntity) {
 		MagiksMostEvile.LOGGER.dev("casting Ritual!");
 		ritual.init(this);
 		ritual.tryStart();
 	}
 
+	private void tickRitual() {
+		if (this.isCasting) {
+			if (this.currentRitual != null) {
+				currentRitual.nextCycle();
+			}
+		}
+	}
 }

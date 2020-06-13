@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "magiksmostevile:items/tome_convert_amethyst"
+       "layer0": "magiksmostevile:items/ritual/tome_convert_amethyst"
    }
 }

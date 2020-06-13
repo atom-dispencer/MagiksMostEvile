@@ -21,6 +21,7 @@ public class AltarCastButtonPressedMessageHandlerOnClient {
 	 * @throws IllegalAccessException
 	 */
 	public static void onMessageReceived(final AltarCastButtonPressedMessageToClient message, Supplier<NetworkEvent.Context> ctxSupplier) {
+		ctxSupplier.get().setPacketHandled(true);
 		MagiksMostEvile.LOGGER.error("An AltarCastButtonPressedMessageHandlerOnClient has been recieved on the client! This should not be happening! Contact the mod author and your server operator to try to resolve this issue!");
 	}
 

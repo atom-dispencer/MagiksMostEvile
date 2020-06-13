@@ -14,12 +14,14 @@ import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;
+import genelectrovise.magiksmostevile.common.network.altar.cast_button.AltarCastButtonPressedMessageToServer;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 /**
@@ -27,9 +29,6 @@ import net.minecraft.util.text.ITextComponent;
  */
 public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	private AltarContainer altarContainer;
-
-	protected ArrayList<Advancement> completetedRitualAdvancements = new ArrayList<Advancement>();
-	protected ArrayList<Ritual> castableRituals = new ArrayList<Ritual>();
 
 	private int scaledWidth;
 	private int halfWidth;
@@ -64,6 +63,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 
+		drawText();
 	}
 
 	// 9 ARG blit()
@@ -86,9 +86,24 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 
 		// Draw images
 		drawMain(posX_main, posY_main);
+	}
+
+	private void drawText() {
+
+		float baseX = -80F;
+		float baseY = 2F;
+		float seperator = 3;
 
 		// Draw text
-		this.font.drawString(this.title.getFormattedText() + " Amethyst Flux: " + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(), 72.0F, 46.0F, 4210752);
+		this.font.drawString(this.title.getFormattedText() + " - Amethyst Flux: " + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(), baseX, baseY, 4210752);
+
+		this.font.drawString("Cast", baseX + 3, baseY + 68, 4210752);
+
+		String displayName = altarContainer.getSelector().getRitualSupplier().get().getDisplayName();
+		this.font.drawSplitString(displayName, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 10)), 100, 11024322);
+
+		String description = altarContainer.getSelector().getRitualSupplier().get().getDescription();
+		this.font.drawSplitString(description, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 20)), 100, 6961030);
 	}
 
 	private void evaluateDimensions() {
@@ -109,7 +124,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	}
 
 	private void addCastButton(int posX, int posY) {
-		addButton(new ImageButton(posX + 9, posY + 72, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
+		addButton(new ImageButton(posX + 9, posY + 72, GuiReference.Altar.CastButton.CAST_WIDTH, GuiReference.Altar.CastButton.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.CastButton.CAST_TEXTURE, (btn) -> {
 			castButtonPressed();
 			altarContainer.inv.player.closeScreen();
 		}));
@@ -117,19 +132,24 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 	}
 
 	private void addArrowToggles(int posX, int posY) {
+
+		int modX = posX + 9;
+		int modY = posY + 72;
+
 		// Left
-		addButton(new ImageButton(posX + 9 + 10, posY + 72 + 10, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
-			AltarNetworkingManager.CAltarCastButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.LEFT));
+		addButton(new ImageButton(modX + 32, modY, GuiReference.Altar.ToggleButtons.LEFT_WIDTH, GuiReference.Altar.ToggleButtons.LEFT_HEIGHT, GuiReference.Altar.ToggleButtons.LEFT_X, GuiReference.Altar.ToggleButtons.LEFT_Y, 0, GuiReference.Altar.ToggleButtons.TEXTURE, (btn) -> {
+			AltarNetworkingManager.CAltarToggleButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.LEFT, altarContainer.getSelector().getLocation()));
 		}));
 
 		// Right
-		addButton(new ImageButton(posX + 9 + 20, posY + 72 + 20, GuiReference.Altar.Button.CAST_WIDTH, GuiReference.Altar.Button.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.Button.CAST_TEXTURE, (btn) -> {
-			AltarNetworkingManager.CAltarCastButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.RIGHT));
+		addButton(new ImageButton(modX + 32 + 16, modY, GuiReference.Altar.ToggleButtons.RIGHT_WIDTH, GuiReference.Altar.ToggleButtons.RIGHT_HEIGHT, GuiReference.Altar.ToggleButtons.RIGHT_X, GuiReference.Altar.ToggleButtons.RIGHT_Y, 0, GuiReference.Altar.ToggleButtons.TEXTURE, (btn) -> {
+			AltarNetworkingManager.CAltarToggleButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.RIGHT, altarContainer.getSelector().getLocation()));
 		}));
 	}
 
 	private void castButtonPressed() {
 		MagiksMostEvile.LOGGER.debug("Button pressed!");
+		AltarNetworkingManager.CAltarCastButton.sendToServer(new AltarCastButtonPressedMessageToServer(altarContainer.getSelector().getLocation()));
 	}
 
 }

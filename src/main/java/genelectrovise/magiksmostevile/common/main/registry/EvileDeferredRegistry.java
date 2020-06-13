@@ -18,6 +18,7 @@ import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
 import genelectrovise.magiksmostevile.common.main.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.common.ritual.ConvertAmethystRitual;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
+import genelectrovise.magiksmostevile.common.ritual.SummonFlappyRitual;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarBlock;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarScreenManager;
@@ -93,6 +94,7 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<Item> GREATER_POWER_STONE = ITEMS.register("greater_power_stone", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> GOING_TO_THE_BALL = ITEMS.register("going_to_the_ball", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> INTRO_BOOK = ITEMS.register("intro_book", () -> new WrittenBookItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+	public static final RegistryObject<Item> VAMPIRE_BAT_TOOTH = ITEMS.register("vampire_bat_tooth", () -> new WrittenBookItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
 //=========TOOLS=======================================================================================================================
 	public static final RegistryObject<Item> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(EnumEvileItemTier.AMETHYST, 1, -0.5F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
@@ -108,6 +110,7 @@ public class EvileDeferredRegistry {
 
 //=========TOMES======================================================================================================================
 	public static final RegistryObject<Item> TOME_CONVERT_AMETHYST = ITEMS.register("tome_convert_amethyst", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+	public static final RegistryObject<Item> TOME_SUMMON_FLAPPY = ITEMS.register("tome_summon_flappy", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
 //=========ARMOR======================================================================================================================
 	public static final RegistryObject<Item> AMETHYST_HELMET = ITEMS.register("amethyst_helmet", () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST, EquipmentSlotType.HEAD, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
@@ -146,6 +149,7 @@ public class EvileDeferredRegistry {
 
 //=========RITUALS=====================================================================================================================
 	public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());
+	public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL = RITUALS.register("summon_flappy_ritual", () -> new SummonFlappyRitual());
 
 //=========CONSTRUCTOR=================================================================================================================
 
