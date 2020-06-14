@@ -250,7 +250,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 	@Override
 	public void openGUI(ServerPlayerEntity player) {
-		if (!world.isRemote) {
+		if (!world.isRemote && !isCasting()) {
 			NetworkHooks.openGui(player, this, getPos());
 		}
 	}

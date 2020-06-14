@@ -5,6 +5,7 @@ package genelectrovise.magiksmostevile.common.ritual;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.ritual.result.ConvertAmethystResultHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -16,9 +17,11 @@ import net.minecraftforge.items.IItemHandler;
 public class ConvertAmethystRitual extends Ritual {
 	public static final String displayName = "Magikify Amethyst";
 	public static final String description = "Imbue an amethyst with magiky powers!";
+	public static final String information = "Convert an amethyst into a powered amethyst";
+	private static final int energyRequirement = 50;
 
 	public ConvertAmethystRitual() {
-		super(displayName, description);
+		super(displayName, description, information, energyRequirement);
 	}
 
 	@Override
@@ -44,7 +47,7 @@ public class ConvertAmethystRitual extends Ritual {
 	}
 
 	@Override
-	protected void tick() {
+	protected RitualResult tick() {
 		super.tick();
 		if (isBetweenTicks(0, 100)) {
 			MagiksMostEvile.LOGGER.info("0/10 excl.");
@@ -71,13 +74,27 @@ public class ConvertAmethystRitual extends Ritual {
 			for (int i = 0; i < stacks.length; i++) {
 				if (stacks[i].getItem() == EvileDeferredRegistry.AMETHYST.get()) {
 
-					int count = i;
+					int slot = i;
 					itemHandler.ifPresent((handler) -> {
-						handler.insertItem(count, new ItemStack(EvileDeferredRegistry.POWERED_AMETHYST.get(), stacks[count].getCount()), false);
+						// Have to extract old item stack before inserting new one
+						handler.extractItem(slot, stacks[slot].getCount(), false);
+
+						int count = stacks[slot].getCount();
+						ItemStack stack = new ItemStack(EvileDeferredRegistry.POWERED_AMETHYST.get(), count);
+						handler.insertItem(slot, stack, false);
 					});
 				}
 			}
+			
+			return RitualResult.SUCCESS;
 		}
+		
+		return RitualResult.CASTING;
+	}
+
+	@Override
+	public ResultHandler<?> getResultHandler() {
+		return new ConvertAmethystResultHandler(getAltar(), this);
 	}
 
 }

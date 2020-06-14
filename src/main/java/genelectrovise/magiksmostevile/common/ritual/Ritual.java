@@ -15,8 +15,12 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
  * @author GenElectrovise 19 May 2020
  */
 public class Ritual extends ForgeRegistryEntry<Ritual> {
-	protected String displayName;
-	protected String description;
+	protected final String displayName;
+	protected final String description;
+	protected final String information;
+	protected final int energyRequirement;
+	protected ResultHandler<?> resultHandler;
+
 	protected AltarTileEntity altar;
 	protected boolean done;
 	protected int tick;
@@ -32,10 +36,14 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * to the {@link Ritual} itself, as that should be done in the {@link #begin()}
 	 * method. This is only used for registering the {@link Ritual} in the
 	 * {@link EvileDeferredRegistry}.
+	 * 
+	 * @param convertAmethystResultHandler
 	 */
-	public Ritual(String displayName, String description) {
+	public Ritual(String displayName, String description, String information, int energyRequirement) {
 		this.displayName = displayName;
 		this.description = description;
+		this.information = information;
+		this.energyRequirement = energyRequirement;
 	}
 
 	/**
@@ -44,6 +52,7 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * setup!
 	 */
 	public void begin() {
+		setTick(0);
 		setDone(false);
 		altar.setCasting(true);
 		altar.currentRitual = this;
@@ -90,10 +99,8 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * Ticks the next tick of this {@link Ritual} during casting. Called from
 	 * {@link AltarTileEntity}#{@link #tick()}
 	 */
-	protected void tick() {
-		if (isDone()) {
-			end();
-		}
+	protected RitualResult tick() {
+		return RitualResult.FAILURE;
 	}
 
 	/**
@@ -115,8 +122,12 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 */
 	public void nextCycle() {
 		if (shouldtick()) {
-			tick();
+			getResultHandler().handle(tick());
 			tick++;
+		}
+
+		if (isDone()) {
+			end();
 		}
 	}
 
@@ -181,5 +192,47 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 */
 	public void setTick(int tick) {
 		this.tick = tick;
+	}
+
+	/**
+	 * @param resultHandler the resultHandler to set
+	 */
+	public void setResultHandler(ResultHandler<?> resultHandler) {
+		this.resultHandler = resultHandler;
+	}
+
+	/**
+	 * @return the resultHandler
+	 */
+	public ResultHandler<?> getResultHandler() {
+		return resultHandler;
+	}
+
+	/**
+	 * @return the energyRequirement
+	 */
+	public final int getEnergyRequirement() {
+		return energyRequirement;
+	}
+
+	/**
+	 * @return the information
+	 */
+	public final String getInformation() {
+		return information;
+	}
+
+	/**
+	 * How can a {@link Ritual} end? <br>
+	 * <br>
+	 * <b>SUCCESS</b> - Where everything is happy and goes well (ish)<br>
+	 * <b>FAILURE</b> - Where the ritual cannot start or fails happily<br>
+	 * <b>CATACLYSM</b> - Where everything goes badly wrong, i.e. you ran out of
+	 * amethyst flux
+	 * 
+	 * @author GenElectrovise 14 Jun 2020
+	 */
+	public static enum RitualResult {
+		SUCCESS, CASTING, FAILURE, CATACLYSM;
 	}
 }
