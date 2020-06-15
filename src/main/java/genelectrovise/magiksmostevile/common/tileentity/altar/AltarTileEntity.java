@@ -260,6 +260,25 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar");
 	}
 
+	/**
+	 * @return the energyStorage
+	 */
+	public int getEnergyStored() {
+		return energyStorage.getEnergyStored();
+	}
+
+	/**
+	 * 
+	 * @param energy How much to extract
+	 * @return Whether that amount was extracted.
+	 */
+	public boolean removeEnergy(int energy) {
+		if (energy == energyStorage.extractEnergy(energy, false)) {
+			return true;
+		}
+		return false;
+	}
+
 	// Ritual handling
 
 	/**

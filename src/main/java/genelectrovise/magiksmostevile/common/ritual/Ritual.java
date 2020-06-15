@@ -5,7 +5,12 @@ package genelectrovise.magiksmostevile.common.ritual;
 
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainerScreen;
+import genelectrovise.magiksmostevile.common.tileentity.altar.AltarEnergyStorage;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
@@ -92,6 +97,11 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * @return Whether the ritual is able to start.
 	 */
 	protected boolean canStart() {
+		
+		if(!(altar.getEnergyStored() > energyRequirement / 2)) {
+			return false;
+		}
+		
 		return true;
 	}
 

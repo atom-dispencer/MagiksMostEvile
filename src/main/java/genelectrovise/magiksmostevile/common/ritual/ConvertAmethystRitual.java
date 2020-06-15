@@ -26,6 +26,8 @@ public class ConvertAmethystRitual extends Ritual {
 
 	@Override
 	protected boolean canStart() {
+		super.canStart();
+		
 		LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
 		ItemStack[] stacks = new ItemStack[4];
@@ -49,46 +51,21 @@ public class ConvertAmethystRitual extends Ritual {
 	@Override
 	protected RitualResult tick() {
 		super.tick();
-		if (isBetweenTicks(0, 100)) {
-			MagiksMostEvile.LOGGER.info("0/10 excl.");
-		}
+		
+		MagiksMostEvile.LOGGER.dev("ticking");
 
-		if (isBetweenTicks(150, 200, true)) {
-			MagiksMostEvile.LOGGER.info("15/20 incl");
+		if (isBetweenTicks(1, 50, true)) {
+			if (altar.removeEnergy(1)) {
+				return RitualResult.CASTING;
+			} else {
+				return RitualResult.CATACLYSM;
+			}
 		}
 
 		if (isBetweenTicks(200, 201, true)) {
-			setDone(true);
-			MagiksMostEvile.LOGGER.info("Done!");
-
-			LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
-
-			ItemStack[] stacks = new ItemStack[4];
-			itemHandler.ifPresent((handler) -> {
-				stacks[0] = handler.getStackInSlot(0);
-				stacks[1] = handler.getStackInSlot(1);
-				stacks[2] = handler.getStackInSlot(2);
-				stacks[3] = handler.getStackInSlot(3);
-			});
-
-			for (int i = 0; i < stacks.length; i++) {
-				if (stacks[i].getItem() == EvileDeferredRegistry.AMETHYST.get()) {
-
-					int slot = i;
-					itemHandler.ifPresent((handler) -> {
-						// Have to extract old item stack before inserting new one
-						handler.extractItem(slot, stacks[slot].getCount(), false);
-
-						int count = stacks[slot].getCount();
-						ItemStack stack = new ItemStack(EvileDeferredRegistry.POWERED_AMETHYST.get(), count);
-						handler.insertItem(slot, stack, false);
-					});
-				}
-			}
-			
 			return RitualResult.SUCCESS;
 		}
-		
+
 		return RitualResult.CASTING;
 	}
 

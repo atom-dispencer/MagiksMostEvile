@@ -24,13 +24,20 @@ public abstract class ResultHandler<T extends Ritual> {
 	public void handle(RitualResult type) {
 		switch (type) {
 		case SUCCESS:
+			ritual.setDone(false);
 			handleSuccess();
 			break;
 		case CASTING:
+			ritual.setDone(false);
+			handleCasting();
 			break;
 		case FAILURE:
+			ritual.setDone(true);
+			handleFailure();
 			break;
 		case CATACLYSM:
+			ritual.setDone(true);
+			handleCataclysm();
 			break;
 		default:
 			break;

@@ -13,6 +13,7 @@ import genelectrovise.magiksmostevile.common.item.glowing.GlowingShovel;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingSword;
 import genelectrovise.magiksmostevile.common.item.spawn_egg.VampireBatSpawnEgg;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.main.particle.GlyphParticle;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileArmorMaterial;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
 import genelectrovise.magiksmostevile.common.main.support.EvileItemGroup;
@@ -28,6 +29,7 @@ import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.Amethys
 import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreFeature;
 import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreFeatureConfig;
 import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreGeneration;
+import io.netty.channel.rxtx.RxtxChannelConfig.Paritybit;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -45,6 +47,8 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.WrittenBookItem;
+import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
@@ -69,6 +73,7 @@ public class EvileDeferredRegistry {
 	public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
 	public static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
 	public static final DeferredRegister<Ritual> RITUALS = new DeferredRegister<Ritual>(LazyForgeRegistry.of(Ritual.class), MagiksMostEvile.MODID);
+	public static final DeferredRegister<ParticleType<?>> PARTICLES = new DeferredRegister<ParticleType<?>>(ForgeRegistries.PARTICLE_TYPES, MagiksMostEvile.MODID);
 
 	// =========BLOCKS======================================================================================================================
 	public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block", () -> new Block(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).lightValue(5 / 16).hardnessAndResistance(3F, 3F)));
@@ -150,6 +155,9 @@ public class EvileDeferredRegistry {
 //=========RITUALS=====================================================================================================================
 	public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());
 	public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL = RITUALS.register("summon_flappy_ritual", () -> new SummonFlappyRitual());
+
+//=========RITUALS=====================================================================================================================
+	public static final RegistryObject<ParticleType<?>> GLYPH_PARTICLE = PARTICLES.register("glyph_particle", () -> new BasicParticleType(true));
 
 //=========CONSTRUCTOR=================================================================================================================
 
