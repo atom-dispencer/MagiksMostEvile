@@ -44,10 +44,10 @@ public  class EvileArmorBases {
 		public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 			if (player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(1) != null
 					&& player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(3) != null) {
-				if (player.inventory.armorItemInSlot(3).getItem() == EvileDeferredRegistry.AMETHYST_HELMET.get()
-						&& player.inventory.armorItemInSlot(2).getItem() == EvileDeferredRegistry.AMETHYST_CHESTPLATE.get()
-						&& player.inventory.armorItemInSlot(1).getItem() == EvileDeferredRegistry.AMETHYST_LEGGINGS.get()
-						&& player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.AMETHYST_BOOTS.get()) {
+				if (player.inventory.armorItemInSlot(3).getItem() == EvileDeferredRegistry.POWERED_AMETHYST_HELMET.get()
+						&& player.inventory.armorItemInSlot(2).getItem() == EvileDeferredRegistry.POWERED_AMETHYST_CHESTPLATE.get()
+						&& player.inventory.armorItemInSlot(1).getItem() == EvileDeferredRegistry.POWERED_AMETHYST_LEGGINGS.get()
+						&& player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.POWERED_AMETHYST_BOOTS.get()) {
 					player.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 1, false, false));
 					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 5, 0, false, false));
 					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5, 0, false, false));
@@ -68,10 +68,10 @@ public  class EvileArmorBases {
 		public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 			if (player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(1) != null
 					&& player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(3) != null) {
-				if (player.inventory.armorItemInSlot(3).getItem() == EvileDeferredRegistry.AMETHYST_HELMET.get()
-						&& player.inventory.armorItemInSlot(2).getItem() == EvileDeferredRegistry.AMETHYST_CHESTPLATE.get()
-						&& player.inventory.armorItemInSlot(1).getItem() == EvileDeferredRegistry.AMETHYST_LEGGINGS.get()
-						&& player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.AMETHYST_BOOTS.get()) {
+				if (player.inventory.armorItemInSlot(3).getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_HELMET.get()
+						&& player.inventory.armorItemInSlot(2).getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_CHESTPLATE.get()
+						&& player.inventory.armorItemInSlot(1).getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_LEGGINGS.get()
+						&& player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_BOOTS.get()) {
 					player.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 2, false, false));
 					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 5, 0, false, false));
 					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5, 0, false, false));

@@ -5,6 +5,7 @@ import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBase
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.OverPoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.PoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.staff.AmethystStaff;
+import genelectrovise.magiksmostevile.common.item.equipment.staff.DimensionWarpingStaff;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingAxe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingHoe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingItem;
@@ -109,7 +110,8 @@ public class EvileDeferredRegistry {
 
 //=========WEAPONS====================================================================================================================
 	public static final RegistryObject<Item> AMETHYST_STAFF = ITEMS.register("amethyst_staff", () -> new AmethystStaff(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(1)));
-	
+	public static final RegistryObject<Item> DIMENSION_WARPING_STAFF = ITEMS.register("dimension_warping_staff", () -> new DimensionWarpingStaff(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(1)));
+
 //=========TOMES======================================================================================================================
 	public static final RegistryObject<Item> TOME_CONVERT_AMETHYST = ITEMS.register("tome_convert_amethyst", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> TOME_SUMMON_FLAPPY = ITEMS.register("tome_summon_flappy", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));

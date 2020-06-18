@@ -1,6 +1,6 @@
 {
-   "parent": "item/generated",
+   "parent": "item/handheld",
    "textures": {
-       "layer0": "magiksmostevile:items/equipment/weapons/amethyst_staff"
+       "layer0": "magiksmostevile:items/equipment/staff/amethyst_staff"
    }
 }

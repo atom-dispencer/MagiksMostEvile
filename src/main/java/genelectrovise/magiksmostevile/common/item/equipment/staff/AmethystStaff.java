@@ -4,14 +4,12 @@
 package genelectrovise.magiksmostevile.common.item.equipment.staff;
 
 import java.awt.Color;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleData;
-import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleFactory;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.IAnimatedSprite;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
@@ -19,6 +17,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.ShootableItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 /**
@@ -50,18 +49,32 @@ public class AmethystStaff extends ShootableItem {
 
 		ItemStack stack = playerIn.getHeldItem(handIn);
 
-		if (worldIn.isRemote()) {
-			for (int i = random.nextInt(10); i < 25; i++) {
+		if (!getInventoryAmmoPredicate().test(playerIn.getHeldItem(handIn == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND)) && !playerIn.isCreative()) {
+			return ActionResult.resultFail(stack);
+		}
 
-				double playerX = new Double(playerIn.getPosX());
-				double playerY = new Double(playerIn.getPosY());
-				double playerZ = new Double(playerIn.getPosZ());
+		Random random = new Random();
+		int radius = 3;
 
-				worldIn.addParticle(new GlyphParticleData(Color.MAGENTA, 10), true, playerX + random.nextDouble() - 0.5, playerY + random.nextDouble() - 0.5, playerZ + random.nextDouble() - 0.5, random.nextDouble() - 0.5, random.nextDouble() - 0.5, random.nextDouble() - 0.5);
+		AxisAlignedBB aabb = new AxisAlignedBB(playerIn.getPosition().east(radius).north(radius).up(), playerIn.getPosition().west(3).south(3).down());
+		List<Entity> entities = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, aabb);
+
+		if (!worldIn.isRemote) {
+			for (Entity entity : entities) {
+				playerIn.attackTargetEntityWithCurrentItem(entity);
+				entity.setFire(1);
 			}
 		}
 
-		return (getInventoryAmmoPredicate().test(stack) ? ActionResult.resultConsume(stack) : ActionResult.resultFail(stack));
+		if (worldIn.isRemote) {
+			for (Entity entity : entities) {
+
+				double vec = (random.nextDouble() - 0.5) / 2;
+				worldIn.addParticle(new GlyphParticleData(Color.MAGENTA, 10), true, entity.getPosX(), entity.getPosY(), entity.getPosZ(), vec, vec, vec);
+			}
+		}
+
+		return ActionResult.resultSuccess(stack);
 	}
 
 }
