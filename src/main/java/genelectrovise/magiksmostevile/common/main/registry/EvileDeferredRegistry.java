@@ -1,10 +1,10 @@
 package genelectrovise.magiksmostevile.common.main.registry;
 
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
-import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatRenderer;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.AmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.OverPoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.PoweredAmethystArmorBase;
+import genelectrovise.magiksmostevile.common.item.equipment.staff.AmethystStaff;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingAxe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingHoe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingItem;
@@ -13,27 +13,24 @@ import genelectrovise.magiksmostevile.common.item.glowing.GlowingShovel;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingSword;
 import genelectrovise.magiksmostevile.common.item.spawn_egg.VampireBatSpawnEgg;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.particle.GlyphParticle;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileArmorMaterial;
 import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
 import genelectrovise.magiksmostevile.common.main.support.EvileItemGroup;
+import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleData;
+import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleType;
 import genelectrovise.magiksmostevile.common.ritual.ConvertAmethystRitual;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.ritual.SummonFlappyRitual;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarBlock;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
-import genelectrovise.magiksmostevile.common.tileentity.altar.AltarScreenManager;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
 import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreFeature;
 import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreFeatureConfig;
-import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreGeneration;
-import io.netty.channel.rxtx.RxtxChannelConfig.Paritybit;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -47,7 +44,6 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.WrittenBookItem;
-import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -57,8 +53,6 @@ import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -113,6 +107,9 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<Item> POWERED_AMETHYST_SHOVEL = ITEMS.register("powered_amethyst_shovel", () -> new GlowingShovel(EnumEvileItemTier.POWERED_AMETHYST, 2, -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> POWERED_AMETHYST_HOE = ITEMS.register("powered_amethyst_hoe", () -> new GlowingHoe(EnumEvileItemTier.POWERED_AMETHYST, -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
+//=========WEAPONS====================================================================================================================
+	public static final RegistryObject<Item> AMETHYST_STAFF = ITEMS.register("amethyst_staff", () -> new AmethystStaff(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(1)));
+	
 //=========TOMES======================================================================================================================
 	public static final RegistryObject<Item> TOME_CONVERT_AMETHYST = ITEMS.register("tome_convert_amethyst", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> TOME_SUMMON_FLAPPY = ITEMS.register("tome_summon_flappy", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
@@ -156,8 +153,8 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());
 	public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL = RITUALS.register("summon_flappy_ritual", () -> new SummonFlappyRitual());
 
-//=========RITUALS=====================================================================================================================
-	public static final RegistryObject<ParticleType<?>> GLYPH_PARTICLE = PARTICLES.register("glyph_particle", () -> new BasicParticleType(true));
+//=========PARTICLES===================================================================================================================
+	public static final RegistryObject<ParticleType<GlyphParticleData>> GLYPH_PARTICLE = PARTICLES.register("glyph_particle", () -> new GlyphParticleType());
 
 //=========CONSTRUCTOR=================================================================================================================
 
@@ -169,7 +166,7 @@ public class EvileDeferredRegistry {
 	public static void init(final IEventBus eventBus) {
 
 		if (isInitialised) {
-			throw new IllegalStateException("MagiksMostEvile is already initialised!");
+			throw new IllegalStateException("MagiksMostEvile's EvileDeferredRegistry is already initialised!");
 		}
 
 		MagiksMostEvile.LOGGER.debug("Constructing EvileRegistry!");
@@ -182,5 +179,6 @@ public class EvileDeferredRegistry {
 		ENTITIES.register(eventBus);
 		CONTAINERS.register(eventBus);
 		RITUALS.register(eventBus);
+		PARTICLES.register(eventBus);
 	}
 }

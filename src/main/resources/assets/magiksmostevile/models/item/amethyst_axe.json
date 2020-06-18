@@ -1,6 +1,6 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "magiksmostevile:items/amethyst_axe"
+       "layer0": "magiksmostevile:items/equipment/tools/amethyst_axe"
    }
 }
