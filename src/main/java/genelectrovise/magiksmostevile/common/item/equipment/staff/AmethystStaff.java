@@ -9,6 +9,8 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleData;
+import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
+import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
@@ -46,6 +48,15 @@ public class AmethystStaff extends ShootableItem {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+
+		try {
+			if (worldIn.isRemote) {
+				Glyph glyph = new Glyph("textures/items/general/amethyst.png");
+				glyph.drawCentered(worldIn, playerIn.getPosition(), 0.5, GlyphOrientation.HORIZONTAL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		ItemStack stack = playerIn.getHeldItem(handIn);
 

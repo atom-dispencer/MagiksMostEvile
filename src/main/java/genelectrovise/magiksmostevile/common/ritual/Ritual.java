@@ -3,14 +3,17 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
+import javax.annotation.Nullable;
+
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainerScreen;
-import genelectrovise.magiksmostevile.common.tileentity.altar.AltarEnergyStorage;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
@@ -19,12 +22,15 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
  * 
  * @author GenElectrovise 19 May 2020
  */
-public class Ritual extends ForgeRegistryEntry<Ritual> {
+public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializable<CompoundNBT> {
+	public static final ResourceLocation NONE = new ResourceLocation(MagiksMostEvile.MODID, "none");
+	
 	protected final String displayName;
 	protected final String description;
 	protected final String information;
 	protected final int energyRequirement;
 	protected ResultHandler<?> resultHandler;
+	private PlayerEntity caster;
 
 	protected AltarTileEntity altar;
 	protected boolean done;
@@ -57,7 +63,7 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * setup!
 	 */
 	public void begin() {
-		setTick(0);
+		setTick((this.getTick() == 0) ? 0 : this.getTick());
 		setDone(false);
 		altar.setCasting(true);
 		altar.currentRitual = this;
@@ -76,9 +82,11 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * Equivalent of a constructor, where one isn't easy to implement.
 	 * 
 	 * @param altarTileEntity
+	 * @param player
 	 */
-	public void init(AltarTileEntity altarTileEntity) {
+	public void init(AltarTileEntity altarTileEntity, @Nullable PlayerEntity player) {
 		this.altar = altarTileEntity;
+		this.caster = player;
 	}
 
 	/**
@@ -88,7 +96,7 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * needed.
 	 */
 	public void tryStart() {
-		if (this.canStart()) {
+		if (this.canStart() || this.getTick() != 0) {
 			this.begin();
 		}
 	}
@@ -97,11 +105,11 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 * @return Whether the ritual is able to start.
 	 */
 	protected boolean canStart() {
-		
-		if(!(altar.getEnergyStored() > energyRequirement / 2)) {
+
+		if (!(altar.getEnergyStored() > energyRequirement / 2)) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -151,6 +159,20 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 		}
 
 		return (getTick() > min) && (getTick() < max);
+	}
+
+	@Override
+	public CompoundNBT serializeNBT() {
+		CompoundNBT tag = new CompoundNBT();
+
+		tag.putInt("tick", getTick());
+
+		return tag;
+	}
+
+	@Override
+	public void deserializeNBT(CompoundNBT nbt) {
+		setTick(nbt.getInt("tick"));
 	}
 
 	// Get and set
@@ -230,6 +252,10 @@ public class Ritual extends ForgeRegistryEntry<Ritual> {
 	 */
 	public final String getInformation() {
 		return information;
+	}
+	
+	public final PlayerEntity getCaster() {
+		return caster;
 	}
 
 	/**

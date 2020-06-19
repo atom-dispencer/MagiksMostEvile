@@ -2,10 +2,13 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
+import genelectrovise.magiksmostevile.common.network.particle.transfer_energy.TransferEnergyMessageToClient;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
@@ -33,6 +36,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -168,8 +172,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
 		slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
 		slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
-
 		energyStorage.fromNbt(tag.getCompound(energyStorage.nbtKey));
+		setCasting(tag.getBoolean("casting"));
+		ResourceLocation location = new ResourceLocation(tag.getString("ritual"));
+		Ritual ritual = location.equals(Ritual.NONE) ? null : getRitualFromResourceLocation(location);
+		UUID casterUUID = tag.getUniqueId("caster_id");
+
+		if (ritual != null && casterUUID != null) {
+			PlayerEntity player = world.getPlayerByUuid(casterUUID);
+			castRitualAtArbitraryTick(ritual, player, tag.getInt("ritual_tick"));
+		}
 	}
 
 	@Override
@@ -180,6 +192,11 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
 		tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
 		tag.put(energyStorage.nbtKey, energyStorage.toNbt());
+		tag.putBoolean("casting", isCasting());
+		tag.putInt("ritual_tick", currentRitual != null ? currentRitual.getTick() : 0);
+		tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString() : Ritual.NONE.toString());
+		tag.putUniqueId("caster_id", currentRitual != null ? currentRitual.getCaster().getUniqueID() : UUID.randomUUID());
+
 		return tag;
 	}
 
@@ -191,6 +208,14 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	// ITickableTileEntity
 	@Override
 	public void tick() {
+
+		if (!world.isRemote) {
+			if (tickIncr % 100 == 0) {
+				for (AmethystCrystalTileEntity te : crystals) {
+					ParticleNetworkingManager.CTransferEnergy.send(PacketDistributor.ALL.noArg(), new TransferEnergyMessageToClient(te.getPos(), this.getPos()));
+				}
+			}
+		}
 
 		if (!world.isRemote) {
 			// Test for crystals nearby
@@ -298,8 +323,9 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 	/**
 	 * @param resourceLocation
 	 * @param serverPlayerEntity
+	 * @return
 	 */
-	public void castRitual(ResourceLocation resourceLocation, ServerPlayerEntity serverPlayerEntity) {
+	public static Ritual getRitualFromResourceLocation(ResourceLocation resourceLocation) {
 		MagiksMostEvile.LOGGER.dev("getting ritual by resource location! : " + resourceLocation);
 
 		ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
@@ -307,15 +333,21 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 		for (Supplier<Ritual> ritualSupplier : all) {
 			if (ritualSupplier.get().getRegistryName().toString().equalsIgnoreCase(resourceLocation.toString())) {
-				castRitual(ritualSupplier.get(), serverPlayerEntity);
-				break;
+				return ritualSupplier.get();
 			}
 		}
+
+		return null;
 	}
 
 	public void castRitual(Ritual ritual, ServerPlayerEntity serverPlayerEntity) {
+		castRitualAtArbitraryTick(ritual, serverPlayerEntity, 0);
+	}
+
+	public void castRitualAtArbitraryTick(Ritual ritual, PlayerEntity player, int tick) {
 		MagiksMostEvile.LOGGER.dev("casting Ritual!");
-		ritual.init(this);
+		ritual.init(this, player);
+		ritual.setTick(tick);
 		ritual.tryStart();
 	}
 

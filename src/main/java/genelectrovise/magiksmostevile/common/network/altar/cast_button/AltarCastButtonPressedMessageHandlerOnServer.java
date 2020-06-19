@@ -49,16 +49,15 @@ public class AltarCastButtonPressedMessageHandlerOnServer {
 		AltarContainer altarContainer = (AltarContainer) container;
 		BlockPos pos = altarContainer.getAltar().getPos();
 
-		
 		// Get and check tile entity
 		TileEntity tileEntity = ctxSupplier.get().getSender().world.getTileEntity(pos);
-		
-		if(!(tileEntity instanceof AltarTileEntity)) {
+
+		if (!(tileEntity instanceof AltarTileEntity)) {
 			return;
 		}
-		
+
 		AltarTileEntity altarTileEntity = (AltarTileEntity) tileEntity;
-		altarTileEntity.castRitual(message.getRitualResourceLocation(), ctxSupplier.get().getSender());
+		altarTileEntity.castRitual(AltarTileEntity.getRitualFromResourceLocation(message.getRitualResourceLocation()), ctxSupplier.get().getSender());
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {

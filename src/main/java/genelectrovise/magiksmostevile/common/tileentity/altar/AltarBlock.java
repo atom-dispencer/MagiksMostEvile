@@ -2,6 +2,7 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
+import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -16,22 +17,26 @@ import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+/**
+ * @see AnvilBlock
+ * @author GenElectrovise 19 Jun 2020
+ */
 public class AltarBlock extends Block {
-	public static AxisAlignedBB ALTAR_AABB = new AxisAlignedBB(0.0625D, 0D, 0.0625D, 0.9375D, 0.625D, 0.9375D);
-
 	// double x1, double y1, double z1, double x2, double y2, double z2
-	protected static final VoxelShape BLOCK_SHAPE = Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 14.0D, 15.0D);
+	protected static final VoxelShape BODY_ADDON = Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 14.0D, 15.0D);
+	protected static final VoxelShape BASE_ADDON = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+	protected static final VoxelShape COMBINED_SHAPE = VoxelShapes.or(BODY_ADDON, BASE_ADDON);
 
 	public AltarBlock(Properties properties) {
 		super(properties);
@@ -59,7 +64,7 @@ public class AltarBlock extends Block {
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return BLOCK_SHAPE;
+		return COMBINED_SHAPE;
 	}
 
 	// ======================================================================================================================
@@ -115,7 +120,7 @@ public class AltarBlock extends Block {
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
 		if (!worldIn.isRemote) {
 			MagiksMostEvile.LOGGER.debug("Activated -- world not remote (client)");
-			
+
 			final ICustomContainer tileEntity = (ICustomContainer) worldIn.getTileEntity(pos);
 			tileEntity.openGUI((ServerPlayerEntity) player);
 

@@ -49,6 +49,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -73,6 +74,8 @@ public class VampireBatEntity extends MonsterEntity {
 	private static final DataParameter<Byte> HANGING = EntityDataManager.createKey(VampireBatEntity.class, DataSerializers.BYTE);
 	public static final EntityPredicate entityPredicate = new EntityPredicate().setDistance(4.0D).allowFriendlyFire();
 	public BlockPos spawnPosition;
+	
+	public static final ResourceLocation LOOT_TABLE = new ResourceLocation(MagiksMostEvile.MODID, "loot_tab/vampire_bat");
 
 	public static final int REINFORCEMENT_CHANCE = 2;
 	public static final int REINFORCEMENT_COOLDOWN = 100;
@@ -265,6 +268,12 @@ public class VampireBatEntity extends MonsterEntity {
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putByte("BatFlags", this.dataManager.get(HANGING));
+	}
+	
+	@Override
+	protected ResourceLocation getLootTable() {
+		//return LOOT_TABLE;
+		return super.getLootTable();
 	}
 
 	/**

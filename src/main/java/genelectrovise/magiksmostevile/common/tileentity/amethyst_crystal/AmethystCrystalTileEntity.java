@@ -2,6 +2,8 @@ package genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
+import genelectrovise.magiksmostevile.common.network.particle.ender.EnderParticleMessageToClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,7 +16,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class AmethystCrystalTileEntity extends TileEntity implements ITickableTileEntity {
 
@@ -69,19 +71,15 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(), new EnderParticleMessageToClient(this.getPos(), 1));
 		}
-		// Main.LOGGER.debug("iteration : " + iteration);
-		// Main.LOGGER.debug("modulus : " + iteration % 10);
+		
 		iteration++;
 	}
 
 	private void doBlockReplacement(Block block, BlockPos blockPos) {
 		if (block instanceof PotatoBlock) {
-
-			/*
-			 * int spudAge = (int) world.getBlockState(blockPos).get(PotatoBlock.AGE); if
-			 * (spudAge == 7) { doReplacement(blockPos); }
-			 */
 
 			if ((int) world.getBlockState(blockPos).get(PotatoBlock.AGE) == 7)
 				doReplacement(blockPos);

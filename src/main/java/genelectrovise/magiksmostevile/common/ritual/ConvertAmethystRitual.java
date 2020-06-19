@@ -5,9 +5,15 @@ package genelectrovise.magiksmostevile.common.ritual;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
+import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
+import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
+import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.common.ritual.result.ConvertAmethystResultHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -27,7 +33,7 @@ public class ConvertAmethystRitual extends Ritual {
 	@Override
 	protected boolean canStart() {
 		super.canStart();
-		
+
 		LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
 		ItemStack[] stacks = new ItemStack[4];
@@ -49,9 +55,15 @@ public class ConvertAmethystRitual extends Ritual {
 	}
 
 	@Override
+	public void begin() {
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/items/general/amethyst.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+		super.begin();
+	}
+
+	@Override
 	protected RitualResult tick() {
 		super.tick();
-		
+
 		MagiksMostEvile.LOGGER.dev("ticking");
 
 		if (isBetweenTicks(1, 50, true)) {

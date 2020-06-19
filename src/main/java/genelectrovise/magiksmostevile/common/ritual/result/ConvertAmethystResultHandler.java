@@ -2,11 +2,16 @@ package genelectrovise.magiksmostevile.common.ritual.result;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
+import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.ConvertAmethystRitual;
 import genelectrovise.magiksmostevile.common.ritual.ResultHandler;
+import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
+import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -56,6 +61,8 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
 			}
 		}
 
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/items/general/powered_amethyst.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+
 	}
 
 	@Override
@@ -65,11 +72,13 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
 
 	@Override
 	public void handleFailure() {
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/ritual/fail.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
 		MagiksMostEvile.LOGGER.info("Failed!");
 	}
 
 	@Override
 	public void handleCataclysm() {
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/ritual/fail.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
 		MagiksMostEvile.LOGGER.info("BOOM!");
 	}
 
