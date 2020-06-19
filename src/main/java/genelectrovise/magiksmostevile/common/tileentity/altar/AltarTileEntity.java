@@ -179,8 +179,12 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		UUID casterUUID = tag.getUniqueId("caster_id");
 
 		if (ritual != null && casterUUID != null) {
-			PlayerEntity player = world.getPlayerByUuid(casterUUID);
-			castRitualAtArbitraryTick(ritual, player, tag.getInt("ritual_tick"));
+			try {
+				PlayerEntity player = world.getPlayerByUuid(casterUUID);
+				castRitualAtArbitraryTick(ritual, player, tag.getInt("ritual_tick"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -63,6 +63,11 @@ public class ConvertAmethystRitual extends Ritual {
 	@Override
 	protected RitualResult tick() {
 		super.tick();
+		
+		if(getTick() < 99999999) {
+			return RitualResult.CASTING;
+		}
+		
 
 		MagiksMostEvile.LOGGER.dev("ticking");
 
@@ -75,6 +80,10 @@ public class ConvertAmethystRitual extends Ritual {
 		}
 
 		if (isBetweenTicks(200, 201, true)) {
+			return RitualResult.SUCCESS;
+		}
+		
+		if(getTick() > 1000) {
 			return RitualResult.SUCCESS;
 		}
 
