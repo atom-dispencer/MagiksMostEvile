@@ -3,12 +3,14 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.common.ritual.result.ConvertAmethystResultHandler;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -29,7 +31,9 @@ public class ConvertAmethystRitual extends Ritual {
 
 	@Override
 	protected boolean canStart() {
-		super.canStart();
+		if (!super.canStart()) {
+			return false;
+		}
 
 		LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
@@ -48,12 +52,12 @@ public class ConvertAmethystRitual extends Ritual {
 			}
 		}
 
-		return super.canStart();
+		return false;
 	}
 
 	@Override
 	public void begin() {
-		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/items/general/amethyst.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/amethyst.png"), GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
 		super.begin();
 	}
 

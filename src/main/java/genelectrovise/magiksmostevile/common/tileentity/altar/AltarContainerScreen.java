@@ -5,8 +5,6 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import static genelectrovise.magiksmostevile.common.main.reference.GuiReference.ZERO;
 
-import java.util.ArrayList;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
@@ -15,13 +13,10 @@ import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManage
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;
 import genelectrovise.magiksmostevile.common.network.altar.cast_button.AltarCastButtonPressedMessageToServer;
-import genelectrovise.magiksmostevile.common.ritual.Ritual;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 /**
@@ -104,6 +99,9 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 
 		String description = altarContainer.getSelector().getRitualSupplier().get().getDescription();
 		this.font.drawSplitString(description, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 20)), 100, 6961030);
+
+		String energyRequirement = "Required Energy: " + new Integer(altarContainer.getSelector().getRitualSupplier().get().getEnergyRequirement()).toString();
+		this.font.drawSplitString(energyRequirement, new Integer(Math.round(baseX + 2)), new Integer(Math.round(baseY + seperator + 81)), 100, 13018111);
 	}
 
 	private void evaluateDimensions() {

@@ -10,6 +10,7 @@ import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -61,7 +62,7 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
 			}
 		}
 
-		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/items/general/powered_amethyst.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/powered_amethyst.png"), GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
 
 	}
 
@@ -72,13 +73,13 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
 
 	@Override
 	public void handleFailure() {
-		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/ritual/fail.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient(new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"), GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
 		MagiksMostEvile.LOGGER.info("Failed!");
 	}
 
 	@Override
 	public void handleCataclysm() {
-		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/ritual/fail.png", GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient(new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"), GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
 		MagiksMostEvile.LOGGER.info("BOOM!");
 	}
 

@@ -90,5 +90,27 @@ public class AmethystFluxEnergyStorage extends EnergyStorage {
 
 		return energyExtracted;
 	}
+	
+	public void receiveMax(int value) {
+		int current = maxReceive;
+		setMaxRecieve(value);
+		receiveEnergy(value, false);
+		setMaxRecieve(current);
+	}
+	
+	public void extractMax(int value) {
+		int current = maxExtract;
+		setMaxExtract(value);
+		receiveEnergy(value, false);
+		setMaxExtract(current);
+	}
+	
+	public void setMaxRecieve(int value) {
+		maxReceive = value;
+	}
+	
+	public void setMaxExtract(int value) {
+		maxExtract = value;
+	}
 
 }

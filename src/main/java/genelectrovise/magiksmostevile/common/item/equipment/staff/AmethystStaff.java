@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleData;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
@@ -19,6 +20,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.ShootableItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -51,7 +53,7 @@ public class AmethystStaff extends ShootableItem {
 
 		try {
 			if (worldIn.isRemote) {
-				Glyph glyph = new Glyph("textures/items/general/amethyst.png");
+				Glyph glyph = new Glyph(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/powered_amethyst.png"));
 				glyph.drawCentered(worldIn, playerIn.getPosition(), 0.5, GlyphOrientation.HORIZONTAL);
 			}
 		} catch (Exception e) {

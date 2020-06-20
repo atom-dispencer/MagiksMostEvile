@@ -5,6 +5,7 @@ package genelectrovise.magiksmostevile.common.network.glyph;
 
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -14,13 +15,13 @@ public class GlyphMessageToClient {
 
 	private static boolean messageIsValid;
 
-	private String resource;
+	private ResourceLocation resource;
 	private GlyphOrientation orientation;
 	private BlockPos position;
 	private boolean centered;
 	private double spacing;
 
-	public GlyphMessageToClient(String resource, GlyphOrientation orientation, BlockPos position, boolean centered, double spacing) {
+	public GlyphMessageToClient(ResourceLocation resource, GlyphOrientation orientation, BlockPos position, boolean centered, double spacing) {
 		this.resource = resource;
 		this.orientation = orientation;
 		this.position = position;
@@ -39,7 +40,7 @@ public class GlyphMessageToClient {
 	 * @param buf
 	 */
 	public void encode(PacketBuffer buf) {
-		buf.writeString(resource);
+		buf.writeResourceLocation(resource);
 		buf.writeInt(GlyphOrientation.toInt(orientation));
 		buf.writeBlockPos(position);
 		buf.writeBoolean(centered);
@@ -54,7 +55,7 @@ public class GlyphMessageToClient {
 	 */
 	public static GlyphMessageToClient decode(PacketBuffer buf) {
 
-		String resource = buf.readString();
+		ResourceLocation resource = buf.readResourceLocation();
 		GlyphOrientation orientaion = GlyphOrientation.fromInt(buf.readInt());
 		BlockPos position = buf.readBlockPos();
 		boolean centered = buf.readBoolean();
@@ -70,7 +71,7 @@ public class GlyphMessageToClient {
 	/**
 	 * @return the resource
 	 */
-	public String getResource() {
+	public ResourceLocation getResource() {
 		return resource;
 	}
 

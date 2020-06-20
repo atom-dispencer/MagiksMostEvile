@@ -2,7 +2,6 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
@@ -241,17 +240,19 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
 			// Receive amethyst flux
 			if (recieveFluxCountdown > 20) {
-				if (world instanceof ServerWorld && !world.isDaytime()) {
-					energyStorage.receiveEnergy(1, false);
+				if (world instanceof ServerWorld) {
+					if (!world.isDaytime()) {
+						energyStorage.receiveEnergy(1, false);
 
-					if (new Random().nextInt(15) == 0) {
-						energyStorage.receiveEnergy(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL, false);
-					}
+						if (new Random().nextInt(15) == 0) {
+							energyStorage.receiveMax(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL);
+						}
 
-					recieveFluxCountdown = 0;
-				} else {
-					if (new Random().nextInt(25) == 0) {
-						energyStorage.receiveEnergy(crystals.size() * DAY_ENERGY_PER_CRYSTAL, false);
+						recieveFluxCountdown = 0;
+					} else {
+						if (new Random().nextInt(25) == 0) {
+							energyStorage.receiveMax(crystals.size() * DAY_ENERGY_PER_CRYSTAL);
+						}
 					}
 				}
 			} else {

@@ -26,8 +26,8 @@ public  class EvileArmorBases {
 						&& player.inventory.armorItemInSlot(2).getItem() == EvileDeferredRegistry.AMETHYST_CHESTPLATE.get()
 						&& player.inventory.armorItemInSlot(1).getItem() == EvileDeferredRegistry.AMETHYST_LEGGINGS.get()
 						&& player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.AMETHYST_BOOTS.get()) {
-					player.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 0, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 5, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 20, 0, false, false));
 				}
 			}
 		}
@@ -48,10 +48,10 @@ public  class EvileArmorBases {
 						&& player.inventory.armorItemInSlot(2).getItem() == EvileDeferredRegistry.POWERED_AMETHYST_CHESTPLATE.get()
 						&& player.inventory.armorItemInSlot(1).getItem() == EvileDeferredRegistry.POWERED_AMETHYST_LEGGINGS.get()
 						&& player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.POWERED_AMETHYST_BOOTS.get()) {
-					player.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 1, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 5, 0, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5, 0, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.HASTE, 5, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 1, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 20, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 20, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.HASTE, 20, 0, false, false));
 				}
 			}
 		}
@@ -72,14 +72,14 @@ public  class EvileArmorBases {
 						&& player.inventory.armorItemInSlot(2).getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_CHESTPLATE.get()
 						&& player.inventory.armorItemInSlot(1).getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_LEGGINGS.get()
 						&& player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_BOOTS.get()) {
-					player.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 2, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 5, 0, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5, 0, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.HASTE, 5, 1, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 5, 2, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 5, 5, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 5, 2, false, false));
-					player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 5, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 2, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 20, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 20, 0, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.HASTE, 20, 1, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 20, 2, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 20, 20, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 20, 2, false, false));
+					player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 20, 0, false, false));
 				}
 			}
 		}

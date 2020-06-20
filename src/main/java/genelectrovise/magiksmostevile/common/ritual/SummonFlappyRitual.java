@@ -3,6 +3,7 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
@@ -11,6 +12,7 @@ import genelectrovise.magiksmostevile.common.network.particle.ender.EnderParticl
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.common.ritual.result.SummonFlappyResultHandler;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -23,7 +25,7 @@ public class SummonFlappyRitual extends Ritual {
 	public static final String displayName = "Summon Flappy!";
 	public static final String description = "Summon the almighty Flappy the Bat!";
 	public static final String information = "Summons a vampire bat into the world!";
-	private static final int energyRequirement = 50;
+	private static final int energyRequirement = 60;
 
 	/**
 	 * @param registryName
@@ -36,6 +38,11 @@ public class SummonFlappyRitual extends Ritual {
 
 	@Override
 	protected boolean canStart() {
+		
+		if(!super.canStart()) {
+			return false;
+		}
+		
 		LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
 		ItemStack[] stacks = new ItemStack[4];
@@ -53,13 +60,13 @@ public class SummonFlappyRitual extends Ritual {
 			}
 		}
 
-		return super.canStart();
+		return false;
 	}
 
 	@Override
 	public void begin() {
 		super.begin();
-		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient("textures/items/general/vampire_bat_tooth.png", GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/vampire_bat_tooth.png"), GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
 		
 		LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
@@ -90,7 +97,7 @@ public class SummonFlappyRitual extends Ritual {
 	protected RitualResult tick() {
 		super.tick();
 
-		if (altar.getWorld().isDaytime() || !isBetweenTicks(0, 150, true)) {
+		if (altar.getWorld().isDaytime()) {
 			return RitualResult.FAILURE;
 		}
 
@@ -107,7 +114,7 @@ public class SummonFlappyRitual extends Ritual {
 			return RitualResult.CASTING;
 		}
 
-		if (getTick() > 140) {
+		if (getTick() > 149) {
 			return RitualResult.SUCCESS;
 		}
 

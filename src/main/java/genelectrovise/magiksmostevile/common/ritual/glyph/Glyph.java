@@ -5,14 +5,17 @@ package genelectrovise.magiksmostevile.common.ritual.glyph;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleData;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.PortalParticle;
 import net.minecraft.entity.item.EnderPearlEntity;
+import net.minecraft.resources.IResource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -25,19 +28,17 @@ import net.minecraft.world.World;
  * @see PortalParticle
  */
 public class Glyph {
-	private String imagePath;
+	private ResourceLocation imageLocation;
 	private ImageProperties imageProperties;
 
 	/**
 	 * 
-	 * @param path ../src/main/resources/assets/magiksmostevile/ is added to the
-	 *             start
+	 * @param location ../src/main/resources/assets/magiksmostevile/ is added to the
+	 *                 start
 	 */
-	public Glyph(String path) {
-		String s = File.separator;
-
-		this.imagePath = "../src/main/resources/assets/magiksmostevile/".replace("/", s) + path.replace("/", s);
-		this.imageProperties = generateImageProperties(imagePath);
+	public Glyph(ResourceLocation location) {
+		this.imageLocation = location;
+		this.imageProperties = generateImageProperties(imageLocation);
 	}
 
 	private static Color[] getPixels(BufferedImage image) {
@@ -145,16 +146,20 @@ public class Glyph {
 	}
 
 	/**
-	 * @param resource
+	 * @param resourceLocation
 	 * @returne
 	 */
-	private ImageProperties generateImageProperties(String resource) {
+	private ImageProperties generateImageProperties(ResourceLocation resourceLocation) {
 		ImageProperties properties = new ImageProperties();
 
 		try {
-			File file = new File(resource);
-			System.out.println(file.getAbsolutePath() + " : " + file.exists());
-			BufferedImage image = ImageIO.read(file);
+			IResource resource = Minecraft.getInstance().getResourceManager().getResource(resourceLocation);
+
+			InputStream stream = resource.getInputStream();
+
+			BufferedImage image = ImageIO.read(stream);
+
+			stream.close();
 
 			properties.setWidth(image.getWidth());
 			properties.setHeight(image.getHeight());

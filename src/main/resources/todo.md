@@ -8,19 +8,6 @@ Advancements
 -Can We Cook 'Em? (defeat the Tom the Troll)
 -Cinderella
 
-Amethyst Crystal
--TileEntity
-
-Vampire Bat
--Code
--AI (bees!)
-
-Altar
--TileEntity
--Container
--GUI
--Code from Beacon?
-
 Structures
 -Sky Temple (Greater Power Stone)
 -Elemental Temples (periodically generated?)

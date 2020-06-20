@@ -93,6 +93,11 @@ public class AltarBlock extends Block {
 			entity.addPotionEffect(levitation);
 		}
 	}
+	
+	@Override
+	public void dropXpOnBlockBreak(World worldIn, BlockPos pos, int amount) {
+		super.dropXpOnBlockBreak(worldIn, pos, 5);
+	}
 
 	@Override
 	public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {

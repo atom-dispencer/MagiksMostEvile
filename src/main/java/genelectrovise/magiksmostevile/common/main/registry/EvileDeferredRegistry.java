@@ -70,7 +70,7 @@ public class EvileDeferredRegistry {
 	public static final DeferredRegister<Ritual> RITUALS = new DeferredRegister<Ritual>(LazyForgeRegistry.of(Ritual.class), MagiksMostEvile.MODID);
 	public static final DeferredRegister<ParticleType<?>> PARTICLES = new DeferredRegister<ParticleType<?>>(ForgeRegistries.PARTICLE_TYPES, MagiksMostEvile.MODID);
 
-	// =========BLOCKS======================================================================================================================
+// =========BLOCKS======================================================================================================================
 	public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block", () -> new Block(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).lightValue(5 / 16).hardnessAndResistance(3F, 3F)));
 	public static final RegistryObject<Block> AMETHYST_ORE_OVERWORLD = BLOCKS.register("amethyst_ore_overworld", () -> new Block(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(5F, 5F)));
 	public static final RegistryObject<Block> AMETHYST_ORE_NETHER = BLOCKS.register("amethyst_ore_nether", () -> new Block(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(5F, 5F)));
@@ -78,7 +78,7 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<Block> AMETHYST_CRYSTAL = BLOCKS.register("amethyst_crystal", () -> new AmethystCrystalBlock(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).hardnessAndResistance(2F, 10F)));
 	public static final RegistryObject<Block> ALTAR = BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE).sound(SoundType.CLOTH).hardnessAndResistance(6F, 10F)));
 
-//=========BLOCK_ITEMS=================================================================================================================
+//=========BLOCK ITEMS=================================================================================================================
 	public static final RegistryObject<Item> AMETHYST_BLOCK_ITEM = ITEMS.register("amethyst_block", () -> new BlockItem(AMETHYST_BLOCK.get(), new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> AMETHYST_ORE_OVERWORLD_ITEM = ITEMS.register("amethyst_ore_overworld", () -> new BlockItem(AMETHYST_ORE_OVERWORLD.get(), new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> AMETHYST_ORE_NETHER_ITEM = ITEMS.register("amethyst_ore_nether", () -> new BlockItem(AMETHYST_ORE_NETHER.get(), new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
