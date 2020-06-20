@@ -57,7 +57,7 @@ public class AltarCastButtonPressedMessageHandlerOnServer {
 		}
 
 		AltarTileEntity altarTileEntity = (AltarTileEntity) tileEntity;
-		altarTileEntity.castRitual(AltarTileEntity.getRitualFromResourceLocation(message.getRitualResourceLocation()), ctxSupplier.get().getSender());
+		altarTileEntity.castRitual(AltarTileEntity.getRitualFromResourceLocation(message.getRitualResourceLocation()));
 	}
 
 	public static boolean isProtocolAccepted(String protocolVersion) {

@@ -3,17 +3,14 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
-import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.common.ritual.result.ConvertAmethystResultHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -63,13 +60,6 @@ public class ConvertAmethystRitual extends Ritual {
 	@Override
 	protected RitualResult tick() {
 		super.tick();
-		
-		if(getTick() < 99999999) {
-			return RitualResult.CASTING;
-		}
-		
-
-		MagiksMostEvile.LOGGER.dev("ticking");
 
 		if (isBetweenTicks(1, 50, true)) {
 			if (altar.removeEnergy(1)) {
@@ -79,11 +69,7 @@ public class ConvertAmethystRitual extends Ritual {
 			}
 		}
 
-		if (isBetweenTicks(200, 201, true)) {
-			return RitualResult.SUCCESS;
-		}
-		
-		if(getTick() > 1000) {
+		if (getTick() > 360) {
 			return RitualResult.SUCCESS;
 		}
 

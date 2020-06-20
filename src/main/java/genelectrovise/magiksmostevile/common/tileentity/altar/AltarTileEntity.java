@@ -176,12 +176,10 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		setCasting(tag.getBoolean("casting"));
 		ResourceLocation location = new ResourceLocation(tag.getString("ritual"));
 		Ritual ritual = location.equals(Ritual.NONE) ? null : getRitualFromResourceLocation(location);
-		UUID casterUUID = tag.getUniqueId("caster_id");
 
-		if (ritual != null && casterUUID != null) {
+		if (ritual != null) {
 			try {
-				PlayerEntity player = world.getPlayerByUuid(casterUUID);
-				castRitualAtArbitraryTick(ritual, player, tag.getInt("ritual_tick"));
+				castRitualAtArbitraryTick(ritual, tag.getInt("ritual_tick"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -199,7 +197,6 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		tag.putBoolean("casting", isCasting());
 		tag.putInt("ritual_tick", currentRitual != null ? currentRitual.getTick() : 0);
 		tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString() : Ritual.NONE.toString());
-		tag.putUniqueId("caster_id", currentRitual != null ? currentRitual.getCaster().getUniqueID() : UUID.randomUUID());
 
 		return tag;
 	}
@@ -344,13 +341,13 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 		return null;
 	}
 
-	public void castRitual(Ritual ritual, ServerPlayerEntity serverPlayerEntity) {
-		castRitualAtArbitraryTick(ritual, serverPlayerEntity, 0);
+	public void castRitual(Ritual ritual) {
+		castRitualAtArbitraryTick(ritual, 0);
 	}
 
-	public void castRitualAtArbitraryTick(Ritual ritual, PlayerEntity player, int tick) {
+	public void castRitualAtArbitraryTick(Ritual ritual, int tick) {
 		MagiksMostEvile.LOGGER.dev("casting Ritual!");
-		ritual.init(this, player);
+		ritual.init(this);
 		ritual.setTick(tick);
 		ritual.tryStart();
 	}

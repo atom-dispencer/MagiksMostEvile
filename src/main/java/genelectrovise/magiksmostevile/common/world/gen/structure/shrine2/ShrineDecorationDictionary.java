@@ -35,20 +35,21 @@ public class ShrineDecorationDictionary extends StructureDecorationDictionary {
 		{ //
 				new ItemStack(Items.BONE, random.nextInt(10) + 1), //
 				new ItemStack(Items.BONE_MEAL, random.nextInt(15) + 1), //
-				new ItemStack(EvileDeferredRegistry.AMETHYST.get(), random.nextInt(5) + 1), //
-				new ItemStack(EvileDeferredRegistry.POWERED_AMETHYST.get(), random.nextInt(1) + 1), //
-				new ItemStack(EvileDeferredRegistry.OVER_POWERED_AMETHYST.get(), random.nextInt(5) + 1), //
-				new ItemStack(Items.EMERALD, random.nextInt(5) + 1), //
+				new ItemStack(EvileDeferredRegistry.AMETHYST.get(), random.nextInt(6) + 1), //
+				new ItemStack(EvileDeferredRegistry.POWERED_AMETHYST.get(), random.nextInt(2) + 1), //
+				new ItemStack(EvileDeferredRegistry.OVER_POWERED_AMETHYST.get(), random.nextInt(1) + 1), //
+				new ItemStack(Items.EMERALD, random.nextInt(2) + 1), //
 				new ItemStack(Items.DIAMOND, random.nextInt(1) + 1), //
 				new ItemStack(Items.GOLD_NUGGET, random.nextInt(20) + 1), //
-				new ItemStack(Items.EMERALD, random.nextInt(5) + 1), //
+				new ItemStack(Items.EMERALD, random.nextInt(3) + 1), //
 				new ItemStack(Items.IRON_NUGGET, random.nextInt(14) + 1), //
-				new ItemStack(Items.BROWN_MUSHROOM, random.nextInt(5) + 1), //
-				new ItemStack(Items.RED_MUSHROOM, random.nextInt(5) + 1), //
+				new ItemStack(Items.BROWN_MUSHROOM, random.nextInt(6) + 1), //
+				new ItemStack(Items.RED_MUSHROOM, random.nextInt(7) + 1), //
 				new ItemStack(Items.ROTTEN_FLESH, random.nextInt(25) + 1), //
-				new ItemStack(EvileDeferredRegistry.AMETHYST_POTATO.get(), random.nextInt(64) + 1), //
+				new ItemStack(EvileDeferredRegistry.AMETHYST_POTATO.get(), random.nextInt(10) + 1), //
 				new ItemStack(Items.WOODEN_HOE, random.nextInt(1) + 1), //
-				new ItemStack(EvileDeferredRegistry.TOME_CONVERT_AMETHYST.get(), random.nextInt(64) + 1),//
+				new ItemStack(EvileDeferredRegistry.TOME_CONVERT_AMETHYST.get(), random.nextInt(1) + 1),//
+				new ItemStack(EvileDeferredRegistry.TOME_SUMMON_FLAPPY.get(), random.nextInt(1) + 1),//
 		};
 
 	// Infested stone bricks

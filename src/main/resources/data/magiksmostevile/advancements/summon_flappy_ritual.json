@@ -1,7 +1,7 @@
 {
 	"display": {
 		"icon": {
-			"item": "magiksmostevile:powered_amethyst"
+			"item": "magiksmostevile:tome_summon_flappy"
 		},
 		"title": "Flappy the Bat!",
 		"frame": "task",

@@ -30,7 +30,6 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
 	protected final String information;
 	protected final int energyRequirement;
 	protected ResultHandler<?> resultHandler;
-	private PlayerEntity caster;
 
 	protected AltarTileEntity altar;
 	protected boolean done;
@@ -82,11 +81,9 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
 	 * Equivalent of a constructor, where one isn't easy to implement.
 	 * 
 	 * @param altarTileEntity
-	 * @param player
 	 */
-	public void init(AltarTileEntity altarTileEntity, @Nullable PlayerEntity player) {
+	public void init(AltarTileEntity altarTileEntity) {
 		this.altar = altarTileEntity;
-		this.caster = player;
 	}
 
 	/**
@@ -252,10 +249,6 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
 	 */
 	public final String getInformation() {
 		return information;
-	}
-	
-	public final PlayerEntity getCaster() {
-		return caster;
 	}
 
 	/**
