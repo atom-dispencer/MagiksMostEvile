@@ -1,16 +1,20 @@
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
+import java.util.Random;
+
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FireBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -30,6 +34,7 @@ import net.minecraft.world.server.ServerWorld;
 
 /**
  * @see AnvilBlock
+ * @see FireBlock
  * @author GenElectrovise 19 Jun 2020
  */
 public class AltarBlock extends Block {
@@ -93,7 +98,7 @@ public class AltarBlock extends Block {
 			entity.addPotionEffect(levitation);
 		}
 	}
-	
+
 	@Override
 	public void dropXpOnBlockBreak(World worldIn, BlockPos pos, int amount) {
 		super.dropXpOnBlockBreak(worldIn, pos, 5);
@@ -117,6 +122,28 @@ public class AltarBlock extends Block {
 					}
 				}
 			}
+		}
+	}
+
+	// Animate
+	@Override
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		try {
+			if (worldIn.getTileEntity(pos) instanceof AltarTileEntity) {
+				AltarTileEntity altar = (AltarTileEntity) worldIn.getTileEntity(pos);
+				if (!altar.isCasting()) {
+					return;
+				}
+
+				// Guaranteed to be casting
+
+				int mod = 3;
+				for (int i = 0; i < 2; i++) {
+					worldIn.addParticle(ParticleTypes.ANGRY_VILLAGER, true, pos.getX() + (rand.nextInt(mod)) - (mod / 2), pos.getX() + (rand.nextInt(mod)) - (mod / 2), pos.getX() + (rand.nextInt(mod)) - (mod / 2), rand.nextDouble() - 0.5, rand.nextDouble(), rand.nextDouble() - 0.5);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
