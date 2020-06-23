@@ -117,6 +117,7 @@ public class GlyphParticle extends SpriteTexturedParticle {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private final IAnimatedSprite sprites; // contains a list of textures; choose one using either
 	// newParticle.selectSpriteRandomly(sprites); or
 	// newParticle.selectSpriteWithAge(sprites);

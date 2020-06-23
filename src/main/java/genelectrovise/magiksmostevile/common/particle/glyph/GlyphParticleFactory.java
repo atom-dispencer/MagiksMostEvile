@@ -2,7 +2,6 @@ package genelectrovise.magiksmostevile.common.particle.glyph;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
@@ -49,6 +48,7 @@ public class GlyphParticleFactory implements IParticleFactory<GlyphParticleData>
 	// default constructor.
 	// ParticleManager has two register methods, and if you use the wrong one the
 	// game will enter an infinite loop
+	@SuppressWarnings("unused")
 	private GlyphParticleFactory() {
 		throw new UnsupportedOperationException("Use the FlameParticleFactory(IAnimatedSprite sprite) constructor");
 	}

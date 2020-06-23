@@ -13,13 +13,11 @@ import net.minecraft.world.IWorld;
  * @author GenElectrovise 12 May 2020
  */
 public class StructureDecorator {
-	private MutableBoundingBox bounds;
 	private IWorld world;
 	private StructureDecorationDictionary dictionary;
 	int lowerY, upperY;
 
 	public StructureDecorator(MutableBoundingBox bounds, IWorld worldIn, StructureDecorationDictionary dictionary, int lowerY, int upperY) {
-		this.bounds = bounds;
 		this.world = worldIn;
 		this.dictionary = dictionary;
 		this.lowerY = lowerY;

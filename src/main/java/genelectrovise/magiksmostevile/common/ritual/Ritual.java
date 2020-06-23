@@ -3,14 +3,10 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
-import javax.annotation.Nullable;
-
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainerScreen;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;

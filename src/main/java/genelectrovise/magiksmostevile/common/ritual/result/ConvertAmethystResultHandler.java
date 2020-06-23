@@ -6,7 +6,6 @@ import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.ConvertAmethystRitual;
 import genelectrovise.magiksmostevile.common.ritual.ResultHandler;
-import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import net.minecraft.item.ItemStack;

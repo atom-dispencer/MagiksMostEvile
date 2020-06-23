@@ -1,0 +1,230 @@
+package genelectrovise.magiksmostevile.common.entity.boss.the_kraken;
+
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+
+// Made with Blockbench 3.5.4
+// Exported for Minecraft version 1.15
+// Paste this class into your mod and generate all required imports
+
+public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
+	private final ModelRenderer kraken;
+	private final ModelRenderer hair;
+	private final ModelRenderer body;
+	private final ModelRenderer frill_west;
+	private final ModelRenderer frill_east;
+	private final ModelRenderer head;
+	private final ModelRenderer eye;
+	private final ModelRenderer beak;
+	private final ModelRenderer limbs;
+	private final ModelRenderer tentacle1;
+	private final ModelRenderer tentacle2;
+	private final ModelRenderer arm_west;
+	private final ModelRenderer gripper_west;
+	private final ModelRenderer tentacle5;
+	private final ModelRenderer arm_east;
+	private final ModelRenderer gripper_east;
+	private final ModelRenderer tentacle3;
+	private final ModelRenderer tentacle4;
+	private final ModelRenderer tentacle6;
+
+	public TheKrakenModel() {
+		textureWidth = 16;
+		textureHeight = 16;
+
+		kraken = new ModelRenderer(this);
+		kraken.setRotationPoint(0.0F, 18.0F, 0.0F);
+
+		hair = new ModelRenderer(this);
+		hair.setRotationPoint(0.0F, 0.0F, 35.0F);
+		kraken.addChild(hair);
+		setRotationAngle(hair, -0.1745F, -0.0349F, 0.1745F);
+		hair.setTextureOffset(0, 0).addBox(-5.0F, -5.0F, 1.0F, 10.0F, 10.0F, 5.0F, 0.0F, false);
+		hair.setTextureOffset(0, 0).addBox(-4.0F, -4.0F, 6.0F, 8.0F, 8.0F, 6.0F, 0.0F, false);
+		hair.setTextureOffset(0, 0).addBox(-2.0F, -2.0F, 17.0F, 4.0F, 4.0F, 5.0F, 0.0F, false);
+		hair.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, 22.0F, 2.0F, 2.0F, 7.0F, 0.0F, false);
+		hair.setTextureOffset(0, 0).addBox(-2.0F, -2.0F, 12.0F, 4.0F, 4.0F, 5.0F, 0.0F, false);
+
+		body = new ModelRenderer(this);
+		body.setRotationPoint(0.0F, 6.0F, 0.0F);
+		kraken.addChild(body);
+		body.setTextureOffset(0, 0).addBox(-5.0F, 0.0F, 1.0F, 10.0F, 1.0F, 34.0F, 0.0F, false);
+		body.setTextureOffset(0, 0).addBox(-6.0F, -12.0F, 0.0F, 12.0F, 12.0F, 36.0F, 0.0F, false);
+		body.setTextureOffset(0, 0).addBox(6.0F, -11.0F, 1.0F, 1.0F, 10.0F, 34.0F, 0.0F, false);
+		body.setTextureOffset(0, 0).addBox(-7.0F, -11.0F, 1.0F, 1.0F, 10.0F, 34.0F, 0.0F, false);
+		body.setTextureOffset(0, 0).addBox(-5.0F, -13.0F, 1.0F, 10.0F, 1.0F, 34.0F, 0.0F, false);
+
+		frill_west = new ModelRenderer(this);
+		frill_west.setRotationPoint(7.0F, -6.0F, 24.0F);
+		body.addChild(frill_west);
+		setRotationAngle(frill_west, 0.0F, 0.0F, 0.1745F);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 2.0F, 9.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 3.0F, 9.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 4.0F, 8.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 1.0F, 8.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 0.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 5.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 6.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -1.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -3.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -4.0F, 6.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -5.0F, 5.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -6.0F, 5.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -7.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -8.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 7.0F, 6.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 8.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, 9.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_west.setTextureOffset(0, 0).addBox(0.0F, 0.0F, -2.0F, 8.0F, 1.0F, 1.0F, 0.0F, false);
+
+		frill_east = new ModelRenderer(this);
+		frill_east.setRotationPoint(-7.0F, -6.0F, 24.0F);
+		body.addChild(frill_east);
+		setRotationAngle(frill_east, 0.0F, 0.0F, -0.1745F);
+		frill_east.setTextureOffset(0, 0).addBox(-9.0F, 0.0F, 2.0F, 9.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-9.0F, 0.0F, 3.0F, 9.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-8.0F, 0.0F, 4.0F, 8.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-8.0F, 0.0F, 1.0F, 8.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-7.0F, 0.0F, 0.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-7.0F, 0.0F, 5.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-7.0F, 0.0F, 6.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-7.0F, 0.0F, -1.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-7.0F, 0.0F, -3.0F, 7.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-6.0F, 0.0F, -4.0F, 6.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-5.0F, 0.0F, -5.0F, 5.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-5.0F, 0.0F, -6.0F, 5.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-4.0F, 0.0F, -7.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-2.0F, 0.0F, -8.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-6.0F, 0.0F, 7.0F, 6.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-4.0F, 0.0F, 8.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, 9.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+		frill_east.setTextureOffset(0, 0).addBox(-8.0F, 0.0F, -2.0F, 8.0F, 1.0F, 1.0F, 0.0F, false);
+
+		head = new ModelRenderer(this);
+		head.setRotationPoint(0.0F, 0.0F, 1.0F);
+		kraken.addChild(head);
+		setRotationAngle(head, -0.0873F, 0.0873F, 0.1745F);
+		head.setTextureOffset(0, 0).addBox(-5.0F, -4.0F, -17.0F, 10.0F, 10.0F, 16.0F, 0.0F, false);
+
+		eye = new ModelRenderer(this);
+		eye.setRotationPoint(0.0F, 0.0F, 0.0F);
+		head.addChild(eye);
+		eye.setTextureOffset(0, 0).addBox(2.0F, -5.0F, -10.0F, 1.0F, 1.0F, 4.0F, 0.0F, false);
+		eye.setTextureOffset(0, 0).addBox(-2.0F, -5.0F, -12.0F, 4.0F, 1.0F, 8.0F, 0.0F, false);
+		eye.setTextureOffset(0, 0).addBox(-3.0F, -5.0F, -10.0F, 1.0F, 1.0F, 4.0F, 0.0F, false);
+
+		beak = new ModelRenderer(this);
+		beak.setRotationPoint(0.0F, 1.0F, -16.0F);
+		head.addChild(beak);
+		beak.setTextureOffset(0, 0).addBox(-4.0F, -4.0F, -2.0F, 8.0F, 8.0F, 1.0F, 0.0F, false);
+		beak.setTextureOffset(0, 0).addBox(1.0F, -2.0F, -3.0F, 2.0F, 5.0F, 1.0F, 0.0F, false);
+		beak.setTextureOffset(0, 0).addBox(-3.0F, -2.0F, -3.0F, 2.0F, 5.0F, 1.0F, 0.0F, false);
+
+		limbs = new ModelRenderer(this);
+		limbs.setRotationPoint(0.0F, 0.0F, 0.0F);
+		head.addChild(limbs);
+
+		tentacle1 = new ModelRenderer(this);
+		tentacle1.setRotationPoint(0.0F, -4.0F, -16.0F);
+		limbs.addChild(tentacle1);
+		setRotationAngle(tentacle1, -0.1745F, 0.0F, 0.0F);
+		tentacle1.setTextureOffset(0, 0).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 3.0F, -28.0F, 0.0F, false);
+		tentacle1.setTextureOffset(0, 0).addBox(-2.0F, -1.0F, -28.0F, 4.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle1.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle1.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+
+		tentacle2 = new ModelRenderer(this);
+		tentacle2.setRotationPoint(5.0F, -1.0F, -16.0F);
+		limbs.addChild(tentacle2);
+		setRotationAngle(tentacle2, -0.0873F, 0.0873F, 1.5708F);
+		tentacle2.setTextureOffset(0, 0).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 3.0F, -28.0F, 0.0F, false);
+		tentacle2.setTextureOffset(0, 0).addBox(-2.0F, -1.0F, -28.0F, 4.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle2.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle2.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+
+		arm_west = new ModelRenderer(this);
+		arm_west.setRotationPoint(5.0F, 3.0F, -16.0F);
+		limbs.addChild(arm_west);
+		setRotationAngle(arm_west, -0.0873F, 0.0F, 1.5708F);
+		arm_west.setTextureOffset(0, 0).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 3.0F, -28.0F, 0.0F, false);
+		arm_west.setTextureOffset(0, 0).addBox(-2.0F, -1.0F, -28.0F, 4.0F, 2.0F, -28.0F, 0.0F, false);
+		arm_west.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		arm_west.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+
+		gripper_west = new ModelRenderer(this);
+		gripper_west.setRotationPoint(0.0F, 0.0F, 0.0F);
+		arm_west.addChild(gripper_west);
+		gripper_west.setTextureOffset(0, 0).addBox(-3.0F, -1.0F, -94.0F, 6.0F, 2.0F, -10.0F, 0.0F, false);
+		gripper_west.setTextureOffset(0, 0).addBox(-2.0F, 0.0F, -107.0F, 4.0F, 2.0F, 14.0F, 0.0F, false);
+
+		tentacle5 = new ModelRenderer(this);
+		tentacle5.setRotationPoint(-5.0F, -1.0F, -16.0F);
+		limbs.addChild(tentacle5);
+		setRotationAngle(tentacle5, -0.0873F, -0.0873F, -1.5708F);
+		tentacle5.setTextureOffset(0, 0).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 3.0F, -28.0F, 0.0F, false);
+		tentacle5.setTextureOffset(0, 0).addBox(-2.0F, -1.0F, -28.0F, 4.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle5.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle5.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+
+		arm_east = new ModelRenderer(this);
+		arm_east.setRotationPoint(-5.0F, 3.0F, -16.0F);
+		limbs.addChild(arm_east);
+		setRotationAngle(arm_east, -0.0873F, 0.0F, -1.5708F);
+		arm_east.setTextureOffset(0, 0).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 3.0F, -28.0F, 0.0F, false);
+		arm_east.setTextureOffset(0, 0).addBox(-2.0F, -1.0F, -28.0F, 4.0F, 2.0F, -28.0F, 0.0F, false);
+		arm_east.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		arm_east.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+
+		gripper_east = new ModelRenderer(this);
+		gripper_east.setRotationPoint(10.0F, 0.0F, 0.0F);
+		arm_east.addChild(gripper_east);
+		gripper_east.setTextureOffset(0, 0).addBox(-13.0F, -1.0F, -94.0F, 6.0F, 2.0F, -10.0F, 0.0F, false);
+		gripper_east.setTextureOffset(0, 0).addBox(-12.0F, 0.0F, -107.0F, 4.0F, 2.0F, 14.0F, 0.0F, false);
+
+		tentacle3 = new ModelRenderer(this);
+		tentacle3.setRotationPoint(3.0F, 6.0F, -16.0F);
+		limbs.addChild(tentacle3);
+		setRotationAngle(tentacle3, -0.0873F, 0.0873F, -3.1416F);
+		tentacle3.setTextureOffset(0, 0).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 3.0F, -28.0F, 0.0F, false);
+		tentacle3.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -28.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle3.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle3.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+
+		tentacle4 = new ModelRenderer(this);
+		tentacle4.setRotationPoint(-3.0F, 6.0F, -16.0F);
+		limbs.addChild(tentacle4);
+		setRotationAngle(tentacle4, -0.0873F, -0.0873F, -3.1416F);
+		tentacle4.setTextureOffset(0, 0).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 3.0F, -28.0F, 0.0F, false);
+		tentacle4.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -28.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle4.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle4.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+
+		tentacle6 = new ModelRenderer(this);
+		tentacle6.setRotationPoint(0.0F, 6.0F, -16.0F);
+		limbs.addChild(tentacle6);
+		setRotationAngle(tentacle6, -0.1745F, 0.0F, -3.1416F);
+		tentacle6.setTextureOffset(0, 0).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 3.0F, -28.0F, 0.0F, false);
+		tentacle6.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -28.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle6.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -56.0F, 2.0F, 2.0F, -28.0F, 0.0F, false);
+		tentacle6.setTextureOffset(0, 0).addBox(-1.0F, 0.0F, -84.0F, 2.0F, 1.0F, -10.0F, 0.0F, false);
+	}
+
+	@Override
+	public void setRotationAngles(TheKrakenEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		// previously the render function, render code was moved to a method below
+	}
+
+	@Override
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		kraken.render(matrixStack, buffer, packedLight, packedOverlay);
+	}
+
+	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+		modelRenderer.rotateAngleX = x;
+		modelRenderer.rotateAngleY = y;
+		modelRenderer.rotateAngleZ = z;
+	}
+}

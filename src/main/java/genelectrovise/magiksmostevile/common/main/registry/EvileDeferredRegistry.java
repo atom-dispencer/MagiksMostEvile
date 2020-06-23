@@ -157,7 +157,7 @@ public class EvileDeferredRegistry {
 
 	public static final RegistryObject<EntityType<EggCaponeEntity>> EGG_CAPONE = ENTITIES.register("egg_capone", () -> EntityType.Builder.create(EggCaponeEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("egg_capone"));
 
-	public static final RegistryObject<EntityType<TheKrakenEntity>> THE_KRAKEN = ENTITIES.register("the_kraken", () -> EntityType.Builder.create(TheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("the_kraken"));
+	public static final RegistryObject<EntityType<TheKrakenEntity>> THE_KRAKEN = ENTITIES.register("the_kraken", () -> EntityType.Builder.create(TheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(1f, 2f).build("the_kraken"));
 
 	public static final RegistryObject<EntityType<TinderAndCinderEntity>> TINDER_AND_CINDER = ENTITIES.register("tinder_and_cinder", () -> EntityType.Builder.create(TinderAndCinderEntity::new, EntityClassification.MONSTER).immuneToFire().setTrackingRange(64).size(0.5f, 0.5f).build("tinder_and_cinder"));
 
