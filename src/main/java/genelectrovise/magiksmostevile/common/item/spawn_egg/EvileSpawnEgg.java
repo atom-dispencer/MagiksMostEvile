@@ -1,6 +1,3 @@
-/**
- * 
- */
 package genelectrovise.magiksmostevile.common.item.spawn_egg;
 
 import java.util.Objects;
@@ -9,7 +6,11 @@ import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.stats.Stats;
+import net.minecraft.tileentity.DispenserTileEntity;
 import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
@@ -35,13 +37,40 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * @see SpawnEggItem
+ * @see DispenserTileEntity
+ * @see DispenserBlock
  * @author GenElectrovise 4 Jun 2020
  */
 @EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public abstract class EvileSpawnEgg extends Item {
 
+	/**
+	 * Should mean that entities spawn when the egg is fired from a dispenser.
+	 */
+	public static final IDispenseItemBehavior DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
+
+		/**
+		 * Dispense the specified stack, play the dispense sound and spawn particles.
+		 */
+		@Override
+		public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+			try {
+				Direction direction = source.getBlockState().get(DispenserBlock.FACING);
+				EntityType<?> entitytype = ((EvileSpawnEgg) stack.getItem()).getEntityType();
+				entitytype.spawn(source.getWorld(), stack, (PlayerEntity) null, source.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+				stack.shrink(1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return stack;
+		}
+
+	};
+
 	public EvileSpawnEgg(Item.Properties properties) {
 		super(properties);
+
+		DispenserBlock.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
 	}
 
 	/**

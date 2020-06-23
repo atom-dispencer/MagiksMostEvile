@@ -2,7 +2,6 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 
 import java.util.Random;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
@@ -139,7 +138,7 @@ public class AltarBlock extends Block {
 
 				int mod = 3;
 				for (int i = 0; i < 2; i++) {
-					worldIn.addParticle(ParticleTypes.ANGRY_VILLAGER, true, pos.getX() + (rand.nextInt(mod)) - (mod / 2), pos.getX() + (rand.nextInt(mod)) - (mod / 2), pos.getX() + (rand.nextInt(mod)) - (mod / 2), rand.nextDouble() - 0.5, rand.nextDouble(), rand.nextDouble() - 0.5);
+					worldIn.addParticle(ParticleTypes.ANGRY_VILLAGER, true, pos.getX() + (rand.nextInt(mod)) - (mod / 2), pos.getY() + (rand.nextInt(mod)) - (mod / 2) + 1, pos.getZ() + (rand.nextInt(mod)) - (mod / 2), rand.nextDouble() - 0.5, rand.nextDouble(), rand.nextDouble() - 0.5);
 				}
 			}
 		} catch (Exception e) {
@@ -151,15 +150,11 @@ public class AltarBlock extends Block {
 
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
 		if (!worldIn.isRemote) {
-			MagiksMostEvile.LOGGER.debug("Activated -- world not remote (client)");
-
 			final ICustomContainer tileEntity = (ICustomContainer) worldIn.getTileEntity(pos);
 			tileEntity.openGUI((ServerPlayerEntity) player);
-
-			return ActionResultType.SUCCESS;
 		}
 
-		return ActionResultType.FAIL;
+		return ActionResultType.SUCCESS;
 	}
 
 }
