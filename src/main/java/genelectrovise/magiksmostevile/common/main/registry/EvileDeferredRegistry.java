@@ -1,9 +1,8 @@
 package genelectrovise.magiksmostevile.common.main.registry;
 
-import genelectrovise.magiksmostevile.common.entity.boss.cinder.CinderEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenEntity;
-import genelectrovise.magiksmostevile.common.entity.boss.tinder.TinderEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.AmethystArmorBase;
@@ -160,9 +159,7 @@ public class EvileDeferredRegistry {
 
 	public static final RegistryObject<EntityType<TheKrakenEntity>> THE_KRAKEN = ENTITIES.register("the_kraken", () -> EntityType.Builder.create(TheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("the_kraken"));
 
-	public static final RegistryObject<EntityType<TinderEntity>> TINDER = ENTITIES.register("tinder", () -> EntityType.Builder.create(TinderEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("tinder"));
-
-	public static final RegistryObject<EntityType<CinderEntity>> CINDER = ENTITIES.register("cinder", () -> EntityType.Builder.create(CinderEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("cinder"));
+	public static final RegistryObject<EntityType<TinderAndCinderEntity>> TINDER_AND_CINDER = ENTITIES.register("tinder_and_cinder", () -> EntityType.Builder.create(TinderAndCinderEntity::new, EntityClassification.MONSTER).immuneToFire().setTrackingRange(64).size(0.5f, 0.5f).build("tinder_and_cinder"));
 
 //=========GENERATION (structures should be done via registry events) =================================================================
 
