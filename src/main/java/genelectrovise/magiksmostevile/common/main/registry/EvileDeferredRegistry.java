@@ -1,5 +1,10 @@
 package genelectrovise.magiksmostevile.common.main.registry;
 
+import genelectrovise.magiksmostevile.common.entity.boss.cinder.CinderEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.tinder.TinderEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.AmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.OverPoweredAmethystArmorBase;
@@ -93,7 +98,9 @@ public class EvileDeferredRegistry {
 	public static final RegistryObject<Item> LESSER_POWER_STONE = ITEMS.register("lesser_power_stone", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> GREATER_POWER_STONE = ITEMS.register("greater_power_stone", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> GOING_TO_THE_BALL = ITEMS.register("going_to_the_ball", () -> new Item(new Item.Properties()));
-	//public static final RegistryObject<Item> INTRO_BOOK = ITEMS.register("intro_book", () -> new WrittenBookItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+	// public static final RegistryObject<Item> INTRO_BOOK =
+	// ITEMS.register("intro_book", () -> new WrittenBookItem(new
+	// Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 	public static final RegistryObject<Item> VAMPIRE_BAT_TOOTH = ITEMS.register("vampire_bat_tooth", () -> new WrittenBookItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
 //=========TOOLS=======================================================================================================================
@@ -146,6 +153,16 @@ public class EvileDeferredRegistry {
 //=========ENTITIES====================================================================================================================
 	public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT = ENTITIES.register("vampire_bat", () -> EntityType.Builder.create(VampireBatEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("vampire_bat"));
 	public static final RegistryObject<Item> VAMPIRE_BAT_EGG = ITEMS.register("vampire_bat_egg", () -> new VampireBatSpawnEgg(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(64)));
+
+	public static final RegistryObject<EntityType<TomTheTrollEntity>> TOM_THE_TROLL = ENTITIES.register("tom_the_troll", () -> EntityType.Builder.create(TomTheTrollEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("tom_the_troll"));
+
+	public static final RegistryObject<EntityType<EggCaponeEntity>> EGG_CAPONE = ENTITIES.register("egg_capone", () -> EntityType.Builder.create(EggCaponeEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("egg_capone"));
+
+	public static final RegistryObject<EntityType<TheKrakenEntity>> THE_KRAKEN = ENTITIES.register("the_kraken", () -> EntityType.Builder.create(TheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("the_kraken"));
+
+	public static final RegistryObject<EntityType<TinderEntity>> TINDER = ENTITIES.register("tinder", () -> EntityType.Builder.create(TinderEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("tinder"));
+
+	public static final RegistryObject<EntityType<CinderEntity>> CINDER = ENTITIES.register("cinder", () -> EntityType.Builder.create(CinderEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f).build("cinder"));
 
 //=========GENERATION (structures should be done via registry events) =================================================================
 
