@@ -1,17 +1,9 @@
-package genelectrovise.magiksmostevile.common.entity.boss.the_kraken;
+// Made with Blockbench 3.5.4
+// Exported for Minecraft version 1.15
+// Paste this class into your mod and generate all required imports
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.math.MathHelper;
-
-//Made with Blockbench 3.5.4
-//Exported for Minecraft version 1.15
-//Paste this class into your mod and generate all required imports
-
-public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
+public class custom_model extends EntityModel<Entity> {
 	private final ModelRenderer kraken;
 	private final ModelRenderer hair;
 	private final ModelRenderer base;
@@ -71,17 +63,19 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 	private final ModelRenderer t6_2;
 	private final ModelRenderer t6_3;
 
-	public TheKrakenModel() {
+	public custom_model() {
 		textureWidth = 512;
 		textureHeight = 512;
 
 		kraken = new ModelRenderer(this);
 		kraken.setRotationPoint(0.0F, 18.0F, 0.0F);
+		
 
 		hair = new ModelRenderer(this);
 		hair.setRotationPoint(0.0F, 0.0F, 35.0F);
 		kraken.addChild(hair);
 		setRotationAngle(hair, -0.1745F, -0.0349F, 0.1745F);
+		
 
 		base = new ModelRenderer(this);
 		base.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -194,11 +188,13 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		limbs = new ModelRenderer(this);
 		limbs.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.addChild(limbs);
+		
 
 		tentacle1 = new ModelRenderer(this);
 		tentacle1.setRotationPoint(0.0F, -4.0F, -16.0F);
 		limbs.addChild(tentacle1);
 		setRotationAngle(tentacle1, -0.1745F, 0.0F, 0.0F);
+		
 
 		t1_4 = new ModelRenderer(this);
 		t1_4.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -224,6 +220,7 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		tentacle2.setRotationPoint(5.0F, -1.0F, -16.0F);
 		limbs.addChild(tentacle2);
 		setRotationAngle(tentacle2, -0.0873F, 0.0873F, 1.5708F);
+		
 
 		t2_4 = new ModelRenderer(this);
 		t2_4.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -249,6 +246,7 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		arm_west.setRotationPoint(5.0F, 3.0F, -16.0F);
 		limbs.addChild(arm_west);
 		setRotationAngle(arm_west, -0.0873F, 0.0F, 1.5708F);
+		
 
 		gripper_west = new ModelRenderer(this);
 		gripper_west.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -280,6 +278,7 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		tentacle5.setRotationPoint(-5.0F, -1.0F, -16.0F);
 		limbs.addChild(tentacle5);
 		setRotationAngle(tentacle5, -0.0873F, -0.0873F, -1.5708F);
+		
 
 		t5_4 = new ModelRenderer(this);
 		t5_4.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -305,6 +304,7 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		arm_east.setRotationPoint(-5.0F, 3.0F, -16.0F);
 		limbs.addChild(arm_east);
 		setRotationAngle(arm_east, -0.0873F, 0.0F, -1.5708F);
+		
 
 		gripper_east = new ModelRenderer(this);
 		gripper_east.setRotationPoint(10.0F, 0.0F, 0.0F);
@@ -336,6 +336,7 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		tentacle3.setRotationPoint(3.0F, 6.0F, -16.0F);
 		limbs.addChild(tentacle3);
 		setRotationAngle(tentacle3, -0.0873F, 0.0873F, -3.1416F);
+		
 
 		t3_1 = new ModelRenderer(this);
 		t3_1.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -361,6 +362,7 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		tentacle4.setRotationPoint(-3.0F, 6.0F, -16.0F);
 		limbs.addChild(tentacle4);
 		setRotationAngle(tentacle4, -0.0873F, -0.0873F, -3.1416F);
+		
 
 		t4_4 = new ModelRenderer(this);
 		t4_4.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -386,6 +388,7 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 		tentacle6.setRotationPoint(0.0F, 6.0F, -16.0F);
 		limbs.addChild(tentacle6);
 		setRotationAngle(tentacle6, -0.1745F, 0.0F, -3.1416F);
+		
 
 		t6_4 = new ModelRenderer(this);
 		t6_4.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -409,62 +412,12 @@ public class TheKrakenModel extends EntityModel<TheKrakenEntity> {
 	}
 
 	@Override
-	public void setRotationAngles(TheKrakenEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		tentacle1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t1_1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t1_2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t1_3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t1_4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		
-		tentacle2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t2_1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t2_2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t2_3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t2_4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		
-		tentacle3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t3_1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t3_2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t3_3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t3_4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		
-		tentacle4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t4_1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t4_2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t4_3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t4_4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		
-		tentacle5.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t5_1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t5_2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t5_3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t5_4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		
-		tentacle6.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t6_1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t6_2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t6_3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		t6_4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		
-		arm_east.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		ae1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		ae2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		ae3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		ae4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		
-		arm_west.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		aw_1.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45 - 0.01f;
-		aw_2.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45 - 0.02f;
-		aw_3.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45 - 0.03f;
-		aw_4.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45 - 0.04f;
-		
-		beak_east.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-		beak_west.rotateAngleX = ((float) Math.PI / 4F) + MathHelper.cos(ageInTicks * 0.1F) * 0.15F - 45;
-
+	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		//previously the render function, render code was moved to a method below
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		kraken.render(matrixStack, buffer, packedLight, packedOverlay);
 	}
 
