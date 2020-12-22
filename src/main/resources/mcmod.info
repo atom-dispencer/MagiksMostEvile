@@ -1,0 +1,16 @@
+[
+{
+  "modid": "magiksmostevile",
+  "name": "Magiks Most Evile",
+  "description": "We specialise in Evile Magiks",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Adam Spencer"],
+  "credits": "The Forge and FML guys, for making this example, which I couldn't be bothered to change :0",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

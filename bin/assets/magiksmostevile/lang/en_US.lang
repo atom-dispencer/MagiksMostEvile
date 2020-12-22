@@ -1,0 +1,29 @@
+tile.amethystOre.name=Amethyst Ore
+tile.solidAmethyst.name=Amethyst Block
+tile.alter.name=Altar
+
+entity.Spongie.name=Spongie
+
+item.amethystSword.name=Amethyst Sword
+item.amethystPickaxe.name=Amethyst Pickaxe
+item.amethystAxe.name=Amethyst Axe
+item.amethystHoe.name=Amethyst Hoe
+item.amethystShovel.name=Amethyst Shovel
+item.lesserPowerStone.name=Lesser Power Stone
+item.greaterPowerStone.name=Greater Power Stone
+item.amethyst.name=Amethyst
+item.amethystHelmet.name=Amethyst Helmet
+item.amethystChestplate.name=Amethyst Chestplate
+item.amethystLeggings.name=Amethyst Leggings
+item.amethystBoots.name=Amethyst Boots
+item.poweredAmethyst.name=Powered Amethyst
+item.empStaff.name=EMP Staff
+item.emp.name=EMP
+item.doomStaff.name=Staff of Doom
+item.doom.name=Doom, Glorious Doom!
+item.nullItem.name=Null
+
+
+
+key.wisdom=Hear Words of Wisdom
+key.categories.magiksmostevile=Evile Keybinds
