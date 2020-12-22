@@ -1,0 +1,45 @@
+{
+    "display": {
+        "icon": {
+            "item": "magiksmostevile:amethyst",
+            "nbt":"NBT_DATA"
+        },
+        "title": "EXAMPLE",
+        "frame": "task / challenge / goal",
+        "background": "magiksmostevile:textures/advancements/magik_advancement.png ONLY USED FOR ROOTS",
+        "description": "Begin your journey into Evile Magiks",
+        "show_toast":BOOLEAN,
+        "announce_to_chat":BOOLEAN,
+        "hidden":BOOLEAN
+    },
+    "parent":"NOT NECESSARY FOR ROOTS. THE PARENT ADVANCEMENT.",
+    "criteria": {
+        "gain_amethyst": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "magiksmostevile:amethyst"
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "magiksmostevile:lesser_power_stone",
+            "magiksmostevile:altar",
+            "magiksmostevile:powered_amethyst"
+        ],
+        "experience": 500,
+        "loot": [
+            "magiksmostevile:magik_advancement_loot"
+        ],
+        "function":"A function to run"
+    }
+}
+
+
+Only need a valid "display"
+
+https://minecraft.gamepedia.com/Advancements

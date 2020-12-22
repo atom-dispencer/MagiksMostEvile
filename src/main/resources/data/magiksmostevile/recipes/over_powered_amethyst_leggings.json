@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "AAA",
+        "A A",
+        "A A"
+    ],
+    "key": {
+        "A": {
+            "item": "magiksmostevile:over_powered_amethyst"
+        }
+    },
+    "result": {
+        "item": "magiksmostevile:over_powered_amethyst_leggings"
+    }
+}
