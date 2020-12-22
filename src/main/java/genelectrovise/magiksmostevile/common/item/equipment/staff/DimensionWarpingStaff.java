@@ -7,6 +7,7 @@ import java.util.List;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.block.EndPortalBlock;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.client.world.DimensionRenderInfo.Overworld;
 import net.minecraft.command.impl.GiveCommand;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EnderPearlEntity;
@@ -24,6 +25,7 @@ import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.server.command.CommandSetDimension;
 
 /**
@@ -90,7 +92,8 @@ public class DimensionWarpingStaff extends Item {
         else {
           worldKey = World.OVERWORLD;
         }
-
+        
+        changeDimension(playerIn, worldIn, worldKey);
 
       } catch (Exception e) {
         e.printStackTrace();
