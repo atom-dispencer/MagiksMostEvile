@@ -1,3 +1,7 @@
+Spellbook to explain rituals
+
+
+
 Advancements
 -Evile Magiks
 -Tomes of Knowledge
