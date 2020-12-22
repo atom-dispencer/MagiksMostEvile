@@ -21,8 +21,8 @@ import net.minecraftforge.registries.RegistryBuilder;
 public class MagiksMostEvile {
   public static final EvileLog LOGGER = new EvileLog(LogManager.getLogger());
   public static final String MODID = "magiksmostevile";
-  public static final String VERSION = "1.0";
-  public static final String NAME = "MagiksMostEvile";
+  public static final String VERSION = "alpha-1.0";
+  public static final String NAME = "Magiks Most Evile";
   public static final String ACCEPTED_VERSIONS = "1.15.2";
 
   public static IEventBus EVENT_BUS;
