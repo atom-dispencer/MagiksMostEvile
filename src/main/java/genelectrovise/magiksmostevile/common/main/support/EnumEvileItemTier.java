@@ -1,22 +1,34 @@
 package genelectrovise.magiksmostevile.common.main.support;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
+import javax.annotation.Nullable;
+import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.tags.TagCollection;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ITag.INamedTag;
+import net.minecraft.tags.ITagCollection;
+import net.minecraft.tags.ITagCollectionSupplier;
+import net.minecraft.tags.TagRegistry;
+import net.minecraft.tags.TagRegistryManager;
 import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags.IOptionalNamedTag;;
 
 public enum EnumEvileItemTier implements IItemTier {
+
+  // Tags to allow repairing of items in an anvil
+  // Amethyst
   AMETHYST(2, 512, 9.0F, 1.5F, 50, () -> {
-    return Ingredient.fromTag(EvileItemTags.AMETHYST);
-  }), POWERED_AMETHYST(3, 512, 15.0F, 3.0F, 200, () -> {
-    return Ingredient.fromTag(EvileItemTags.AMETHYST);
+    return Ingredient.fromItems(EvileDeferredRegistry.AMETHYST.get());
+  }),
+  // Powered amethyst
+  POWERED_AMETHYST(3, 512, 15.0F, 3.0F, 200, () -> {
+    return Ingredient.fromItems(EvileDeferredRegistry.POWERED_AMETHYST.get());
   });
 
   private final int harvestLevel;
@@ -63,67 +75,52 @@ public enum EnumEvileItemTier implements IItemTier {
   // +++++++++++++++++++++++++++++++++++++++_EVILE_ITEM_TAGS_++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   public static class EvileItemTags {
-    private static TagCollection<Item> evile_itemtag_collection =
-        new TagCollection<>((p_203643_0_) -> {
-          return Optional.empty();
-        }, "", false, "");
-    private static int generation;
-    public static final Tag<Item> AMETHYST = makeWrapperTag("amethyst");
-    public static final Tag<Item> POWERED_AMETHYST = makeWrapperTag("powered_amethyst");
-    public static final Tag<Item> OVER_POWERED_AMETHYST = makeWrapperTag("over_powered_amethyst");
 
+    public static final INamedTag<Item> AMETHYST = makeWrapperTag("amethyst");
 
-    public static void setCollection(TagCollection<Item> collectionIn) {
-      evile_itemtag_collection = collectionIn;
-      ++generation;
+    /**
+     * Contains and creates new tags
+     */
+    private static TagRegistry<Item> itemTags =
+        TagRegistryManager.create(new ResourceLocation(MagiksMostEvile.MODID, "itemTags"),
+            ITagCollectionSupplier::getItemTags);
+
+    /**
+     * @return A simple {@link INamedTag} of the given id.
+     */
+    public static INamedTag<Item> makeWrapperTag(String id) {
+      return itemTags.createTag(id);
     }
 
-    public static TagCollection<Item> getCollection() {
-      return evile_itemtag_collection;
+    /**
+     * @see #createOptional(ResourceLocation, Set), where defaults are null.
+     */
+    public static IOptionalNamedTag<Item> createOptional(ResourceLocation name) {
+      return createOptional(name, null);
     }
 
-    public static int getGeneration() {
-      return generation;
+    /**
+     * @param name The name of the tag to create
+     * @param defaults A {@link Set} of {@link Supplier}s to give the default values of the tag
+     * @return The completed {@link IOptionalNamedTag}
+     */
+    public static IOptionalNamedTag<Item> createOptional(ResourceLocation name,
+        @Nullable Set<Supplier<Item>> defaults) {
+      return itemTags.createOptional(name, defaults);
     }
 
-    private static Tag<Item> makeWrapperTag(String p_199901_0_) {
-      return new ItemTags.Wrapper(new ResourceLocation(p_199901_0_));
+    /**
+     * @return An {@link ITagCollection} of the the registered {@link ITag}s.
+     */
+    public static ITagCollection<Item> getCollection() {
+      return itemTags.getCollection();
     }
 
-    public static class Wrapper extends Tag<Item> {
-      private int lastKnownGeneration = -1;
-      private Tag<Item> cachedTag;
-
-      public Wrapper(ResourceLocation resourceLocationIn) {
-        super(resourceLocationIn);
-      }
-
-      public boolean contains(Item itemIn) {
-        if (this.lastKnownGeneration != EvileItemTags.generation) {
-          this.cachedTag = EvileItemTags.evile_itemtag_collection.getOrCreate(this.getId());
-          this.lastKnownGeneration = EvileItemTags.generation;
-        }
-
-        return this.cachedTag.contains(itemIn);
-      }
-
-      public Collection<Item> getAllElements() {
-        if (this.lastKnownGeneration != EvileItemTags.generation) {
-          this.cachedTag = EvileItemTags.evile_itemtag_collection.getOrCreate(this.getId());
-          this.lastKnownGeneration = EvileItemTags.generation;
-        }
-
-        return this.cachedTag.getAllElements();
-      }
-
-      public Collection<Tag.ITagEntry<Item>> getEntries() {
-        if (this.lastKnownGeneration != EvileItemTags.generation) {
-          this.cachedTag = EvileItemTags.evile_itemtag_collection.getOrCreate(this.getId());
-          this.lastKnownGeneration = EvileItemTags.generation;
-        }
-
-        return this.cachedTag.getEntries();
-      }
+    /**
+     * @return A list of each registered {@link INamedTag}
+     */
+    public static List<? extends INamedTag<Item>> getAllTags() {
+      return itemTags.getTags();
     }
   }
 
