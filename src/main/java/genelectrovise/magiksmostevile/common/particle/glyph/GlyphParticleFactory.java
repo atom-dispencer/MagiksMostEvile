@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.world.World;
+import net.minecraft.client.world.ClientWorld;
 
 /**
  * Created by TGG on 25/03/2020.
@@ -17,7 +17,7 @@ public class GlyphParticleFactory implements IParticleFactory<GlyphParticleData>
 
   @Nullable
   @Override
-  public Particle makeParticle(GlyphParticleData glyphParticleData, World world, double xPos,
+  public Particle makeParticle(GlyphParticleData glyphParticleData, ClientWorld world, double xPos,
       double yPos, double zPos, double xVelocity, double yVelocity, double zVelocity) {
 
     try {

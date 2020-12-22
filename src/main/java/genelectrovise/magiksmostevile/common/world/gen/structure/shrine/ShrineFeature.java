@@ -34,7 +34,7 @@ public class ShrineFeature extends Feature<IFeatureConfig> {
 
     if (!worldIn.isRemote()) {
       ServerWorld serverWorld =
-          (ServerWorld) worldIn.getWorld().getServer().getWorld(worldIn.getDimension().getType());
+          (ServerWorld) worldIn.getWorld().getServer().getWorld(worldIn.getDimension().getThis());
       TemplateManager manager = serverWorld.getStructureTemplateManager();
 
       Template template;

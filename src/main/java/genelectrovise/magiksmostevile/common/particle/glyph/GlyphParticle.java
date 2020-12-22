@@ -9,7 +9,7 @@ import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.PortalParticle;
 import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.world.World;
+import net.minecraft.client.world.ClientWorld;
 
 /**
  * @author GenElectrovise 15 Jun 2020
@@ -21,7 +21,7 @@ public class GlyphParticle extends SpriteTexturedParticle {
    * the given color, and the given diameter. We also supply sprites so that you can change the
    * sprite texture in the tick() method (although not needed for this example)
    */
-  public GlyphParticle(World world, double x, double y, double z, double velocityX,
+  public GlyphParticle(ClientWorld world, double x, double y, double z, double velocityX,
       double velocityY, double velocityZ, Color tint, double diameter, IAnimatedSprite sprites) {
     super(world, x, y, z, velocityX, velocityY, velocityZ);
     this.sprites = sprites;
