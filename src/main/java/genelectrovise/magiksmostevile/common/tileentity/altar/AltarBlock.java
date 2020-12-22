@@ -8,6 +8,7 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FireBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +17,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.resources.FallbackResourceManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -28,6 +28,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -51,11 +52,6 @@ public class AltarBlock extends Block {
   @Override
   public BlockRenderType getRenderType(BlockState state) {
     return BlockRenderType.MODEL;
-  }
-
-  @Override
-  public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-    return false;
   }
 
   @Override
@@ -89,11 +85,6 @@ public class AltarBlock extends Block {
   }
 
   @Override
-  public boolean hasTileEntity() {
-    return true;
-  }
-
-  @Override
   public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
     if (entityIn instanceof LivingEntity) {
       EffectInstance levitation = new EffectInstance(Effects.LEVITATION, 30);
@@ -103,30 +94,43 @@ public class AltarBlock extends Block {
   }
 
   @Override
-  public void dropXpOnBlockBreak(World worldIn, BlockPos pos, int amount) {
-    super.dropXpOnBlockBreak(worldIn, pos, 5);
+  public int getExpDrop(BlockState state, IWorldReader world, BlockPos pos, int fortune,
+      int silktouch) {
+    return silktouch == 0 ? 5 * fortune : 0;
   }
 
   @Override
   public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
 
+    // On the server
     if (!worldIn.isRemote()) {
+
+      // 15 times
       for (int i = 0; i < 15; i++) {
+
+        // Definitely on the server
+        if (!(worldIn instanceof ServerWorld)) {
+          return;
+        }
+        ServerWorld serverWorld = (ServerWorld) worldIn;
+
+        // New lightning bolt
         LightningBoltEntity lightning =
-            new LightningBoltEntity(worldIn.getWorld(), pos.getX() + RANDOM.nextInt(21) - 5,
-                pos.getY() + RANDOM.nextInt(3) - 1, pos.getZ() + RANDOM.nextInt(21) - 5, true);
-        if (lightning.world instanceof ServerWorld) {
-          ServerWorld serverWorld = (ServerWorld) lightning.world;
+            new LightningBoltEntity(EntityType.LIGHTNING_BOLT, serverWorld);
+        lightning.setPosition(pos.getX() + RANDOM.nextInt(21) - 5,
+            pos.getY() + RANDOM.nextInt(3) - 1, pos.getZ() + RANDOM.nextInt(21) - 5);
 
-          serverWorld.addLightningBolt(lightning);
+        // Summon
+        serverWorld.summonEntity(lightning);
 
-          PlayerEntity player =
-              serverWorld.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
+        // Get the closest player
+        PlayerEntity player =
+            serverWorld.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
+        // If not null, make an explosion - the player is the cause
+        if (player != null) {
+          serverWorld.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), 2, true,
+              Explosion.Mode.BREAK);
 
-          if (player != null) {
-            serverWorld.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), 2, true,
-                Explosion.Mode.BREAK);
-          }
         }
       }
     }

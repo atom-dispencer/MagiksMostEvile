@@ -12,6 +12,7 @@ import net.minecraft.particles.ParticleType;
 public class GlyphParticleType extends ParticleType<GlyphParticleData> {
   private static boolean ALWAYS_SHOW_REGARDLESS_OF_DISTANCE_FROM_PLAYER = false;
 
+  // TODO does this error?
   private final Codec<GlyphParticleData> codec = Codec.unit(() -> null);
 
   public GlyphParticleType() {
