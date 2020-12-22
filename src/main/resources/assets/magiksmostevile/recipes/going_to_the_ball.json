@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PPP",
+        "GAA",
+        "PPP"
+    ],
+    "key": {
+        "A": {
+            "item": "magiksmostevile:amethyst",
+            "data": 0
+        },
+        "P": {
+            "item": "minecraft:pumpkin",
+            "data": 0
+        },
+        "G": {
+            "item": "minecraft:golden_horse_armor",
+            "data": 0
+        }
+    },
+    "result": {
+        "item": "magiksmostevile:going_to_the_ball",
+        "data": 0
+    }
+}

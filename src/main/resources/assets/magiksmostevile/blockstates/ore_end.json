@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "variant=amethyst": {
+            "model": "magiksmostevile:ore_end_amethyst"
+        },
+        "variant=lead": {
+            "model": "magiksmostevile:ore_end_lead"
+        }
+    }
+}

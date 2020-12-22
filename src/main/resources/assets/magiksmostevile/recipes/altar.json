@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "APA",
+        "ELE",
+        "EEE"
+    ],
+    "key": {
+        "A": {
+            "item": "magiksmostevile:amethyst",
+            "data": 0
+        },
+        "P": {
+            "item": "magiksmostevile:powered_amethyst",
+            "data": 0
+        },
+        "L": {
+            "item": "magiksmostevile:lesser_power_stone",
+            "data": 0
+        },
+        "E": {
+            "item": "minecraft:end_stone",
+            "data": 0
+        }
+    },
+    "result": {
+        "item": "magiksmostevile:altar",
+        "data": 0
+    }
+}

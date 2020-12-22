@@ -1,0 +1,52 @@
+{
+    "pools": [
+        {
+            "name": "vampire_bat_loot_tooth",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 35,
+                    "name": "magiksmostevile:vampire_bat_tooth",
+                    "conditions": [
+                        {
+                            "condition": "killed_by_player"
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "vampire_bat_loot_special",
+            "rolls": {
+                "min": 1,
+                "max": 10
+            },
+            "entries": [
+                {
+                    "type": "empty",
+                    "weight": 100
+                },
+                {
+                    "type": "item",
+                    "weight": 15,
+                    "name": "magiksmostevile:amethyst"
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "magiksmostevile:powered_amethyst"
+                }
+            ]
+        }
+    ]
+}

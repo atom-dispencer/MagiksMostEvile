@@ -1,0 +1,505 @@
+[16:38:15] [main/INFO] [GradleStart]: Extra: []
+[16:38:15] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/adam_/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[16:38:15] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[16:38:15] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[16:38:15] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[16:38:15] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[16:38:15] [main/INFO] [FML]: Forge Mod Loader version 14.23.5.2768 for Minecraft 1.12.2 loading
+[16:38:15] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_201, running on Windows 10:amd64:10.0, installed at C:\Program Files\Java\jdk1.8.0_201\jre
+[16:38:15] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
+[16:38:15] [main/ERROR] [FML]: Full: C:\Users\adam_\.gradle\caches\modules-2\files-2.1\org.apache.maven\maven-artifact\3.5.3\7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4\maven-artifact-3.5.3.jar
+[16:38:15] [main/ERROR] [FML]: Trimmed: c:/users/adam_/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
+[16:38:15] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[16:38:15] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
+[16:38:17] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[16:38:17] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[16:38:17] [main/INFO] [FML]: Searching C:\Users\adam_\git\MagiksMostEvile_Git\.\mods for mods
+[16:38:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[16:38:17] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[16:38:17] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[16:38:17] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[16:38:17] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[16:38:17] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[16:38:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[16:38:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[16:38:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:38:19] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[16:38:19] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:38:19] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[16:38:19] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[16:38:19] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[16:38:19] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[16:38:19] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[16:38:22] [main/INFO] [net.minecraft.client.Minecraft]: Setting user: Player302
+[16:38:27] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[16:38:27] [main/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.4
+[16:38:28] [main/INFO] [FML]: -- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_201, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 853133216 bytes (813 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.6.0 NVIDIA 391.25' Renderer: 'GeForce GT 730/PCIe/SSE2'
+[16:38:28] [main/INFO] [FML]: MinecraftForge v14.23.5.2768 Initialized
+[16:38:28] [main/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[16:38:28] [main/INFO] [FML]: Replaced 1036 ore ingredients
+[16:38:29] [main/INFO] [FML]: Searching C:\Users\adam_\git\MagiksMostEvile_Git\.\mods for mods
+[16:38:30] [main/INFO] [FML]: Forge Mod Loader has identified 5 mods to load
+[16:38:31] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, magiksmostevile] at CLIENT
+[16:38:31] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, magiksmostevile] at SERVER
+[16:38:31] [main/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiks Most Evile
+[16:38:32] [main/INFO] [FML]: Processing ObjectHolder annotations
+[16:38:32] [main/INFO] [FML]: Found 1168 ObjectHolder annotations
+[16:38:32] [main/INFO] [FML]: Identifying ItemStackHolder annotations
+[16:38:32] [main/INFO] [FML]: Found 0 ItemStackHolder annotations
+[16:38:32] [main/INFO] [FML]: Configured a dormant chunk cache size of 0
+[16:38:32] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[16:38:32] [main/INFO] [STDOUT]: [com.magiksmostevile.Main:preInit:48]: preInit: Client
+[16:38:32] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Constructing ALTAR
+[16:38:32] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Constructing amethyst_crystal
+[16:38:32] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Registering tile entities for mod :magiksmostevile
+[16:38:32] [main/INFO] [FML]: Applying holder lookups
+[16:38:32] [main/INFO] [FML]: Holder lookups applied
+[16:38:32] [main/INFO] [FML]: Applying holder lookups
+[16:38:32] [main/INFO] [FML]: Holder lookups applied
+[16:38:32] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Registering entities for mod: magiksmostevile
+[16:38:32] [main/INFO] [FML]: Applying holder lookups
+[16:38:32] [main/INFO] [FML]: Holder lookups applied
+[16:38:32] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: UP_TO_DATE Target: null
+[16:38:32] [main/INFO] [FML]: Applying holder lookups
+[16:38:32] [main/INFO] [FML]: Holder lookups applied
+[16:38:32] [main/INFO] [FML]: Injecting itemstacks
+[16:38:32] [main/INFO] [FML]: Itemstack injection complete
+[16:38:32] [Thread-3/INFO] [FML]: Using alternative sync timing : 200 frames of Display.update took 2295359900 nanos
+[16:38:36] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[16:38:37] [Thread-5/ERROR] [net.minecraft.client.audio.SoundManager]: Error in class 'LibraryLWJGLOpenAL'
+[16:38:37] [Thread-5/ERROR] [net.minecraft.client.audio.SoundManager]: Unable to initialize OpenAL.  Probable cause: OpenAL not supported.
+[16:38:37] [Thread-5/WARN] [net.minecraft.client.audio.SoundManager]: ERROR MESSAGE:
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Could not locate OpenAL library.
+[16:38:37] [Thread-5/WARN] [net.minecraft.client.audio.SoundManager]: STACK TRACE:
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: org.lwjgl.openal.AL.create(AL.java:156)
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: org.lwjgl.openal.AL.create(AL.java:102)
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: org.lwjgl.openal.AL.create(AL.java:206)
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.libraries.LibraryLWJGLOpenAL.init(LibraryLWJGLOpenAL.java:164)
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.SoundSystem.CommandNewLibrary(SoundSystem.java:1576)
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.SoundSystem.CommandQueue(SoundSystem.java:2572)
+[16:38:37] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.CommandThread.run(CommandThread.java:121)
+[16:38:37] [Sound Library Loader/WARN] [net.minecraft.client.audio.SoundManager]: ERROR MESSAGE:
+[16:38:37] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Could not locate OpenAL library.
+[16:38:37] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[16:38:37] [Thread-7/INFO] [net.minecraft.client.audio.SoundManager]: Switching to No Sound
+[16:38:37] [Thread-7/INFO] [net.minecraft.client.audio.SoundManager]: (Silent Mode)
+[16:38:38] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
+[16:38:43] [main/INFO] [FML]: Max texture size: 16384
+[16:38:43] [main/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 512x512 textures-atlas
+[16:38:45] [main/INFO] [FML]: Applying holder lookups
+[16:38:45] [main/INFO] [FML]: Holder lookups applied
+[16:38:45] [main/INFO] [FML]: Injecting itemstacks
+[16:38:45] [main/INFO] [FML]: Itemstack injection complete
+[16:38:45] [main/INFO] [FML]: Forge Mod Loader has successfully loaded 5 mods
+[16:38:45] [main/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[16:38:45] [main/INFO] [com.mojang.text2speech.NarratorWindows]: Narrator library for x64 successfully loaded
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: The following texture errors were found.
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:   DOMAIN magiksmostevile
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: --------------------------------------------------
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:   domain magiksmostevile is missing 2 textures
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:     domain magiksmostevile has 1 location:
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:       mod magiksmostevile resources at C:\Users\adam_\git\MagiksMostEvile_Git\bin
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:     The missing resources for domain magiksmostevile are:
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/doom.png
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/emp.png
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]:     No other errors exist for domain magiksmostevile
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[16:38:45] [main/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[16:38:46] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
+[16:38:55] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
+[16:38:55] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
+[16:38:55] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
+[16:38:55] [Server thread/INFO] [FML]: Applying holder lookups
+[16:38:55] [Server thread/INFO] [FML]: Holder lookups applied
+[16:38:55] [Server thread/INFO] [FML]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@4da75fdb)
+[16:38:56] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 492 advancements
+[16:38:56] [Server thread/INFO] [FML]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@4da75fdb)
+[16:38:56] [Server thread/INFO] [FML]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@4da75fdb)
+[16:38:56] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
+[16:38:57] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 43%
+[16:38:57] [Server thread/INFO] [FML]: Unloading dimension -1
+[16:38:58] [Server thread/INFO] [FML]: Unloading dimension 1
+[16:38:58] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
+[16:38:59] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
+[16:38:59] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
+[16:38:59] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 5 mods : minecraft@1.12.2,FML@8.0.99.99,forge@14.23.5.2768,magiksmostevile@1.0,mcp@9.42
+[16:38:59] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
+[16:38:59] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
+[16:38:59] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: Player302[local:E:25b22009] logged in with entity id 381 at (-61.460400313548824, 85.90247890094565, 251.61105619420982)
+[16:38:59] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player302 joined the game
+[16:39:01] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[16:39:01] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[16:39:01] [pool-2-thread-1/WARN] [com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@2adfa53f[id=babe9e7f-35b2-34ef-82f9-4869d34a0755,name=Player302,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:60) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:57) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4154) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153) [guava-21.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:170) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3181) [Minecraft.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:138) [SkinManager$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_201]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_201]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_201]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_201]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_201]
+[16:39:25] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[16:39:25] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player302: Object successfully summoned]
+[16:39:25] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Object successfully summoned
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:startExecuting:65]: starting execution!
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.819090843200684
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 85.8089370727539
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.07963601575278127
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 4.562807599871706
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.819090843200684
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 85.85832977294922
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.07959000935192664
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 4.560171627272149
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.819090843200684
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 85.94842529296875
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.07950622771765585
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 4.555371293227724
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.819090843200684
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 86.07193756103516
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.07939165801674353
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 4.5488069329053715
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.819090843200684
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 86.22299194335938
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.07925198930187606
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 4.54080450501345
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.819090843200684
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 86.39676666259766
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.07909192066676522
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 4.53163324778918
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.819090843200684
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 86.5893325805664
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.07891529806625938
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 4.5215135182135695
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.648529052734375
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 86.8024673461914
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.08834294266982011
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 5.061677764746885
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.648529052734375
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 87.02031707763672
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.08812063725326034
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 5.048940602615113
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.648529052734375
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 87.24910736083984
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.08788837191287205
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 5.035632778883694
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.648529052734375
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 87.48692321777344
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.08764824144552846
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 5.0218743165724025
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:resetTask:85]: Resetting
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:startExecuting:65]: starting execution!
+[16:39:27] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:resetTask:85]: Resetting
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:startExecuting:65]: starting execution!
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 10.67765998840332
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 12.178009033203125
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.2018082905939769
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 68.85854283486687
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.697405815124512
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 12.170310020446777
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.023084973193213
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 58.618451047226074
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.697405815124512
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 12.092724800109863
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0336032543794471
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 59.221104166929145
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.697405815124512
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.976640701293945
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0498102344384346
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 60.14969572296181
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.697405815124512
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.830042839050293
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0711273869187148
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 61.3710785913187
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.697405815124512
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.65964126586914
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0971879161987033
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 62.86423693093915
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.697405815124512
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.471076011657715
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.1277790650272317
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 64.6169806492704
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.697405815124512
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.369051933288574
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.1451633316432495
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 65.61302575629838
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.721635818481445
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.36874008178711
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9641719592674939
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 55.24298399088692
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.721635818481445
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.379733085632324
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9627429558057681
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 55.161108123620444
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.439160346984863
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0034016311721345
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 57.49067862270577
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.538037300109863
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9899561825679302
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 56.7203111640248
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.605676651000977
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8340912640953382
+[16:39:28] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 47.78990916139461
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.568115234375
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8379261311883615
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.009630860818454
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.489810943603516
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8460489703476777
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.47503526231086
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.480719566345215
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8470035003586367
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.529725803357394
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.525470733642578
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8423280716334347
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.26184346998909
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.513059616088867
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8436189404943805
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.33580480762614
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.45361614227295
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8498635352488003
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.69359373182393
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.45611572265625
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.849598866765721
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.678429344773356
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.509249687194824
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8440160964543074
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.35856016793842
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.50596809387207
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8443585131055382
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.37817919688895
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.557658195495605
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8390007819883091
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.07120381610581
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.549084663391113
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8398841713787699
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 48.12181829984585
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.068097114562988
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.593220710754395
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.8353586092896104
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 47.8625226922126
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.542344093322754
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9893798237955573
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 56.687288238882495
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.478312492370605
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.998028279693327
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 57.182808261129715
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.379837989807129
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0116698416245957
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 57.96441218575775
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.2546968460083
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0296313997605548
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 58.993533660427076
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 11.102710723876953
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.0524506980036101
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 60.30098314120443
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.926679611206055
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.080371703093087
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 61.90073889259475
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.003718376159668
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.73016357421875
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.1136221609521366
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 63.8058497947959
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.384398460388184
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.515226364135742
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.2408230669079015
+[16:39:29] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 71.09392485630171
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.384398460388184
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.283220291137695
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.2932771280919275
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 74.0993211804674
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.384398460388184
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.041281700134277
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.3537725912211254
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 77.56545589745973
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.384398460388184
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.795933723449707
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.4222616687612186
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 81.4895909832513
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.384398460388184
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.643406867980957
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.4690767114951773
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 84.17189534963173
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.384398460388184
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.568168640136719
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.4935189992496853
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 85.57233527960933
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 9.384398460388184
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.557766914367676
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.4969728430974738
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 85.77022595518484
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.490829467773438
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.635993003845215
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.2125198784527995
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 69.47227161106098
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.490829467773438
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.706290245056152
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.1968765279722584
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 68.57597365108202
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.490829467773438
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.814935684204102
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.1735910490758494
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 67.24181398637684
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 8.490829467773438
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.95665454864502
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 1.1447338342903577
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 65.58841737066565
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.623742580413818
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.172956466674805
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9305000232214
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 53.313724167411316
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.623742580413818
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.242186546325684
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9210929005985966
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 52.77473574376264
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.623742580413818
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.25162124633789
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9198274767370752
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 52.70223229720232
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 7.623742580413818
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.215873718261719
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.9246429508833957
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 52.97813864214085
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.793283462524414
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.19299030303955
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.7865183525629007
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 45.06418211143671
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.256892204284668
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 10.053217887878418
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.7175036821963533
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 41.10993277494695
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.256892204284668
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.89299488067627
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.732884394202131
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 41.99118265878421
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 6.256892204284668
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.718832015991211
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.7504523493471204
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 42.99775234326724
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:141]: doing trig
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:145]: Opp: 5.401477336883545
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:146]: Adj: 9.575607299804688
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:150]: AngleRad: 0.6326579073131937
+[16:39:30] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:doTrig:151]: AngleDeg: 36.248627964624816
+[16:39:30] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[16:39:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[16:39:31] [main/INFO] [net.minecraft.client.Minecraft]: Stopping!
+[16:39:31] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
+[16:39:31] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
+[16:39:31] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
+[16:39:31] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'New World'/overworld
+[16:39:32] [Server thread/INFO] [FML]: Unloading dimension 0
+[16:39:32] [Server thread/INFO] [FML]: Applying holder lookups
+[16:39:32] [Server thread/INFO] [FML]: Holder lookups applied
+[16:39:32] [main/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
+[16:39:32] [main/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com

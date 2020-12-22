@@ -1,0 +1,68 @@
+{
+  "magiksmostevile:magik_advancement": {
+    "criteria": {
+      "gain_amethyst": "2019-10-30 20:44:11 +0000"
+    },
+    "done": true
+  },
+  "magiksmostevile:tome_convert_amethyst_advancement": {
+    "criteria": {
+      "gain_tome_convert_amethyst": "2019-10-30 20:44:11 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_gray_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2019-10-30 20:44:42 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_blue_dye_from_lapis_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2019-10-30 20:44:42 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/pink_dye_from_red_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2019-10-30 20:44:42 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/lime_dye": {
+    "criteria": {
+      "has_bonemeal": "2019-10-30 20:44:42 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gray_dye": {
+    "criteria": {
+      "has_bonemeal": "2019-10-30 20:44:42 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_lapis_ink_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2019-10-30 20:44:42 +0000"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "plains": "2019-10-30 20:43:34 +0000"
+    },
+    "done": false
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_ink_bonemeal": {
+    "criteria": {
+      "has_bonemeal": "2019-10-30 20:44:42 +0000"
+    },
+    "done": true
+  },
+  "magiksmostevile:tomes_of_knowledge_advancement": {
+    "criteria": {
+      "gain_tome": "2019-10-30 20:44:11 +0000"
+    },
+    "done": true
+  }
+}

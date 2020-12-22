@@ -1,0 +1,56 @@
+itemGroup.tabEvile.name=Magiks Most Evile
+
+te.tile_entity_amethyst_crystal=Amethyst Crystal
+container.altar=Altar
+
+item.tome_convert_amethyst.name=Tome of Magikifying Amethysts
+item.information_book.name=Evile Information Book (TODO)
+
+tile.solid_amethyst_block.name=Amethyst Block
+tile.altar.name=Altar
+tile.what_block.name=What?
+tile.amethyst_crystal.name=Amethyst Crystal
+
+tile.ore_overworld_amethyst.name=Amethyst Ore
+tile.ore_overworld_lead.name=Lead Ore
+
+tile.ore_end_amethyst.name=Ender Amethyst Ore
+tile.ore_end_lead.name=Ender Lead Ore
+
+tile.ore_nether_amethyst.name=Nether Amethyst Ore
+tile.ore_nether_lead.name=Nether Lead Ore
+
+item.amethyst.name=Amethyst
+item.powered_amethyst.name=Powered Amethyst
+item.lesser_power_stone.name=Lesser Power Stone
+item.greater_power_stone.name=Greater Power Stone
+item.vampire_bat_tooth.name=Vampire Bat Tooth
+item.vampire_bat_guano.name=Bat Guano
+
+item.amethyst_potato.name=Amethyst Potato
+
+item.amethyst_helmet.name=Amethyst Helmet
+item.amethyst_chestplate.name=Amethyst Chestplate
+item.amethyst_leggings.name=Amethyst Leggings
+item.amethyst_boots.name=Amethyst Boots
+
+item.powered_amethyst_helmet.name=Powered Amethyst Helmet
+item.powered_amethyst_chestplate.name=Powered Amethyst Chestplate
+item.powered_amethyst_leggings.name=Powered Amethyst Leggings
+item.powered_amethyst_boots.name=Powered Amethyst Boots
+
+item.over_powered_amethyst_helmet.name=Over Powered Amethyst Helmet
+item.over_powered_amethyst_chestplate.name=Over Powered Amethyst Chestplate
+item.over_powered_amethyst_leggings.name=Over Powered Amethyst Leggings
+item.over_powered_amethyst_boots.name=Over Powered Amethyst Boots
+
+item.amethyst_sword.name=Amethyst Sword
+item.amethyst_pickaxe.name=Amethyst Pickaxe
+item.amethyst_axe.name=Amethyst Axe
+item.amethyst_shovel.name=Amethyst Shovel
+item.amethyst_hoe.name=Amethyst Hoe
+
+item.emp.name=EMP
+item.doom.name=Doom
+
+entity.vampire_bat.name=Vampire Bat

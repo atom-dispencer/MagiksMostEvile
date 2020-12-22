@@ -1,0 +1,6 @@
+{
+   "parent": "block/cube_all",
+   "textures": {
+       "all": "magiksmostevile:blocks/solid_amethyst_block"
+   }
+}

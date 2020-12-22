@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " S ",
+        "ABA",
+        " S "
+    ],
+    "key": {
+        "A": {
+            "item": "magiksmostevile:amethyst",
+            "data": 0
+        },
+        "B": {
+            "item": "minecraft:blaze_powder",
+            "data": 0
+        },
+        "S": {
+            "item": "magiksmostevile:solid_amethyst_block",
+            "data": 0
+        }
+    },
+    "result": {
+        "item": "magiksmostevile:powered_amethyst",
+        "data": 0
+    }
+}

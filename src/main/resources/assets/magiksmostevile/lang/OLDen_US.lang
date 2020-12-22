@@ -1,0 +1,31 @@
+itemGroup.tabEvile=Evile Magiks
+
+tile.amethystOre.name=Amethyst Ore
+tile.solid_amethyst_block.name=Amethyst Block
+tile.altar.name=Altar
+
+entity.Spongie.name=Spongie
+
+item.amethystSword.name=Amethyst Sword
+item.amethystPickaxe.name=Amethyst Pickaxe
+item.amethystAxe.name=Amethyst Axe
+item.amethystHoe.name=Amethyst Hoe
+item.amethystShovel.name=Amethyst Shovel
+item.lesserPowerStone.name=Lesser Power Stone
+item.greaterPowerStone.name=Greater Power Stone
+item.amethyst.name=Amethyst
+item.amethystHelmet.name=Amethyst Helmet
+item.amethystChestplate.name=Amethyst Chestplate
+item.amethystLeggings.name=Amethyst Leggings
+item.amethystBoots.name=Amethyst Boots
+item.poweredAmethyst.name=Powered Amethyst
+item.empStaff.name=EMP Staff
+item.emp.name=EMP
+item.doomStaff.name=Staff of Doom
+item.doom.name=Doom, Glorious Doom!
+item.nullItem.name=Null
+
+
+
+key.wisdom.name=Hear Words of Wisdom
+key.categories.magiksmostevile.name=Evile Keybinds

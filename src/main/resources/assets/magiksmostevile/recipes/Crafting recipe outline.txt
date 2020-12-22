@@ -1,0 +1,48 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "aaa",
+        "xxx",
+        "xxx"
+    ],
+    "key":
+    {
+        "x":
+        {
+            "type": "forge:ore_dict",
+            "ore": "gemDiamond"
+        },
+        "a":
+        {
+            "item": "mymod:myfirstitem",
+            "data": 1
+        }
+    },
+    "result":
+    {
+        "item": "mymod:myitem",
+        "count": 9,
+        "data": 2
+    }
+}
+
+INFO ON >>>    https://mcforge.readthedocs.io/en/latest/utilities/recipes/
+
+>>> FORGE WILL LOAD ANY RECIPES FROM ./assets/<modid>/recipes/  ----- THEY MUST HAVE THE .json EXTENSION!
+
+>>> ONE RECIPE PER JSON!!!
+
+>>> PLEASE READ THE WEBPAGE FOR INFOS ON "FACTORIES" AND "CONSTANTS"
+
+>>> IMPORTANT! FURNACES DO NOT USE JSONs FOR THEIR RECIPES! THEY USE: GameRegistry.addSmelting(input, output, exp);
+
+"Type" refers to the kind of crafting recipe >>>  minecraft:crafting_shaped     OR     minecraft:crafting_shapeless
+Shaped recipes require the "pattern" and "key" keywords. They might also have a 'data' field if you require the item to be, for example, on full durability.
+Shapeless ones only need "ingredients"
+
+Optionally you can add a "group" which refers to where it will be displayed in the crafting recipe helper
+"Pattern" is the pattern of items in the shaped crafting recipe
+
+Every recipe needs a "result".
+Similarly to above you can add a "data" tag, however ONLY under "result" you can add a "count" if you want the recipe to produce more than one item.

@@ -1,0 +1,241 @@
+[20:42:12] [main/INFO] [GradleStart]: Extra: []
+[20:42:12] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/adam_/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[20:42:12] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[20:42:12] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[20:42:12] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[20:42:12] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[20:42:12] [main/INFO] [FML]: Forge Mod Loader version 14.23.5.2768 for Minecraft 1.12.2 loading
+[20:42:12] [main/INFO] [FML]: Java is Java HotSpot(TM) Client VM, version 1.8.0_201, running on Windows 10:x86:10.0, installed at C:\Program Files (x86)\Java\jre1.8.0_201
+[20:42:12] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
+[20:42:12] [main/ERROR] [FML]: Full: C:\Users\adam_\.gradle\caches\modules-2\files-2.1\org.apache.maven\maven-artifact\3.5.3\7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4\maven-artifact-3.5.3.jar
+[20:42:12] [main/ERROR] [FML]: Trimmed: c:/users/adam_/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
+[20:42:12] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[20:42:12] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
+[20:42:17] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[20:42:17] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[20:42:17] [main/INFO] [FML]: Searching C:\Users\adam_\OneDrive\Desktop\MCModding\1.12.2 Modding\forge_workspace\forge-1.12.2-14.23.5.2768-mdk\run\.\mods for mods
+[20:42:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[20:42:17] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[20:42:17] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[20:42:17] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[20:42:17] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[20:42:17] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[20:42:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[20:42:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[20:42:17] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[20:42:20] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[20:42:20] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[20:42:20] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[20:42:21] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[20:42:21] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[20:42:21] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[20:42:21] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[20:42:21] [main/INFO] [net.minecraft.client.Minecraft]: Setting user: Player919
+[20:42:25] [main/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.4
+[20:42:26] [main/INFO] [FML]: Could not load splash.properties, will create a default one
+[20:42:26] [main/INFO] [FML]: -- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Windows 10 (x86) version 10.0
+	Java Version: 1.8.0_201, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation
+	Memory: 761517168 bytes (726 MB) / 1046937600 bytes (998 MB) up to 1046937600 bytes (998 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.6.0 NVIDIA 391.25' Renderer: 'GeForce GT 730/PCIe/SSE2'
+[20:42:26] [main/INFO] [FML]: MinecraftForge v14.23.5.2768 Initialized
+[20:42:26] [main/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[20:42:27] [main/INFO] [FML]: Replaced 1036 ore ingredients
+[20:42:27] [main/INFO] [FML]: Searching C:\Users\adam_\OneDrive\Desktop\MCModding\1.12.2 Modding\forge_workspace\forge-1.12.2-14.23.5.2768-mdk\run\.\mods for mods
+[20:42:28] [main/INFO] [FML]: Forge Mod Loader has identified 5 mods to load
+[20:42:28] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, magiksmostevile] at CLIENT
+[20:42:28] [main/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, magiksmostevile] at SERVER
+[20:42:28] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 99121600 nanos
+[20:42:29] [main/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiks Most Evile
+[20:42:29] [main/INFO] [FML]: Processing ObjectHolder annotations
+[20:42:29] [main/INFO] [FML]: Found 1168 ObjectHolder annotations
+[20:42:29] [main/INFO] [FML]: Identifying ItemStackHolder annotations
+[20:42:29] [main/INFO] [FML]: Found 0 ItemStackHolder annotations
+[20:42:29] [main/INFO] [FML]: Configured a dormant chunk cache size of 0
+[20:42:29] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[20:42:29] [main/INFO] [STDOUT]: [com.magiksmostevile.Main:preInit:48]: preInit: Client
+[20:42:30] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Constructing ALTAR
+[20:42:30] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Constructing amethyst_crystal
+[20:42:30] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Registering tile entities for mod :magiksmostevile
+[20:42:30] [main/INFO] [FML]: Applying holder lookups
+[20:42:30] [main/INFO] [FML]: Holder lookups applied
+[20:42:30] [main/INFO] [FML]: Applying holder lookups
+[20:42:30] [main/INFO] [FML]: Holder lookups applied
+[20:42:30] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Registering entities for mod: magiksmostevile
+[20:42:30] [main/INFO] [FML]: Applying holder lookups
+[20:42:30] [main/INFO] [FML]: Holder lookups applied
+[20:42:30] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: UP_TO_DATE Target: null
+[20:42:30] [main/INFO] [FML]: Applying holder lookups
+[20:42:30] [main/INFO] [FML]: Holder lookups applied
+[20:42:30] [main/INFO] [FML]: Injecting itemstacks
+[20:42:30] [main/INFO] [FML]: Itemstack injection complete
+[20:42:48] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[20:42:48] [Thread-5/ERROR] [net.minecraft.client.audio.SoundManager]: Error in class 'LibraryLWJGLOpenAL'
+[20:42:48] [Thread-5/ERROR] [net.minecraft.client.audio.SoundManager]: Unable to initialize OpenAL.  Probable cause: OpenAL not supported.
+[20:42:48] [Thread-5/WARN] [net.minecraft.client.audio.SoundManager]: ERROR MESSAGE:
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Could not locate OpenAL library.
+[20:42:48] [Thread-5/WARN] [net.minecraft.client.audio.SoundManager]: STACK TRACE:
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: org.lwjgl.openal.AL.create(AL.java:156)
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: org.lwjgl.openal.AL.create(AL.java:102)
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: org.lwjgl.openal.AL.create(AL.java:206)
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.libraries.LibraryLWJGLOpenAL.init(LibraryLWJGLOpenAL.java:164)
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.SoundSystem.CommandNewLibrary(SoundSystem.java:1576)
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.SoundSystem.CommandQueue(SoundSystem.java:2572)
+[20:42:48] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: paulscode.sound.CommandThread.run(CommandThread.java:121)
+[20:42:49] [Sound Library Loader/WARN] [net.minecraft.client.audio.SoundManager]: ERROR MESSAGE:
+[20:42:49] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Could not locate OpenAL library.
+[20:42:49] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[20:42:49] [Thread-7/INFO] [net.minecraft.client.audio.SoundManager]: Switching to No Sound
+[20:42:49] [Thread-7/INFO] [net.minecraft.client.audio.SoundManager]: (Silent Mode)
+[20:42:49] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
+[20:42:55] [main/INFO] [FML]: Max texture size: 16384
+[20:42:55] [main/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 512x512 textures-atlas
+[20:42:57] [main/INFO] [FML]: Applying holder lookups
+[20:42:57] [main/INFO] [FML]: Holder lookups applied
+[20:42:57] [main/INFO] [FML]: Injecting itemstacks
+[20:42:57] [main/INFO] [FML]: Itemstack injection complete
+[20:42:57] [main/INFO] [FML]: Forge Mod Loader has successfully loaded 5 mods
+[20:42:57] [main/INFO] [com.mojang.text2speech.NarratorWindows]: Narrator library for x86 successfully loaded
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: The following texture errors were found.
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:   DOMAIN magiksmostevile
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: --------------------------------------------------
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:   domain magiksmostevile is missing 2 textures
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:     domain magiksmostevile has 1 location:
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:       mod magiksmostevile resources at C:\Users\adam_\OneDrive\Desktop\MCModding\1.12.2 Modding\forge_workspace\forge-1.12.2-14.23.5.2768-mdk\bin
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:     The missing resources for domain magiksmostevile are:
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/doom.png
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/emp.png
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]:     No other errors exist for domain magiksmostevile
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[20:42:57] [main/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[20:42:58] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
+[20:43:11] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
+[20:43:11] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
+[20:43:11] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
+[20:43:11] [Server thread/INFO] [FML]: Applying holder lookups
+[20:43:11] [Server thread/INFO] [FML]: Holder lookups applied
+[20:43:12] [Server thread/INFO] [FML]: Loading dimension 0 (MME_Test) (net.minecraft.server.integrated.IntegratedServer@17f3534)
+[20:43:12] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 492 advancements
+[20:43:13] [Server thread/INFO] [FML]: Loading dimension -1 (MME_Test) (net.minecraft.server.integrated.IntegratedServer@17f3534)
+[20:43:13] [Server thread/INFO] [FML]: Loading dimension 1 (MME_Test) (net.minecraft.server.integrated.IntegratedServer@17f3534)
+[20:43:13] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
+[20:43:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 8%
+[20:43:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 12%
+[20:43:16] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 17%
+[20:43:17] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 22%
+[20:43:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 26%
+[20:43:19] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 30%
+[20:43:20] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 36%
+[20:43:21] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 42%
+[20:43:22] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 46%
+[20:43:23] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 52%
+[20:43:24] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 57%
+[20:43:25] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 63%
+[20:43:26] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 69%
+[20:43:27] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 74%
+[20:43:28] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 81%
+[20:43:29] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 86%
+[20:43:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 91%
+[20:43:31] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 97%
+[20:43:32] [Server thread/INFO] [FML]: Unloading dimension -1
+[20:43:32] [Server thread/INFO] [FML]: Unloading dimension 1
+[20:43:32] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 8, from 10
+[20:43:34] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
+[20:43:34] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
+[20:43:34] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 5 mods : minecraft@1.12.2,FML@8.0.99.99,forge@14.23.5.2768,magiksmostevile@1.0,mcp@9.42
+[20:43:34] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
+[20:43:34] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
+[20:43:34] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: Player919[local:E:ecd0aebc] logged in with entity id 1319 at (-248.5, 71.0, 254.5)
+[20:43:34] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player919 joined the game
+[20:43:34] [Server thread/WARN] [net.minecraft.server.MinecraftServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 2270ms behind, skipping 45 tick(s)
+[20:43:34] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:35] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[20:43:35] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'MME_Test'/overworld
+[20:43:36] [pool-2-thread-1/WARN] [com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@1c4fc71[id=fd31ce15-3baa-3523-8ee4-307bb606ee39,name=Player919,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:60) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:57) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4154) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147) [guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153) [guava-21.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:170) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3181) [Minecraft.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:138) [SkinManager$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:1.8.0_201]
+	at java.util.concurrent.FutureTask.run(Unknown Source) [?:1.8.0_201]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_201]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_201]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_201]
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:38] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.entity.evileAI.tasks.EvileVampireBatAIWanderAvoidWaterFlyingBiasToTarget3:<init>:49]: constructing EvileEntityAIWanderAvoidWaterFlyingBiasToTarget
+[20:43:42] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] doDaylightCycle, doEntityDrops, doFireTick, doLimitedCrafting, doMobLoot, doMobSpawning, doTileDrops, doWeatherCycle
+[20:43:43] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] doDaylightCycle, doEntityDrops, doFireTick, doLimitedCrafting, doMobLoot, doMobSpawning, doTileDrops, doWeatherCycle
+[20:43:46] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] doMobLoot, doMobSpawning
+[20:43:46] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] doMobLoot, doMobSpawning
+[20:43:50] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player919: Game rule doMobSpawning has been updated to false]
+[20:43:50] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Game rule doMobSpawning has been updated to false
+[20:43:57] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: [Player919: Game rule doDaylightCycle has been updated to false]
+[20:43:57] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Game rule doDaylightCycle has been updated to false
+[20:44:11] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player919 has made the advancement [Tomes of Knowledge]
+[20:44:11] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player919 has made the advancement [Magikification!]
+[20:44:11] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Player919 has made the advancement [Tomes of Knowledge]
+[20:44:11] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Player919 has made the advancement [Magikification!]
+[20:44:11] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player919 has made the advancement [Evile Magiks]
+[20:44:11] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Player919 has made the advancement [Evile Magiks]
+[20:44:11] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 3 advancements
+[20:44:16] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[20:44:16] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'MME_Test'/overworld
+[20:44:20] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE WARNING! : Altar placed! Evile-ness incoming!
+[20:44:20] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Altar activated! +++++++++++++++++++++++++++
+[20:44:20] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] Altar activated! +++++++++++++++++++++++++++
+[20:44:20] [main/INFO] [net.minecraft.client.gui.GuiNewChat]: [CHAT] World is not remote
+[20:44:24] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : creating tile entity for amethyst crystal
+[20:44:24] [main/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Constructing crystal tile entity (Not called previously - added by me)
+[20:44:24] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : creating tile entity for amethyst crystal
+[20:44:24] [Server thread/INFO] [STDOUT]: [com.magiksmostevile.EvileLog:logText:23]: EVILE INFORMATION! : Constructing crystal tile entity (Not called previously - added by me)
+[20:44:42] [main/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 11 advancements
+[20:44:47] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[20:44:47] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'MME_Test'/overworld
+[20:44:48] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
+[20:44:48] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
+[20:44:48] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Player919 lost connection: Disconnected
+[20:44:48] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Player919 left the game
+[20:44:48] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Stopping singleplayer server as player logged out
+[20:44:48] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
+[20:44:48] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'MME_Test'/overworld
+[20:44:48] [Server thread/INFO] [FML]: Unloading dimension 0
+[20:44:49] [Server thread/INFO] [FML]: Applying holder lookups
+[20:44:49] [Server thread/INFO] [FML]: Holder lookups applied
+[20:44:50] [main/INFO] [net.minecraft.client.Minecraft]: Stopping!
+[20:44:50] [main/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
+[20:44:50] [main/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "AAA",
+        "A A",
+        "A A"
+    ],
+    "key": {
+        "A": {
+            "item": "magiksmostevile:amethyst",
+            "data": 0
+        }
+    },
+    "result": {
+        "item": "magiksmostevile:amethyst_leggings",
+        "data": 0
+    }
+}
