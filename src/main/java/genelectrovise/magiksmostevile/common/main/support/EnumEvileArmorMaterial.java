@@ -2,7 +2,7 @@ package genelectrovise.magiksmostevile.common.main.support;
 
 import java.util.function.Supplier;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier.EvileItemTags;
+import genelectrovise.magiksmostevile.common.main.support.EvileItemTags;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
