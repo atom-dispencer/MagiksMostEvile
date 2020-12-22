@@ -31,8 +31,6 @@ import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
-import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreFeature;
-import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -63,29 +61,35 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EvileDeferredRegistry {
-  // https://github.com/McJty/YouTubeModding14/blob/master/src/main/java/com/mcjty/mytutorial/setup/Registration.java
 
   public static final DeferredRegister<Item> ITEMS =
-      new DeferredRegister<>(ForgeRegistries.ITEMS, MagiksMostEvile.MODID);
+      DeferredRegister.create(ForgeRegistries.ITEMS, MagiksMostEvile.MODID);
+
   public static final DeferredRegister<Block> BLOCKS =
-      new DeferredRegister<>(ForgeRegistries.BLOCKS, MagiksMostEvile.MODID);
+      DeferredRegister.create(ForgeRegistries.BLOCKS, MagiksMostEvile.MODID);
+
   public static final DeferredRegister<Feature<?>> FEATURES =
-      new DeferredRegister<>(ForgeRegistries.FEATURES, MagiksMostEvile.MODID);
+      DeferredRegister.create(ForgeRegistries.FEATURES, MagiksMostEvile.MODID);
+
   public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES =
-      new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, MagiksMostEvile.MODID);
+      DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MagiksMostEvile.MODID);
+
   public static final DeferredRegister<EntityType<?>> ENTITIES =
-      new DeferredRegister<>(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
+      DeferredRegister.create(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
+
   public static final DeferredRegister<ContainerType<?>> CONTAINERS =
-      new DeferredRegister<>(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
+      DeferredRegister.create(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
+
   public static final DeferredRegister<Ritual> RITUALS =
-      new DeferredRegister<Ritual>(LazyForgeRegistry.of(Ritual.class), MagiksMostEvile.MODID);
+      DeferredRegister.create(EvileRegistries.RITUALS, MagiksMostEvile.MODID);
+
   public static final DeferredRegister<ParticleType<?>> PARTICLES =
-      new DeferredRegister<ParticleType<?>>(ForgeRegistries.PARTICLE_TYPES, MagiksMostEvile.MODID);
+      DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MagiksMostEvile.MODID);
 
   // =========BLOCKS======================================================================================================================
   public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block",
       () -> new Block(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE)
-          .sound(SoundType.GLASS).lightValue(5 / 16).hardnessAndResistance(3F, 3F)));
+          .sound(SoundType.GLASS).setLightLevel((state) -> 5 / 16).hardnessAndResistance(3F, 3F)));
   public static final RegistryObject<Block> AMETHYST_ORE_OVERWORLD = BLOCKS
       .register("amethyst_ore_overworld", () -> new Block(Block.Properties.create(Material.ROCK)
           .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(5F, 5F)));
@@ -158,7 +162,7 @@ public class EvileDeferredRegistry {
       ITEMS.register("amethyst_shovel", () -> new ShovelItem(EnumEvileItemTier.AMETHYST, 1, -0.5F,
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   public static final RegistryObject<Item> AMETHYST_HOE =
-      ITEMS.register("amethyst_hoe", () -> new HoeItem(EnumEvileItemTier.AMETHYST, -0.5F,
+      ITEMS.register("amethyst_hoe", () -> new HoeItem(EnumEvileItemTier.AMETHYST, 1, -0.5F,
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   public static final RegistryObject<Item> POWERED_AMETHYST_SWORD = ITEMS
       .register("powered_amethyst_sword", () -> new GlowingSword(EnumEvileItemTier.POWERED_AMETHYST,
@@ -173,7 +177,7 @@ public class EvileDeferredRegistry {
       "powered_amethyst_shovel", () -> new GlowingShovel(EnumEvileItemTier.POWERED_AMETHYST, 2,
           -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   public static final RegistryObject<Item> POWERED_AMETHYST_HOE = ITEMS
-      .register("powered_amethyst_hoe", () -> new GlowingHoe(EnumEvileItemTier.POWERED_AMETHYST,
+      .register("powered_amethyst_hoe", () -> new GlowingHoe(EnumEvileItemTier.POWERED_AMETHYST, 2,
           -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
   // =========WEAPONS====================================================================================================================
@@ -292,13 +296,6 @@ public class EvileDeferredRegistry {
       ENTITIES.register("tinder_and_cinder",
           () -> EntityType.Builder.create(TinderAndCinderEntity::new, EntityClassification.MONSTER)
               .immuneToFire().setTrackingRange(64).size(0.5f, 0.5f).build("tinder_and_cinder"));
-
-  // =========GENERATION (structures should be done via registry events)
-  // =================================================================
-
-  public static final RegistryObject<EvileOreFeature> AMETHYST_ORE_OVERWORLD_GEN =
-      FEATURES.register("amethyst_ore_overworld_gen",
-          () -> new EvileOreFeature(EvileOreFeatureConfig::deserialize));
 
   // =========RITUALS=====================================================================================================================
   public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL =

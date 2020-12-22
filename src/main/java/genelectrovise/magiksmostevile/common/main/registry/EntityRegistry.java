@@ -5,9 +5,7 @@ package genelectrovise.magiksmostevile.common.main.registry;
 
 import java.util.Iterator;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
@@ -30,21 +28,23 @@ public class EntityRegistry {
     @SuppressWarnings("deprecation")
     @SubscribeEvent
     public static void addVampireBatSpawns(FMLCommonSetupEvent event) {
+
+      // Run later
       DeferredWorkQueue.runLater(() -> {
-        MagiksMostEvile.LOGGER.debug(
-            "Adding vampire bats to Biomes! (will skip Biome.Category == OCEAN, NETHER, THEEND)");
+
         Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
         biomes.forEachRemaining((biome) -> {
+
+          // If biome is not the ocean, nether, or end, add a spawn
           if (biome.getCategory() != Biome.Category.OCEAN
               || biome.getCategory() != Biome.Category.NETHER
               || biome.getCategory() != Biome.Category.THEEND) {
-            MagiksMostEvile.LOGGER
-                .debug(" > Adding vampire bat spawn list entry to Biome : " + biome);
-            biome.getSpawns(EntityClassification.MONSTER)
-                .add(new SpawnListEntry(EvileDeferredRegistry.VAMPIRE_BAT.get(), 5, 2, 10));
+
+            biome.getMobSpawnInfo().getEntityTypes().add(EvileDeferredRegistry.VAMPIRE_BAT.get());
           }
         });
       });
+
     }
 
   }

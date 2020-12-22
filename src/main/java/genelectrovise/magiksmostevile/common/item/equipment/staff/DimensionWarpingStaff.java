@@ -4,18 +4,13 @@
 package genelectrovise.magiksmostevile.common.item.equipment.staff;
 
 import java.util.List;
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.block.EndPortalBlock;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.client.world.DimensionRenderInfo.Overworld;
-import net.minecraft.command.impl.GiveCommand;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EnderPearlEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.EndPortalTileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
@@ -25,8 +20,6 @@ import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.server.command.CommandSetDimension;
 
 /**
  * @author GenElectrovise 18 Jun 2020

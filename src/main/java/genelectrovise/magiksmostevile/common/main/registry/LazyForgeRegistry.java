@@ -3,11 +3,13 @@ package genelectrovise.magiksmostevile.common.main.registry;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.util.LazyValue;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -104,7 +106,7 @@ public class LazyForgeRegistry<V extends IForgeRegistryEntry<V>> implements IFor
 
   @Override
   @Nonnull
-  public Set<Map.Entry<ResourceLocation, V>> getEntries() {
+  public Set<Entry<RegistryKey<V>, V>> getEntries() {
     return getRegistry().getEntries();
   }
 
