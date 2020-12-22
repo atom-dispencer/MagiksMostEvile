@@ -22,11 +22,6 @@ public class AmethystCrystalBlock extends Block {
   }
 
   @Override
-  public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-    return false;
-  }
-
-  @Override
   public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos,
       ISelectionContext context) {
     return BLOCK_SHAPE;
