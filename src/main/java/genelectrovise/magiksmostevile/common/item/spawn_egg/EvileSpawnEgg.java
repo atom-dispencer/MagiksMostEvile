@@ -30,6 +30,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.AbstractSpawner;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -79,9 +80,13 @@ public abstract class EvileSpawnEgg extends Item {
    */
   public ActionResultType onItemUse(ItemUseContext context) {
     World world = context.getWorld();
+
+    // If client, return
     if (world.isRemote) {
       return ActionResultType.SUCCESS;
-    } else {
+    }
+    // If server
+    else {
       ItemStack itemstack = context.getItem();
       BlockPos blockpos = context.getPos();
       Direction direction = context.getFace();
@@ -109,8 +114,9 @@ public abstract class EvileSpawnEgg extends Item {
       }
 
       EntityType<?> entitytype = this.getEntityType();
-      if (entitytype.spawn(world, itemstack, context.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG,
-          true, !Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
+      if (entitytype.spawn((ServerWorld) world, itemstack, context.getPlayer(), blockpos1,
+          SpawnReason.SPAWN_EGG, true,
+          !Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
         itemstack.shrink(1);
       }
 
@@ -124,33 +130,58 @@ public abstract class EvileSpawnEgg extends Item {
    */
   public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn,
       Hand handIn) {
+
+    // Hand
     ItemStack itemstack = playerIn.getHeldItem(handIn);
+
+    // What are they looking at
     RayTraceResult raytraceresult =
         rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
+
+    // If is not a block return pass
     if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
       return ActionResult.resultPass(itemstack);
-    } else if (worldIn.isRemote) {
+    }
+    // Otherwise give the client success
+    else if (worldIn.isRemote) {
       return ActionResult.resultSuccess(itemstack);
-    } else {
+    }
+    // And give the server spawning logic
+    else {
       BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
       BlockPos blockpos = blockraytraceresult.getPos();
+
+      // If not a fluid
       if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
         return ActionResult.resultPass(itemstack);
-      } else if (worldIn.isBlockModifiable(playerIn, blockpos)
+      }
+      // Can the targetted block be modified by the player? Can the player edit the targetted face
+      // with this itemstack?
+      else if (worldIn.isBlockModifiable(playerIn, blockpos)
           && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
+
+        // Type to spawn
         EntityType<?> entitytype = this.getEntityType();
-        if (entitytype.spawn(worldIn, itemstack, playerIn, blockpos, SpawnReason.SPAWN_EGG, false,
+
+        // If null spawned, pass
+        if (entitytype.spawn((ServerWorld) worldIn, itemstack, playerIn, blockpos, SpawnReason.SPAWN_EGG, false,
             false) == null) {
           return ActionResult.resultPass(itemstack);
-        } else {
+        }
+        // Else shrink the stack if the player is not creative
+        else {
           if (!playerIn.abilities.isCreativeMode) {
             itemstack.shrink(1);
           }
 
+          // Record usage and succeed
           playerIn.addStat(Stats.ITEM_USED.get(this));
           return ActionResult.resultSuccess(itemstack);
         }
-      } else {
+      }
+      
+      // If the block was not modifiable, fail
+      else {
         return ActionResult.resultFail(itemstack);
       }
     }
