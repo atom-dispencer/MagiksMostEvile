@@ -12,19 +12,19 @@ import net.minecraftforge.items.SlotItemHandler;
  */
 public class SlotAltar extends SlotItemHandler {
 
-	/**
-	 * @param itemHandler
-	 * @param index
-	 * @param xPosition
-	 * @param yPosition
-	 */
-	public SlotAltar(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-		super(itemHandler, index, xPosition, yPosition);
-	}
+  /**
+   * @param itemHandler
+   * @param index
+   * @param xPosition
+   * @param yPosition
+   */
+  public SlotAltar(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+    super(itemHandler, index, xPosition, yPosition);
+  }
 
-	@Override
-	public boolean isItemValid(ItemStack stack) {
-		return true;
-	}
+  @Override
+  public boolean isItemValid(ItemStack stack) {
+    return true;
+  }
 
 }

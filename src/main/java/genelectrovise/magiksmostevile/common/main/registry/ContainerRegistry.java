@@ -16,8 +16,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ContainerRegistry {
 
-	@SubscribeEvent
-	public static void registerFactories(FMLLoadCompleteEvent event) {
-		ScreenManager.registerFactory(EvileDeferredRegistry.ALTAR_CONTAINER.get(), new AltarScreenManager());
-	}
+  @SubscribeEvent
+  public static void registerFactories(FMLLoadCompleteEvent event) {
+    ScreenManager.registerFactory(EvileDeferredRegistry.ALTAR_CONTAINER.get(),
+        new AltarScreenManager());
+  }
 }

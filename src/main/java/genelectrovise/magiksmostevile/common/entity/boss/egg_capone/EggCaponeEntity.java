@@ -12,12 +12,12 @@ import net.minecraft.world.World;
  */
 public class EggCaponeEntity extends BossMob {
 
-	/**
-	 * @param type
-	 * @param worldIn
-	 */
-	public EggCaponeEntity(EntityType<? extends EggCaponeEntity> type, World worldIn) {
-		super(type, worldIn);
-	}
+  /**
+   * @param type
+   * @param worldIn
+   */
+  public EggCaponeEntity(EntityType<? extends EggCaponeEntity> type, World worldIn) {
+    super(type, worldIn);
+  }
 
 }

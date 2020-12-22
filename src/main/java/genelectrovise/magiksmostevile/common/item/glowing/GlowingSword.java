@@ -6,13 +6,13 @@ import net.minecraft.item.SwordItem;
 
 public class GlowingSword extends SwordItem {
 
-	public GlowingSword(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
-		super(tier, attackDamageIn, attackSpeedIn, builder);
-	}
-	
-	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return true;
-	}
+  public GlowingSword(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+    super(tier, attackDamageIn, attackSpeedIn, builder);
+  }
+
+  @Override
+  public boolean hasEffect(ItemStack stack) {
+    return true;
+  }
 
 }

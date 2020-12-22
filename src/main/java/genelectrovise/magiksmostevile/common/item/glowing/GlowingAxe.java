@@ -6,13 +6,13 @@ import net.minecraft.item.ItemStack;
 
 public class GlowingAxe extends AxeItem {
 
-	public GlowingAxe(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
-		super(tier, attackDamageIn, attackSpeedIn, builder);
-	}
-	
-	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return true;
-	}
+  public GlowingAxe(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
+    super(tier, attackDamageIn, attackSpeedIn, builder);
+  }
+
+  @Override
+  public boolean hasEffect(ItemStack stack) {
+    return true;
+  }
 
 }

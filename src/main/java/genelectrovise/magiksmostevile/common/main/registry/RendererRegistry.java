@@ -18,9 +18,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class RendererRegistry {
 
-	@SubscribeEvent
-	public static void renderers(FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(EvileDeferredRegistry.VAMPIRE_BAT.get(), VampireBatRenderer::new);
-		RenderingRegistry.registerEntityRenderingHandler(EvileDeferredRegistry.THE_KRAKEN.get(), TheKrakenRenderer::new);
-	}
+  @SubscribeEvent
+  public static void renderers(FMLClientSetupEvent event) {
+    RenderingRegistry.registerEntityRenderingHandler(EvileDeferredRegistry.VAMPIRE_BAT.get(),
+        VampireBatRenderer::new);
+    RenderingRegistry.registerEntityRenderingHandler(EvileDeferredRegistry.THE_KRAKEN.get(),
+        TheKrakenRenderer::new);
+  }
 }

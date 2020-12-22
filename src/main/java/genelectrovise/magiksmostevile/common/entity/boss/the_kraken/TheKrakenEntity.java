@@ -12,12 +12,12 @@ import net.minecraft.world.World;
  */
 public class TheKrakenEntity extends BossMob {
 
-	/**
-	 * @param type
-	 * @param worldIn
-	 */
-	public TheKrakenEntity(EntityType<? extends TheKrakenEntity> type, World worldIn) {
-		super(type, worldIn);
-	}
+  /**
+   * @param type
+   * @param worldIn
+   */
+  public TheKrakenEntity(EntityType<? extends TheKrakenEntity> type, World worldIn) {
+    super(type, worldIn);
+  }
 
 }

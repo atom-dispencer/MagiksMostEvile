@@ -4,7 +4,6 @@
 package genelectrovise.magiksmostevile.common.main.registry;
 
 import java.util.Iterator;
-
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.reference.StructureReference;
 import genelectrovise.magiksmostevile.common.world.gen.ore.EvileOreGeneration;
@@ -34,61 +33,66 @@ import net.minecraftforge.registries.ObjectHolder;
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class WorldGenerationRegistry {
 
-	/**
-	 * Contains the {@link ObjectHolder}s for {@link MagiksMostEvile}
-	 * 
-	 * @author GenElectrovise 12 Jun 2020
-	 */
-	@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class ObjectHolders {
-		@ObjectHolder(MagiksMostEvile.MODID + ":shrine")
-		public static Structure<NoFeatureConfig> SHRINE_CENTRE;
-	}
+  /**
+   * Contains the {@link ObjectHolder}s for {@link MagiksMostEvile}
+   * 
+   * @author GenElectrovise 12 Jun 2020
+   */
+  @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+  public static class ObjectHolders {
+    @ObjectHolder(MagiksMostEvile.MODID + ":shrine")
+    public static Structure<NoFeatureConfig> SHRINE_CENTRE;
+  }
 
-	/**
-	 * A class containing the methods to register and add shrines to the world
-	 * 
-	 * @author GenElectrovise 12 Jun 2020
-	 */
-	@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class Shrine {
+  /**
+   * A class containing the methods to register and add shrines to the world
+   * 
+   * @author GenElectrovise 12 Jun 2020
+   */
+  @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+  public static class Shrine {
 
-		@SubscribeEvent
-		public static void registerShrines(RegistryEvent.Register<Feature<?>> event) {
-			MagiksMostEvile.LOGGER.debug("Registering shrines!");
-			Shrine2.CENTRE_PIECE = Registry.register(Registry.STRUCTURE_PIECE, StructureReference.SHRINE_LOC, ShrinePiece.ShrineCentrePiece::new);
-			event.getRegistry().register(new Shrine2(NoFeatureConfig::deserialize).setRegistryName(StructureReference.SHRINE_LOC));
+    @SubscribeEvent
+    public static void registerShrines(RegistryEvent.Register<Feature<?>> event) {
+      MagiksMostEvile.LOGGER.debug("Registering shrines!");
+      Shrine2.CENTRE_PIECE = Registry.register(Registry.STRUCTURE_PIECE,
+          StructureReference.SHRINE_LOC, ShrinePiece.ShrineCentrePiece::new);
+      event.getRegistry().register(
+          new Shrine2(NoFeatureConfig::deserialize).setRegistryName(StructureReference.SHRINE_LOC));
 
-		}
+    }
 
-		@SuppressWarnings("deprecation")
-		@SubscribeEvent
-		public static void addShrines(FMLCommonSetupEvent event) {
-			MagiksMostEvile.LOGGER.debug("Adding shrines to Biomes!");
-			DeferredWorkQueue.runLater(() -> {
-				Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
-				biomes.forEachRemaining((biome) -> {
-					biome.addStructure(ObjectHolders.SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-					biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, ObjectHolders.SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-				});
-			});
-		}
-	}
+    @SuppressWarnings("deprecation")
+    @SubscribeEvent
+    public static void addShrines(FMLCommonSetupEvent event) {
+      MagiksMostEvile.LOGGER.debug("Adding shrines to Biomes!");
+      DeferredWorkQueue.runLater(() -> {
+        Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
+        biomes.forEachRemaining((biome) -> {
+          biome.addStructure(
+              ObjectHolders.SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+          biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES,
+              ObjectHolders.SHRINE_CENTRE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
+                  .withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+        });
+      });
+    }
+  }
 
-	/**
-	 * Adds ores to the world.
-	 * 
-	 * @author GenElectrovise 12 Jun 2020
-	 */
-	@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class Ore {
+  /**
+   * Adds ores to the world.
+   * 
+   * @author GenElectrovise 12 Jun 2020
+   */
+  @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+  public static class Ore {
 
-		@SubscribeEvent
-		public static void addOres(FMLLoadCompleteEvent event) {
-			MagiksMostEvile.LOGGER.debug("Adding ores!");
-			EvileOreGeneration.addOverworldOres();
-			EvileOreGeneration.addNetherOres();
-			// EvileOreGeneration.addEndOres();
-		}
-	}
+    @SubscribeEvent
+    public static void addOres(FMLLoadCompleteEvent event) {
+      MagiksMostEvile.LOGGER.debug("Adding ores!");
+      EvileOreGeneration.addOverworldOres();
+      EvileOreGeneration.addNetherOres();
+      // EvileOreGeneration.addEndOres();
+    }
+  }
 }

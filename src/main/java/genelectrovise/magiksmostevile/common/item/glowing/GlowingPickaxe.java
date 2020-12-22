@@ -6,13 +6,14 @@ import net.minecraft.item.PickaxeItem;
 
 public class GlowingPickaxe extends PickaxeItem {
 
-	public GlowingPickaxe(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
-		super(tier, attackDamageIn, attackSpeedIn, builder);
-	}
-	
-	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return true;
-	}
+  public GlowingPickaxe(IItemTier tier, int attackDamageIn, float attackSpeedIn,
+      Properties builder) {
+    super(tier, attackDamageIn, attackSpeedIn, builder);
+  }
+
+  @Override
+  public boolean hasEffect(ItemStack stack) {
+    return true;
+  }
 
 }

@@ -8,17 +8,16 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 
 /**
- * @author GenElectrovise
- * 23 Jun 2020
+ * @author GenElectrovise 23 Jun 2020
  */
 public class TomTheTrollEntity extends BossMob {
 
-	/**
-	 * @param type
-	 * @param worldIn
-	 */
-	public TomTheTrollEntity(EntityType<? extends TomTheTrollEntity> type, World worldIn) {
-		super(type, worldIn);
-	}
+  /**
+   * @param type
+   * @param worldIn
+   */
+  public TomTheTrollEntity(EntityType<? extends TomTheTrollEntity> type, World worldIn) {
+    super(type, worldIn);
+  }
 
 }

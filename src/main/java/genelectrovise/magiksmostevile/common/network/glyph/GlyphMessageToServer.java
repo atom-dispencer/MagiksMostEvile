@@ -8,20 +8,20 @@ import net.minecraft.network.PacketBuffer;
  */
 public class GlyphMessageToServer {
 
-	protected GlyphMessageToServer() {
-			
-	}
+  protected GlyphMessageToServer() {
 
-	public void encode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Encoding message to server");
-	}
+  }
 
-	public static GlyphMessageToServer decode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Decoding message to server");
-		return new GlyphMessageToServer();
-	}
+  public void encode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Encoding message to server");
+  }
 
-	public boolean isValid() {
-		return false;
-	}
+  public static GlyphMessageToServer decode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Decoding message to server");
+    return new GlyphMessageToServer();
+  }
+
+  public boolean isValid() {
+    return false;
+  }
 }

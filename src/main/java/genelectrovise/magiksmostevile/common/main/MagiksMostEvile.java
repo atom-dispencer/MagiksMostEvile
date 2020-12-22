@@ -1,7 +1,6 @@
 package genelectrovise.magiksmostevile.common.main;
 
 import org.apache.logging.log4j.LogManager;
-
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.common.particle.ParticleCommonStartup;
@@ -20,42 +19,45 @@ import net.minecraftforge.registries.RegistryBuilder;
 @Mod(MagiksMostEvile.MODID)
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MagiksMostEvile {
-	public static final EvileLog LOGGER = new EvileLog(LogManager.getLogger());
-	public static final String MODID = "magiksmostevile";
-	public static final String VERSION = "1.0";
-	public static final String NAME = "MagiksMostEvile";
-	public static final String ACCEPTED_VERSIONS = "1.15.2";
+  public static final EvileLog LOGGER = new EvileLog(LogManager.getLogger());
+  public static final String MODID = "magiksmostevile";
+  public static final String VERSION = "1.0";
+  public static final String NAME = "MagiksMostEvile";
+  public static final String ACCEPTED_VERSIONS = "1.15.2";
 
-	public static IEventBus EVENT_BUS;
+  public static IEventBus EVENT_BUS;
 
-	public MagiksMostEvile() {
-		EVENT_BUS = FMLJavaModLoadingContext.get().getModEventBus();
-		
-		LOGGER.info("Welcome to Magiks Most Evile! Hello from the Main class! (If you can see this message, Magiks Most Evile is being loaded by Forge! Woohoo!)");
-		MagiksMostEvile.LOGGER.debug("Log Key 182927012020 : FMLJavaModLoadingContext = " + FMLJavaModLoadingContext.get());
+  public MagiksMostEvile() {
+    EVENT_BUS = FMLJavaModLoadingContext.get().getModEventBus();
 
-		registerEventListeners(MinecraftForge.EVENT_BUS);
-		EvileDeferredRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
+    LOGGER.info(
+        "Welcome to Magiks Most Evile! Hello from the Main class! (If you can see this message, Magiks Most Evile is being loaded by Forge! Woohoo!)");
+    MagiksMostEvile.LOGGER.debug(
+        "Log Key 182927012020 : FMLJavaModLoadingContext = " + FMLJavaModLoadingContext.get());
 
-		registerCommonEvents();
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> MagiksMostEvile::registerClientOnlyEvents);
-	}
+    registerEventListeners(MinecraftForge.EVENT_BUS);
+    EvileDeferredRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
 
-	@SubscribeEvent
-	public static void createRegistries(RegistryEvent.NewRegistry event) {
-		new RegistryBuilder<Ritual>().setType(Ritual.class).setName(new ResourceLocation(MODID, "ritual")).create();
-	}
+    registerCommonEvents();
+    DistExecutor.runWhenOn(Dist.CLIENT, () -> MagiksMostEvile::registerClientOnlyEvents);
+  }
 
-	private static void registerEventListeners(IEventBus bus) {
-		MagiksMostEvile.LOGGER.debug("==MME1== Registering Event Listeners to Forge EventBus");
-	}
+  @SubscribeEvent
+  public static void createRegistries(RegistryEvent.NewRegistry event) {
+    new RegistryBuilder<Ritual>().setType(Ritual.class)
+        .setName(new ResourceLocation(MODID, "ritual")).create();
+  }
 
-	public static void registerCommonEvents() {
-		EVENT_BUS.register(ParticleCommonStartup.class);
-	}
+  private static void registerEventListeners(IEventBus bus) {
+    MagiksMostEvile.LOGGER.debug("==MME1== Registering Event Listeners to Forge EventBus");
+  }
 
-	public static void registerClientOnlyEvents() {
-		EVENT_BUS.register(ParticleClientStartup.class);
-	}
+  public static void registerCommonEvents() {
+    EVENT_BUS.register(ParticleCommonStartup.class);
+  }
+
+  public static void registerClientOnlyEvents() {
+    EVENT_BUS.register(ParticleClientStartup.class);
+  }
 
 }

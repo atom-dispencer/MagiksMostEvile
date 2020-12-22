@@ -10,26 +10,26 @@ import net.minecraft.util.IntReferenceHolder;
  */
 public class TrackableIntegerHolder extends IntReferenceHolder {
 
-	public int value;
-	public String nbtKey;
+  public int value;
+  public String nbtKey;
 
-	public TrackableIntegerHolder(int value) {
-		this(value, "trackableIntegerHolderKey");
-	}
+  public TrackableIntegerHolder(int value) {
+    this(value, "trackableIntegerHolderKey");
+  }
 
-	public TrackableIntegerHolder(int value, String nbtKey) {
-		this.value = value;
-		this.nbtKey = nbtKey;
-	}
+  public TrackableIntegerHolder(int value, String nbtKey) {
+    this.value = value;
+    this.nbtKey = nbtKey;
+  }
 
-	@Override
-	public int get() {
-		return value;
-	}
+  @Override
+  public int get() {
+    return value;
+  }
 
-	@Override
-	public void set(int value) {
-		this.value = value;
-	}
+  @Override
+  public void set(int value) {
+    this.value = value;
+  }
 
 }

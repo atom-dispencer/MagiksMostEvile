@@ -9,22 +9,22 @@ import net.minecraft.network.PacketBuffer;
 @Deprecated
 public class AltarEnergyUpdateMessageToServer {
 
-	private static boolean messageIsValid;
+  private static boolean messageIsValid;
 
-	public AltarEnergyUpdateMessageToServer() {
-		messageIsValid = true;
-	}
+  public AltarEnergyUpdateMessageToServer() {
+    messageIsValid = true;
+  }
 
-	public void encode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Encoding message to server");
-	}
+  public void encode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Encoding message to server");
+  }
 
-	public static AltarEnergyUpdateMessageToServer decode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Decoding message to server");
-		return new AltarEnergyUpdateMessageToServer();
-	}
+  public static AltarEnergyUpdateMessageToServer decode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Decoding message to server");
+    return new AltarEnergyUpdateMessageToServer();
+  }
 
-	public boolean isValid() {
-		return messageIsValid;
-	}
+  public boolean isValid() {
+    return messageIsValid;
+  }
 }

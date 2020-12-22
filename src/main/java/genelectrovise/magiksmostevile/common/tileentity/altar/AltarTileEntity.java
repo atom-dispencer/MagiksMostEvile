@@ -3,7 +3,6 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Supplier;
-
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
@@ -51,313 +50,345 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
  */
 public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
 
-	private static final int BASE_ENERGY_CAPACITY = 50;
-	private static final int ADDITIONAL_STORAGE_PER_CRYSTAL = 50;
-	private static final int DAY_ENERGY_PER_CRYSTAL = 1;
-	private static final int NIGHT_ENERGY_PER_CRYSTAL = 3;
+  private static final int BASE_ENERGY_CAPACITY = 50;
+  private static final int ADDITIONAL_STORAGE_PER_CRYSTAL = 50;
+  private static final int DAY_ENERGY_PER_CRYSTAL = 1;
+  private static final int NIGHT_ENERGY_PER_CRYSTAL = 3;
 
-	private int tickIncr = 0;
-	private int recieveFluxCountdown = 0;
-	private ArrayList<AmethystCrystalTileEntity> crystals = new ArrayList<AmethystCrystalTileEntity>();
-	public boolean isCasting = false;
-	public Ritual currentRitual;
+  private int tickIncr = 0;
+  private int recieveFluxCountdown = 0;
+  private ArrayList<AmethystCrystalTileEntity> crystals =
+      new ArrayList<AmethystCrystalTileEntity>();
+  public boolean isCasting = false;
+  public Ritual currentRitual;
 
-	// IItemHandler
-	protected ItemStackHandler slot_0;
-	protected ItemStackHandler slot_1;
-	protected ItemStackHandler slot_2;
-	protected ItemStackHandler slot_3;
+  // IItemHandler
+  protected ItemStackHandler slot_0;
+  protected ItemStackHandler slot_1;
+  protected ItemStackHandler slot_2;
+  protected ItemStackHandler slot_3;
 
-	private final LazyOptional<IItemHandler> slot_0_holder = LazyOptional.of(() -> slot_0);
-	private final LazyOptional<IItemHandler> slot_1_holder = LazyOptional.of(() -> slot_1);
-	private final LazyOptional<IItemHandler> slot_2_holder = LazyOptional.of(() -> slot_2);
-	private final LazyOptional<IItemHandler> slot_3_holder = LazyOptional.of(() -> slot_3);
+  private final LazyOptional<IItemHandler> slot_0_holder = LazyOptional.of(() -> slot_0);
+  private final LazyOptional<IItemHandler> slot_1_holder = LazyOptional.of(() -> slot_1);
+  private final LazyOptional<IItemHandler> slot_2_holder = LazyOptional.of(() -> slot_2);
+  private final LazyOptional<IItemHandler> slot_3_holder = LazyOptional.of(() -> slot_3);
 
-	private final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
+  private final LazyOptional<IItemHandler> allSlots =
+      LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
-	// IEnergyStorage
-	protected AltarEnergyStorage energyStorage;
+  // IEnergyStorage
+  protected AltarEnergyStorage energyStorage;
 
-	private final LazyOptional<IEnergyStorage> energyStorageLazyOptional = LazyOptional.of(() -> energyStorage);
+  private final LazyOptional<IEnergyStorage> energyStorageLazyOptional =
+      LazyOptional.of(() -> energyStorage);
 
-	// Constructor
+  // Constructor
 
-	public AltarTileEntity() {
-		super(EvileDeferredRegistry.TILE_ENTITY_ALTAR.get());
-		MagiksMostEvile.LOGGER.debug("Constructing class : AltarTileEntity");
+  public AltarTileEntity() {
+    super(EvileDeferredRegistry.TILE_ENTITY_ALTAR.get());
+    MagiksMostEvile.LOGGER.debug("Constructing class : AltarTileEntity");
 
-		// IItemHandler
-		slot_0 = new ItemStackHandler() {
-			@Override
-			protected void onContentsChanged(int slot) {
-				markDirty();
-			}
-		};
+    // IItemHandler
+    slot_0 = new ItemStackHandler() {
+      @Override
+      protected void onContentsChanged(int slot) {
+        markDirty();
+      }
+    };
 
-		slot_1 = new ItemStackHandler() {
-			@Override
-			protected void onContentsChanged(int slot) {
-				markDirty();
-			}
-		};
+    slot_1 = new ItemStackHandler() {
+      @Override
+      protected void onContentsChanged(int slot) {
+        markDirty();
+      }
+    };
 
-		slot_2 = new ItemStackHandler() {
-			@Override
-			protected void onContentsChanged(int slot) {
-				markDirty();
-			}
-		};
+    slot_2 = new ItemStackHandler() {
+      @Override
+      protected void onContentsChanged(int slot) {
+        markDirty();
+      }
+    };
 
-		slot_3 = new ItemStackHandler() {
-			@Override
-			protected void onContentsChanged(int slot) {
-				markDirty();
-			}
-		};
+    slot_3 = new ItemStackHandler() {
+      @Override
+      protected void onContentsChanged(int slot) {
+        markDirty();
+      }
+    };
 
-		// IEnergyStorage
-		energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0, MagiksMostEvile.MODID + ":energyStorage") {
+    // IEnergyStorage
+    energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0,
+        MagiksMostEvile.MODID + ":energyStorage") {
 
-		};
-	}
-	
-	// IItemHandler
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
-		// IItemHandler
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			this.markDirty();
-			if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if the block at myself isn't myself, allow full access (Block Broken)
-				return allSlots.cast();
-			}
-			if (facing == null) {
-				return allSlots.cast();
-			}
-		}
+    };
+  }
 
-		// IEnergyStorage
-		if (capability == CapabilityEnergy.ENERGY) {
-			this.markDirty();
+  // IItemHandler
+  @Override
+  public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
+    // IItemHandler
+    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+      this.markDirty();
+      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if
+                                                                                                    // the
+                                                                                                    // block
+                                                                                                    // at
+                                                                                                    // myself
+                                                                                                    // isn't
+                                                                                                    // myself,
+                                                                                                    // allow
+                                                                                                    // full
+                                                                                                    // access
+                                                                                                    // (Block
+                                                                                                    // Broken)
+        return allSlots.cast();
+      }
+      if (facing == null) {
+        return allSlots.cast();
+      }
+    }
 
-			if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if the block at myself isn't myself, allow full access (Block Broken)
-				return energyStorageLazyOptional.cast();
-			}
-			if (facing == null) {
-				return energyStorageLazyOptional.cast();
-			}
-		}
+    // IEnergyStorage
+    if (capability == CapabilityEnergy.ENERGY) {
+      this.markDirty();
 
-		return super.getCapability(capability, facing);
-	}
+      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if
+                                                                                                    // the
+                                                                                                    // block
+                                                                                                    // at
+                                                                                                    // myself
+                                                                                                    // isn't
+                                                                                                    // myself,
+                                                                                                    // allow
+                                                                                                    // full
+                                                                                                    // access
+                                                                                                    // (Block
+                                                                                                    // Broken)
+        return energyStorageLazyOptional.cast();
+      }
+      if (facing == null) {
+        return energyStorageLazyOptional.cast();
+      }
+    }
 
-	// Generic stuff for tile entities
+    return super.getCapability(capability, facing);
+  }
 
-	@Override
-	public void remove() {
-		super.remove();
-		slot_0_holder.invalidate();
-		slot_1_holder.invalidate();
-		slot_2_holder.invalidate();
-		slot_3_holder.invalidate();
-		allSlots.invalidate();
+  // Generic stuff for tile entities
 
-		energyStorageLazyOptional.invalidate();
-	}
+  @Override
+  public void remove() {
+    super.remove();
+    slot_0_holder.invalidate();
+    slot_1_holder.invalidate();
+    slot_2_holder.invalidate();
+    slot_3_holder.invalidate();
+    allSlots.invalidate();
 
-	@Override
-	public void read(CompoundNBT tag) {
-		super.read(tag);
-		slot_0.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_0"));
-		slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
-		slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
-		slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
-		energyStorage.fromNbt(tag.getCompound(energyStorage.nbtKey));
-		setCasting(tag.getBoolean("casting"));
-		ResourceLocation location = new ResourceLocation(tag.getString("ritual"));
-		Ritual ritual = location.equals(Ritual.NONE) ? null : getRitualFromResourceLocation(location);
+    energyStorageLazyOptional.invalidate();
+  }
 
-		if (ritual != null) {
-			try {
-				castRitualAtArbitraryTick(ritual, tag.getInt("ritual_tick"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+  @Override
+  public void read(CompoundNBT tag) {
+    super.read(tag);
+    slot_0.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_0"));
+    slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
+    slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
+    slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
+    energyStorage.fromNbt(tag.getCompound(energyStorage.nbtKey));
+    setCasting(tag.getBoolean("casting"));
+    ResourceLocation location = new ResourceLocation(tag.getString("ritual"));
+    Ritual ritual = location.equals(Ritual.NONE) ? null : getRitualFromResourceLocation(location);
 
-	@Override
-	public CompoundNBT write(CompoundNBT tag) {
-		tag = super.write(tag);
-		tag.put(MagiksMostEvile.MODID + ":slot_0", slot_0.serializeNBT());
-		tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
-		tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
-		tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
-		tag.put(energyStorage.nbtKey, energyStorage.toNbt());
-		tag.putBoolean("casting", isCasting());
-		tag.putInt("ritual_tick", currentRitual != null ? currentRitual.getTick() : 0);
-		tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString() : Ritual.NONE.toString());
+    if (ritual != null) {
+      try {
+        castRitualAtArbitraryTick(ritual, tag.getInt("ritual_tick"));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
 
-		return tag;
-	}
+  @Override
+  public CompoundNBT write(CompoundNBT tag) {
+    tag = super.write(tag);
+    tag.put(MagiksMostEvile.MODID + ":slot_0", slot_0.serializeNBT());
+    tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
+    tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
+    tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
+    tag.put(energyStorage.nbtKey, energyStorage.toNbt());
+    tag.putBoolean("casting", isCasting());
+    tag.putInt("ritual_tick", currentRitual != null ? currentRitual.getTick() : 0);
+    tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString()
+        : Ritual.NONE.toString());
 
-	@Override
-	public void onLoad() {
-		super.onLoad();
-	}
+    return tag;
+  }
 
-	// ITickableTileEntity
-	@Override
-	public void tick() {
+  @Override
+  public void onLoad() {
+    super.onLoad();
+  }
 
-		if (!world.isRemote) {
-			if (tickIncr % 100 == 0) {
-				for (AmethystCrystalTileEntity te : crystals) {
-					ParticleNetworkingManager.CTransferEnergy.send(PacketDistributor.ALL.noArg(), new TransferEnergyMessageToClient(te.getPos(), this.getPos()));
-				}
-			}
-		}
+  // ITickableTileEntity
+  @Override
+  public void tick() {
 
-		if (!world.isRemote) {
-			// Test for crystals nearby
-			if (tickIncr % 100 == 0) {
-				crystals.clear();
+    if (!world.isRemote) {
+      if (tickIncr % 100 == 0) {
+        for (AmethystCrystalTileEntity te : crystals) {
+          ParticleNetworkingManager.CTransferEnergy.send(PacketDistributor.ALL.noArg(),
+              new TransferEnergyMessageToClient(te.getPos(), this.getPos()));
+        }
+      }
+    }
 
-				for (int x = -4; x < 4; x++) {
-					for (int y = -4; y < 4; y++) {
-						for (int z = -4; z < 4; z++) {
-							BlockPos position = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-							BlockState state = world.getBlockState(position);
-							if (state.getBlock() == EvileDeferredRegistry.AMETHYST_CRYSTAL.get() || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
-								crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
-							}
-						}
-					}
-				}
+    if (!world.isRemote) {
+      // Test for crystals nearby
+      if (tickIncr % 100 == 0) {
+        crystals.clear();
 
-				// Increase energy capacity
-				energyStorage.setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
-			}
+        for (int x = -4; x < 4; x++) {
+          for (int y = -4; y < 4; y++) {
+            for (int z = -4; z < 4; z++) {
+              BlockPos position = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+              BlockState state = world.getBlockState(position);
+              if (state.getBlock() == EvileDeferredRegistry.AMETHYST_CRYSTAL.get()
+                  || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
+                crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
+              }
+            }
+          }
+        }
 
-			// Receive amethyst flux
-			if (recieveFluxCountdown > 20) {
-				if (world instanceof ServerWorld) {
-					if (!world.isDaytime()) {
-						energyStorage.receiveEnergy(1, false);
+        // Increase energy capacity
+        energyStorage
+            .setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
+      }
 
-						if (new Random().nextInt(15) == 0) {
-							energyStorage.receiveMax(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL);
-						}
+      // Receive amethyst flux
+      if (recieveFluxCountdown > 20) {
+        if (world instanceof ServerWorld) {
+          if (!world.isDaytime()) {
+            energyStorage.receiveEnergy(1, false);
 
-						recieveFluxCountdown = 0;
-					} else {
-						if (new Random().nextInt(25) == 0) {
-							energyStorage.receiveMax(crystals.size() * DAY_ENERGY_PER_CRYSTAL);
-						}
-					}
-				}
-			} else {
-				recieveFluxCountdown++;
-			}
+            if (new Random().nextInt(15) == 0) {
+              energyStorage.receiveMax(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL);
+            }
 
-			// Should reset tickIncr
-			if (tickIncr > 100) {
-				tickIncr = 0;
-			} else {
-				tickIncr++;
-			}
-		}
+            recieveFluxCountdown = 0;
+          } else {
+            if (new Random().nextInt(25) == 0) {
+              energyStorage.receiveMax(crystals.size() * DAY_ENERGY_PER_CRYSTAL);
+            }
+          }
+        }
+      } else {
+        recieveFluxCountdown++;
+      }
 
-		tickRitual();
-	}
+      // Should reset tickIncr
+      if (tickIncr > 100) {
+        tickIncr = 0;
+      } else {
+        tickIncr++;
+      }
+    }
 
-	@Override
-	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
-		return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this);
-	}
+    tickRitual();
+  }
 
-	@Override
-	public void openGUI(ServerPlayerEntity player) {
-		if (!world.isRemote && !isCasting()) {
-			NetworkHooks.openGui(player, this, getPos());
-		}
-	}
+  @Override
+  public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
+    return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3),
+        this);
+  }
 
-	@Override
-	public ITextComponent getDisplayName() {
-		return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar");
-	}
+  @Override
+  public void openGUI(ServerPlayerEntity player) {
+    if (!world.isRemote && !isCasting()) {
+      NetworkHooks.openGui(player, this, getPos());
+    }
+  }
 
-	/**
-	 * @return the energyStorage
-	 */
-	public int getEnergyStored() {
-		return energyStorage.getEnergyStored();
-	}
+  @Override
+  public ITextComponent getDisplayName() {
+    return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar");
+  }
 
-	/**
-	 * 
-	 * @param energy How much to extract
-	 * @return Whether that amount was extracted.
-	 */
-	public boolean removeEnergy(int energy) {
-		if (energy == energyStorage.extractEnergy(energy, false)) {
-			return true;
-		}
-		return false;
-	}
+  /**
+   * @return the energyStorage
+   */
+  public int getEnergyStored() {
+    return energyStorage.getEnergyStored();
+  }
 
-	// Ritual handling
+  /**
+   * 
+   * @param energy How much to extract
+   * @return Whether that amount was extracted.
+   */
+  public boolean removeEnergy(int energy) {
+    if (energy == energyStorage.extractEnergy(energy, false)) {
+      return true;
+    }
+    return false;
+  }
 
-	/**
-	 * @return the isCasting
-	 */
-	public boolean isCasting() {
-		return isCasting;
-	}
+  // Ritual handling
 
-	/**
-	 * @param isCasting the isCasting to set
-	 */
-	public void setCasting(boolean isCasting) {
-		this.isCasting = isCasting;
-	}
+  /**
+   * @return the isCasting
+   */
+  public boolean isCasting() {
+    return isCasting;
+  }
 
-	/**
-	 * @param resourceLocation
-	 * @param serverPlayerEntity
-	 * @return
-	 */
-	public static Ritual getRitualFromResourceLocation(ResourceLocation resourceLocation) {
-		MagiksMostEvile.LOGGER.dev("getting ritual by resource location! : " + resourceLocation);
+  /**
+   * @param isCasting the isCasting to set
+   */
+  public void setCasting(boolean isCasting) {
+    this.isCasting = isCasting;
+  }
 
-		ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
-		EvileDeferredRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
+  /**
+   * @param resourceLocation
+   * @param serverPlayerEntity
+   * @return
+   */
+  public static Ritual getRitualFromResourceLocation(ResourceLocation resourceLocation) {
+    MagiksMostEvile.LOGGER.dev("getting ritual by resource location! : " + resourceLocation);
 
-		for (Supplier<Ritual> ritualSupplier : all) {
-			if (ritualSupplier.get().getRegistryName().toString().equalsIgnoreCase(resourceLocation.toString())) {
-				return ritualSupplier.get();
-			}
-		}
+    ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
+    EvileDeferredRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
 
-		return null;
-	}
+    for (Supplier<Ritual> ritualSupplier : all) {
+      if (ritualSupplier.get().getRegistryName().toString()
+          .equalsIgnoreCase(resourceLocation.toString())) {
+        return ritualSupplier.get();
+      }
+    }
 
-	public void castRitual(Ritual ritual) {
-		castRitualAtArbitraryTick(ritual, 0);
-	}
+    return null;
+  }
 
-	public void castRitualAtArbitraryTick(Ritual ritual, int tick) {
-		MagiksMostEvile.LOGGER.dev("casting Ritual!");
-		ritual.init(this);
-		ritual.setTick(tick);
-		ritual.tryStart();
-	}
+  public void castRitual(Ritual ritual) {
+    castRitualAtArbitraryTick(ritual, 0);
+  }
 
-	private void tickRitual() {
-		if (this.isCasting) {
-			if (this.currentRitual != null) {
-				currentRitual.nextCycle();
-			}
-		}
-	}
+  public void castRitualAtArbitraryTick(Ritual ritual, int tick) {
+    MagiksMostEvile.LOGGER.dev("casting Ritual!");
+    ritual.init(this);
+    ritual.setTick(tick);
+    ritual.tryStart();
+  }
+
+  private void tickRitual() {
+    if (this.isCasting) {
+      if (this.currentRitual != null) {
+        currentRitual.nextCycle();
+      }
+    }
+  }
 }
