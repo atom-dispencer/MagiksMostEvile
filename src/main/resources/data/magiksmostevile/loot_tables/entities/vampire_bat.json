@@ -1,0 +1,15 @@
+{
+	"pools": [
+		{
+			"name": "vampire_bat_tooth_pool",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "magiksmostevile:vampire_bat_tooth"
+				}
+			]
+		}
+	]
+}

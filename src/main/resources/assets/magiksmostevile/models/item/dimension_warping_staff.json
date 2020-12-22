@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "magiksmostevile:items/equipment/staff/dimension_warping_staff"
+   }
+}
