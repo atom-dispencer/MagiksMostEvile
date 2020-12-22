@@ -5,7 +5,7 @@
 # file with configuration.  For more information, see:
 # https://github.com/actions/labeler
 
-name: Pull Request Labeler
+name: Pull Request Labeler (GitHub - Label by paths)
 on: 
     -   pull_request
 
