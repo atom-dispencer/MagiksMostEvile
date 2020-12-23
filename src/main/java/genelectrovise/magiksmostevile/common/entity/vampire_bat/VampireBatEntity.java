@@ -89,6 +89,7 @@ public class VampireBatEntity extends MonsterEntity {
   public VampireBatEntity(EntityType<? extends VampireBatEntity> entityType, World world) {
     super(entityType, world);
     this.setIsBatHanging(false);
+
     this.moveController = new VampireBatMoveHelperController(this, 60, true);
     this.navigator = new FlyingPathNavigator(this, this.world);
 
@@ -143,7 +144,7 @@ public class VampireBatEntity extends MonsterEntity {
   /**
    * Create a map of attributes
    */
-  public static AttributeModifierMap.MutableAttribute func_234182_eX_() {
+  public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.func_233666_p_() //
         .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
         .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f)

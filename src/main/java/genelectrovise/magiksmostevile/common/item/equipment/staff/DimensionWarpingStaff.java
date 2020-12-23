@@ -17,7 +17,6 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentUtils;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -69,23 +68,26 @@ public class DimensionWarpingStaff extends Item {
         // Destination
         RegistryKey<World> worldKey;
 
+        // Current
+        RegistryKey<World> currentWorld = playerIn.world.getDimensionKey();
+
         // In Over-world
-        if (playerIn.world.getDimensionKey().compareTo(DimensionType.OVERWORLD) == 0) {
+        if (currentWorld.compareTo(World.OVERWORLD) == 0) {
           worldKey = World.THE_NETHER;
         }
         // In Nether
-        else if (playerIn.world.getDimensionKey().compareTo(DimensionType.THE_NETHER) == 0) {
+        else if (currentWorld.compareTo(World.THE_NETHER) == 0) {
           worldKey = World.THE_END;
         }
         // In End
-        else if (playerIn.world.getDimensionKey().compareTo(DimensionType.THE_END) == 0) {
+        else if (currentWorld.compareTo(World.THE_END) == 0) {
           worldKey = World.OVERWORLD;
         }
         // Default
         else {
           worldKey = World.OVERWORLD;
         }
-        
+
         changeDimension(playerIn, worldIn, worldKey);
 
       } catch (Exception e) {
@@ -113,7 +115,8 @@ public class DimensionWarpingStaff extends Item {
     if (serverworld == null) {
       return;
     }
-    entityIn.changeDimension(serverworld);
+
+    entityIn.changeDimension(serverworld, new NoPortalTeleporter(serverworld));
   }
 
   @Override

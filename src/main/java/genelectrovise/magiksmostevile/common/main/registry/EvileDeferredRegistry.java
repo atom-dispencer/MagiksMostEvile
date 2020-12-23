@@ -81,7 +81,7 @@ public class EvileDeferredRegistry {
       DeferredRegister.create(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
 
   public static final DeferredRegister<Ritual> RITUALS =
-      DeferredRegister.create(EvileRegistries.RITUALS, MagiksMostEvile.MODID);
+      DeferredRegister.create(Ritual.class, MagiksMostEvile.MODID);
 
   public static final DeferredRegister<ParticleType<?>> PARTICLES =
       DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MagiksMostEvile.MODID);

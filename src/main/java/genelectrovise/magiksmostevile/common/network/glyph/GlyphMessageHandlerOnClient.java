@@ -25,8 +25,6 @@ public class GlyphMessageHandlerOnClient {
   public static void onMessageReceived(final GlyphMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
-    MagiksMostEvile.LOGGER.dev("Message recieved on client!");
-
     ctxSupplier.get().setPacketHandled(true);
 
     if (!message.isValid()) {

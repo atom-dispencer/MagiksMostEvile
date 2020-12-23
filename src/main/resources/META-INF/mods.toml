@@ -6,11 +6,26 @@ issueTrackerURL="https://github.com/GenElectrovise/MagiksMostEvile/"
 modId="magiksmostevile"
 version="${file.jarVersion}"
 displayName="Magiks Most Evile"
-updateJSONURL="http://example.net/"
+#updateJSONURL="http://example.net/"
 displayURL="https://magiksmostevile.fandom.com/wiki/Magiks_Most_Evile_Wiki"
 logoFile="magiksmostevile.png"
-credits="Thanks to my pre-alpha testers: machotoast, KoalaManiac & Minion3665 (You should go sub to Minion...); to everyone who helped and gave inspiration (Too many to name, but lookin' at you, Eddywinkles!); and to y'all who actually downloaded my pet project! And to Flappy! We can never forget Flappy!" #optional
+credits="Thanks to my alpha testers: machotoast, KoalaManiac & Minion3665 (You should go sub to Minion...); to everyone who helped and gave inspiration (Too many to name, but lookin' at you, Eddywinkles!); and to y'all who actually downloaded my pet project! And to Flappy! We can never forget Flappy!" #optional
 authors="GenElectrovise"
 description='''
 Ever wanted to summon massive all consuming elementals to destroy that one Minecraft world you've had since 2012 and would do anything to save? No? Huh... Well you should still get Magiks Most Evile! It does way more cool stuff that just blow stuff up! I think... --\_(~_~)_/-- 
 '''
+[[dependencies.magiksmostevile]] #optional
+    modId="forge" 
+    mandatory=true
+    versionRange="[31,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+# Here's another dependency
+[[dependencies.magiksmostevile]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4]"
+    ordering="NONE"
+    side="BOTH"
