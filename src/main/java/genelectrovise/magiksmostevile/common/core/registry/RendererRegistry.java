@@ -1,11 +1,11 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.main.registry;
+package genelectrovise.magiksmostevile.common.core.registry;
 
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenRenderer;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatRenderer;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;

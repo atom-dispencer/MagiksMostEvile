@@ -3,7 +3,7 @@
  */
 package genelectrovise.magiksmostevile.common.item.spawn_egg;
 
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import net.minecraft.entity.EntityType;
 
 /**

@@ -1,11 +1,11 @@
-package genelectrovise.magiksmostevile.common.main;
+package genelectrovise.magiksmostevile.common.core;
 
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;

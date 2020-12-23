@@ -3,8 +3,8 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.support.TrackableIntegerHolder;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.support.TrackableIntegerHolder;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.energy.EnergyStorage;
 

@@ -3,8 +3,8 @@
  */
 package genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder;
 
+import genelectrovise.magiksmostevile.common.core.SetupManager;
 import genelectrovise.magiksmostevile.common.entity.boss.BossMob;
-import genelectrovise.magiksmostevile.common.main.SetupManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;

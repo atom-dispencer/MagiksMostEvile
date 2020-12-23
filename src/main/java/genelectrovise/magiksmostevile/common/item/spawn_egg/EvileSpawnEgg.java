@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.common.item.spawn_egg;
 
 import java.util.Objects;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

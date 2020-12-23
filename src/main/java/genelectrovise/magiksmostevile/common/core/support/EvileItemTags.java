@@ -1,10 +1,10 @@
-package genelectrovise.magiksmostevile.common.main.support;
+package genelectrovise.magiksmostevile.common.core.support;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ITag.INamedTag;

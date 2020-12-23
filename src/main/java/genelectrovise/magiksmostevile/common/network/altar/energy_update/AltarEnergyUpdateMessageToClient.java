@@ -4,7 +4,7 @@
 package genelectrovise.magiksmostevile.common.network.altar.energy_update;
 
 import java.util.UUID;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 

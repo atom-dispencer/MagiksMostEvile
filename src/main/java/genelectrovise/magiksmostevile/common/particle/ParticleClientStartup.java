@@ -3,8 +3,8 @@
  */
 package genelectrovise.magiksmostevile.common.particle;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;

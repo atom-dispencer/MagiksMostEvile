@@ -1,9 +1,9 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.main.registry;
+package genelectrovise.magiksmostevile.common.core.registry;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraftforge.fml.common.Mod;
 
 /**

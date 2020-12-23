@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.common.entity.boss.the_kraken;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.entity.passive.SquidEntity;

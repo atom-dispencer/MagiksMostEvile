@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.network.particle.transfer_energy;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraft.network.PacketBuffer;
 
 /**

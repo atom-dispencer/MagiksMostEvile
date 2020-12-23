@@ -1,8 +1,8 @@
 package genelectrovise.magiksmostevile.common.ritual.result;
 
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.ResultHandler;

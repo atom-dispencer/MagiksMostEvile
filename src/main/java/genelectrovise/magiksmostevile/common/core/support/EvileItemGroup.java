@@ -1,6 +1,6 @@
-package genelectrovise.magiksmostevile.common.main.support;
+package genelectrovise.magiksmostevile.common.core.support;
 
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

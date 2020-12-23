@@ -3,11 +3,11 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
-import static genelectrovise.magiksmostevile.common.main.reference.GuiReference.ZERO;
+import static genelectrovise.magiksmostevile.common.core.reference.GuiReference.ZERO;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.reference.GuiReference;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;

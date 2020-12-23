@@ -1,6 +1,6 @@
-package genelectrovise.magiksmostevile.common.main.registry;
+package genelectrovise.magiksmostevile.common.core.registry;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;

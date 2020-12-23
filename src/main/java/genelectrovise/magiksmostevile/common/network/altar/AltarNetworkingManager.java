@@ -3,7 +3,7 @@
  */
 package genelectrovise.magiksmostevile.common.network.altar;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageHandlerOnClient;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageHandlerOnServer;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToClient;

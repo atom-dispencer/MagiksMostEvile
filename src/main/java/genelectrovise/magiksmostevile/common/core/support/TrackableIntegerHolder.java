@@ -1,7 +1,7 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.main.support;
+package genelectrovise.magiksmostevile.common.core.support;
 
 import net.minecraft.util.IntReferenceHolder;
 

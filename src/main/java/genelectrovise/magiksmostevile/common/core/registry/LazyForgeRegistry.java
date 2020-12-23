@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.common.main.registry;
+package genelectrovise.magiksmostevile.common.core.registry;
 
 import java.util.Collection;
 import java.util.Iterator;

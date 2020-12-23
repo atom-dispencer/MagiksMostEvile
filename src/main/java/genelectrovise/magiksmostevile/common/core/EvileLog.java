@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.common.main;
+package genelectrovise.magiksmostevile.common.core;
 
 import org.apache.logging.log4j.Logger;
 

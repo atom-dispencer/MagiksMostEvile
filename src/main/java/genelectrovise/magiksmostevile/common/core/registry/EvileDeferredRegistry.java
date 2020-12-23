@@ -1,5 +1,9 @@
-package genelectrovise.magiksmostevile.common.main.registry;
+package genelectrovise.magiksmostevile.common.core.registry;
 
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.support.EnumEvileArmorMaterial;
+import genelectrovise.magiksmostevile.common.core.support.EnumEvileItemTier;
+import genelectrovise.magiksmostevile.common.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
@@ -17,10 +21,6 @@ import genelectrovise.magiksmostevile.common.item.glowing.GlowingPickaxe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingShovel;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingSword;
 import genelectrovise.magiksmostevile.common.item.spawn_egg.VampireBatSpawnEgg;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.support.EnumEvileArmorMaterial;
-import genelectrovise.magiksmostevile.common.main.support.EnumEvileItemTier;
-import genelectrovise.magiksmostevile.common.main.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleData;
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleType;
 import genelectrovise.magiksmostevile.common.ritual.ConvertAmethystRitual;

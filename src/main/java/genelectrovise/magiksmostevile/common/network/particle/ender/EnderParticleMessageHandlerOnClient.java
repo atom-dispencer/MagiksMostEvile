@@ -5,7 +5,7 @@ package genelectrovise.magiksmostevile.common.network.particle.ender;
 
 import java.util.Random;
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.ParticleTypes;

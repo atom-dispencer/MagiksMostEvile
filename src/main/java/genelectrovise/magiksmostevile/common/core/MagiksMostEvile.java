@@ -1,8 +1,8 @@
-package genelectrovise.magiksmostevile.common.main;
+package genelectrovise.magiksmostevile.common.core;
 
 import org.apache.logging.log4j.LogManager;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
-import genelectrovise.magiksmostevile.common.main.setup.RegistryCreationManager;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.common.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.common.particle.ParticleCommonStartup;
 import net.minecraftforge.api.distmarker.Dist;

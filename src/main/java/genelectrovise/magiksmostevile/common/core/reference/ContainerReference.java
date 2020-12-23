@@ -1,7 +1,7 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.main.reference;
+package genelectrovise.magiksmostevile.common.core.reference;
 
 /**
  * @author GenElectrovise 14 May 2020

@@ -3,8 +3,8 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainerScreen;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import net.minecraft.nbt.CompoundNBT;

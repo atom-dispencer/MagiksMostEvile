@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.particle.glyph.GlyphParticleData;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
