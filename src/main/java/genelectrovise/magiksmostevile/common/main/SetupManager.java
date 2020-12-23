@@ -1,5 +1,9 @@
 package genelectrovise.magiksmostevile.common.main;
 
+import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
@@ -13,8 +17,26 @@ public final class SetupManager {
       // Setup entity attributes
       () -> {
         MagiksMostEvile.LOGGER.debug("Registering MME entity attributes");
+
+        // Vampire Bat
         GlobalEntityTypeAttributes.put(EvileDeferredRegistry.VAMPIRE_BAT.get(),
             VampireBatEntity.getEntityAttributes().create());
+
+        // Egg Capone
+        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.EGG_CAPONE.get(),
+            EggCaponeEntity.getEntityAttributes().create());
+
+        // The Kraken
+        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.THE_KRAKEN.get(),
+            TheKrakenEntity.getEntityAttributes().create());
+
+        // Tinder and Cinder
+        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.TINDER_AND_CINDER.get(),
+            TinderAndCinderEntity.getEntityAttributes().create());
+
+        // Tom the Trol
+        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.TOM_THE_TROLL.get(),
+            TomTheTrollEntity.getEntityAttributes().create());
       }
 
       //
@@ -22,7 +44,7 @@ public final class SetupManager {
 
   @SubscribeEvent
   public static void setup(ParallelDispatchEvent event) {
-    
+
     MagiksMostEvile.LOGGER.debug("SetupManager#setup() called for MME");
 
     for (Runnable runnable : tasks) {

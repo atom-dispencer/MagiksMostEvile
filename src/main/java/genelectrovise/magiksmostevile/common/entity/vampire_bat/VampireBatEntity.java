@@ -13,6 +13,7 @@ import genelectrovise.magiksmostevile.common.entity.goal.VampireBatFlapGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatHangGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatNearestAttackableTargetGoal;
 import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.main.SetupManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPredicate;
@@ -142,7 +143,7 @@ public class VampireBatEntity extends MonsterEntity {
   protected void collideWithNearbyEntities() {}
 
   /**
-   * Create a map of attributes
+   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.func_233666_p_() //
