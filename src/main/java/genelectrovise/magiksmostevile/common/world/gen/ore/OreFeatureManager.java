@@ -2,10 +2,9 @@ package genelectrovise.magiksmostevile.common.world.gen.ore;
 
 import java.util.ArrayList;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -14,16 +13,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Bus.FORGE)
-public class OreFeatureRegistry {
+public class OreFeatureManager {
 
-  public static final ArrayList<SimpleConfiguredOreFeature> overworldOres =
-      new ArrayList<SimpleConfiguredOreFeature>();
+  public static final ArrayList<ConfiguredFeature<?, ?>> overworldOres =
+      new ArrayList<ConfiguredFeature<?, ?>>();
 
-  public static final ArrayList<SimpleConfiguredOreFeature> netherOres =
-      new ArrayList<SimpleConfiguredOreFeature>();
+  public static final ArrayList<ConfiguredFeature<?, ?>> netherOres =
+      new ArrayList<ConfiguredFeature<?, ?>>();
 
-  public static final ArrayList<SimpleConfiguredOreFeature> endOres =
-      new ArrayList<SimpleConfiguredOreFeature>();
+  public static final ArrayList<ConfiguredFeature<?, ?>> endOres =
+      new ArrayList<ConfiguredFeature<?, ?>>();
 
   /**
    * Called on {@link Bus.Forge}. Trigger ore registration.
@@ -51,13 +50,7 @@ public class OreFeatureRegistry {
   }
 
   private static void overworldOres() {
-    overworldOres
-        .add(
-            new SimpleConfiguredOreFeature.Builder().withSimpleOreFeature(new SimpleOreFeature())
-                .withSimpleOreFeatureConfiguration(new SimpleOreFeatureConfiguration(
-                    Blocks.STONE.getDefaultState(),
-                    EvileDeferredRegistry.AMETHYST_ORE_OVERWORLD.get().getDefaultState(), 10, true))
-                .withName("amethyst_ore_overworld").build());
+    overworldOres.add(OreFeatures.AMETHYST_ORE_OVERWORLD);
   }
 
   private static void netherOres() {
@@ -80,19 +73,19 @@ public class OreFeatureRegistry {
 
     switch (event.getCategory()) {
       case NETHER:
-        for (SimpleConfiguredOreFeature simpleConfiguredOreFeature : netherOres) {
+        for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : netherOres) {
           registerTo(generation, simpleConfiguredOreFeature);
         }
         break;
 
       case THEEND:
-        for (SimpleConfiguredOreFeature simpleConfiguredOreFeature : endOres) {
+        for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : endOres) {
           registerTo(generation, simpleConfiguredOreFeature);
         }
         break;
 
       default:
-        for (SimpleConfiguredOreFeature simpleConfiguredOreFeature : overworldOres) {
+        for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : overworldOres) {
           registerTo(generation, simpleConfiguredOreFeature);
         }
         break;
@@ -108,7 +101,7 @@ public class OreFeatureRegistry {
    * @param feature
    */
   private static void registerTo(BiomeGenerationSettingsBuilder builder,
-      SimpleConfiguredOreFeature feature) {
+      ConfiguredFeature<?, ?> feature) {
     builder.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, feature);
   }
 }

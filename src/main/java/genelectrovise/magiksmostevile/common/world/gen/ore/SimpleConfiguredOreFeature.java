@@ -7,11 +7,17 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.placement.ConfiguredPlacement;
 
 public class SimpleConfiguredOreFeature extends ConfiguredFeature<OreFeatureConfig, OreFeature> {
 
   public SimpleConfiguredOreFeature(OreFeature featureIn, OreFeatureConfig configIn) {
     super(featureIn, configIn);
+  }
+  
+  @Override
+  public ConfiguredFeature<?, ?> withPlacement(ConfiguredPlacement<?> placement) {
+    return super.withPlacement(placement);
   }
 
   public static class Builder {
@@ -36,6 +42,7 @@ public class SimpleConfiguredOreFeature extends ConfiguredFeature<OreFeatureConf
     }
 
     public SimpleConfiguredOreFeature build() {
+
       return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE,
           new ResourceLocation(MagiksMostEvile.MODID, name),
           new SimpleConfiguredOreFeature(simpleOreFeature, configuration));
