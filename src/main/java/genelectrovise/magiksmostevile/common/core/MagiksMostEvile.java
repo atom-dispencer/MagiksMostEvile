@@ -23,12 +23,13 @@ public class MagiksMostEvile {
   public static final String NAME = "Magiks Most Evile";
   public static final String ACCEPTED_VERSIONS = "1.16.4";
 
-  public static IEventBus EVENT_BUS;
+  public static IEventBus MOD_EVENT_BUS;
+  public static IEventBus FORGE_EVENT_BUS;
 
   public MagiksMostEvile() {
     LOGGER.info("Magiks Most Evile is being loaded by FML");
 
-    EVENT_BUS = FMLJavaModLoadingContext.get().getModEventBus();
+    MOD_EVENT_BUS = FMLJavaModLoadingContext.get().getModEventBus();
 
     registerCommonEvents();
     DistExecutor.runWhenOn(Dist.CLIENT, () -> MagiksMostEvile::registerClientOnlyEvents);
@@ -44,14 +45,14 @@ public class MagiksMostEvile {
 
   public static void registerCommonEvents() {
     LOGGER.debug("Registering MME common events");
-    EVENT_BUS.register(ParticleCommonStartup.class);
-    EVENT_BUS.register(SetupManager.class);
-    EVENT_BUS.register(OreFeatureRegistry.class);
+    MOD_EVENT_BUS.register(ParticleCommonStartup.class);
+    MOD_EVENT_BUS.register(SetupManager.class);
+    //MOD_EVENT_BUS.register(OreFeatureRegistry.class);
   }
 
   public static void registerClientOnlyEvents() {
     LOGGER.debug("Registering MME client only events");
-    EVENT_BUS.register(ParticleClientStartup.class);
+    MOD_EVENT_BUS.register(ParticleClientStartup.class);
   }
 
 }
