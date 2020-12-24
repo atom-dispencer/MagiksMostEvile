@@ -3,10 +3,6 @@ package genelectrovise.magiksmostevile.common.world.gen.ore;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.data.ModdedTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -20,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-//@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Bus.MOD)
+@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Bus.MOD)
 public class OreFeatures {
 
   public static ConfiguredFeature<?, ?> AMETHYST_ORE_OVERWORLD;
@@ -41,7 +37,7 @@ public class OreFeatures {
         "amethyst_ore_overworld_generation", //
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
-                new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
+                new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE.get()), //
                 EvileDeferredRegistry.AMETHYST_ORE_OVERWORLD.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
