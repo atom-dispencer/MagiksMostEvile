@@ -5,7 +5,6 @@ import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry
 import genelectrovise.magiksmostevile.common.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.common.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.common.particle.ParticleCommonStartup;
-import genelectrovise.magiksmostevile.common.world.gen.ore.OreFeatureManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -49,7 +48,6 @@ public class MagiksMostEvile {
     LOGGER.debug("Registering MME common events");
     MOD_EVENT_BUS.register(ParticleCommonStartup.class);
     MOD_EVENT_BUS.register(SetupManager.class);
-    //MOD_EVENT_BUS.register(OreFeatureRegistry.class);
   }
 
   public static void registerClientOnlyEvents() {
