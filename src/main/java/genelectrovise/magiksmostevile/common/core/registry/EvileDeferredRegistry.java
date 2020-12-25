@@ -13,6 +13,7 @@ import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBase
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.OverPoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.armor.EvileArmorBases.PoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.common.item.equipment.staff.AmethystStaff;
+import genelectrovise.magiksmostevile.common.item.equipment.staff.DebuggingStaff;
 import genelectrovise.magiksmostevile.common.item.equipment.staff.DimensionWarpingStaff;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingAxe;
 import genelectrovise.magiksmostevile.common.item.glowing.GlowingHoe;
@@ -31,9 +32,7 @@ import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
-import genelectrovise.magiksmostevile.common.world.gen.ore.SimpleOreFeatureConfiguration;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityClassification;
@@ -53,11 +52,7 @@ import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeature;
-import net.minecraft.world.gen.placement.DepthAverageConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -112,8 +107,7 @@ public class EvileDeferredRegistry {
       BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.create(Material.GLASS)
           .harvestTool(ToolType.PICKAXE).sound(SoundType.CLOTH).hardnessAndResistance(6F, 10F)));
 
-  // =========BLOCK
-  // ITEMS=================================================================================================================
+  // =========BLOCK-ITEMS=================================================================================================================
   public static final RegistryObject<Item> AMETHYST_BLOCK_ITEM =
       ITEMS.register("amethyst_block", () -> new BlockItem(AMETHYST_BLOCK.get(),
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
@@ -186,12 +180,15 @@ public class EvileDeferredRegistry {
       .register("powered_amethyst_hoe", () -> new GlowingHoe(EnumEvileItemTier.POWERED_AMETHYST, 2,
           -0.25F, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
-  // =========WEAPONS====================================================================================================================
+  // =========STAFFS====================================================================================================================
   public static final RegistryObject<Item> AMETHYST_STAFF =
       ITEMS.register("amethyst_staff", () -> new AmethystStaff(
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(1)));
   public static final RegistryObject<Item> DIMENSION_WARPING_STAFF =
       ITEMS.register("dimension_warping_staff", () -> new DimensionWarpingStaff(
+          new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(1)));
+  public static final RegistryObject<Item> STAFF_OF_DEGUGGING =
+      ITEMS.register("debugging_staff", () -> new DebuggingStaff(
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(1)));
 
   // =========TOMES======================================================================================================================
@@ -257,8 +254,8 @@ public class EvileDeferredRegistry {
           () -> new Item(new Item.Properties().food((new Food.Builder()).hunger(3).saturation(0.8F)
               .effect(() -> new EffectInstance(Effects.SPEED, 400, 1), 1.0F).fastToEat().build())
               .group(EvileItemGroup.ITEMGROUP_EVILE)));
-  
-  //Features
+
+  // Features
 
   // =========TILE
   // ENTITIES===============================================================================================================

@@ -21,14 +21,13 @@ public class OreFeatures {
 
   public static ConfiguredFeature<?, ?> AMETHYST_ORE_OVERWORLD;
 
-  public static final ConfiguredFeature<?, ?>[] OVERWORLD_ORES = {AMETHYST_ORE_OVERWORLD};
-  public static final ConfiguredFeature<?, ?>[] NETHER_ORES = {};
-  public static final ConfiguredFeature<?, ?>[] END_ORES = {};
+  public static ConfiguredFeature<?, ?>[] OVERWORLD_ORES;
+  public static ConfiguredFeature<?, ?>[] NETHER_ORES;
+  public static ConfiguredFeature<?, ?>[] END_ORES;
 
   @SubscribeEvent
   public static void createConfiguredOreFeatures(FMLCommonSetupEvent event) {
     MagiksMostEvile.LOGGER.debug("Creating MME configured ore features");
-
 
 
     // Amethyst Ore Overworld
@@ -37,11 +36,19 @@ public class OreFeatures {
         "amethyst_ore_overworld_generation", //
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
-                new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE.get()), //
+                new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
                 EvileDeferredRegistry.AMETHYST_ORE_OVERWORLD.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
                 new DepthAverageConfig(10, 32))) //
             .range(16)); //
+
+    applyToLists();
+  }
+
+  private static void applyToLists() {
+    OVERWORLD_ORES = new ConfiguredFeature<?, ?>[] {AMETHYST_ORE_OVERWORLD};
+    NETHER_ORES = new ConfiguredFeature<?, ?>[] {};
+    END_ORES = new ConfiguredFeature<?, ?>[] {};
   }
 }

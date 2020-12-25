@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smelting",
+    "ingredients": [
+        {
+            "tag": "#magiksmostevile:ores/lead"
+        }
+    ],
+    "result": {
+        "item": "magiksmostevile:lead_ingot",
+        "count": 1
+    }
+}

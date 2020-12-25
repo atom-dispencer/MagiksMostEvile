@@ -1,0 +1,26 @@
+{
+	"display": {
+		"icon": {
+			"item": "magiksmostevile:amethyst_staff"
+		},
+		"title": "Unlimited Power!",
+		"frame": "task",
+		"description": "Become a sith lo- Uhh... Obtain a magical staff."
+	},
+	"parent": "magiksmostevile:magik_advancement",
+	"criteria": {
+		"gain_tome_convert_amethyst": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"tag": "magiksmostevile:equipment/staffs"
+					}
+				]
+			}
+		}
+	},
+	"rewards": {
+		"experience": 250
+	}
+}

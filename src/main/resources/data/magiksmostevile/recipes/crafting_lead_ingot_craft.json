@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "magiksmostevile:lead_block"
+        }
+    ],
+    "result": {
+        "item": "magiksmostevile:lead",
+        "count": 9
+    }
+}

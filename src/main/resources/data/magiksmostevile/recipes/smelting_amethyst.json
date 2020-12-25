@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smelting",
+    "ingredients": [
+        {
+            "tag": "#magiksmostevile:ores/amethyst"
+        }
+    ],
+    "result": {
+        "item": "magiksmostevile:amethyst",
+        "count": 1
+    }
+}
