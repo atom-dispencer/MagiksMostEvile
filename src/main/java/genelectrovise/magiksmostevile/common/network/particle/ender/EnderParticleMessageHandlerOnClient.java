@@ -5,7 +5,7 @@ package genelectrovise.magiksmostevile.common.network.particle.ender;
 
 import java.util.Random;
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.ParticleTypes;
@@ -23,8 +23,6 @@ public class EnderParticleMessageHandlerOnClient {
    */
   public static void onMessageReceived(final EnderParticleMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
-
-    MagiksMostEvile.LOGGER.dev("Message recieved on client!");
 
     ctxSupplier.get().setPacketHandled(true);
 

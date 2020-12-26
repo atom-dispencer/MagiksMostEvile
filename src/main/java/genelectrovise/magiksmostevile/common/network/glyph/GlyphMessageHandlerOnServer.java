@@ -4,7 +4,7 @@
 package genelectrovise.magiksmostevile.common.network.glyph;
 
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -15,7 +15,6 @@ public class GlyphMessageHandlerOnServer {
 
   public static void onMessageReceived(final GlyphMessageToServer message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
-    MagiksMostEvile.LOGGER.dev("Message recieved by server!");
 
     ctxSupplier.get().setPacketHandled(true);
 

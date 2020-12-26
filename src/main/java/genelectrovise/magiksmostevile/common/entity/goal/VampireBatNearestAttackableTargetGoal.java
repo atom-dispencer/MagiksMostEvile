@@ -5,7 +5,6 @@ package genelectrovise.magiksmostevile.common.entity.goal;
 
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 
 /**

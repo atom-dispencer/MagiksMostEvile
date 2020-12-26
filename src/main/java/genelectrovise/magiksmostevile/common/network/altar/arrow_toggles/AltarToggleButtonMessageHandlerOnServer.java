@@ -5,8 +5,8 @@ package genelectrovise.magiksmostevile.common.network.altar.arrow_toggles;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;

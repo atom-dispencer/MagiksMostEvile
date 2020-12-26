@@ -8,11 +8,12 @@ import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.SetupManager;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatBiteGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatFlapGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatHangGoal;
 import genelectrovise.magiksmostevile.common.entity.goal.VampireBatNearestAttackableTargetGoal;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPredicate;
@@ -141,9 +142,9 @@ public class VampireBatEntity extends MonsterEntity {
   protected void collideWithNearbyEntities() {}
 
   /**
-   * Create a map of attributes
+   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
    */
-  public static AttributeModifierMap.MutableAttribute func_234182_eX_() {
+  public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.func_233666_p_() //
         .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
         .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f)

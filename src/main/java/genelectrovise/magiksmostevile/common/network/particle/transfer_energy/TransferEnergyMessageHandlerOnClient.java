@@ -4,11 +4,11 @@
 package genelectrovise.magiksmostevile.common.network.particle.transfer_energy;
 
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -44,12 +44,12 @@ public class TransferEnergyMessageHandlerOnClient {
   // This message is called from the Client thread.
   private static void processMessage(TransferEnergyMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
-    Vec3d crystal = new Vec3d(message.getDeparture().getX(), message.getDeparture().getY(),
+    Vector3d crystal = new Vector3d(message.getDeparture().getX(), message.getDeparture().getY(),
         message.getDeparture().getZ());
-    Vec3d altar = new Vec3d(message.getDestination().getX(), message.getDestination().getY(),
+    Vector3d altar = new Vector3d(message.getDestination().getX(), message.getDestination().getY(),
         message.getDestination().getZ());
 
-    Vec3d direction = altar.subtract(crystal);
+    Vector3d direction = altar.subtract(crystal);
     direction.normalize();
 
     double mul = 0.4;

@@ -4,8 +4,8 @@
 package genelectrovise.magiksmostevile.common.entity.goal;
 
 import java.util.Random;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;

@@ -3,7 +3,7 @@
  */
 package genelectrovise.magiksmostevile.common.network.particle;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.network.particle.ender.EnderParticleMessageHandlerOnClient;
 import genelectrovise.magiksmostevile.common.network.particle.ender.EnderParticleMessageHandlerOnServer;
 import genelectrovise.magiksmostevile.common.network.particle.ender.EnderParticleMessageToClient;

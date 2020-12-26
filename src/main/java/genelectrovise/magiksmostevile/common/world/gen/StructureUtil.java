@@ -7,27 +7,21 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
 
 public class StructureUtil {
-  public void placeStructure(ServerWorld serverworld, ChunkPos chunk_pos,
-      ResourceLocation template_location) {
-    // Gets the world's structure template manager
-    TemplateManager templatemanager = serverworld.getStructureTemplateManager();
-    // Sets default placement settings
-    PlacementSettings placementsettings =
-        (new PlacementSettings()).setIgnoreEntities(true).setChunk((ChunkPos) null);
-    // Gets the template and builds
-    templatemanager.getTemplate(template_location).addBlocksToWorldChunk(serverworld,
-        chunk_pos.asBlockPos(), placementsettings);
-  }
+  
+  public void placeStructure(ServerWorld serverWorld, ChunkPos chunkPos,
+      ResourceLocation templateLocation) {
 
-  public void placeStructureWithPlacementConfig(ServerWorld serverworld, ChunkPos chunk_pos,
-      ResourceLocation template_location) {
     // Gets the world's structure template manager
-    TemplateManager templatemanager = serverworld.getStructureTemplateManager();
+    TemplateManager templatemanager = serverWorld.getStructureTemplateManager();
+
     // Sets default placement settings
     PlacementSettings placementsettings =
         (new PlacementSettings()).setIgnoreEntities(true).setChunk((ChunkPos) null);
+
     // Gets the template and builds
-    templatemanager.getTemplate(template_location).addBlocksToWorldChunk(serverworld,
-        chunk_pos.asBlockPos(), placementsettings);
+    templatemanager.getTemplate(templateLocation).func_237144_a_(serverWorld, chunkPos.asBlockPos(), placementsettings, serverWorld.getRandom());
+    
+    //Alternatively use func_237152_b_ to avoid "placementSettings.setBoundingBoxFromChunk()"
   }
+  
 }

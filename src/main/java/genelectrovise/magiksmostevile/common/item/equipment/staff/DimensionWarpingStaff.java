@@ -4,27 +4,21 @@
 package genelectrovise.magiksmostevile.common.item.equipment.staff;
 
 import java.util.List;
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.block.EndPortalBlock;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.command.impl.GiveCommand;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EnderPearlEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.EndPortalTileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentUtils;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.server.command.CommandSetDimension;
 
 /**
  * @author GenElectrovise 18 Jun 2020
@@ -74,16 +68,19 @@ public class DimensionWarpingStaff extends Item {
         // Destination
         RegistryKey<World> worldKey;
 
+        // Current
+        RegistryKey<World> currentWorld = playerIn.world.getDimensionKey();
+
         // In Over-world
-        if (playerIn.world.getDimensionKey().compareTo(DimensionType.OVERWORLD) == 0) {
+        if (currentWorld.compareTo(World.OVERWORLD) == 0) {
           worldKey = World.THE_NETHER;
         }
         // In Nether
-        else if (playerIn.world.getDimensionKey().compareTo(DimensionType.THE_NETHER) == 0) {
+        else if (currentWorld.compareTo(World.THE_NETHER) == 0) {
           worldKey = World.THE_END;
         }
         // In End
-        else if (playerIn.world.getDimensionKey().compareTo(DimensionType.THE_END) == 0) {
+        else if (currentWorld.compareTo(World.THE_END) == 0) {
           worldKey = World.OVERWORLD;
         }
         // Default
@@ -91,6 +88,7 @@ public class DimensionWarpingStaff extends Item {
           worldKey = World.OVERWORLD;
         }
 
+        changeDimension(playerIn, worldIn, worldKey);
 
       } catch (Exception e) {
         e.printStackTrace();
@@ -117,7 +115,7 @@ public class DimensionWarpingStaff extends Item {
     if (serverworld == null) {
       return;
     }
-    entityIn.changeDimension(serverworld);
+    entityIn.changeDimension(serverworld, new NoPortalTeleporter(serverworld));
   }
 
   @Override

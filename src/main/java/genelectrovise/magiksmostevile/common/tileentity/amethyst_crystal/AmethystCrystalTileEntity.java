@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.particle.ender.EnderParticleMessageToClient;
 import net.minecraft.block.Block;
@@ -28,9 +28,8 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
     MagiksMostEvile.LOGGER.debug("Constructing class : TileEntityAmethystCrystal");
   }
 
-  @Override
-  public void read(CompoundNBT compound) {
-    super.read(compound);
+  public void read(BlockState state, CompoundNBT compound) {
+    super.read(state, compound);
   }
 
   @Override

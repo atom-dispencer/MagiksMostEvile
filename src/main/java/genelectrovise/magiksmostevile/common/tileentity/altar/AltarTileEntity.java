@@ -3,8 +3,8 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.particle.transfer_energy.TransferEnergyMessageToClient;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
@@ -130,18 +130,9 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     // IItemHandler
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
       this.markDirty();
-      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if
-                                                                                                    // the
-                                                                                                    // block
-                                                                                                    // at
-                                                                                                    // myself
-                                                                                                    // isn't
-                                                                                                    // myself,
-                                                                                                    // allow
-                                                                                                    // full
-                                                                                                    // access
-                                                                                                    // (Block
-                                                                                                    // Broken)
+
+      // if the block at myself isn't myself, allow full access (Block Broken)
+      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
         return allSlots.cast();
       }
       if (facing == null) {
@@ -153,18 +144,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     if (capability == CapabilityEnergy.ENERGY) {
       this.markDirty();
 
-      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {// if
-                                                                                                    // the
-                                                                                                    // block
-                                                                                                    // at
-                                                                                                    // myself
-                                                                                                    // isn't
-                                                                                                    // myself,
-                                                                                                    // allow
-                                                                                                    // full
-                                                                                                    // access
-                                                                                                    // (Block
-                                                                                                    // Broken)
+      // if the block at myself isn't myself, allow full access (Block Broken)
+      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
         return energyStorageLazyOptional.cast();
       }
       if (facing == null) {
@@ -190,8 +171,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   }
 
   @Override
-  public void read(CompoundNBT tag) {
-    super.read(tag);
+  public void read(BlockState state, CompoundNBT tag) {
+    super.read(state, tag);
     slot_0.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_0"));
     slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
     slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));

@@ -3,10 +3,11 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
-import static genelectrovise.magiksmostevile.common.main.reference.GuiReference.ZERO;
+import static genelectrovise.magiksmostevile.common.core.reference.GuiReference.ZERO;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.reference.GuiReference;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.reference.GuiReference;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;
@@ -53,11 +54,10 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   }
 
   // Drawing
-
   @Override
-  protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+  protected void drawGuiContainerForegroundLayer(MatrixStack stack, int mouseX, int mouseY) {
 
-    drawText();
+    drawText(stack);
   }
 
   // 9 ARG blit()
@@ -72,43 +72,46 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   // x image size (will scale image to fit)
 
   @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+  protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX,
+      int mouseY) {
     // Flush the colour buffer
     RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
     evaluateDimensions();
 
     // Draw images
-    drawMain(posX_main, posY_main);
+    drawMain(stack, posX_main, posY_main);
   }
 
-  private void drawText() {
+  private void drawText(MatrixStack stack) {
 
     float baseX = -80F;
     float baseY = 2F;
     float seperator = 3;
 
+    // Used to use split = 100
+
     // Draw text
     this.font.drawString(
-        this.title.getFormattedText() + " - Amethyst Flux: "
+        stack, this.title.getString() + " - Amethyst Flux: "
             + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(),
         baseX, baseY, 4210752);
 
-    this.font.drawString("Cast", baseX + 3, baseY + 68, 4210752);
+    this.font.drawString(stack, "Cast", baseX + 3, baseY + 68, 4210752);
 
     String displayName = altarContainer.getSelector().getRitualSupplier().get().getDisplayName();
-    this.font.drawSplitString(displayName, new Integer(Math.round(baseX)),
-        new Integer(Math.round(baseY + seperator + 10)), 100, 11024322);
+    this.font.drawString(stack, displayName, new Integer(Math.round(baseX)),
+        new Integer(Math.round(baseY + seperator + 10)), 11024322);
 
     String description = altarContainer.getSelector().getRitualSupplier().get().getDescription();
-    this.font.drawSplitString(description, new Integer(Math.round(baseX)),
-        new Integer(Math.round(baseY + seperator + 20)), 100, 6961030);
+    this.font.drawString(stack, description, new Integer(Math.round(baseX)),
+        new Integer(Math.round(baseY + seperator + 20)), 6961030);
 
     String energyRequirement = "Required Energy: "
         + new Integer(altarContainer.getSelector().getRitualSupplier().get().getEnergyRequirement())
             .toString();
-    this.font.drawSplitString(energyRequirement, new Integer(Math.round(baseX + 2)),
-        new Integer(Math.round(baseY + seperator + 81)), 100, 13018111);
+    this.font.drawString(stack, energyRequirement, new Integer(Math.round(baseX + 2)),
+        new Integer(Math.round(baseY + seperator + 81)), 13018111);
   }
 
   private void evaluateDimensions() {
@@ -122,10 +125,10 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
     posY_main = halfHeight - (GuiReference.Altar.Main.MAIN_HEIGHT / 2);
   }
 
-  private void drawMain(int posX, int posY) {
+  private void drawMain(MatrixStack stack, int posX, int posY) {
     getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.Main.MAIN_TEXTURE);
 
-    blit(posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH,
+    blit(stack, posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH,
         GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT,
         GuiReference.Altar.Main.MAIN_WIDTH);
   }

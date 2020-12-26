@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.item.equipment.armor;
 
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
