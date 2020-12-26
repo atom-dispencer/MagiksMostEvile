@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.network.altar.cast_button;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 
@@ -9,38 +9,38 @@ import net.minecraft.util.ResourceLocation;
  */
 public class AltarCastButtonPressedMessageToServer {
 
-	private static boolean messageIsValid;
+  private static boolean messageIsValid;
 
-	private ResourceLocation ritualResourceLocation;
+  private ResourceLocation ritualResourceLocation;
 
-	public AltarCastButtonPressedMessageToServer(ResourceLocation ritualResourceLocation) {
-		messageIsValid = true;
+  public AltarCastButtonPressedMessageToServer(ResourceLocation ritualResourceLocation) {
+    messageIsValid = true;
 
-		this.ritualResourceLocation = ritualResourceLocation;
-	}
+    this.ritualResourceLocation = ritualResourceLocation;
+  }
 
-	public void encode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Encoding AltarCastButtonPressedMessageToServer.");
+  public void encode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Encoding AltarCastButtonPressedMessageToServer.");
 
-		buffer.writeResourceLocation(ritualResourceLocation);
-	}
+    buffer.writeResourceLocation(ritualResourceLocation);
+  }
 
-	public static AltarCastButtonPressedMessageToServer decode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Decoding AltarCastButtonPressedMessageToServer");
+  public static AltarCastButtonPressedMessageToServer decode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Decoding AltarCastButtonPressedMessageToServer");
 
-		ResourceLocation ritualResourceLocation = buffer.readResourceLocation();
+    ResourceLocation ritualResourceLocation = buffer.readResourceLocation();
 
-		return new AltarCastButtonPressedMessageToServer(ritualResourceLocation);
-	}
+    return new AltarCastButtonPressedMessageToServer(ritualResourceLocation);
+  }
 
-	public boolean isValid() {
-		return messageIsValid;
-	}
+  public boolean isValid() {
+    return messageIsValid;
+  }
 
-	/**
-	 * @return the ritualName
-	 */
-	public ResourceLocation getRitualResourceLocation() {
-		return ritualResourceLocation;
-	}
+  /**
+   * @return the ritualName
+   */
+  public ResourceLocation getRitualResourceLocation() {
+    return ritualResourceLocation;
+  }
 }

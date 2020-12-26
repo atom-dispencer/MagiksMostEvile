@@ -10,37 +10,34 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
 public class AmethystCrystalBlock extends Block {
-	public static AxisAlignedBB AMETHYST_CRYSTAL_AABB = new AxisAlignedBB(0.0625D, 0D, 0.0625D, 0.9375D, 0.625D,
-			0.9375D);
+  public static AxisAlignedBB AMETHYST_CRYSTAL_AABB =
+      new AxisAlignedBB(0.0625D, 0D, 0.0625D, 0.9375D, 0.625D, 0.9375D);
 
-	// double x1, double y1, double z1, double x2, double y2, double z2
-	protected static final VoxelShape BLOCK_SHAPE = Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 1.0D, 15.0D);
+  // double x1, double y1, double z1, double x2, double y2, double z2
+  protected static final VoxelShape BLOCK_SHAPE =
+      Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
-	public AmethystCrystalBlock(Properties properties) {
-		super(properties);
-	}
+  public AmethystCrystalBlock(Properties properties) {
+    super(properties);
+  }
 
-	@Override
-	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return false;
-	}
+  @Override
+  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos,
+      ISelectionContext context) {
+    return BLOCK_SHAPE;
+  }
 
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return BLOCK_SHAPE;
-	}
+  // ======================================================================================================================
+  // TILE ENTITY
 
-	// ======================================================================================================================
-	// TILE ENTITY
+  @Override
+  public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    return new AmethystCrystalTileEntity();
+  }
 
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new AmethystCrystalTileEntity();
-	}
-
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
+  @Override
+  public boolean hasTileEntity(BlockState state) {
+    return true;
+  }
 
 }

@@ -4,8 +4,7 @@
 package genelectrovise.magiksmostevile.common.network.glyph;
 
 import java.util.function.Supplier;
-
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -14,27 +13,28 @@ import net.minecraftforge.fml.network.NetworkEvent;
  */
 public class GlyphMessageHandlerOnServer {
 
-	public static void onMessageReceived(final GlyphMessageToServer message, Supplier<NetworkEvent.Context> ctxSupplier) {
-		MagiksMostEvile.LOGGER.dev("Message recieved by server!");
+  public static void onMessageReceived(final GlyphMessageToServer message,
+      Supplier<NetworkEvent.Context> ctxSupplier) {
+    MagiksMostEvile.LOGGER.dev("Message recieved by server!");
 
-		ctxSupplier.get().setPacketHandled(true);
+    ctxSupplier.get().setPacketHandled(true);
 
-		if (!message.isValid()) {
-			MagiksMostEvile.LOGGER.warn("Invalid message received on server.");
-			return;
-		}
-		if (ctxSupplier.get().getDirection().getReceptionSide() != LogicalSide.SERVER) {
-			MagiksMostEvile.LOGGER.warn("Message recieved on incorrect side. (server) ");
-		}
+    if (!message.isValid()) {
+      MagiksMostEvile.LOGGER.warn("Invalid message received on server.");
+      return;
+    }
+    if (ctxSupplier.get().getDirection().getReceptionSide() != LogicalSide.SERVER) {
+      MagiksMostEvile.LOGGER.warn("Message recieved on incorrect side. (server) ");
+    }
 
-		ctxSupplier.get().enqueueWork(() -> processMessage(message));
-	}
+    ctxSupplier.get().enqueueWork(() -> processMessage(message));
+  }
 
-	private static void processMessage(GlyphMessageToServer message) {
-		return;
-	}
+  private static void processMessage(GlyphMessageToServer message) {
+    return;
+  }
 
-	public static boolean isProtocolAccepted(String protocolVersion) {
-		return GlyphNetworkingManager.GLYPH_MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
-	}
+  public static boolean isProtocolAccepted(String protocolVersion) {
+    return GlyphNetworkingManager.GLYPH_MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
+  }
 }

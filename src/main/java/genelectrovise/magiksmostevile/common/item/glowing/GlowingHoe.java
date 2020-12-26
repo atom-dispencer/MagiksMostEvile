@@ -6,13 +6,13 @@ import net.minecraft.item.ItemStack;
 
 public class GlowingHoe extends HoeItem {
 
-	public GlowingHoe(IItemTier tier, float attackSpeedIn, Properties builder) {
-		super(tier, attackSpeedIn, builder);
-	}
-	
-	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return true;
-	}
+  public GlowingHoe(IItemTier tier, int maxDamage, float attackSpeedIn, Properties builder) {
+    super(tier, maxDamage, attackSpeedIn, builder);
+  }
+
+  @Override
+  public boolean hasEffect(ItemStack stack) {
+    return true;
+  }
 
 }

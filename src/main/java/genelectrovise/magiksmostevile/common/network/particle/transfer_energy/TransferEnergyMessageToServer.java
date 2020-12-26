@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.network.particle.transfer_energy;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraft.network.PacketBuffer;
 
 /**
@@ -8,20 +8,20 @@ import net.minecraft.network.PacketBuffer;
  */
 public class TransferEnergyMessageToServer {
 
-	protected TransferEnergyMessageToServer() {
-		
-	}
+  protected TransferEnergyMessageToServer() {
 
-	public void encode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Encoding message to server");
-	}
+  }
 
-	public static TransferEnergyMessageToServer decode(PacketBuffer buffer) {
-		MagiksMostEvile.LOGGER.dev("Decoding message to server");
-		return new TransferEnergyMessageToServer();
-	}
+  public void encode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Encoding message to server");
+  }
 
-	public boolean isValid() {
-		return false;
-	}
+  public static TransferEnergyMessageToServer decode(PacketBuffer buffer) {
+    MagiksMostEvile.LOGGER.dev("Decoding message to server");
+    return new TransferEnergyMessageToServer();
+  }
+
+  public boolean isValid() {
+    return false;
+  }
 }

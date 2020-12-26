@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "magiksmostevile:lead_ore_overworld",
+    "magiksmostevile:lead_ore_nether",
+    "magiksmostevile:lead_ore_end"
+  ]
+}

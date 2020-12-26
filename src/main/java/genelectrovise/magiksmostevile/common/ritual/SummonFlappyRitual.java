@@ -3,8 +3,8 @@
  */
 package genelectrovise.magiksmostevile.common.ritual;
 
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.main.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
@@ -22,108 +22,116 @@ import net.minecraftforge.items.IItemHandler;
  * @author GenElectrovise 13 Jun 2020
  */
 public class SummonFlappyRitual extends Ritual {
-	public static final String displayName = "Summon Flappy!";
-	public static final String description = "Summon the almighty Flappy the Bat!";
-	public static final String information = "Summons a vampire bat into the world!";
-	private static final int energyRequirement = 60;
+  public static final String displayName = "Summon Flappy!";
+  public static final String description = "Summon the almighty Flappy the Bat!";
+  public static final String information = "Summons a vampire bat into the world!";
+  private static final int energyRequirement = 60;
 
-	/**
-	 * @param registryName
-	 * @param displayName
-	 * @param description
-	 */
-	public SummonFlappyRitual() {
-		super(displayName, description, information, energyRequirement);
-	}
+  /**
+   * @param registryName
+   * @param displayName
+   * @param description
+   */
+  public SummonFlappyRitual() {
+    super(displayName, description, information, energyRequirement);
+  }
 
-	@Override
-	protected boolean canStart() {
-		
-		if(!super.canStart()) {
-			return false;
-		}
-		
-		LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+  @Override
+  protected boolean canStart() {
 
-		ItemStack[] stacks = new ItemStack[4];
+    if (!super.canStart()) {
+      return false;
+    }
 
-		itemHandler.ifPresent((handler) -> {
-			stacks[0] = handler.getStackInSlot(0);
-			stacks[1] = handler.getStackInSlot(1);
-			stacks[2] = handler.getStackInSlot(2);
-			stacks[3] = handler.getStackInSlot(3);
-		});
+    LazyOptional<IItemHandler> itemHandler =
+        altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
-		for (int i = 0; i < stacks.length; i++) {
-			if (stacks[i].getItem() == EvileDeferredRegistry.VAMPIRE_BAT_TOOTH.get() && stacks[i].getCount() == 1) {
-				return true;
-			}
-		}
+    ItemStack[] stacks = new ItemStack[4];
 
-		return false;
-	}
+    itemHandler.ifPresent((handler) -> {
+      stacks[0] = handler.getStackInSlot(0);
+      stacks[1] = handler.getStackInSlot(1);
+      stacks[2] = handler.getStackInSlot(2);
+      stacks[3] = handler.getStackInSlot(3);
+    });
 
-	@Override
-	public void begin() {
-		super.begin();
-		GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(), new GlyphMessageToClient(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/vampire_bat_tooth.png"), GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
-		
-		LazyOptional<IItemHandler> itemHandler = altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+    for (int i = 0; i < stacks.length; i++) {
+      if (stacks[i].getItem() == EvileDeferredRegistry.VAMPIRE_BAT_TOOTH.get()
+          && stacks[i].getCount() == 1) {
+        return true;
+      }
+    }
 
-		ItemStack[] stacks = new ItemStack[4];
-		itemHandler.ifPresent((handler) -> {
-			stacks[0] = handler.getStackInSlot(0);
-			stacks[1] = handler.getStackInSlot(1);
-			stacks[2] = handler.getStackInSlot(2);
-			stacks[3] = handler.getStackInSlot(3);
-		});
+    return false;
+  }
 
-		for (int i = 0; i < stacks.length; i++) {
-			if (stacks[i].getItem() == EvileDeferredRegistry.VAMPIRE_BAT_TOOTH.get()) {
+  @Override
+  public void begin() {
+    super.begin();
+    GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
+        new GlyphMessageToClient(
+            new ResourceLocation(MagiksMostEvile.MODID,
+                "textures/items/general/vampire_bat_tooth.png"),
+            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
 
-				int slot = i;
-				itemHandler.ifPresent((handler) -> {
-					// Have to extract old item stack before inserting new one
-					handler.extractItem(slot, stacks[slot].getCount(), false);
+    LazyOptional<IItemHandler> itemHandler =
+        altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
 
-					ItemStack stack = ItemStack.EMPTY;
-					handler.insertItem(slot, stack, false);
-				});
-			}
-		}
-	}
+    ItemStack[] stacks = new ItemStack[4];
+    itemHandler.ifPresent((handler) -> {
+      stacks[0] = handler.getStackInSlot(0);
+      stacks[1] = handler.getStackInSlot(1);
+      stacks[2] = handler.getStackInSlot(2);
+      stacks[3] = handler.getStackInSlot(3);
+    });
 
-	@Override
-	protected RitualResult tick() {
-		super.tick();
+    for (int i = 0; i < stacks.length; i++) {
+      if (stacks[i].getItem() == EvileDeferredRegistry.VAMPIRE_BAT_TOOTH.get()) {
 
-		if (altar.getWorld().isDaytime()) {
-			return RitualResult.FAILURE;
-		}
+        int slot = i;
+        itemHandler.ifPresent((handler) -> {
+          // Have to extract old item stack before inserting new one
+          handler.extractItem(slot, stacks[slot].getCount(), false);
 
-		if (isBetweenTicks(1, 60)) {
-			if (altar.removeEnergy(1)) {
-				return RitualResult.CASTING;
-			} else {
-				return RitualResult.CATACLYSM;
-			}
-		}
+          ItemStack stack = ItemStack.EMPTY;
+          handler.insertItem(slot, stack, false);
+        });
+      }
+    }
+  }
 
-		if (isBetweenTicks(100, 140)) {
-			ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(), new EnderParticleMessageToClient(altar.getPos().up(3), 2));
-			return RitualResult.CASTING;
-		}
+  @Override
+  protected RitualResult tick() {
+    super.tick();
 
-		if (getTick() > 149) {
-			return RitualResult.SUCCESS;
-		}
+    if (altar.getWorld().isDaytime()) {
+      return RitualResult.FAILURE;
+    }
 
-		return RitualResult.CASTING;
-	}
+    if (isBetweenTicks(1, 60)) {
+      if (altar.removeEnergy(1)) {
+        return RitualResult.CASTING;
+      } else {
+        return RitualResult.CATACLYSM;
+      }
+    }
 
-	@Override
-	public ResultHandler<?> getResultHandler() {
-		return new SummonFlappyResultHandler(getAltar(), this);
-	}
+    if (isBetweenTicks(100, 140)) {
+      ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(),
+          new EnderParticleMessageToClient(altar.getPos().up(3), 2));
+      return RitualResult.CASTING;
+    }
+
+    if (getTick() > 149) {
+      return RitualResult.SUCCESS;
+    }
+
+    return RitualResult.CASTING;
+  }
+
+  @Override
+  public ResultHandler<?> getResultHandler() {
+    return new SummonFlappyResultHandler(getAltar(), this);
+  }
 
 }

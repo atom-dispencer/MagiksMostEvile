@@ -4,14 +4,12 @@
 package genelectrovise.magiksmostevile.common.entity.goal;
 
 import java.util.Random;
-
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
-import genelectrovise.magiksmostevile.common.main.MagiksMostEvile;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 
@@ -20,100 +18,105 @@ import net.minecraft.world.server.ServerWorld;
  */
 public class VampireBatBiteGoal extends MeleeAttackGoal {
 
-	private VampireBatEntity vampireBat;
-	private LivingEntity target;
+  private VampireBatEntity vampireBat;
+  private LivingEntity target;
 
-	private int cooldown;
-	private int cooldownMax;
-	private int maxReinforcements;
+  private int cooldown;
+  private int cooldownMax;
+  private int maxReinforcements;
 
-	public VampireBatBiteGoal(VampireBatEntity vampireBat) {
-		super(vampireBat, vampireBat.getAttribute(SharedMonsterAttributes.FLYING_SPEED).getValue(), true);
-		this.vampireBat = vampireBat;
+  public VampireBatBiteGoal(VampireBatEntity vampireBat) {
+    super(vampireBat, vampireBat.getAttribute(Attributes.FLYING_SPEED).getValue(), true);
+    this.vampireBat = vampireBat;
 
-		this.cooldownMax = VampireBatEntity.REINFORCEMENT_COOLDOWN;
-		this.maxReinforcements = VampireBatEntity.MAX_REINFORCEMENTS;
-		this.cooldown = cooldownMax;
-	}
+    this.cooldownMax = VampireBatEntity.REINFORCEMENT_COOLDOWN;
+    this.maxReinforcements = VampireBatEntity.MAX_REINFORCEMENTS;
+    this.cooldown = cooldownMax;
+  }
 
-	@Override
-	public void tick() {
-		vampireBat.setIsBatHanging(false);
+  @Override
+  public void tick() {
+    vampireBat.setIsBatHanging(false);
 
-		if (shouldSummonAid()) {
-			summonAid();
-		}
+    if (shouldSummonAid()) {
+      summonAid();
+    }
 
-		super.tick();
-	}
+    super.tick();
+  }
 
-	@Override
-	public boolean shouldExecute() {
+  @Override
+  public boolean shouldExecute() {
 
-		if (!vampireBat.isInActiveLightLevel()) {
-			return false;
-		}
+    if (!vampireBat.isInActiveLightLevel()) {
+      return false;
+    }
 
-		return super.shouldExecute();
-	}
+    return super.shouldExecute();
+  }
 
-	private boolean shouldSummonAid() {
-		
-		if (cooldown == 0) {
+  private boolean shouldSummonAid() {
 
-			if (vampireBat.getRNG().nextInt(VampireBatEntity.REINFORCEMENT_CHANCE) == 0 && vampireBat.batsWithinArea(VampireBatEntity.REINFORCEMENT_DETECTION_RADIUS).size() < VampireBatEntity.MINIMUM_REINFORCEMENTS) {
-				cooldown = cooldownMax;
-				return true;
-			} else {
-				if (vampireBat.getAttackTarget() != null & vampireBat.getAttackTarget().isAlive()) {
-					for (VampireBatEntity bat : vampireBat.batsWithinArea(VampireBatEntity.REINFORCEMENT_CALLING_RADIUS)) {
-						bat.setAttackTarget(vampireBat.getAttackTarget());
-					}
-				}
-			}
+    if (cooldown == 0) {
 
-		} else {
-			cooldown--;
-		}
+      if (vampireBat.getRNG().nextInt(VampireBatEntity.REINFORCEMENT_CHANCE) == 0
+          && vampireBat.batsWithinArea(VampireBatEntity.REINFORCEMENT_DETECTION_RADIUS)
+              .size() < VampireBatEntity.MINIMUM_REINFORCEMENTS) {
+        cooldown = cooldownMax;
+        return true;
+      } else {
+        if (vampireBat.getAttackTarget() != null & vampireBat.getAttackTarget().isAlive()) {
+          for (VampireBatEntity bat : vampireBat
+              .batsWithinArea(VampireBatEntity.REINFORCEMENT_CALLING_RADIUS)) {
+            bat.setAttackTarget(vampireBat.getAttackTarget());
+          }
+        }
+      }
 
-		return false;
-	}
+    } else {
+      cooldown--;
+    }
 
-	private void summonAid() {
+    return false;
+  }
 
-		MagiksMostEvile.LOGGER.dev("Flappys!");
+  private void summonAid() {
 
-		if (vampireBat.world instanceof ServerWorld && vampireBat.getRandom().nextInt(10) == 0) {
-			ServerWorld world = (ServerWorld) vampireBat.world;
+    MagiksMostEvile.LOGGER.dev("Flappys!");
 
-			for (int i = 0; i < maxReinforcements + 1; i++) {
-				Random rand = vampireBat.getRandom();
+    if (vampireBat.world instanceof ServerWorld && vampireBat.getRandom().nextInt(10) == 0) {
+      ServerWorld world = (ServerWorld) vampireBat.world;
 
-				if (rand.nextBoolean()) {
-					double x = vampireBat.getPosX();
-					double y = vampireBat.getPosY();
-					double z = vampireBat.getPosZ();
+      for (int i = 0; i < maxReinforcements + 1; i++) {
+        Random rand = vampireBat.getRandom();
 
-					double nearbyX = x + nearbyPos(rand, 5);
-					double nearbyY = y + nearbyPos(rand, 5);
-					double nearbyZ = z + nearbyPos(rand, 5);
+        if (rand.nextBoolean()) {
+          double x = vampireBat.getPosX();
+          double y = vampireBat.getPosY();
+          double z = vampireBat.getPosZ();
 
-					if (world.getBlockState(new BlockPos(nearbyX, nearbyY, nearbyZ)).getBlock() == Blocks.AIR) {
-						VampireBatEntity newBat = (VampireBatEntity) vampireBat.getType().create(world);
-						newBat.setLocationAndAngles(nearbyX, nearbyY, nearbyZ, vampireBat.rotationYaw, vampireBat.rotationPitch);
-						world.addEntity(newBat);
-					}
-				}
-			}
-		}
+          double nearbyX = x + nearbyPos(rand, 5);
+          double nearbyY = y + nearbyPos(rand, 5);
+          double nearbyZ = z + nearbyPos(rand, 5);
 
-		cooldown--;
+          if (world.getBlockState(new BlockPos(nearbyX, nearbyY, nearbyZ))
+              .getBlock() == Blocks.AIR) {
+            VampireBatEntity newBat = (VampireBatEntity) vampireBat.getType().create(world);
+            newBat.setLocationAndAngles(nearbyX, nearbyY, nearbyZ, vampireBat.rotationYaw,
+                vampireBat.rotationPitch);
+            world.addEntity(newBat);
+          }
+        }
+      }
+    }
 
-		super.startExecuting();
-	}
+    cooldown--;
 
-	private double nearbyPos(Random rand, int radius) {
-		return rand.nextInt(radius * 2) - radius + 0.5d;
-	}
+    super.startExecuting();
+  }
+
+  private double nearbyPos(Random rand, int radius) {
+    return rand.nextInt(radius * 2) - radius + 0.5d;
+  }
 
 }
