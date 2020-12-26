@@ -1,0 +1,33 @@
+#https://github.com/marketplace/actions/google-java-format
+name: Google Style Java Formatter
+
+on:
+  [pull_request]
+    
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Status - Beginning
+        run: | 
+          echo Starting formatting workflow
+      
+      - name: Actions - Checkout Project
+        uses: actions/checkout@v2
+      
+      - name: Actions - Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "11"
+      
+      - name: Axel-Op - Google Java Format
+        uses: axel-op/googlejavaformat-action@v3.4.0
+        with:
+          version: 1.9
+          commitMessage: "Auto generated commit to reformat code in line with Google Style Format v1.9"
+          args: "--skip-reflowing-long-strings --skip-sorting-imports --skip-removing-unused-imports"
+
+      - name: Status - Completion
+        run: | 
+          echo Run Google Java Format Action
