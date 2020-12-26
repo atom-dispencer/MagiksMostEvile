@@ -1,17 +1,19 @@
 # Configuration for the GitHub Actions labeler
 # Labels by affected paths
 
+core:
+ - any: ['src/**/core/*']
 blocks:
- - any: ['block']
+ - any: ['src/**/block/*']
 item:
- - any: ['item']
+ - any: ['src/**/item/*']
 entities:
- - any: ['entity']
+ - any: ['src/**/entity/*']
 tile-entities:
- - any: ['tileentity']
+ - any: ['src/**/tileentity/*']
 network:
- - any: ['network']
+ - any: ['src/**/network/*']
 particle:
- - any: ['particle']
+ - any: ['src/**/particle/*']
 ritual:
- - any: ['ritual']
+ - any: ['src/**/ritual/*']
