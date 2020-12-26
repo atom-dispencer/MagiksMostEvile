@@ -1,0 +1,17 @@
+# Configuration for the GitHub Actions labeler
+# Labels by affected paths
+
+blocks:
+ - any: ['block']
+item:
+ - any: ['item']
+entities:
+ - any: ['entity']
+tile-entities:
+ - any: ['tileentity']
+network:
+ - any: ['network']
+particle:
+ - any: ['particle']
+ritual:
+ - any: ['ritual']
