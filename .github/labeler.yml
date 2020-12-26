@@ -5,15 +5,15 @@ core:
  - any: ['src/**/core/*']
 blocks:
  - any: ['src/**/block/*']
-item:
+items:
  - any: ['src/**/item/*']
 entities:
  - any: ['src/**/entity/*']
 tile-entities:
  - any: ['src/**/tileentity/*']
-network:
+networking:
  - any: ['src/**/network/*']
-particle:
+particles:
  - any: ['src/**/particle/*']
-ritual:
+rituals:
  - any: ['src/**/ritual/*']
