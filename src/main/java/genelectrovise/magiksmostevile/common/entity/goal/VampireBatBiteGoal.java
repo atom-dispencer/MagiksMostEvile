@@ -7,7 +7,6 @@ import java.util.Random;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +18,6 @@ import net.minecraft.world.server.ServerWorld;
 public class VampireBatBiteGoal extends MeleeAttackGoal {
 
   private VampireBatEntity vampireBat;
-  private LivingEntity target;
 
   private int cooldown;
   private int cooldownMax;
