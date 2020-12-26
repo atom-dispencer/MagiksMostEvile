@@ -35,6 +35,7 @@ import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.Amethys
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -89,28 +90,63 @@ public class EvileDeferredRegistry {
 
   // =========BLOCKS======================================================================================================================
   public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block",
-      () -> new Block(Block.Properties.create(Material.GLASS).harvestTool(ToolType.PICKAXE)
-          .sound(SoundType.GLASS).setLightLevel((state) -> 5 / 16).hardnessAndResistance(3F, 3F)));
-  public static final RegistryObject<Block> AMETHYST_ORE_OVERWORLD = BLOCKS
-      .register("amethyst_ore_overworld", () -> new Block(Block.Properties.create(Material.ROCK)
-          .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(5F, 5F)));
+      () -> new Block(Block.Properties.create(Material.GLASS, MaterialColor.MAGENTA)
+          .harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).setLightLevel((state) -> 5 / 16)
+          .hardnessAndResistance(3F, 3F)));
+  public static final RegistryObject<Block> LEAD_BLOCK = BLOCKS.register("lead_block",
+      () -> new Block(Block.Properties.create(Material.IRON, MaterialColor.IRON)
+          .harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).hardnessAndResistance(5F, 6F)));
+
+  // Amethyst Ore
+  public static final RegistryObject<Block> AMETHYST_ORE_OVERWORLD =
+      BLOCKS.register("amethyst_ore_overworld",
+          () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE)
+              .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(1.5F, 6F)
+              .setRequiresTool()));
   public static final RegistryObject<Block> AMETHYST_ORE_NETHER =
-      BLOCKS.register("amethyst_ore_nether", () -> new Block(Block.Properties.create(Material.ROCK)
-          .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(5F, 5F)));
+      BLOCKS.register("amethyst_ore_nether",
+          () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.NETHERRACK)
+              .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL)
+              .hardnessAndResistance(0.4F, 0.4F).setRequiresTool()));
   public static final RegistryObject<Block> AMETHYST_ORE_END =
-      BLOCKS.register("amethyst_ore_end", () -> new Block(Block.Properties.create(Material.ROCK)
-          .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(5F, 5F)));
+      BLOCKS.register("amethyst_ore_end",
+          () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.SAND)
+              .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(3F, 9F)
+              .setRequiresTool()));
+
+  // Lead Ore
+  public static final RegistryObject<Block> LEAD_ORE_OVERWORLD =
+      BLOCKS.register("lead_ore_overworld",
+          () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE)
+              .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(1.5F, 6F)
+              .setRequiresTool()));
+  public static final RegistryObject<Block> LEAD_ORE_NETHER = BLOCKS.register("lead_ore_nether",
+      () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.NETHERRACK)
+          .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(0.4F, 0.4F)
+          .setRequiresTool()));
+  public static final RegistryObject<Block> LEAD_ORE_END =
+      BLOCKS.register("lead_ore_end",
+          () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.SAND)
+              .harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL).hardnessAndResistance(3F, 9F)
+              .setRequiresTool()));
+
+  // Assorted
   public static final RegistryObject<Block> AMETHYST_CRYSTAL = BLOCKS.register("amethyst_crystal",
-      () -> new AmethystCrystalBlock(Block.Properties.create(Material.GLASS)
+      () -> new AmethystCrystalBlock(Block.Properties.create(Material.GLASS, MaterialColor.MAGENTA)
           .harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).hardnessAndResistance(2F, 10F)));
-  public static final RegistryObject<Block> ALTAR =
-      BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.create(Material.GLASS)
+  public static final RegistryObject<Block> ALTAR = BLOCKS.register("altar",
+      () -> new AltarBlock(Block.Properties.create(Material.GLASS, MaterialColor.SAND)
           .harvestTool(ToolType.PICKAXE).sound(SoundType.CLOTH).hardnessAndResistance(6F, 10F)));
 
   // =========BLOCK-ITEMS=================================================================================================================
   public static final RegistryObject<Item> AMETHYST_BLOCK_ITEM =
       ITEMS.register("amethyst_block", () -> new BlockItem(AMETHYST_BLOCK.get(),
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> LEAD_BLOCK_ITEM =
+      ITEMS.register("lead_block", () -> new BlockItem(LEAD_BLOCK.get(),
+          new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+
+  // Amethyst Ore
   public static final RegistryObject<Item> AMETHYST_ORE_OVERWORLD_ITEM =
       ITEMS.register("amethyst_ore_overworld", () -> new BlockItem(AMETHYST_ORE_OVERWORLD.get(),
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
@@ -120,6 +156,19 @@ public class EvileDeferredRegistry {
   public static final RegistryObject<Item> AMETHYST_ORE_END_ITEM =
       ITEMS.register("amethyst_ore_end", () -> new BlockItem(AMETHYST_ORE_END.get(),
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+
+  // Lead Ore
+  public static final RegistryObject<Item> LEAD_ORE_OVERWORLD_ITEM =
+      ITEMS.register("lead_ore_overworld", () -> new BlockItem(LEAD_ORE_OVERWORLD.get(),
+          new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> LEAD_ORE_NETHER_ITEM =
+      ITEMS.register("lead_ore_nether", () -> new BlockItem(LEAD_ORE_NETHER.get(),
+          new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> LEAD_ORE_END_ITEM =
+      ITEMS.register("lead_ore_end", () -> new BlockItem(LEAD_ORE_END.get(),
+          new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+
+  // Assorted
   public static final RegistryObject<Item> AMETHYST_CRYSTAL_ITEM =
       ITEMS.register("amethyst_crystal", () -> new BlockItem(AMETHYST_CRYSTAL.get(),
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
@@ -128,6 +177,8 @@ public class EvileDeferredRegistry {
           new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
   // =========ITEMS=======================================================================================================================
+
+  // Amethysts
   public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst",
       () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   public static final RegistryObject<Item> POWERED_AMETHYST = ITEMS.register("powered_amethyst",
@@ -135,18 +186,27 @@ public class EvileDeferredRegistry {
   public static final RegistryObject<Item> OVER_POWERED_AMETHYST =
       ITEMS.register("over_powered_amethyst",
           () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+
+  // Ingots
+  public static final RegistryObject<Item> LEAD_INGOT = ITEMS.register("lead_ingot",
+      () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+
+  // Power stones
   public static final RegistryObject<Item> LESSER_POWER_STONE = ITEMS.register("lesser_power_stone",
       () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   public static final RegistryObject<Item> GREATER_POWER_STONE =
       ITEMS.register("greater_power_stone",
           () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> GOING_TO_THE_BALL =
-      ITEMS.register("going_to_the_ball", () -> new Item(new Item.Properties()));
-  // public static final RegistryObject<Item> INTRO_BOOK =
-  // ITEMS.register("intro_book", () -> new WrittenBookItem(new
-  // Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+
+  // Mob related
   public static final RegistryObject<Item> VAMPIRE_BAT_TOOTH = ITEMS.register("vampire_bat_tooth",
       () -> new WrittenBookItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+
+  // Assorted
+  public static final RegistryObject<Item> GOING_TO_THE_BALL =
+      ITEMS.register("going_to_the_ball", () -> new Item(new Item.Properties()));
+  public static final RegistryObject<Item> INTRO_BOOK = ITEMS.register("intro_book",
+      () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
   // =========TOOLS=======================================================================================================================
   public static final RegistryObject<Item> AMETHYST_SWORD =

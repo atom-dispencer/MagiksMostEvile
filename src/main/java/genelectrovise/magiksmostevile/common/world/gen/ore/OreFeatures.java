@@ -20,15 +20,30 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public class OreFeatures {
 
   public static ConfiguredFeature<?, ?> AMETHYST_ORE_OVERWORLD;
+  public static ConfiguredFeature<?, ?> AMETHYST_ORE_NETHER;
+  public static ConfiguredFeature<?, ?> AMETHYST_ORE_END;
+  public static ConfiguredFeature<?, ?> LEAD_ORE_OVERWORLD;
+  public static ConfiguredFeature<?, ?> LEAD_ORE_NETHER;
+  public static ConfiguredFeature<?, ?> LEAD_ORE_END;
 
   public static ConfiguredFeature<?, ?>[] OVERWORLD_ORES;
   public static ConfiguredFeature<?, ?>[] NETHER_ORES;
   public static ConfiguredFeature<?, ?>[] END_ORES;
 
+  /**
+   * Definitions:
+   * <ul>
+   * <li><code>DepthAverageConfig(baseline, spread)</code> == "Most common on baseline, forming a
+   * bell curve of frequency to a range (each side?) of the spread"
+   * <li><code>.func_242731_b(2)</code> == "spawn attempts per chunk"?
+   * </ul>
+   * 
+   * @see net.minecraft.world.gen.feature.Features
+   * @param event
+   */
   @SubscribeEvent
   public static void createConfiguredOreFeatures(FMLCommonSetupEvent event) {
     MagiksMostEvile.LOGGER.debug("Creating MME configured ore features");
-
 
     // Amethyst Ore Overworld
     AMETHYST_ORE_OVERWORLD = Registry.register( //
@@ -40,15 +55,85 @@ public class OreFeatures {
                 EvileDeferredRegistry.AMETHYST_ORE_OVERWORLD.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
-                new DepthAverageConfig(10, 32))) //
-            .range(16)); //
+                new DepthAverageConfig(32, 32))) //
+            .func_242731_b(1)); //
+
+    // Amethyst Ore Nether
+    AMETHYST_ORE_NETHER = Registry.register( //
+        WorldGenRegistries.CONFIGURED_FEATURE, //
+        "amethyst_ore_nether_generation", //
+        Feature.ORE.withConfiguration( //
+            new OreFeatureConfig( //
+                new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
+                EvileDeferredRegistry.AMETHYST_ORE_NETHER.get().getDefaultState(), //
+                7)) //
+            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+                new DepthAverageConfig(32, 32))//
+                .func_242731_b(2)) //
+    ); //
+
+    // Amethyst Ore End
+    AMETHYST_ORE_END = Registry.register( //
+        WorldGenRegistries.CONFIGURED_FEATURE, //
+        "amethyst_ore_end_generation", //
+        Feature.ORE.withConfiguration( //
+            new OreFeatureConfig( //
+                new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
+                EvileDeferredRegistry.AMETHYST_ORE_END.get().getDefaultState(), //
+                7)) //
+            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+                new DepthAverageConfig(40, 20))//
+                .func_242731_b(4)) //
+    ); //
+
+    // Lead Ore Overworld
+    LEAD_ORE_OVERWORLD = Registry.register( //
+        WorldGenRegistries.CONFIGURED_FEATURE, //
+        "lead_ore_overworld_generation", //
+        Feature.ORE.withConfiguration( //
+            new OreFeatureConfig( //
+                new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
+                EvileDeferredRegistry.LEAD_ORE_OVERWORLD.get().getDefaultState(), //
+                7)) //
+            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+                new DepthAverageConfig(40, 32))//
+                .func_242731_b(2)) //
+    ); //
+
+    // Lead Ore Nether
+    LEAD_ORE_NETHER = Registry.register( //
+        WorldGenRegistries.CONFIGURED_FEATURE, //
+        "lead_ore_overworld_generation", //
+        Feature.ORE.withConfiguration( //
+            new OreFeatureConfig( //
+                new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
+                EvileDeferredRegistry.LEAD_ORE_NETHER.get().getDefaultState(), //
+                7)) //
+            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+                new DepthAverageConfig(65, 20))//
+                .func_242731_b(3)) //
+    ); //
+
+    // Lead Ore End
+    LEAD_ORE_END = Registry.register( //
+        WorldGenRegistries.CONFIGURED_FEATURE, //
+        "lead_ore_overworld_generation", //
+        Feature.ORE.withConfiguration( //
+            new OreFeatureConfig( //
+                new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
+                EvileDeferredRegistry.LEAD_ORE_END.get().getDefaultState(), //
+                7)) //
+            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+                new DepthAverageConfig(40, 32))//
+                .func_242731_b(1)) //
+    ); //
 
     applyToLists();
   }
 
   private static void applyToLists() {
-    OVERWORLD_ORES = new ConfiguredFeature<?, ?>[] {AMETHYST_ORE_OVERWORLD};
-    NETHER_ORES = new ConfiguredFeature<?, ?>[] {};
-    END_ORES = new ConfiguredFeature<?, ?>[] {};
+    OVERWORLD_ORES = new ConfiguredFeature<?, ?>[] {AMETHYST_ORE_OVERWORLD, LEAD_ORE_OVERWORLD};
+    NETHER_ORES = new ConfiguredFeature<?, ?>[] {AMETHYST_ORE_NETHER, LEAD_ORE_NETHER};
+    END_ORES = new ConfiguredFeature<?, ?>[] {AMETHYST_ORE_END, LEAD_ORE_END};
   }
 }
