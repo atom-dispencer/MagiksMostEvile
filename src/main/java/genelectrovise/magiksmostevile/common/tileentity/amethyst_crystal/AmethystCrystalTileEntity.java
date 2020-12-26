@@ -28,7 +28,6 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
     MagiksMostEvile.LOGGER.debug("Constructing class : TileEntityAmethystCrystal");
   }
 
-  @Override
   public void read(BlockState state, CompoundNBT compound) {
     super.read(state, compound);
   }

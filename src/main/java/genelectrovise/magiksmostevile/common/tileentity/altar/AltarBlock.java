@@ -93,7 +93,6 @@ public class AltarBlock extends Block {
     }
   }
 
-  @Override
   public int getExpDrop(BlockState state, IWorldReader world, BlockPos pos, int fortune,
       int silktouch) {
     return silktouch == 0 ? 5 * fortune : 0;
@@ -101,7 +100,6 @@ public class AltarBlock extends Block {
 
   @Override
   public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
-
     // On the server
     if (!worldIn.isRemote()) {
 

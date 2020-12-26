@@ -85,6 +85,7 @@ public abstract class EvileSpawnEgg extends Item {
     if (world.isRemote) {
       return ActionResultType.SUCCESS;
     }
+    
     // If server
     else {
       ItemStack itemstack = context.getItem();

@@ -90,7 +90,6 @@ public class VampireBatEntity extends MonsterEntity {
   public VampireBatEntity(EntityType<? extends VampireBatEntity> entityType, World world) {
     super(entityType, world);
     this.setIsBatHanging(false);
-
     this.moveController = new VampireBatMoveHelperController(this, 60, true);
     this.navigator = new FlyingPathNavigator(this, this.world);
 
