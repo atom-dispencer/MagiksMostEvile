@@ -8,12 +8,11 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureFeatures;
 
 /**
  * Contains the register method for all MME structure features.
  * 
- * {@link StructureFeatures}
+ * {@link StructuresAndStructureFeatures}
  * 
  * @author GenElectrovise
  *
@@ -22,6 +21,7 @@ public class StructureAspectRegistrationManager {
 
   public static <FC extends IFeatureConfig, F extends Structure<FC>> StructureFeature<FC, F> registerStructureFeature(
       String name, StructureFeature<FC, F> structure) {
+
     return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, name,
         structure);
   }
