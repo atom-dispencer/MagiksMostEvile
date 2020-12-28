@@ -32,6 +32,8 @@ import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
+import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
+import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineStructure;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -54,6 +56,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -72,6 +75,9 @@ public class EvileDeferredRegistry {
 
   public static final DeferredRegister<Feature<?>> FEATURES =
       DeferredRegister.create(ForgeRegistries.FEATURES, MagiksMostEvile.MODID);
+
+  public static final DeferredRegister<Structure<?>> STRUCTURES =
+      DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, MagiksMostEvile.MODID);
 
   public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES =
       DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MagiksMostEvile.MODID);
@@ -362,6 +368,10 @@ public class EvileDeferredRegistry {
           () -> EntityType.Builder.create(TinderAndCinderEntity::new, EntityClassification.MONSTER)
               .immuneToFire().setTrackingRange(64).size(0.5f, 0.5f).build("tinder_and_cinder"));
 
+  // Structures
+  public static final RegistryObject<Structure<OvergroundShrineFeatureConfig>> OVERGROUND_SHRINE =
+      STRUCTURES.register("overground_shrine", () -> new OvergroundShrineStructure());
+
   // =========RITUALS=====================================================================================================================
   public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL =
       RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());
@@ -398,5 +408,6 @@ public class EvileDeferredRegistry {
     CONTAINERS.register(eventBus);
     RITUALS.register(eventBus);
     PARTICLES.register(eventBus);
+    STRUCTURES.register(eventBus);
   }
 }

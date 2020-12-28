@@ -5,7 +5,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 
+/**
+ * {@link RuinedPortalPiece.Location}
+ * 
+ * @author GenElectrovise
+ *
+ */
 public enum EnumFeatureLocation implements IStringSerializable {
   DEFAULT("default"), //
   DESERT("desert"), //
@@ -16,7 +23,7 @@ public enum EnumFeatureLocation implements IStringSerializable {
   OCEAN("ocean"), //
   NETHER("nether"), //
   END("end"), //
-  ; 
+  ;
 
   // Codec
   public static final Codec<EnumFeatureLocation> CODEC =

@@ -13,6 +13,7 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.structure.RuinedPortalStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
@@ -40,6 +41,10 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
   public IStartFactory<OvergroundShrineFeatureConfig> getStartFactory() {
     return OvergroundShrineStructure.Start::new;
   }
+
+  public net.minecraft.world.gen.GenerationStage.Decoration getDecorationStage() {
+    return Decoration.SURFACE_STRUCTURES;
+  };
 
   public static class Start extends StructureStart<OvergroundShrineFeatureConfig> {
 

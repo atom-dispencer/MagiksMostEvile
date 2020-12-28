@@ -20,6 +20,7 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
+import net.minecraft.world.gen.feature.structure.IglooPieces.Piece;
 import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.BlackStoneReplacementProcessor;
@@ -138,7 +139,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
   }
 
   /**
-   * (abstract) Helper method to read subclass data from NBT
+   * (abstract) Called on loading the structure to read data from the java to the NBT tag!
    */
   protected void readAdditional(CompoundNBT tagCompound) {
     super.readAdditional(tagCompound);
@@ -164,7 +165,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
   @Override
   protected void handleDataMarker(String function, BlockPos pos, IServerWorld worldIn, Random rand,
       MutableBoundingBox sbb) {
-    // Nothing in RuinedPortalPiece
+    // Nothing in RuinedPortalPiece, used by the igloo to give its chest a loot table.
   }
 
 }
