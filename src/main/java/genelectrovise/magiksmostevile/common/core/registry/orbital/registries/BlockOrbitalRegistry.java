@@ -18,7 +18,7 @@ public class BlockOrbitalRegistry implements IOrbitalRegistry {
 
   public static final DeferredRegister<Block> BLOCKS =
       DeferredRegister.create(ForgeRegistries.BLOCKS, MagiksMostEvile.MODID);
-  
+
   // =========BLOCKS======================================================================================================================
   public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block",
       () -> new Block(Block.Properties.create(Material.GLASS, MaterialColor.MAGENTA)

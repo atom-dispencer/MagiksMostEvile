@@ -13,17 +13,17 @@ import net.minecraftforge.fml.RegistryObject;
 public class ArmorOrbitalRegistry implements IOrbitalRegistry {
 
   // =========ARMOR======================================================================================================================
-  public static final RegistryObject<Item> AMETHYST_HELMET =
-      ItemOrbitalRegistry.ITEMS.register("amethyst_helmet", () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST,
+  public static final RegistryObject<Item> AMETHYST_HELMET = ItemOrbitalRegistry.ITEMS
+      .register("amethyst_helmet", () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST,
           EquipmentSlotType.HEAD, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   public static final RegistryObject<Item> AMETHYST_CHESTPLATE = ItemOrbitalRegistry.ITEMS
       .register("amethyst_chestplate", () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST,
           EquipmentSlotType.CHEST, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> AMETHYST_LEGGINGS = ItemOrbitalRegistry.ITEMS.register("amethyst_leggings",
-      () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST, EquipmentSlotType.LEGS,
-          new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> AMETHYST_BOOTS =
-      ItemOrbitalRegistry.ITEMS.register("amethyst_boots", () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST,
+  public static final RegistryObject<Item> AMETHYST_LEGGINGS = ItemOrbitalRegistry.ITEMS
+      .register("amethyst_leggings", () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST,
+          EquipmentSlotType.LEGS, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> AMETHYST_BOOTS = ItemOrbitalRegistry.ITEMS
+      .register("amethyst_boots", () -> new AmethystArmorBase(EnumEvileArmorMaterial.AMETHYST,
           EquipmentSlotType.FEET, new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   //
   public static final RegistryObject<Item> POWERED_AMETHYST_HELMET =

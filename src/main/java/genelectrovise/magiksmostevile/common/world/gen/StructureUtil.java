@@ -29,8 +29,10 @@ public class StructureUtil {
     // Alternatively use func_237152_b_ to avoid "placementSettings.setBoundingBoxFromChunk()"
   }
 
-  public static RuleEntry randomBlockReplacementRule(Block replaceThis, float chance, Block replaceWith) {
-    return new RuleEntry(new RandomBlockMatchRuleTest(replaceThis, chance), AlwaysTrueRuleTest.INSTANCE, replaceWith.getDefaultState());
+  public static RuleEntry randomBlockReplacementRule(Block replaceThis, float chance,
+      Block replaceWith) {
+    return new RuleEntry(new RandomBlockMatchRuleTest(replaceThis, chance),
+        AlwaysTrueRuleTest.INSTANCE, replaceWith.getDefaultState());
   }
 
 }

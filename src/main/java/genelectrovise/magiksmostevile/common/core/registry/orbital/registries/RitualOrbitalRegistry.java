@@ -27,7 +27,7 @@ public class RitualOrbitalRegistry implements IOrbitalRegistry {
 
   @Override
   public void initialise() {
-   OrbitalRegistryGenerator.registerDeferredRegister(RITUALS);
+    OrbitalRegistryGenerator.registerDeferredRegister(RITUALS);
   }
 
   @Override

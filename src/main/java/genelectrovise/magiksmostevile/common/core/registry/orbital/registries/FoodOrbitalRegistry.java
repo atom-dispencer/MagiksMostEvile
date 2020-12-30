@@ -9,7 +9,7 @@ import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.RegistryObject;
 
 public class FoodOrbitalRegistry implements IOrbitalRegistry {
-  
+
   // =========FOOD========================================================================================================================
   public static final RegistryObject<Item> AMETHYST_POTATO =
       ItemOrbitalRegistry.ITEMS.register("amethyst_potato",

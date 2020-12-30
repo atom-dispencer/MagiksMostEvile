@@ -56,7 +56,7 @@ public class StructureFeatures {
         MagiksMostEvile.MODID + ":overground_shrine/default",
         StructureOrbitalRegistry.OVERGROUND_SHRINE.get()
             .withConfiguration(new OvergroundShrineFeatureConfig(EnumFeatureLocation.DEFAULT)));
-    
+
     // Desert
     OVERGROUND_SHRINE_DESERT = StructureAspectRegistrationManager.registerStructureFeature(
         MagiksMostEvile.MODID + ":overground_shrine/desert",
@@ -83,12 +83,14 @@ public class StructureFeatures {
             .withConfiguration(new OvergroundShrineFeatureConfig(EnumFeatureLocation.NETHER)));
     // Ocean
     OVERGROUND_SHRINE_OCEAN = StructureAspectRegistrationManager.registerStructureFeature(
-        MagiksMostEvile.MODID + ":overground_shrine/ocean", StructureOrbitalRegistry.OVERGROUND_SHRINE
-            .get().withConfiguration(new OvergroundShrineFeatureConfig(EnumFeatureLocation.OCEAN)));
+        MagiksMostEvile.MODID + ":overground_shrine/ocean",
+        StructureOrbitalRegistry.OVERGROUND_SHRINE.get()
+            .withConfiguration(new OvergroundShrineFeatureConfig(EnumFeatureLocation.OCEAN)));
     // Swamp
     OVERGROUND_SHRINE_SWAMP = StructureAspectRegistrationManager.registerStructureFeature(
-        MagiksMostEvile.MODID + ":overground_shrine/swamp", StructureOrbitalRegistry.OVERGROUND_SHRINE
-            .get().withConfiguration(new OvergroundShrineFeatureConfig(EnumFeatureLocation.SWAMP)));
+        MagiksMostEvile.MODID + ":overground_shrine/swamp",
+        StructureOrbitalRegistry.OVERGROUND_SHRINE.get()
+            .withConfiguration(new OvergroundShrineFeatureConfig(EnumFeatureLocation.SWAMP)));
     // Tundra
     OVERGROUND_SHRINE_TUNDRA = StructureAspectRegistrationManager.registerStructureFeature(
         MagiksMostEvile.MODID + ":overground_shrine/tundra",

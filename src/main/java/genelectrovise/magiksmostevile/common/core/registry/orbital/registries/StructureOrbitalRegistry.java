@@ -12,10 +12,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 // https://forums.minecraftforge.net/topic/93506-1163-generate-structure-in-custom-biome/
 
 public class StructureOrbitalRegistry implements IOrbitalRegistry {
-  
+
   public static final DeferredRegister<Structure<?>> STRUCTURES =
       DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, MagiksMostEvile.MODID);
-  
+
   public static final RegistryObject<Structure<OvergroundShrineFeatureConfig>> OVERGROUND_SHRINE =
       STRUCTURES.register("overground_shrine", () -> new OvergroundShrineStructure());
 
