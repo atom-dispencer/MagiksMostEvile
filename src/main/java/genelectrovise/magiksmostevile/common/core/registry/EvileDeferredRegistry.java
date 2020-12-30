@@ -32,8 +32,6 @@ import genelectrovise.magiksmostevile.common.tileentity.altar.AltarContainer;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
-import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
-import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineStructure;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -367,11 +365,7 @@ public class EvileDeferredRegistry {
       ENTITIES.register("tinder_and_cinder",
           () -> EntityType.Builder.create(TinderAndCinderEntity::new, EntityClassification.MONSTER)
               .immuneToFire().setTrackingRange(64).size(0.5f, 0.5f).build("tinder_and_cinder"));
-
-  // Structures
-  public static final RegistryObject<Structure<OvergroundShrineFeatureConfig>> OVERGROUND_SHRINE =
-      STRUCTURES.register("overground_shrine", () -> new OvergroundShrineStructure());
-
+  
   // =========RITUALS=====================================================================================================================
   public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL =
       RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());

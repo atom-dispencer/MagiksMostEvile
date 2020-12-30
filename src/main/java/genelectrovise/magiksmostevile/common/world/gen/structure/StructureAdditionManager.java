@@ -1,8 +1,11 @@
 package genelectrovise.magiksmostevile.common.world.gen.structure;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineStructure;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -36,8 +39,10 @@ public class StructureAdditionManager {
       StructureFeature<?, ?> structure, BiomeLoadingEvent event) {
 
     MagiksMostEvile.LOGGER.debug(" > Adding " + structure + " to a " + event.getCategory() + " biome");
-
+    
     generation.withStructure(structure);
+    Registry.register(Registry.STRUCTURE_FEATURE, "", new OvergroundShrineStructure());
+    generation.withFeature(Decoration.SURFACE_STRUCTURES, null);
   }
 
 
