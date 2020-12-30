@@ -8,7 +8,7 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ParticleOrbitalRegistry;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
@@ -38,7 +38,7 @@ public class GlyphParticleData implements IParticleData {
   @Nonnull
   @Override
   public ParticleType<GlyphParticleData> getType() {
-    return EvileDeferredRegistry.GLYPH_PARTICLE.get();
+    return ParticleOrbitalRegistry.GLYPH_PARTICLE.get();
   }
 
   // write the particle information to a PacketBuffer, ready for transmission to a

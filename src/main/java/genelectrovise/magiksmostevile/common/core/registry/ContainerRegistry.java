@@ -4,6 +4,7 @@
 package genelectrovise.magiksmostevile.common.core.registry;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.tileentity.altar.AltarScreenManager;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +19,7 @@ public class ContainerRegistry {
 
   @SubscribeEvent
   public static void registerFactories(FMLLoadCompleteEvent event) {
-    ScreenManager.registerFactory(EvileDeferredRegistry.ALTAR_CONTAINER.get(),
+    ScreenManager.registerFactory(ContainerOrbitalRegistry.ALTAR_CONTAINER.get(),
         new AltarScreenManager());
   }
 }

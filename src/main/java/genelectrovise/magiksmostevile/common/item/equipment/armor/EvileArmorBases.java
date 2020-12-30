@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.item.equipment.armor;
 
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ArmorOrbitalRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -24,13 +24,13 @@ public class EvileArmorBases {
       if (player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(1) != null
           && player.inventory.armorItemInSlot(2) != null
           && player.inventory.armorItemInSlot(3) != null) {
-        if (player.inventory.armorItemInSlot(3).getItem() == EvileDeferredRegistry.AMETHYST_HELMET
+        if (player.inventory.armorItemInSlot(3).getItem() == ArmorOrbitalRegistry.AMETHYST_HELMET
             .get()
             && player.inventory.armorItemInSlot(2)
-                .getItem() == EvileDeferredRegistry.AMETHYST_CHESTPLATE.get()
+                .getItem() == ArmorOrbitalRegistry.AMETHYST_CHESTPLATE.get()
             && player.inventory.armorItemInSlot(1)
-                .getItem() == EvileDeferredRegistry.AMETHYST_LEGGINGS.get()
-            && player.inventory.armorItemInSlot(0).getItem() == EvileDeferredRegistry.AMETHYST_BOOTS
+                .getItem() == ArmorOrbitalRegistry.AMETHYST_LEGGINGS.get()
+            && player.inventory.armorItemInSlot(0).getItem() == ArmorOrbitalRegistry.AMETHYST_BOOTS
                 .get()) {
 
           player.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 0, false, false));
@@ -55,13 +55,13 @@ public class EvileArmorBases {
           && player.inventory.armorItemInSlot(2) != null
           && player.inventory.armorItemInSlot(3) != null) {
         if (player.inventory.armorItemInSlot(3)
-            .getItem() == EvileDeferredRegistry.POWERED_AMETHYST_HELMET.get()
+            .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_HELMET.get()
             && player.inventory.armorItemInSlot(2)
-                .getItem() == EvileDeferredRegistry.POWERED_AMETHYST_CHESTPLATE.get()
+                .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_CHESTPLATE.get()
             && player.inventory.armorItemInSlot(1)
-                .getItem() == EvileDeferredRegistry.POWERED_AMETHYST_LEGGINGS.get()
+                .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_LEGGINGS.get()
             && player.inventory.armorItemInSlot(0)
-                .getItem() == EvileDeferredRegistry.POWERED_AMETHYST_BOOTS.get()) {
+                .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_BOOTS.get()) {
 
           player.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 1, false, false));
           player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));
@@ -87,13 +87,13 @@ public class EvileArmorBases {
           && player.inventory.armorItemInSlot(2) != null
           && player.inventory.armorItemInSlot(3) != null) {
         if (player.inventory.armorItemInSlot(3)
-            .getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_HELMET.get()
+            .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_HELMET.get()
             && player.inventory.armorItemInSlot(2)
-                .getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_CHESTPLATE.get()
+                .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_CHESTPLATE.get()
             && player.inventory.armorItemInSlot(1)
-                .getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_LEGGINGS.get()
+                .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_LEGGINGS.get()
             && player.inventory.armorItemInSlot(0)
-                .getItem() == EvileDeferredRegistry.OVER_POWERED_AMETHYST_BOOTS.get()) {
+                .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_BOOTS.get()) {
 
           player.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 2, false, false));
           player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));

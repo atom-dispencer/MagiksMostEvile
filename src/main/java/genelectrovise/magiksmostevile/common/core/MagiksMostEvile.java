@@ -1,10 +1,11 @@
 package genelectrovise.magiksmostevile.common.core;
 
 import org.apache.logging.log4j.LogManager;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.common.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.common.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.common.particle.ParticleCommonStartup;
+import genelectrovise.magiksmostevile.common.world.gen.structure.StructureRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -35,7 +36,11 @@ public class MagiksMostEvile {
     registerCommonEvents();
     DistExecutor.runWhenOn(Dist.CLIENT, () -> MagiksMostEvile::registerClientOnlyEvents);
 
-    EvileDeferredRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
+    // Handle orbital registries
+    new OrbitalRegistryGenerator(OrbitalRegistryGenerator.REFLECTIONS_CONFIGURATION)
+        .collectOrbitalRegistries();
+
+    StructureRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
   }
 
   @SubscribeEvent

@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.common.ritual.result;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ItemOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.ConvertAmethystRitual;
@@ -48,7 +48,7 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
     });
 
     for (int i = 0; i < stacks.length; i++) {
-      if (stacks[i].getItem() == EvileDeferredRegistry.AMETHYST.get()) {
+      if (stacks[i].getItem() == ItemOrbitalRegistry.AMETHYST.get()) {
 
         int slot = i;
         itemHandler.ifPresent((handler) -> {
@@ -56,7 +56,7 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
           handler.extractItem(slot, stacks[slot].getCount(), false);
 
           int count = stacks[slot].getCount();
-          ItemStack stack = new ItemStack(EvileDeferredRegistry.POWERED_AMETHYST.get(), count);
+          ItemStack stack = new ItemStack(ItemOrbitalRegistry.POWERED_AMETHYST.get(), count);
           handler.insertItem(slot, stack, false);
         });
       }

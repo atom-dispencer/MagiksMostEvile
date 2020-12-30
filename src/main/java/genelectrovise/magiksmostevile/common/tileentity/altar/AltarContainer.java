@@ -3,7 +3,7 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.core.support.TrackableIntegerHolder;
 import genelectrovise.magiksmostevile.common.tileentity.CommonContainer;
 import net.minecraft.client.Minecraft;
@@ -35,7 +35,7 @@ public class AltarContainer extends CommonContainer {
 
   public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler,
       AltarTileEntity altar) {
-    super(EvileDeferredRegistry.ALTAR_CONTAINER.get(), windowId, 4);
+    super(ContainerOrbitalRegistry.ALTAR_CONTAINER.get(), windowId, 4);
 
     this.setAltar(altar);
     this.maxAmethystFlux = altar.energyStorage.maxAmethystFlux;

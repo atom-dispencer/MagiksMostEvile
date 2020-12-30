@@ -3,7 +3,7 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.RitualOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import net.minecraft.util.ResourceLocation;
 
@@ -40,7 +40,7 @@ public class RitualSelector {
 
     ArrayList<Supplier<Ritual>> ritualSuppliers = new ArrayList<Supplier<Ritual>>();
 
-    EvileDeferredRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> {
+    RitualOrbitalRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> {
       ritualSuppliers.add(ritualSupplier);
     });
 
@@ -51,7 +51,7 @@ public class RitualSelector {
     }
 
     MagiksMostEvile.LOGGER.error("No valid ritual of ID " + location + " in ritual registry!");
-    MagiksMostEvile.LOGGER.debug("Registry: \n " + EvileDeferredRegistry.RITUALS);
+    MagiksMostEvile.LOGGER.debug("Registry: \n " + RitualOrbitalRegistry.RITUALS);
     return null;
   }
 }

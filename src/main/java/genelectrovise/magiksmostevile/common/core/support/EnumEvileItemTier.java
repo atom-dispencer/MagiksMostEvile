@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.common.core.support;
 
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ItemOrbitalRegistry;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;;
@@ -11,11 +11,11 @@ public enum EnumEvileItemTier implements IItemTier {
   // Tags to allow repairing of items in an anvil
   // Amethyst
   AMETHYST(2, 512, 9.0F, 1.5F, 50, () -> {
-    return Ingredient.fromItems(EvileDeferredRegistry.AMETHYST.get());
+    return Ingredient.fromItems(ItemOrbitalRegistry.AMETHYST.get());
   }),
   // Powered amethyst
   POWERED_AMETHYST(3, 512, 15.0F, 3.0F, 200, () -> {
-    return Ingredient.fromItems(EvileDeferredRegistry.POWERED_AMETHYST.get());
+    return Ingredient.fromItems(ItemOrbitalRegistry.POWERED_AMETHYST.get());
   });
 
   private final int harvestLevel;

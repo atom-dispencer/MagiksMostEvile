@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.common.core;
 
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
@@ -19,23 +19,23 @@ public final class SetupManager {
         MagiksMostEvile.LOGGER.debug("Registering MME entity attributes");
 
         // Vampire Bat
-        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.VAMPIRE_BAT.get(),
+        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.VAMPIRE_BAT.get(),
             VampireBatEntity.getEntityAttributes().create());
 
         // Egg Capone
-        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.EGG_CAPONE.get(),
+        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.EGG_CAPONE.get(),
             EggCaponeEntity.getEntityAttributes().create());
 
         // The Kraken
-        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.THE_KRAKEN.get(),
+        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.THE_KRAKEN.get(),
             TheKrakenEntity.getEntityAttributes().create());
 
         // Tinder and Cinder
-        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.TINDER_AND_CINDER.get(),
+        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TINDER_AND_CINDER.get(),
             TinderAndCinderEntity.getEntityAttributes().create());
 
         // Tom the Trol
-        GlobalEntityTypeAttributes.put(EvileDeferredRegistry.TOM_THE_TROLL.get(),
+        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(),
             TomTheTrollEntity.getEntityAttributes().create());
       }
 

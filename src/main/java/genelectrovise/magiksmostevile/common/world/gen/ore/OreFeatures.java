@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.common.world.gen.ore;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.BlockOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.data.ModdedTags;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -52,7 +52,7 @@ public class OreFeatures {
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
-                EvileDeferredRegistry.AMETHYST_ORE_OVERWORLD.get().getDefaultState(), //
+                BlockOrbitalRegistry.AMETHYST_ORE_OVERWORLD.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
                 new DepthAverageConfig(32, 32))) //
@@ -65,7 +65,7 @@ public class OreFeatures {
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
-                EvileDeferredRegistry.AMETHYST_ORE_NETHER.get().getDefaultState(), //
+                BlockOrbitalRegistry.AMETHYST_ORE_NETHER.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
                 new DepthAverageConfig(32, 32))//
@@ -79,7 +79,7 @@ public class OreFeatures {
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
-                EvileDeferredRegistry.AMETHYST_ORE_END.get().getDefaultState(), //
+                BlockOrbitalRegistry.AMETHYST_ORE_END.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
                 new DepthAverageConfig(40, 20))//
@@ -93,7 +93,7 @@ public class OreFeatures {
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
-                EvileDeferredRegistry.LEAD_ORE_OVERWORLD.get().getDefaultState(), //
+                BlockOrbitalRegistry.LEAD_ORE_OVERWORLD.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
                 new DepthAverageConfig(40, 32))//
@@ -107,7 +107,7 @@ public class OreFeatures {
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
-                EvileDeferredRegistry.LEAD_ORE_NETHER.get().getDefaultState(), //
+                BlockOrbitalRegistry.LEAD_ORE_NETHER.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
                 new DepthAverageConfig(65, 20))//
@@ -121,7 +121,7 @@ public class OreFeatures {
         Feature.ORE.withConfiguration( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
-                EvileDeferredRegistry.LEAD_ORE_END.get().getDefaultState(), //
+                BlockOrbitalRegistry.LEAD_ORE_END.get().getDefaultState(), //
                 7)) //
             .withPlacement(Placement.DEPTH_AVERAGE.configure( //
                 new DepthAverageConfig(40, 32))//
