@@ -1,10 +1,19 @@
 package genelectrovise.magiksmostevile.common.core.registry.orbital;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
+import com.google.common.collect.Lists;
+import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import net.minecraftforge.registries.DeferredRegister;
 
 public class OrbitalRegistryGenerator {
 
@@ -13,6 +22,7 @@ public class OrbitalRegistryGenerator {
 
   public static final ConfigurationBuilder REFLECTIONS_CONFIGURATION =
       new ConfigurationBuilder().forPackages("genelectrovise");
+  private static final Logger LOGGER = LogManager.getLogger(OrbitalRegistryGenerator.class);
 
   public OrbitalRegistryGenerator(@Nullable Configuration configuration) {
     this.setInitialised(false);
@@ -21,20 +31,46 @@ public class OrbitalRegistryGenerator {
   }
 
   public void collectOrbitalRegistries() {
+    
+    if (this.isInitialised()) {
+      throw new IllegalStateException("OrbitalRegistries already initialised");
+    }
 
     try {
+      
+      MagiksMostEvile.LOGGER.debug("Collecting OrbitalRegistries");
 
       Set<Class<? extends IOrbitalRegistry>> orbitals =
           reflections.getSubTypesOf(IOrbitalRegistry.class);
 
+      Map<Integer, IOrbitalRegistry> registries = new HashMap<Integer, IOrbitalRegistry>();
+
       for (Class<? extends IOrbitalRegistry> clazz : orbitals) {
-        clazz.getMethod("initialise").invoke(clazz);
+        IOrbitalRegistry instance = clazz.newInstance();
+        registries.put(instance.priority(), instance);
+      }
+
+      ArrayList<Integer> keys = Lists.newArrayList(registries.keySet());
+      Collections.sort(keys);
+
+      for (Integer integer : keys) {
+        IOrbitalRegistry registry = registries.get(integer);
+        MagiksMostEvile.LOGGER.info("Initialising MagiksMostEvile OrbitalRegistry: (" + registry.priority() + ") ["
+            + registry.name() + "]");
+        registry.initialise();
       }
 
     } catch (Exception e) {
       e.printStackTrace();
     }
+    
+    this.setInitialised(true);
 
+  }
+  
+  public static void registerDeferredRegister(DeferredRegister<?> register) {
+    OrbitalRegistryGenerator.LOGGER.info("Registering MagiksMostEvile DeferredRegister<?> " + register.toString() + " to the MOD_EVENT_BUS");
+    register.register(MagiksMostEvile.MOD_EVENT_BUS);
   }
 
   // Get and set

@@ -6,7 +6,7 @@ package genelectrovise.magiksmostevile.common.network.altar.arrow_toggles;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.RitualOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
@@ -47,7 +47,7 @@ public class AltarToggleButtonMessageHandlerOnServer {
     ArrayList<ResourceLocation> possibleRitualKeys = new ArrayList<ResourceLocation>();
 
     // Create a list of all the rituals
-    EvileDeferredRegistry.RITUALS.getEntries().forEach((ritual) -> {
+    RitualOrbitalRegistry.RITUALS.getEntries().forEach((ritual) -> {
       allRituals.add(ritual);
     });
 

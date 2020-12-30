@@ -1,7 +1,6 @@
 package genelectrovise.magiksmostevile.common.core;
 
 import org.apache.logging.log4j.LogManager;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.common.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.common.particle.ParticleClientStartup;
@@ -41,7 +40,6 @@ public class MagiksMostEvile {
     new OrbitalRegistryGenerator(OrbitalRegistryGenerator.REFLECTIONS_CONFIGURATION)
         .collectOrbitalRegistries();
 
-    EvileDeferredRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
     StructureRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
   }
 

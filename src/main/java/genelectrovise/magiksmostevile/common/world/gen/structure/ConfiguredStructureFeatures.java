@@ -1,6 +1,5 @@
 package genelectrovise.magiksmostevile.common.world.gen.structure;
 
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.world.gen.EnumFeatureLocation;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;

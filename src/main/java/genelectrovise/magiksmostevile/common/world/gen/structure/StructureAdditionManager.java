@@ -37,12 +37,14 @@ public class StructureAdditionManager {
 
   private static void registerTo(BiomeGenerationSettingsBuilder generation,
       StructureFeature<?, ?> structure, BiomeLoadingEvent event) {
-
-    MagiksMostEvile.LOGGER.debug(" > Adding " + structure + " to a " + event.getCategory() + " biome");
     
-    generation.withStructure(structure);
-    Registry.register(Registry.STRUCTURE_FEATURE, "", new OvergroundShrineStructure());
-    generation.withFeature(Decoration.SURFACE_STRUCTURES, null);
+    return;
+
+    //MagiksMostEvile.LOGGER.debug(" > Adding " + structure + " to a " + event.getCategory() + " biome");
+    
+    //generation.withStructure(structure);
+    //Registry.register(Registry.STRUCTURE_FEATURE, "", new OvergroundShrineStructure());
+    //generation.withFeature(Decoration.SURFACE_STRUCTURES, null);
   }
 
 

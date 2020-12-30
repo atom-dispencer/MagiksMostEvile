@@ -3,7 +3,7 @@
  */
 package genelectrovise.magiksmostevile.common.item.spawn_egg;
 
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
 import net.minecraft.entity.EntityType;
 
 /**
@@ -20,7 +20,7 @@ public class VampireBatSpawnEgg extends EvileSpawnEgg {
 
   @Override
   public EntityType<?> getEntityType() {
-    return EvileDeferredRegistry.VAMPIRE_BAT.get();
+    return EntityOrbitalRegistry.VAMPIRE_BAT.get();
   }
 
 }

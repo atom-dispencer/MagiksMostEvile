@@ -12,7 +12,6 @@ import static net.minecraft.world.biome.Biome.Category.THEEND;
 import java.util.HashMap;
 import java.util.Map;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
 import genelectrovise.magiksmostevile.common.world.gen.EnumFeatureLocation;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
 import net.minecraft.world.biome.Biome;
