@@ -5,7 +5,6 @@ import genelectrovise.magiksmostevile.common.core.registry.orbital.OrbitalRegist
 import genelectrovise.magiksmostevile.common.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.common.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.common.particle.ParticleCommonStartup;
-import genelectrovise.magiksmostevile.common.world.gen.structure.StructureRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -40,7 +39,6 @@ public class MagiksMostEvile {
     new OrbitalRegistryGenerator(OrbitalRegistryGenerator.REFLECTIONS_CONFIGURATION)
         .collectOrbitalRegistries();
 
-    StructureRegistry.init(FMLJavaModLoadingContext.get().getModEventBus());
   }
 
   @SubscribeEvent

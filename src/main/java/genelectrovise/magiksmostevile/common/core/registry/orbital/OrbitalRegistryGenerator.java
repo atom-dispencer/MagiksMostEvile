@@ -15,6 +15,27 @@ import com.google.common.collect.Lists;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import net.minecraftforge.registries.DeferredRegister;
 
+/**
+ * <ol> 
+ * <li> blocks (BLOCKS) 
+ * <li> items (ITEMS) 
+ * <li> blockitems
+ * <li> tools
+ * <li> staffs
+ * <li> tomes
+ * <li> armor
+ * <li> foods
+ * <li> tileentities (TILEENTITIES)
+ * <li> containers (CONTAINERS)
+ * <li> entities (ENTITIES)
+ * <li> rituals (RITUALS)
+ * <li> particles (PARTICLES)
+ * <li> structures (STRUCTURES)
+ * <li> (features)
+ * </ol>
+ * @author GenElectrovise
+ *
+ */
 public class OrbitalRegistryGenerator {
 
   private boolean initialised;
