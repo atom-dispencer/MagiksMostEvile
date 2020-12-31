@@ -1,11 +1,15 @@
 package genelectrovise.magiksmostevile.common.core.registry.orbital.registries;
 
+import java.util.HashMap;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.IOrbitalRegistry;
+import genelectrovise.magiksmostevile.common.world.gen.structure.StructureData;
+import genelectrovise.magiksmostevile.common.world.gen.structure.StructureHolder;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineStructure;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -13,12 +17,40 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class StructureOrbitalRegistry implements IOrbitalRegistry {
 
-  public static final DeferredRegister<Structure<?>> STRUCTURES =
+  // Data containers
+
+  // Auto put structures in the main map
+  @SuppressWarnings("serial")
+  public static final HashMap<Structure<?>, StructureData> EVILE_STRUCTURES =
+      new HashMap<Structure<?>, StructureData>() {
+
+        @Override
+        public StructureData put(Structure<?> structure, StructureData data) {
+          Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);
+          return super.put(structure, data);
+        };
+      };
+
+  // Registers
+  public static final DeferredRegister<Structure<?>> STRUCTURE_FEATURES =
       DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, MagiksMostEvile.MODID);
 
-  public static final RegistryObject<Structure<OvergroundShrineFeatureConfig>> OVERGROUND_SHRINE =
-      STRUCTURES.register("overground_shrine", () -> new OvergroundShrineStructure());
+  // Declarations
+  public static final StructureHolder<OvergroundShrineStructure, OvergroundShrineFeatureConfig> OVERGROUND_SHRINE =
+      registerStructure("overground_shrine", new OvergroundShrineStructure(),
+          GenerationStage.Decoration.SURFACE_STRUCTURES);
 
+  // Methods
+
+  public static <T extends Structure<FC>, FC extends IFeatureConfig> StructureHolder<T, FC> registerStructure(
+      String name, Structure<FC> structure, GenerationStage.Decoration stage) {
+
+    StructureOrbitalRegistry.EVILE_STRUCTURES.put(structure, new StructureData(name, stage));
+
+    return new StructureHolder<T, FC>(STRUCTURE_FEATURES.register(name, () -> structure), stage);
+  }
+
+  // Orbital boilerplate
 
   @Override
   public String name() {
@@ -34,6 +66,6 @@ public class StructureOrbitalRegistry implements IOrbitalRegistry {
 
   @Override
   public void initialise() {
-    STRUCTURES.register(MagiksMostEvile.MOD_EVENT_BUS);
+    STRUCTURE_FEATURES.register(MagiksMostEvile.MOD_EVENT_BUS);
   }
 }
