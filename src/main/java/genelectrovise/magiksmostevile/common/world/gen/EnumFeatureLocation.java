@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
+import net.minecraft.world.biome.Biome;
+import static net.minecraft.world.biome.Biome.*;
 
 /**
  * {@link RuinedPortalPiece.Location}
@@ -14,15 +15,14 @@ import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
  *
  */
 public enum EnumFeatureLocation implements IStringSerializable {
-  DEFAULT("default"), //
-  DESERT("desert"), //
-  JUNGLE("jungle"), //
-  SWAMP("swamp"), //
-  MOUNTAIN("mountain"), //
-  TUNDRA("tundra"), //
-  OCEAN("ocean"), //
-  NETHER("nether"), //
-  END("end"), //
+  DEFAULT("default", Category.NONE), //
+  DESERT("desert", Category.DESERT), //
+  JUNGLE("jungle", Category.JUNGLE), //
+  SWAMP("swamp", Category.SWAMP), //
+  ICY("mountain", Category.ICY), //
+  OCEAN("ocean", Category.OCEAN), //
+  NETHER("nether", Category.NETHER), //
+  END("end", Category.THEEND), //
   ;
 
   // Codec
@@ -35,16 +35,24 @@ public enum EnumFeatureLocation implements IStringSerializable {
         return location;
       }));
 
-  // Enum Code
+  // Enum
   private final String name;
+  private final Biome.Category biomeCategory;
 
-  private EnumFeatureLocation(String name) {
+  private EnumFeatureLocation(String name, Biome.Category biomeCategory) {
     this.name = name;
+    this.biomeCategory = biomeCategory;
   }
 
   public String getName() {
     return this.name;
   }
+
+  public Biome.Category getBiomeCategory() {
+    return biomeCategory;
+  }
+
+  // IStringSerializable
 
   public static EnumFeatureLocation get(String name) {
     return MAP.get(name);

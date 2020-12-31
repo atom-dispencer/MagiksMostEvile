@@ -1,6 +1,8 @@
 package genelectrovise.magiksmostevile.common.world.gen.structure;
 
 import java.util.HashMap;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.StructureFeatureHolder;
+import genelectrovise.magiksmostevile.common.world.gen.EnumFeatureLocation;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.IFeatureConfig;
@@ -13,7 +15,7 @@ public class StructureHolder<T extends Structure<FC>, FC extends IFeatureConfig>
   private RegistryObject<Structure<FC>> structure;
   private Decoration stage;
   private HashMap<String, FC> configurations;
-  private HashMap<String, StructureFeature<FC, ? extends Structure<FC>>> features;
+  private HashMap<String, StructureFeatureHolder<FC, ? extends Structure<FC>>> features;
 
   public StructureHolder(RegistryObject<Structure<FC>> structure, Decoration stage) {
     this.structure = structure;
@@ -25,18 +27,25 @@ public class StructureHolder<T extends Structure<FC>, FC extends IFeatureConfig>
   }
 
   /**
-   * Automatically registers a structure feature of the given name (structure_id + _ +
-   * feature_name)
+   * Automatically registers a structure feature of the given name (structure_id + _ + feature_name)
    * 
    * @param name
    * @param configuration
    * @return The configured feature
    */
-  public StructureFeature<FC, ? extends Structure<FC>> withStructureFeature(String name,
-      FC configuration) {
-    return features.put(structure.getId() + "_" + name,
+  public StructureFeatureHolder<FC, Structure<FC>> withStructureFeature(String name,
+      FC configuration, EnumFeatureLocation... enumFeatureLocations) {
+
+    StructureFeature<FC, ? extends Structure<FC>> rawStructureFeature =
         WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, name,
-            structure.get().withConfiguration(configuration)));
+            structure.get().withConfiguration(configuration));
+    
+    StructureFeatureHolder<FC, Structure<FC>> holder =
+        new StructureFeatureHolder<FC, Structure<FC>>(rawStructureFeature, enumFeatureLocations);
+    
+    features.put(structure.getId() + "_" + name, holder);
+
+    return holder;
   }
 
   //
@@ -51,6 +60,10 @@ public class StructureHolder<T extends Structure<FC>, FC extends IFeatureConfig>
 
   public HashMap<String, FC> getConfigurations() {
     return configurations;
+  }
+
+  public HashMap<String, StructureFeatureHolder<FC, ? extends Structure<FC>>> getFeatures() {
+    return features;
   }
 
 }

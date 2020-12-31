@@ -82,15 +82,13 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
           break;
         case JUNGLE:
           break;
-        case MOUNTAIN:
-          break;
         case NETHER:
           break;
         case OCEAN:
           break;
         case SWAMP:
           break;
-        case TUNDRA:
+        case ICY:
           break;
         default:
           break;
@@ -133,9 +131,8 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
       BlockPos finalPlacementPosition = new BlockPos(x, y, z);
 
       // Is the position cold?
-      if (configuration.location == EnumFeatureLocation.MOUNTAIN
+      if (configuration.location == EnumFeatureLocation.ICY
           || configuration.location == EnumFeatureLocation.OCEAN
-          || configuration.location == EnumFeatureLocation.TUNDRA
           || configuration.location == EnumFeatureLocation.END) {
 
         serializer.isCold = isPlacementPositionCold(finalPlacementPosition, biome);

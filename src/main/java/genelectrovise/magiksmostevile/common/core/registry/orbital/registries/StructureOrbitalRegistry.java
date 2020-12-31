@@ -3,6 +3,7 @@ package genelectrovise.magiksmostevile.common.core.registry.orbital.registries;
 import java.util.HashMap;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.IOrbitalRegistry;
+import genelectrovise.magiksmostevile.common.world.gen.EnumFeatureLocation;
 import genelectrovise.magiksmostevile.common.world.gen.structure.StructureData;
 import genelectrovise.magiksmostevile.common.world.gen.structure.StructureHolder;
 import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
@@ -21,12 +22,14 @@ public class StructureOrbitalRegistry implements IOrbitalRegistry {
 
   // Auto put structures in the main map
   @SuppressWarnings("serial")
-  public static final HashMap<Structure<?>, StructureData> EVILE_STRUCTURES =
-      new HashMap<Structure<?>, StructureData>() {
+  public static final HashMap<StructureHolder<?, ?>, StructureData> EVILE_STRUCTURES =
+
+      new HashMap<StructureHolder<?, ?>, StructureData>() {
 
         @Override
-        public StructureData put(Structure<?> structure, StructureData data) {
-          Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);
+        public StructureData put(StructureHolder<?, ?> structure, StructureData data) {
+          Structure.NAME_STRUCTURE_BIMAP.put(structure.getStructure().getId().toString(),
+              structure.getStructure().get());
           return super.put(structure, data);
         };
       };
@@ -40,14 +43,21 @@ public class StructureOrbitalRegistry implements IOrbitalRegistry {
       registerStructure("overground_shrine", new OvergroundShrineStructure(),
           GenerationStage.Decoration.SURFACE_STRUCTURES);
 
+  public static final StructureFeatureHolder<OvergroundShrineFeatureConfig, ? extends Structure<OvergroundShrineFeatureConfig>> OVERGROUND_SHRINE_DEFAULT =
+      OVERGROUND_SHRINE.withStructureFeature("default",
+          new OvergroundShrineFeatureConfig(EnumFeatureLocation.DEFAULT));
+
   // Methods
 
   public static <T extends Structure<FC>, FC extends IFeatureConfig> StructureHolder<T, FC> registerStructure(
       String name, Structure<FC> structure, GenerationStage.Decoration stage) {
 
-    StructureOrbitalRegistry.EVILE_STRUCTURES.put(structure, new StructureData(name, stage));
+    StructureHolder<T, FC> structureHolder =
+        new StructureHolder<T, FC>(STRUCTURE_FEATURES.register(name, () -> structure), stage);
 
-    return new StructureHolder<T, FC>(STRUCTURE_FEATURES.register(name, () -> structure), stage);
+    StructureOrbitalRegistry.EVILE_STRUCTURES.put(structureHolder, new StructureData(name, stage));
+
+    return structureHolder;
   }
 
   // Orbital boilerplate
