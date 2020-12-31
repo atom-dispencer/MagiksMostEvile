@@ -14,16 +14,12 @@ public class StructureHolder<T extends Structure<FC>, FC extends IFeatureConfig>
 
   private RegistryObject<Structure<FC>> structure;
   private Decoration stage;
-  private HashMap<String, FC> configurations;
-  private HashMap<String, StructureFeatureHolder<FC, ? extends Structure<FC>>> features;
+  private final HashMap<String, StructureFeatureHolder<FC, ? extends Structure<FC>>> features =
+      new HashMap<>();
 
   public StructureHolder(RegistryObject<Structure<FC>> structure, Decoration stage) {
     this.structure = structure;
     this.stage = stage;
-  }
-
-  public void withConfiguration(String name, FC configuration) {
-    configurations.put(name, configuration);
   }
 
   /**
@@ -39,10 +35,10 @@ public class StructureHolder<T extends Structure<FC>, FC extends IFeatureConfig>
     StructureFeature<FC, ? extends Structure<FC>> rawStructureFeature =
         WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, name,
             structure.get().withConfiguration(configuration));
-    
+
     StructureFeatureHolder<FC, Structure<FC>> holder =
         new StructureFeatureHolder<FC, Structure<FC>>(rawStructureFeature, enumFeatureLocations);
-    
+
     features.put(structure.getId() + "_" + name, holder);
 
     return holder;
@@ -56,10 +52,6 @@ public class StructureHolder<T extends Structure<FC>, FC extends IFeatureConfig>
 
   public Decoration getStage() {
     return stage;
-  }
-
-  public HashMap<String, FC> getConfigurations() {
-    return configurations;
   }
 
   public HashMap<String, StructureFeatureHolder<FC, ? extends Structure<FC>>> getFeatures() {

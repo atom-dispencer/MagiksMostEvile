@@ -4,11 +4,8 @@ import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.StructureFeatureHolder;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.StructureOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.world.gen.EnumFeatureLocation;
-import genelectrovise.magiksmostevile.common.world.gen.structure.shrine.OvergroundShrineStructure;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +21,7 @@ public class StructureAdditionManager {
     BiomeGenerationSettingsBuilder generation = event.getGeneration();
 
     StructureOrbitalRegistry.EVILE_STRUCTURES.forEach((structureHolder, structureData) -> {
+      
       structureHolder.getFeatures().forEach((name, feature) -> {
 
         for (EnumFeatureLocation location : feature.getLocations()) {
@@ -38,8 +36,6 @@ public class StructureAdditionManager {
 
       });
     });
-
-    MagiksMostEvile.LOGGER.debug("MME Structure addition complete!");
   }
 
   private static void registerTo(BiomeGenerationSettingsBuilder generation,
@@ -49,7 +45,6 @@ public class StructureAdditionManager {
         .debug(" > Adding " + structureFeatureHolder + " to a " + event.getCategory() + " biome");
 
     generation.withStructure(structureFeatureHolder.getFeature());
-    generation.withFeature(Decoration.SURFACE_STRUCTURES, structureFeatureHolder.getFeature());
   }
 
 
