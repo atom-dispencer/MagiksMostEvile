@@ -8,7 +8,7 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.Dynamic;
 import genelectrovise.magiksmostevile.common.world.gen.EnumFeatureLocation;
 import genelectrovise.magiksmostevile.common.world.gen.StructureUtil;
-import genelectrovise.magiksmostevile.common.world.gen.structure.StructurePieceTypes;
+import genelectrovise.magiksmostevile.common.world.gen.structure.registry.StructurePieces;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTDynamicOps;
@@ -20,7 +20,6 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.minecraft.world.gen.feature.structure.IglooPieces.Piece;
 import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.BlackStoneReplacementProcessor;
@@ -63,7 +62,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
   public OvergroundShrineStructurePiece(BlockPos blockPos, EnumFeatureLocation location,
       OvergroundShrineStructureAestheticsSerializer serializer, ResourceLocation templateName,
       Template template, Rotation rotation, Mirror mirror, BlockPos truePosition) {
-    super(StructurePieceTypes.OVERGROUND_SHRINE, 0);
+    super(StructurePieces.OVERGROUND_SHRINE_PIECE, 0);
     this.templatePosition = blockPos;
     this.templateName = templateName;
     this.rotation = rotation;
