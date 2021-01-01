@@ -5,7 +5,7 @@ import genelectrovise.magiksmostevile.common.core.registry.orbital.IOrbitalRegis
 import genelectrovise.magiksmostevile.common.core.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.common.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
-import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.KittyTheKrakenEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
@@ -41,10 +41,10 @@ public class EntityOrbitalRegistry implements IOrbitalRegistry {
           () -> EntityType.Builder.create(EggCaponeEntity::new, EntityClassification.MONSTER)
               .setTrackingRange(64).size(0.5f, 0.5f).build("egg_capone"));
 
-  public static final RegistryObject<EntityType<TheKrakenEntity>> THE_KRAKEN =
+  public static final RegistryObject<EntityType<KittyTheKrakenEntity>> THE_KRAKEN =
       ENTITIES.register("the_kraken",
-          () -> EntityType.Builder.create(TheKrakenEntity::new, EntityClassification.MONSTER)
-              .setTrackingRange(64).size(1f, 2f).build("the_kraken"));
+          () -> EntityType.Builder.create(KittyTheKrakenEntity::new, EntityClassification.MONSTER)
+              .setTrackingRange(64).size(1f, 2f).build("kitty_the_kraken"));
 
   public static final RegistryObject<EntityType<TinderAndCinderEntity>> TINDER_AND_CINDER =
       ENTITIES.register("tinder_and_cinder",

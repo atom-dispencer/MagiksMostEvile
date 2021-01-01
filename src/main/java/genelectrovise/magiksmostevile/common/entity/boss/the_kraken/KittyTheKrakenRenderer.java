@@ -13,19 +13,19 @@ import net.minecraft.util.math.vector.Vector3f;
  * @author GenElectrovise 1 Jun 2020
  */
 
-public class TheKrakenRenderer
-    extends MobRenderer<TheKrakenEntity, TheKrakenModel<TheKrakenEntity>> {
+public class KittyTheKrakenRenderer
+    extends MobRenderer<KittyTheKrakenEntity, KittyTheKrakenModel<KittyTheKrakenEntity>> {
   private static final ResourceLocation THE_KRAKEN_TEXTURES =
       new ResourceLocation(MagiksMostEvile.MODID, "textures/entity/the_kraken/the_kraken.png");
 
-  public TheKrakenRenderer(EntityRendererManager renderManagerIn) {
-    super(renderManagerIn, new TheKrakenModel<>(), 0.7F);
+  public KittyTheKrakenRenderer(EntityRendererManager renderManagerIn) {
+    super(renderManagerIn, new KittyTheKrakenModel<>(), 0.7F);
   }
 
   /**
    * Returns the location of an entity's texture.
    */
-  public ResourceLocation getEntityTexture(TheKrakenEntity entity) {
+  public ResourceLocation getEntityTexture(KittyTheKrakenEntity entity) {
     return THE_KRAKEN_TEXTURES;
   }
 

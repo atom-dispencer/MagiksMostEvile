@@ -14,13 +14,13 @@ import net.minecraft.world.World;
 /**
  * @author GenElectrovise 23 Jun 2020
  */
-public class TheKrakenEntity extends BossMob {
+public class KittyTheKrakenEntity extends BossMob {
 
   /**
    * @param type
    * @param worldIn
    */
-  public TheKrakenEntity(EntityType<? extends TheKrakenEntity> type, World worldIn) {
+  public KittyTheKrakenEntity(EntityType<? extends KittyTheKrakenEntity> type, World worldIn) {
     super(type, worldIn);
   }
 

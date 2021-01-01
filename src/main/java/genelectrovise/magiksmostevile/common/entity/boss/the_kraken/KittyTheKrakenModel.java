@@ -7,12 +7,12 @@ import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class TheKrakenModel<T extends Entity> extends SegmentedModel<T> {
+public class KittyTheKrakenModel<T extends Entity> extends SegmentedModel<T> {
   private final ModelRenderer body;
   private final ModelRenderer[] legs = new ModelRenderer[8];
   private final ImmutableList<ModelRenderer> field_228296_f_;
 
-  public TheKrakenModel() {
+  public KittyTheKrakenModel() {
     this.body = new ModelRenderer(this, 0, 0);
     this.body.addBox(-6.0F, -8.0F, -6.0F, 12.0F, 16.0F, 12.0F);
     this.body.rotationPointY += 8.0F;
