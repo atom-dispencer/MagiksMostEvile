@@ -10,7 +10,9 @@ import net.minecraftforge.registries.RegistryManager;
 
 public class EvileRegistries {
 
-  public static final IForgeRegistry<Ritual> RITUALS = RegistryManager.ACTIVE.getRegistry(Ritual.class);
-  public static final RegistryKey<Registry<Ritual>> RITUALS_KEY = RegistryKey.getOrCreateRootKey(new ResourceLocation(MagiksMostEvile.MODID, "ritual"));
+  public static final IForgeRegistry<Ritual> RITUALS =
+      RegistryManager.ACTIVE.getRegistry(Ritual.class);
+  public static final RegistryKey<Registry<Ritual>> RITUALS_KEY =
+      RegistryKey.getOrCreateRootKey(new ResourceLocation(MagiksMostEvile.MODID, "ritual"));
 
 }

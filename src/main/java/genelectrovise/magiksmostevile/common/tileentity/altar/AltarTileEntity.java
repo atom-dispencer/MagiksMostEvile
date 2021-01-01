@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Supplier;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.BlockOrbitalRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.RitualOrbitalRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.TileEntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.particle.transfer_energy.TransferEnergyMessageToClient;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
@@ -85,7 +87,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   // Constructor
 
   public AltarTileEntity() {
-    super(EvileDeferredRegistry.TILE_ENTITY_ALTAR.get());
+    super(TileEntityOrbitalRegistry.TILE_ENTITY_ALTAR.get());
     MagiksMostEvile.LOGGER.debug("Constructing class : AltarTileEntity");
 
     // IItemHandler
@@ -235,7 +237,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
             for (int z = -4; z < 4; z++) {
               BlockPos position = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
               BlockState state = world.getBlockState(position);
-              if (state.getBlock() == EvileDeferredRegistry.AMETHYST_CRYSTAL.get()
+              if (state.getBlock() == BlockOrbitalRegistry.AMETHYST_CRYSTAL.get()
                   || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
                 crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
               }
@@ -342,7 +344,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     MagiksMostEvile.LOGGER.dev("getting ritual by resource location! : " + resourceLocation);
 
     ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
-    EvileDeferredRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
+    RitualOrbitalRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
 
     for (Supplier<Ritual> ritualSupplier : all) {
       if (ritualSupplier.get().getRegistryName().toString()

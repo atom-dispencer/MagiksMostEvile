@@ -1,7 +1,8 @@
 package genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.FoodOrbitalRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.TileEntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.particle.ender.EnderParticleMessageToClient;
 import net.minecraft.block.Block;
@@ -24,7 +25,7 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
   private int iteration = 1;
 
   public AmethystCrystalTileEntity() {
-    super(EvileDeferredRegistry.TILE_ENTITY_AMETHYST_CRYSTAL.get());
+    super(TileEntityOrbitalRegistry.TILE_ENTITY_AMETHYST_CRYSTAL.get());
     MagiksMostEvile.LOGGER.debug("Constructing class : TileEntityAmethystCrystal");
   }
 
@@ -97,7 +98,7 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
   private void spawnEntityItemAmethystPotato(BlockPos blockPos) {
     if (!world.isRemote) {
       Entity entity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-          new ItemStack(EvileDeferredRegistry.AMETHYST_POTATO.get(), 1));
+          new ItemStack(FoodOrbitalRegistry.AMETHYST_POTATO.get(), 1));
       world.addEntity(entity);
     }
   }

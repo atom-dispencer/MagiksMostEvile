@@ -5,6 +5,7 @@ package genelectrovise.magiksmostevile.common.core.registry;
 
 import java.util.Iterator;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -40,7 +41,7 @@ public class EntityRegistry {
               || biome.getCategory() != Biome.Category.NETHER
               || biome.getCategory() != Biome.Category.THEEND) {
 
-            biome.getMobSpawnInfo().getEntityTypes().add(EvileDeferredRegistry.VAMPIRE_BAT.get());
+            biome.getMobSpawnInfo().getEntityTypes().add(EntityOrbitalRegistry.VAMPIRE_BAT.get());
           }
         });
       });

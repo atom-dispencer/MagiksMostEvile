@@ -4,7 +4,7 @@
 package genelectrovise.magiksmostevile.common.ritual;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ItemOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.ritual.glyph.Glyph.GlyphOrientation;
@@ -48,7 +48,7 @@ public class ConvertAmethystRitual extends Ritual {
     });
 
     for (int i = 0; i < stacks.length; i++) {
-      if (stacks[i].getItem() == EvileDeferredRegistry.AMETHYST.get()) {
+      if (stacks[i].getItem() == ItemOrbitalRegistry.AMETHYST.get()) {
         return true;
       }
     }
