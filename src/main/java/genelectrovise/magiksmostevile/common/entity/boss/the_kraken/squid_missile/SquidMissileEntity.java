@@ -2,27 +2,20 @@ package genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missi
 
 import java.util.function.Function;
 import com.google.common.primitives.Doubles;
-import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.ForgeEventFactory;
 
 /**
@@ -33,7 +26,7 @@ import net.minecraftforge.event.ForgeEventFactory;
  */
 public class SquidMissileEntity extends MobEntity {
 
-  protected SquidMissileEntity(EntityType<? extends MobEntity> type, World worldIn) {
+  public SquidMissileEntity(EntityType<? extends MobEntity> type, World worldIn) {
     super(type, worldIn);
   }
 

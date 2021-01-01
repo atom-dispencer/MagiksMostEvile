@@ -43,7 +43,7 @@ public class EntityOrbitalRegistry implements IOrbitalRegistry {
               .build("egg_capone"));
 
   public static final RegistryObject<EntityType<KittyTheKrakenEntity>> THE_KRAKEN =
-      ENTITIES.register("the_kraken",
+      ENTITIES.register("kitty_the_kraken",
           () -> EntityType.Builder.create(KittyTheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(1f, 2f)
               .build("kitty_the_kraken"));
 

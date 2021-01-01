@@ -2,10 +2,11 @@ package genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missi
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.KittyTheKrakenModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.SquidRenderer;
 import net.minecraft.client.renderer.entity.model.SquidModel;
 import net.minecraft.util.ResourceLocation;
@@ -19,10 +20,10 @@ import net.minecraft.util.math.vector.Vector3f;
  *
  * @param <T>
  */
-public class SquidMissileRenderer<T extends SquidMissileEntity> extends EntityRenderer<T> {
+public class SquidMissileRenderer extends MobRenderer<SquidMissileEntity, SquidMissileModel<SquidMissileEntity>> {
 
-  protected SquidMissileRenderer(EntityRendererManager renderManager) {
-    super(renderManager);
+  public SquidMissileRenderer(EntityRendererManager renderManagerIn) {
+    super(renderManagerIn, new SquidMissileModel<>(), 1);
   }
 
   @Override
