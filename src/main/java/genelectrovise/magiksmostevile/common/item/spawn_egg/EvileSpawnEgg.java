@@ -85,7 +85,7 @@ public abstract class EvileSpawnEgg extends Item {
     if (world.isRemote) {
       return ActionResultType.SUCCESS;
     }
-    
+
     // If server
     else {
       ItemStack itemstack = context.getItem();
@@ -165,8 +165,8 @@ public abstract class EvileSpawnEgg extends Item {
         EntityType<?> entitytype = this.getEntityType();
 
         // If null spawned, pass
-        if (entitytype.spawn((ServerWorld) worldIn, itemstack, playerIn, blockpos, SpawnReason.SPAWN_EGG, false,
-            false) == null) {
+        if (entitytype.spawn((ServerWorld) worldIn, itemstack, playerIn, blockpos,
+            SpawnReason.SPAWN_EGG, false, false) == null) {
           return ActionResult.resultPass(itemstack);
         }
         // Else shrink the stack if the player is not creative
@@ -180,7 +180,7 @@ public abstract class EvileSpawnEgg extends Item {
           return ActionResult.resultSuccess(itemstack);
         }
       }
-      
+
       // If the block was not modifiable, fail
       else {
         return ActionResult.resultFail(itemstack);

@@ -4,6 +4,7 @@
 package genelectrovise.magiksmostevile.common.core.registry;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.TheKrakenRenderer;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatRenderer;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,9 +21,9 @@ public class RendererRegistry {
 
   @SubscribeEvent
   public static void renderers(FMLClientSetupEvent event) {
-    RenderingRegistry.registerEntityRenderingHandler(EvileDeferredRegistry.VAMPIRE_BAT.get(),
+    RenderingRegistry.registerEntityRenderingHandler(EntityOrbitalRegistry.VAMPIRE_BAT.get(),
         VampireBatRenderer::new);
-    RenderingRegistry.registerEntityRenderingHandler(EvileDeferredRegistry.THE_KRAKEN.get(),
+    RenderingRegistry.registerEntityRenderingHandler(EntityOrbitalRegistry.THE_KRAKEN.get(),
         TheKrakenRenderer::new);
   }
 }

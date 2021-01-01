@@ -14,17 +14,17 @@ public class NoPortalTeleporter extends Teleporter {
   public NoPortalTeleporter(ServerWorld worldIn) {
     super(worldIn);
   }
-  
+
   @Override
   public Optional<Result> makePortal(BlockPos pos, Axis axis) {
     return Optional.of(null);
   }
-  
+
   @Override
   public Optional<Result> getExistingPortal(BlockPos pos, boolean isNether) {
     return Optional.of(null);
   }
-  
+
   @Override
   public Entity placeEntity(Entity entity, ServerWorld currentWorld, ServerWorld destWorld,
       float yaw, Function<Boolean, Entity> repositionEntity) {

@@ -4,7 +4,7 @@
 package genelectrovise.magiksmostevile.common.ritual;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.ItemOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworkingManager;
@@ -56,7 +56,7 @@ public class SummonFlappyRitual extends Ritual {
     });
 
     for (int i = 0; i < stacks.length; i++) {
-      if (stacks[i].getItem() == EvileDeferredRegistry.VAMPIRE_BAT_TOOTH.get()
+      if (stacks[i].getItem() == ItemOrbitalRegistry.VAMPIRE_BAT_TOOTH.get()
           && stacks[i].getCount() == 1) {
         return true;
       }
@@ -86,7 +86,7 @@ public class SummonFlappyRitual extends Ritual {
     });
 
     for (int i = 0; i < stacks.length; i++) {
-      if (stacks[i].getItem() == EvileDeferredRegistry.VAMPIRE_BAT_TOOTH.get()) {
+      if (stacks[i].getItem() == ItemOrbitalRegistry.VAMPIRE_BAT_TOOTH.get()) {
 
         int slot = i;
         itemHandler.ifPresent((handler) -> {

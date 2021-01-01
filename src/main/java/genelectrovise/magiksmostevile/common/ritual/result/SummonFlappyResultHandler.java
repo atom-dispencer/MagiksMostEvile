@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.common.ritual.result;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.common.core.registry.EvileDeferredRegistry;
+import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.common.network.glyph.GlyphNetworkingManager;
@@ -33,7 +33,7 @@ public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual>
 
     ritual.setDone(true);
 
-    VampireBatEntity bat = EvileDeferredRegistry.VAMPIRE_BAT.get().create(altar.getWorld());
+    VampireBatEntity bat = EntityOrbitalRegistry.VAMPIRE_BAT.get().create(altar.getWorld());
 
     BlockPos altarPosUp = altar.getPos().up(3);
     bat.setPosition(altarPosUp.getX(), altarPosUp.getY(), altarPosUp.getZ());
