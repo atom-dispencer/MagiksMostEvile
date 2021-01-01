@@ -13,8 +13,7 @@ import net.minecraft.util.math.vector.Vector3f;
  * @author GenElectrovise 1 Jun 2020
  */
 
-public class KittyTheKrakenRenderer
-    extends MobRenderer<KittyTheKrakenEntity, KittyTheKrakenModel<KittyTheKrakenEntity>> {
+public class KittyTheKrakenRenderer extends MobRenderer<KittyTheKrakenEntity, KittyTheKrakenModel<KittyTheKrakenEntity>> {
   private static final ResourceLocation THE_KRAKEN_TEXTURES =
       new ResourceLocation(MagiksMostEvile.MODID, "textures/entity/the_kraken/the_kraken.png");
 
