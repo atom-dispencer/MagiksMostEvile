@@ -50,7 +50,7 @@ public class SquidMissileModel<T extends Entity> extends SegmentedModel<T> {
    */
   public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
     for (ModelRenderer modelrenderer : this.legs) {
-      modelrenderer.rotateAngleX = ageInTicks;
+      modelrenderer.rotateAngleX = (float) (((Math.sin(ageInTicks / 5)) / 2) + 0.5);
     }
 
   }
