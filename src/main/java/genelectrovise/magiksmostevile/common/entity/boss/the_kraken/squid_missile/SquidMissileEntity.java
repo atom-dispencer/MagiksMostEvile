@@ -16,11 +16,12 @@ import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
 
 /**
- * {@link FireballEntity} {@link ArrowRenderer} {@link SquidEntity} {@link ArrowEntity}
+ * {@link FireballEntity} {@link ArrowRenderer} {@link SquidEntity} {@link ArrowEntity}{@link RuinedPortalPiece}
  * 
  * @author GenElectrovise
  *
