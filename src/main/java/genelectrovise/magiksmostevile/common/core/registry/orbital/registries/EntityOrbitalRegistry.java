@@ -44,7 +44,7 @@ public class EntityOrbitalRegistry implements IOrbitalRegistry {
 
   public static final RegistryObject<EntityType<KittyTheKrakenEntity>> THE_KRAKEN =
       ENTITIES.register("kitty_the_kraken",
-          () -> EntityType.Builder.create(KittyTheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(1f, 2f)
+          () -> EntityType.Builder.create(KittyTheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(6f, 8f)
               .build("kitty_the_kraken"));
 
   public static final RegistryObject<EntityType<TinderAndCinderEntity>> TINDER_AND_CINDER =

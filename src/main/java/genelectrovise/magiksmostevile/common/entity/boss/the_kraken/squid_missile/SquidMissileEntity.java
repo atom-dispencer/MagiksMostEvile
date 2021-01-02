@@ -3,9 +3,7 @@ package genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missi
 import java.util.function.Function;
 import com.google.common.primitives.Doubles;
 import genelectrovise.magiksmostevile.common.core.SetupManager;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -16,15 +14,12 @@ import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
 
 /**
- * {@link FireballEntity} {@link ArrowRenderer} {@link SquidEntity}
- * {@link ArrowEntity}{@link RuinedPortalPiece}
+ * {@link FireballEntity} {@link ArrowRenderer} {@link SquidEntity} {@link ArrowEntity}
  * 
  * @author GenElectrovise
  *

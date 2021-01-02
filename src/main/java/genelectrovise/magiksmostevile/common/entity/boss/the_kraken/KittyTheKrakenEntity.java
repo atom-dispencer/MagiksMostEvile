@@ -29,11 +29,16 @@ public class KittyTheKrakenEntity extends BossMob {
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.func_233666_p_() //
-        .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
+        .createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
         .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f)
         .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0f)
         .createMutableAttribute(Attributes.ATTACK_SPEED, 5.0f)
         .createMutableAttribute(Attributes.FOLLOW_RANGE, 64.0f);
+  }
+  
+  @Override
+  public double getPosYEye() {
+    return this.getPosY() + 4.5;
   }
 
 }

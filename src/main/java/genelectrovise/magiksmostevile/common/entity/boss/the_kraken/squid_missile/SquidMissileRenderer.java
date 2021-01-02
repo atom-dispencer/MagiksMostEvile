@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.SquidRenderer;
+import net.minecraft.client.renderer.entity.model.GiantModel;
 import net.minecraft.client.renderer.entity.model.SquidModel;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 
 /**
- * {@link SquidRenderer} {@link ArrowRenderer} {@link SquidModel}
+ * {@link SquidRenderer} {@link ArrowRenderer} {@link SquidModel} {@link GiantModel}
  * 
  * @author GenElectrovise
  *
@@ -34,13 +35,13 @@ public class SquidMissileRenderer extends MobRenderer<SquidMissileEntity, SquidM
   protected void applyRotations(SquidMissileEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
     float f = MathHelper.lerp(partialTicks, entityLiving.prevSquidPitch, entityLiving.squidPitch);
     float f1 = MathHelper.lerp(partialTicks, entityLiving.prevSquidYaw, entityLiving.squidYaw);
-    
+
     matrixStackIn.translate(0.0D, 0.5D, 0.0D);
     matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
     matrixStackIn.rotate(Vector3f.XP.rotationDegrees(f));
     matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
-    matrixStackIn.translate(0.0D, (double)-1.2F, 0.0D);
- }
+    matrixStackIn.translate(0.0D, (double) -1.2F, 0.0D);
+  }
 
   /**
    * Defines what float the third param in setRotationAngles of ModelBase is
