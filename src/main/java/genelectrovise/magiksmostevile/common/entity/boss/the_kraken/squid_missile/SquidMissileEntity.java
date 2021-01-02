@@ -95,7 +95,7 @@ public class SquidMissileEntity extends MobEntity {
         // flag = (causesFire), (mode ? DESTROY : NONE)
         serverWorld.createExplosion((Entity) null, this.getPosX(), this.getPosY(), this.getPosZ(), (float) SquidMissileEntity.EXPLOSION_POWER, flag,
             flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
-        
+
         spawnInkBySendingPacketFromServer(serverWorld, MAX_PARTICLES);
 
         this.remove();
@@ -118,6 +118,8 @@ public class SquidMissileEntity extends MobEntity {
       double vY = velocitySalter.apply(rand.nextDouble());
       double vZ = velocitySalter.apply(rand.nextDouble());
 
+      // Like SquidEntity (if this works its easier than making a custom packet handler)
+      // Maintains sided-ness because this method forces the server to send packets to the clients
       world.spawnParticle(ParticleTypes.SQUID_INK, pX, pY, pZ, 1, vX, vY, vZ, 1);
     }
   }
