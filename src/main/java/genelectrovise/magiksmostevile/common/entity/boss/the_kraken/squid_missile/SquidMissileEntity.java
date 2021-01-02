@@ -2,17 +2,18 @@ package genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missi
 
 import java.util.function.Function;
 import com.google.common.primitives.Doubles;
+import genelectrovise.magiksmostevile.common.core.SetupManager;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -25,6 +26,17 @@ import net.minecraftforge.event.ForgeEventFactory;
  *
  */
 public class SquidMissileEntity extends MobEntity {
+  
+  public float squidPitch;
+  public float prevSquidPitch;
+  public float squidYaw;
+  public float prevSquidYaw;
+  public float squidRotation;
+  public float prevSquidRotation;
+  public float tentacleAngle;
+  public float lastTentacleAngle;
+  private float rotationVelocity;
+  private int tentacleTick = 0;
 
   public SquidMissileEntity(EntityType<? extends MobEntity> type, World worldIn) {
     super(type, worldIn);
@@ -32,9 +44,6 @@ public class SquidMissileEntity extends MobEntity {
 
   public static final int EXPLOSION_POWER = 2;
   private static final int MAX_PARTICLES = 20;
-
-  private int tentacleTick = 0;
-  private double tentacleAngle = 0;
 
   /**
    * Makes a salted double. 234 + (0.366 * (4 + 0.234)) = 235.549644
@@ -51,23 +60,24 @@ public class SquidMissileEntity extends MobEntity {
     final double RANGE = 0.5;
     return Doubles.constrainToRange(rand.nextDouble(), 0, RANGE) - (RANGE / 2);
   };
-
-  @Override
-  public void tick() {
-    tentacleAngle = ((float) Math.PI / 4F) + MathHelper.cos(tentacleTick * 0.1F) * 0.15F;
-    tentacleTick++;
-  }
-
-  public double getTentacleAngle() {
-    return tentacleAngle;
-  }
-
-  public int getTentacleTick() {
-    return tentacleTick;
+  
+  /**
+   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
+   */
+  public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
+    return MobEntity.func_233666_p_() //
+        .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
+        .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f);
   }
 
   @Override
   public void livingTick() {
+    
+    this.prevSquidPitch = this.squidPitch;
+    this.prevSquidYaw = this.squidYaw;
+    this.prevSquidRotation = this.squidRotation;
+    this.lastTentacleAngle = this.tentacleAngle;
+    this.squidRotation += this.rotationVelocity;
 
     if (!isNotColliding(this.world)) {
       
@@ -108,14 +118,12 @@ public class SquidMissileEntity extends MobEntity {
     }
   }
 
-  @Override
-  protected void registerData() {
-
+  public double getTentacleAngle() {
+    return tentacleAngle;
   }
 
-  @Override
-  public IPacket<?> createSpawnPacket() {
-    return null;
+  public int getTentacleTick() {
+    return tentacleTick;
   }
 
 }

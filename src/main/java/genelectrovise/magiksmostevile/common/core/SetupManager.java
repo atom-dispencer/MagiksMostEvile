@@ -3,6 +3,7 @@ package genelectrovise.magiksmostevile.common.core;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.KittyTheKrakenEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missile.SquidMissileEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;
@@ -37,6 +38,10 @@ public final class SetupManager {
         // Tom the Trol
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(),
             TomTheTrollEntity.getEntityAttributes().create());
+        
+        // Squid Missile
+        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.SQUID_MISSILE.get(),
+            SquidMissileEntity.getEntityAttributes().create());
       }
 
       //
