@@ -27,7 +27,7 @@ public class SquidMissileRenderer extends MobRenderer<SquidMissileEntity, SquidM
 
   @Override
   public ResourceLocation getEntityTexture(SquidMissileEntity entity) {
-    return new ResourceLocation(MagiksMostEvile.MODID, "textures/entity/squid_missile/squid_missile");
+    return new ResourceLocation(MagiksMostEvile.MODID, "textures/entity/squid_missile/squid_missile.png");
   }
 
   @Override

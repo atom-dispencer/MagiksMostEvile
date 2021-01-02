@@ -15,19 +15,21 @@ import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
 
 /**
- * {@link FireballEntity} {@link ArrowRenderer} {@link SquidEntity} {@link ArrowEntity}{@link RuinedPortalPiece}
+ * {@link FireballEntity} {@link ArrowRenderer} {@link SquidEntity}
+ * {@link ArrowEntity}{@link RuinedPortalPiece}
  * 
  * @author GenElectrovise
  *
  */
 public class SquidMissileEntity extends MobEntity {
-  
+
   public float squidPitch;
   public float prevSquidPitch;
   public float squidYaw;
@@ -44,7 +46,7 @@ public class SquidMissileEntity extends MobEntity {
   }
 
   public static final int EXPLOSION_POWER = 2;
-  private static final int MAX_PARTICLES = 20;
+  private static final int MAX_PARTICLES = 50;
 
   /**
    * Makes a salted double. 234 + (0.366 * (4 + 0.234)) = 235.549644
@@ -61,7 +63,7 @@ public class SquidMissileEntity extends MobEntity {
     final double RANGE = 0.5;
     return Doubles.constrainToRange(rand.nextDouble(), 0, RANGE) - (RANGE / 2);
   };
-  
+
   /**
    * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
    */
@@ -73,7 +75,7 @@ public class SquidMissileEntity extends MobEntity {
 
   @Override
   public void livingTick() {
-    
+
     this.prevSquidPitch = this.squidPitch;
     this.prevSquidYaw = this.squidYaw;
     this.prevSquidRotation = this.squidRotation;
@@ -81,7 +83,7 @@ public class SquidMissileEntity extends MobEntity {
     this.squidRotation += this.rotationVelocity;
 
     if (!isNotColliding(this.world)) {
-      
+
       // Server
       if (!this.world.isRemote) {
         ServerWorld serverWorld = (ServerWorld) world;
@@ -100,22 +102,25 @@ public class SquidMissileEntity extends MobEntity {
       // Client
       if (this.world.isRemote) {
         ClientWorld clientWorld = (ClientWorld) world;
-
-        for (int spawned = 0; spawned < MAX_PARTICLES; spawned++) {
-
-          // Get the position of this
-          double pX = positionSalter.apply(this.getPosX());
-          double pY = positionSalter.apply(this.getPosY());
-          double pZ = positionSalter.apply(this.getPosZ());
-
-          // Clamp each in 0.0-0.5, then take 0.25 to give a possible negative
-          double vX = velocitySalter.apply(rand.nextDouble());
-          double vY = velocitySalter.apply(rand.nextDouble());
-          double vZ = velocitySalter.apply(rand.nextDouble());
-
-          clientWorld.addOptionalParticle(ParticleTypes.SQUID_INK, true, pX, pY, pZ, vX, vY, vZ);
-        }
       }
+    }
+  }
+
+  public void spawnInk(World world, int particles) {
+
+    for (int spawned = 0; spawned < particles; spawned++) {
+
+      // Get the position of this
+      double pX = positionSalter.apply(this.getPosX());
+      double pY = positionSalter.apply(this.getPosY());
+      double pZ = positionSalter.apply(this.getPosZ());
+
+      // Clamp each in 0.0-0.5, then take 0.25 to give a possible negative
+      double vX = velocitySalter.apply(rand.nextDouble());
+      double vY = velocitySalter.apply(rand.nextDouble());
+      double vZ = velocitySalter.apply(rand.nextDouble());
+
+      world.addParticle(ParticleTypes.SQUID_INK, true, pX, pY, pZ, vX, vY, vZ);
     }
   }
 
