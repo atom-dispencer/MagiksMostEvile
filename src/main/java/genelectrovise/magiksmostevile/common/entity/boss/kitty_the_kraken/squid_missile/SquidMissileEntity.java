@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missile;
+package genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken.squid_missile;
 
 import java.util.function.Function;
 import com.google.common.primitives.Doubles;

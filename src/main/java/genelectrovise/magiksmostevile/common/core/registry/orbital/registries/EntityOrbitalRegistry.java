@@ -5,8 +5,8 @@ import genelectrovise.magiksmostevile.common.core.registry.orbital.IOrbitalRegis
 import genelectrovise.magiksmostevile.common.core.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.common.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.common.entity.boss.egg_capone.EggCaponeEntity;
-import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.KittyTheKrakenEntity;
-import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missile.SquidMissileEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken.KittyTheKrakenEntity;
+import genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken.squid_missile.SquidMissileEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
 import genelectrovise.magiksmostevile.common.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatEntity;

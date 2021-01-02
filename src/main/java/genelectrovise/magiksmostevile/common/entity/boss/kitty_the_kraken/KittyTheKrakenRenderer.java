@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.common.entity.boss.the_kraken;
+package genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.common.entity.boss.the_kraken;
+package genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken;
 
 import genelectrovise.magiksmostevile.common.core.SetupManager;
 import genelectrovise.magiksmostevile.common.entity.boss.BossMob;

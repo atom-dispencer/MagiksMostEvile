@@ -5,8 +5,8 @@ package genelectrovise.magiksmostevile.common.core.registry;
 
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.EntityOrbitalRegistry;
-import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.KittyTheKrakenRenderer;
-import genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missile.SquidMissileRenderer;
+import genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken.KittyTheKrakenRenderer;
+import genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken.squid_missile.SquidMissileRenderer;
 import genelectrovise.magiksmostevile.common.entity.vampire_bat.VampireBatRenderer;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
