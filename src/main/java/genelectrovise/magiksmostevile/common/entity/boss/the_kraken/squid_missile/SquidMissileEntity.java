@@ -3,6 +3,7 @@ package genelectrovise.magiksmostevile.common.entity.boss.the_kraken.squid_missi
 import java.util.function.Function;
 import com.google.common.primitives.Doubles;
 import genelectrovise.magiksmostevile.common.core.SetupManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -94,19 +95,16 @@ public class SquidMissileEntity extends MobEntity {
         // flag = (causesFire), (mode ? DESTROY : NONE)
         serverWorld.createExplosion((Entity) null, this.getPosX(), this.getPosY(), this.getPosZ(), (float) SquidMissileEntity.EXPLOSION_POWER, flag,
             flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+        
+        spawnInkBySendingPacketFromServer(serverWorld, MAX_PARTICLES);
 
         this.remove();
         return;
       }
-
-      // Client
-      if (this.world.isRemote) {
-        ClientWorld clientWorld = (ClientWorld) world;
-      }
     }
   }
 
-  public void spawnInk(World world, int particles) {
+  public void spawnInkBySendingPacketFromServer(ServerWorld world, int particles) {
 
     for (int spawned = 0; spawned < particles; spawned++) {
 
@@ -120,7 +118,7 @@ public class SquidMissileEntity extends MobEntity {
       double vY = velocitySalter.apply(rand.nextDouble());
       double vZ = velocitySalter.apply(rand.nextDouble());
 
-      world.addParticle(ParticleTypes.SQUID_INK, true, pX, pY, pZ, vX, vY, vZ);
+      world.spawnParticle(ParticleTypes.SQUID_INK, pX, pY, pZ, 1, vX, vY, vZ, 1);
     }
   }
 
