@@ -3,7 +3,6 @@ package genelectrovise.magiksmostevile.common.world.gen.structure.shrine;
 import com.mojang.serialization.Codec;
 import genelectrovise.magiksmostevile.common.world.gen.EnumFeatureLocation;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.RuinedPortalFeature;
 
 
 /**
