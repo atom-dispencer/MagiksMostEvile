@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -26,6 +27,9 @@ import net.minecraftforge.event.ForgeEventFactory;
  */
 public class SquidMissileEntity extends MobEntity {
 
+  private boolean explosive = false;
+  private int ticksUntilIgnition = 0;
+
   public float squidPitch;
   public float prevSquidPitch;
   public float squidYaw;
@@ -35,7 +39,6 @@ public class SquidMissileEntity extends MobEntity {
   public float tentacleAngle;
   public float lastTentacleAngle;
   private float rotationVelocity;
-  private int tentacleTick = 0;
 
   public SquidMissileEntity(EntityType<? extends MobEntity> type, World worldIn) {
     super(type, worldIn);
@@ -70,15 +73,64 @@ public class SquidMissileEntity extends MobEntity {
   }
 
   @Override
+  public CompoundNBT serializeNBT() {
+    CompoundNBT superNbt = super.serializeNBT();
+    CompoundNBT squidNbt = new CompoundNBT();
+
+    squidNbt.putInt("ticksUntilIgnition", ticksUntilIgnition);
+    squidNbt.putBoolean("explosive", explosive);
+
+    superNbt.put("SquidMissileData", squidNbt);
+    return superNbt;
+  }
+
+  @Override
+  public void deserializeNBT(CompoundNBT nbt) {
+    super.deserializeNBT(nbt);
+    CompoundNBT squidNbt = nbt.getCompound("SquidMissileData");
+    
+    this.setExplosive(squidNbt.getBoolean("explosive"));
+    this.setTicksUntilIgnition(squidNbt.getInt("ticksUntilIgnition"));
+  }
+
+  @Override
   public void livingTick() {
 
+    checkIgnitionTick();
+
+    changeSquidAngles();
+
+    checkExplosions();
+  }
+
+  /**
+   * Check the ticks until this missile is rearmed, and re-arm if time is 0.
+   */
+  private void checkIgnitionTick() {
+    if (ticksUntilIgnition > 0) {
+      ticksUntilIgnition--;
+      return;
+    }
+
+    setExplosive(true);
+  }
+
+  /**
+   * Update squid related variables
+   */
+  private void changeSquidAngles() {
     this.prevSquidPitch = this.squidPitch;
     this.prevSquidYaw = this.squidYaw;
     this.prevSquidRotation = this.squidRotation;
     this.lastTentacleAngle = this.tentacleAngle;
     this.squidRotation += this.rotationVelocity;
+  }
 
-    if (!isNotColliding(this.world)) {
+  /**
+   * Check if this entity is colliding, and explode if needed.
+   */
+  private void checkExplosions() {
+    if (!isNotColliding(this.world) && explosive) {
 
       // Server
       if (!this.world.isRemote) {
@@ -119,12 +171,21 @@ public class SquidMissileEntity extends MobEntity {
     }
   }
 
+  // Get and set
+
   public double getTentacleAngle() {
     return tentacleAngle;
   }
+  public boolean isExplosive() {
+    return explosive;
+  }
 
-  public int getTentacleTick() {
-    return tentacleTick;
+  public void setExplosive(boolean explosive) {
+    this.explosive = explosive;
+  }
+
+  public void setTicksUntilIgnition(int i) {
+    this.ticksUntilIgnition = i;
   }
 
 }
