@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 
 /**
@@ -29,13 +30,13 @@ public class KittyTheKrakenEntity extends BossMob {
    * @param worldIn
    */
   public KittyTheKrakenEntity(EntityType<? extends KittyTheKrakenEntity> type, World worldIn) {
-    super(type, worldIn);
+    super(type, worldIn, BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS, true, true);
   }
 
   @Override
   protected void registerGoals() {
     this.goalSelector.addGoal(0, new SquidMissileAttackGoal(this));
-    
+
     this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
   }
 

@@ -7,8 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.monster.GhastEntity;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraftforge.common.animation.TimeValues.VariableValue;
 
 /**
  * {@link GhastEntity.FireballAttackGoal}
