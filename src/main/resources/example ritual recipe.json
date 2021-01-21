@@ -1,0 +1,57 @@
+{
+	"type": "magiksmostevile:ritual",
+	"glyph": {
+		"start": "magiksmostevile:amethyst",
+		"success": "magiksmostevile:powered_amethyst",
+		"cataclysm": "magiksmostevile:fail",
+		"failure": "magiksmostevile:fail"
+	},
+	"environment": {
+		"biome": "any",
+		"weather": "any"
+	},
+	"input": {
+		"energy": 50,
+		"entity": {
+			"id": "magiksmostevile:vampire_bat",
+			"count": 1
+		}
+	},
+	"output": {
+		"success": {
+			"execute": [
+				"/command 1",
+				"/command 2"
+			]
+		},
+		"failure": {
+			"execute": [
+				"/command 1",
+				"/command 2"
+			]
+		},
+		"cataclysm": {
+			"execute": [
+				"/command 1",
+				"/command 2"
+			]
+		}
+	},
+	"slots": {
+		"slot_1": {
+			"input": {
+				"id": "amethyst",
+				"count": "any",
+				"required": false
+			},
+			"output": {
+				"id": "powered_amethyst",
+				"type": {
+					"id": "convert",
+					"ratio": "1 1"
+				},
+				"count": "any"
+			}
+		}
+	}
+}

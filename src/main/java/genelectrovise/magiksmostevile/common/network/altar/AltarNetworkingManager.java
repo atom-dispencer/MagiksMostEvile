@@ -55,7 +55,7 @@ public class AltarNetworkingManager {
 
   @SubscribeEvent
   public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
-    MagiksMostEvile.LOGGER.dev("FMLCommonSetupEvent heard by AltarNetworkingManager!");
+    MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by AltarNetworkingManager!");
     CAltarEnergyUpdate = NetworkRegistry.newSimpleChannel(RLEnergyUpdate,
         () -> ENERGY_UPDATE_MESSAGE_PROTOCOL_VERSION,
         AltarEnergyUpdateMessageHandlerOnClient::isProtocolAccepted,

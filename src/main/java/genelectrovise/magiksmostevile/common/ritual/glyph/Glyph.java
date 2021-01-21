@@ -107,7 +107,7 @@ public class Glyph {
 
             Color tint = imageProperties.pixels[(imageProperties.width * x) + y];
 
-            MagiksMostEvile.LOGGER.dev("Adding glyph particle : " + x + " " + y + " " + tint);
+            MagiksMostEvile.LOGGER.debug("Adding glyph particle : " + x + " " + y + " " + tint);
 
             GlyphParticleData data = new GlyphParticleData(tint, 5);
 

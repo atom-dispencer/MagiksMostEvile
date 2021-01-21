@@ -43,7 +43,7 @@ public class ParticleNetworkingManager {
 
   @SubscribeEvent
   public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
-    MagiksMostEvile.LOGGER.dev("FMLCommonSetupEvent heard by GlyphNetworkManager!");
+    MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by GlyphNetworkManager!");
     CEnderParticle = NetworkRegistry.newSimpleChannel(RLEnderParticle,
         () -> ENDER_PARTICLE_MESSAGE_PROTOCOL_VERSION,
         EnderParticleMessageHandlerOnClient::isProtocolAccepted,

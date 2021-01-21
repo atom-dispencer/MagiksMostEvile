@@ -21,7 +21,7 @@ public class AltarCastButtonPressedMessageHandlerOnServer {
 
   public static void onMessageReceived(final AltarCastButtonPressedMessageToServer message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
-    MagiksMostEvile.LOGGER.dev("Message recieved by server!");
+    MagiksMostEvile.LOGGER.debug("Message recieved by server!");
 
     ctxSupplier.get().setPacketHandled(true);
 
@@ -38,7 +38,7 @@ public class AltarCastButtonPressedMessageHandlerOnServer {
 
   private static void processMessage(AltarCastButtonPressedMessageToServer message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
-    MagiksMostEvile.LOGGER.dev("processing message!");
+    MagiksMostEvile.LOGGER.debug("processing message!");
 
     // Get and check container
     Container container = ctxSupplier.get().getSender().openContainer;

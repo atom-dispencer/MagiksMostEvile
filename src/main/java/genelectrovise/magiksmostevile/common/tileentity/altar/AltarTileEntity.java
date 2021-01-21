@@ -341,7 +341,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
    * @return
    */
   public static Ritual getRitualFromResourceLocation(ResourceLocation resourceLocation) {
-    MagiksMostEvile.LOGGER.dev("getting ritual by resource location! : " + resourceLocation);
+    MagiksMostEvile.LOGGER.debug("getting ritual by resource location! : " + resourceLocation);
 
     ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
     RitualOrbitalRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
@@ -361,7 +361,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   }
 
   public void castRitualAtArbitraryTick(Ritual ritual, int tick) {
-    MagiksMostEvile.LOGGER.dev("casting Ritual!");
+    MagiksMostEvile.LOGGER.debug("casting Ritual!");
     ritual.init(this);
     ritual.setTick(tick);
     ritual.tryStart();

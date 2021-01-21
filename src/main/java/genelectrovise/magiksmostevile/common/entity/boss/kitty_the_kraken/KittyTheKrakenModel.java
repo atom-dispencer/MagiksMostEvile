@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.common.entity.boss.the_kraken;
+package genelectrovise.magiksmostevile.common.entity.boss.kitty_the_kraken;
 
 import java.util.Arrays;
 import com.google.common.collect.ImmutableList;
@@ -7,12 +7,12 @@ import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class TheKrakenModel<T extends Entity> extends SegmentedModel<T> {
+public class KittyTheKrakenModel<T extends Entity> extends SegmentedModel<T> {
   private final ModelRenderer body;
   private final ModelRenderer[] legs = new ModelRenderer[8];
-  private final ImmutableList<ModelRenderer> field_228296_f_;
+  private final ImmutableList<ModelRenderer> renderers;
 
-  public TheKrakenModel() {
+  public KittyTheKrakenModel() {
     this.body = new ModelRenderer(this, 0, 0);
     this.body.addBox(-6.0F, -8.0F, -6.0F, 12.0F, 16.0F, 12.0F);
     this.body.rotationPointY += 8.0F;
@@ -33,7 +33,7 @@ public class TheKrakenModel<T extends Entity> extends SegmentedModel<T> {
     Builder<ModelRenderer> builder = ImmutableList.builder();
     builder.add(this.body);
     builder.addAll(Arrays.asList(this.legs));
-    this.field_228296_f_ = builder.build();
+    this.renderers = builder.build();
   }
 
   /**
@@ -41,13 +41,20 @@ public class TheKrakenModel<T extends Entity> extends SegmentedModel<T> {
    */
   public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount,
       float ageInTicks, float netHeadYaw, float headPitch) {
-    for (ModelRenderer modelrenderer : this.legs) {
-      modelrenderer.rotateAngleX = ageInTicks;
+
+    try {
+      for (ModelRenderer modelrenderer : this.legs) {
+        modelrenderer.rotateAngleX = (float) (((Math.sin(ageInTicks / 10)) / 2) + 0.5);
+      }
+      
+      
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
   }
 
   public Iterable<ModelRenderer> getParts() {
-    return this.field_228296_f_;
+    return this.renderers;
   }
 }

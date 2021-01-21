@@ -19,8 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.BlackStoneReplacementProcessor;
 import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
@@ -79,7 +77,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
    * @param nbt
    */
   public OvergroundShrineStructurePiece(TemplateManager templateManager, CompoundNBT nbt) {
-    super(IStructurePieceType.RUINED_PORTAL, nbt);
+    super(StructurePieces.OVERGROUND_SHRINE_PIECE, nbt);
 
     // Basic
     this.templateName = new ResourceLocation(nbt.getString("Template"));

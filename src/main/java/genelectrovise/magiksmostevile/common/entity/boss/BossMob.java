@@ -18,16 +18,21 @@ import net.minecraft.world.server.ServerBossInfo;
  */
 public class BossMob extends MonsterEntity {
 
-  protected final ServerBossInfo bossInfo =
-      (ServerBossInfo) (new ServerBossInfo(this.getDisplayName(), BossInfo.Color.PURPLE,
-          BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+  protected ServerBossInfo serverBossInfo;
 
-  /**
-   * @param type
-   * @param worldIn
-   */
   public BossMob(EntityType<? extends BossMob> type, World worldIn) {
+    this(type, worldIn, BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
+  }
+
+  public BossMob(EntityType<? extends BossMob> type, World worldIn, BossInfo.Color bossBarColor, BossInfo.Overlay bossBarType) {
+    this(type, worldIn, bossBarColor, bossBarType, true, false);
+  }
+
+  public BossMob(EntityType<? extends BossMob> type, World worldIn, BossInfo.Color bossBarColor, BossInfo.Overlay bossBarType, boolean darkenSky, boolean createFog) {
     super(type, worldIn);
+    this.serverBossInfo = new ServerBossInfo(this.getDisplayName(), bossBarColor, bossBarType);
+    this.serverBossInfo.setDarkenSky(darkenSky);
+    this.serverBossInfo.setCreateFog(createFog);
   }
 
   /**
@@ -35,7 +40,7 @@ public class BossMob extends MonsterEntity {
    */
   @Override
   protected void updateAITasks() {
-    this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    this.serverBossInfo.setPercent(this.getHealth() / this.getMaxHealth());
   }
 
   /**
@@ -44,7 +49,7 @@ public class BossMob extends MonsterEntity {
    */
   public void addTrackingPlayer(ServerPlayerEntity player) {
     super.addTrackingPlayer(player);
-    this.bossInfo.addPlayer(player);
+    this.serverBossInfo.addPlayer(player);
   }
 
   /**
@@ -53,13 +58,17 @@ public class BossMob extends MonsterEntity {
    */
   public void removeTrackingPlayer(ServerPlayerEntity player) {
     super.removeTrackingPlayer(player);
-    this.bossInfo.removePlayer(player);
+    this.serverBossInfo.removePlayer(player);
   }
 
   /**
    * @return the bossInfo
    */
-  public ServerBossInfo getBossInfo() {
-    return bossInfo;
+  public ServerBossInfo getServerBossInfo() {
+    return serverBossInfo;
+  }
+
+  public void setServerBossInfo(ServerBossInfo bossInfo) {
+    this.serverBossInfo = bossInfo;
   }
 }
