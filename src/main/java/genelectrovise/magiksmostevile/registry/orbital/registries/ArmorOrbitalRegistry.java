@@ -1,11 +1,11 @@
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
-import genelectrovise.magiksmostevile.core.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.core.support.EnumEvileArmorMaterial;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.equipment.armor.EvileArmorBases.AmethystArmorBase;
 import genelectrovise.magiksmostevile.item.equipment.armor.EvileArmorBases.OverPoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.item.equipment.armor.EvileArmorBases.PoweredAmethystArmorBase;
+import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;

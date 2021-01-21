@@ -3,7 +3,7 @@ package genelectrovise.magiksmostevile.tileentity.altar;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.RitualOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.registries.RitualOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.Ritual;
 import net.minecraft.util.ResourceLocation;
 

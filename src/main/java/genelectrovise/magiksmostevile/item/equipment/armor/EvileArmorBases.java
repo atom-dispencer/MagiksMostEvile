@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.item.equipment.armor;
 
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.ArmorOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.registries.ArmorOrbitalRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;

@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.core.support;
 
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.ItemOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.registries.ItemOrbitalRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

@@ -1,11 +1,11 @@
 
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.core.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.particle.glyph.GlyphParticleData;
 import genelectrovise.magiksmostevile.particle.glyph.GlyphParticleType;
+import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraft.particles.ParticleType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

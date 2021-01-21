@@ -1,10 +1,10 @@
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
-import genelectrovise.magiksmostevile.core.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.equipment.staff.AmethystStaff;
 import genelectrovise.magiksmostevile.item.equipment.staff.DebuggingStaff;
 import genelectrovise.magiksmostevile.item.equipment.staff.DimensionWarpingStaff;
+import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 

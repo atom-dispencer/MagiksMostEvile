@@ -1,8 +1,6 @@
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.core.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.entity.boss.egg_capone.EggCaponeEntity;
 import genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.KittyTheKrakenEntity;
@@ -11,6 +9,8 @@ import genelectrovise.magiksmostevile.entity.boss.tinder_and_cinder.TinderAndCin
 import genelectrovise.magiksmostevile.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.item.spawn_egg.VampireBatSpawnEgg;
+import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;

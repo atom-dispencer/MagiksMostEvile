@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.core.registry;
+package genelectrovise.magiksmostevile.registry;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.ritual.Ritual;

@@ -1,10 +1,10 @@
 package genelectrovise.magiksmostevile.ritual.result;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.EntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.network.glyph.GlyphNetworkingManager;
+import genelectrovise.magiksmostevile.registry.orbital.registries.EntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.ResultHandler;
 import genelectrovise.magiksmostevile.ritual.SummonFlappyRitual;
 import genelectrovise.magiksmostevile.ritual.glyph.Glyph.GlyphOrientation;

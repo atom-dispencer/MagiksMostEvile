@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.core.support;
 
 import java.util.function.Supplier;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.ItemOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.registries.ItemOrbitalRegistry;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;;

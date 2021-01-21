@@ -1,10 +1,10 @@
 package genelectrovise.magiksmostevile.tileentity.amethyst_crystal;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.FoodOrbitalRegistry;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.TileEntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.network.particle.ParticleNetworkingManager;
 import genelectrovise.magiksmostevile.network.particle.ender.EnderParticleMessageToClient;
+import genelectrovise.magiksmostevile.registry.orbital.registries.FoodOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.registries.TileEntityOrbitalRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

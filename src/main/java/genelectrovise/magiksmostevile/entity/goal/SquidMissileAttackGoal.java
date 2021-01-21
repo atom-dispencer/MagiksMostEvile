@@ -1,9 +1,9 @@
 package genelectrovise.magiksmostevile.entity.goal;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.EntityOrbitalRegistry;
 import genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.KittyTheKrakenEntity;
 import genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.squid_missile.SquidMissileEntity;
+import genelectrovise.magiksmostevile.registry.orbital.registries.EntityOrbitalRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.Goal;

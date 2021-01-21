@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -1,6 +1,5 @@
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
-import genelectrovise.magiksmostevile.core.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.core.support.EnumEvileItemTier;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.glowing.GlowingAxe;
@@ -8,6 +7,7 @@ import genelectrovise.magiksmostevile.item.glowing.GlowingHoe;
 import genelectrovise.magiksmostevile.item.glowing.GlowingPickaxe;
 import genelectrovise.magiksmostevile.item.glowing.GlowingShovel;
 import genelectrovise.magiksmostevile.item.glowing.GlowingSword;
+import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;

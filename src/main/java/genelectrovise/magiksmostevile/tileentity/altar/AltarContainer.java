@@ -3,8 +3,8 @@
  */
 package genelectrovise.magiksmostevile.tileentity.altar;
 
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.core.support.TrackableIntegerHolder;
+import genelectrovise.magiksmostevile.registry.orbital.registries.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.tileentity.CommonContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;

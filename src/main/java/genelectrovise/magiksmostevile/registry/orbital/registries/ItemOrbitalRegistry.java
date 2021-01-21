@@ -1,10 +1,10 @@
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.core.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.glowing.GlowingItem;
+import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.WrittenBookItem;
 import net.minecraftforge.fml.RegistryObject;

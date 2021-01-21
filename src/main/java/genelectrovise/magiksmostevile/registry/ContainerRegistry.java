@@ -1,10 +1,10 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.core.registry;
+package genelectrovise.magiksmostevile.registry;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.ContainerOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.registries.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarScreenManager;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

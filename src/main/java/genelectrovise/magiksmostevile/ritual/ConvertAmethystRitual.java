@@ -4,9 +4,9 @@
 package genelectrovise.magiksmostevile.ritual;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.ItemOrbitalRegistry;
 import genelectrovise.magiksmostevile.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.network.glyph.GlyphNetworkingManager;
+import genelectrovise.magiksmostevile.registry.orbital.registries.ItemOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.ritual.result.ConvertAmethystResultHandler;
 import net.minecraft.item.ItemStack;

@@ -1,8 +1,8 @@
 package genelectrovise.magiksmostevile.world.gen.ore;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.BlockOrbitalRegistry;
 import genelectrovise.magiksmostevile.data.ModdedTags;
+import genelectrovise.magiksmostevile.registry.orbital.registries.BlockOrbitalRegistry;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;

@@ -1,8 +1,8 @@
-package genelectrovise.magiksmostevile.core.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital.registries;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.core.registry.orbital.OrbitalRegistryGenerator;
+import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarContainer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;

@@ -1,11 +1,11 @@
 /**
  * 
  */
-package genelectrovise.magiksmostevile.core.registry;
+package genelectrovise.magiksmostevile.registry;
 
 import java.util.Iterator;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.registry.orbital.registries.EntityOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.registries.EntityOrbitalRegistry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
