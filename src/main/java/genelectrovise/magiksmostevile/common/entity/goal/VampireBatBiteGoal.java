@@ -80,7 +80,7 @@ public class VampireBatBiteGoal extends MeleeAttackGoal {
 
   private void summonAid() {
 
-    MagiksMostEvile.LOGGER.dev("Flappys!");
+    MagiksMostEvile.LOGGER.debug("Flappys!");
 
     if (vampireBat.world instanceof ServerWorld && vampireBat.getRandom().nextInt(10) == 0) {
       ServerWorld world = (ServerWorld) vampireBat.world;

@@ -27,7 +27,7 @@ public class GlyphNetworkingManager {
 
   @SubscribeEvent
   public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
-    MagiksMostEvile.LOGGER.dev("FMLCommonSetupEvent heard by GlyphNetworkManager!");
+    MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by GlyphNetworkManager!");
     CGlyph = NetworkRegistry.newSimpleChannel(RLGlyph, () -> GLYPH_MESSAGE_PROTOCOL_VERSION,
         GlyphMessageHandlerOnClient::isProtocolAccepted,
         GlyphMessageHandlerOnServer::isProtocolAccepted);

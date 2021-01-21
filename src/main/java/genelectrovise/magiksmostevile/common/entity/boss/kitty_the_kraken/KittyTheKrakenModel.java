@@ -46,6 +46,8 @@ public class KittyTheKrakenModel<T extends Entity> extends SegmentedModel<T> {
       for (ModelRenderer modelrenderer : this.legs) {
         modelrenderer.rotateAngleX = (float) (((Math.sin(ageInTicks / 10)) / 2) + 0.5);
       }
+      
+      
     } catch (Exception e) {
       e.printStackTrace();
     }

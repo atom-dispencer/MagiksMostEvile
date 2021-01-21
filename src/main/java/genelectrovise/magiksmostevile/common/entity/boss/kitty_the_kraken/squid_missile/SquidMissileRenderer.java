@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.model.SquidModel;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.util.math.vector.Quaternion;
 
 /**
  * {@link SquidRenderer} {@link ArrowRenderer} {@link SquidModel} {@link GiantModel}
@@ -32,15 +32,14 @@ public class SquidMissileRenderer extends MobRenderer<SquidMissileEntity, SquidM
   }
 
   @Override
-  protected void applyRotations(SquidMissileEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-    float f = MathHelper.lerp(partialTicks, entityLiving.prevSquidPitch, entityLiving.squidPitch);
-    float f1 = MathHelper.lerp(partialTicks, entityLiving.prevSquidYaw, entityLiving.squidYaw);
+  protected void applyRotations(SquidMissileEntity missile, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+    
+    // + pitch squid backwards, - pitch squid forwards
+    // + yaw ??
+    // + rotate squid eyes to its left hand-side (do squid have hand-sides??)
 
-    matrixStackIn.translate(0.0D, 0.5D, 0.0D);
-    matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
-    matrixStackIn.rotate(Vector3f.XP.rotationDegrees(f));
-    matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
-    matrixStackIn.translate(0.0D, (double) -1.2F, 0.0D);
+    matrixStackIn.translate(0, 0, 0);
+    matrixStackIn.rotate(new Quaternion(0, 0, 0, true));
   }
 
   /**
@@ -48,6 +47,14 @@ public class SquidMissileRenderer extends MobRenderer<SquidMissileEntity, SquidM
    */
   protected float handleRotationFloat(SquidEntity livingBase, float partialTicks) {
     return MathHelper.lerp(partialTicks, livingBase.lastTentacleAngle, livingBase.tentacleAngle);
+  }
+
+  private static double toRadians(float degrees) {
+    return degrees * (Math.PI / 180);
+  }
+
+  private static double toDegrees(float radians) {
+    return radians * (180 / Math.PI);
   }
 
 }

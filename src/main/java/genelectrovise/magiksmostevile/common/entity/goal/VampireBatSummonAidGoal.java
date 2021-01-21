@@ -49,7 +49,7 @@ public class VampireBatSummonAidGoal extends Goal {
   @Override
   public void startExecuting() {
 
-    MagiksMostEvile.LOGGER.dev("Flappys!");
+    MagiksMostEvile.LOGGER.debug("Flappys!");
 
     if (this.cooldown > 3) {
       if (vampireBat.getRNG().nextBoolean()) {

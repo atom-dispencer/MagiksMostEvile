@@ -26,7 +26,7 @@ public class AltarEnergyUpdateMessageHandlerOnClient {
   public static void onMessageReceived(final AltarEnergyUpdateMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
-    MagiksMostEvile.LOGGER.dev("Message recieved on client!");
+    MagiksMostEvile.LOGGER.debug("Message recieved on client!");
 
     ctxSupplier.get().setPacketHandled(true);
 
@@ -51,13 +51,13 @@ public class AltarEnergyUpdateMessageHandlerOnClient {
   private static void processMessage(AltarEnergyUpdateMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
-    MagiksMostEvile.LOGGER.dev("Processing msg on client");
+    MagiksMostEvile.LOGGER.debug("Processing msg on client");
 
     // Here I need to get an instance of the world or player so I can access things
     ClientPlayerEntity player = Minecraft.getInstance().player;
     Container containerRaw = player.openContainer;
     if (containerRaw instanceof AltarContainer) {
-      MagiksMostEvile.LOGGER.dev("instanceof AltarContainer. Updating values.");
+      MagiksMostEvile.LOGGER.debug("instanceof AltarContainer. Updating values.");
       AltarContainer altarContainer = (AltarContainer) containerRaw;
       altarContainer.setMaxAmethystFlux(message.maxAmethystFlux);
       altarContainer.setCurrentAmethystFlux(message.currentAmethystFlux);

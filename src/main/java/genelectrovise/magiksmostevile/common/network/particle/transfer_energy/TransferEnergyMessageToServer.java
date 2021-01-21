@@ -13,11 +13,11 @@ public class TransferEnergyMessageToServer {
   }
 
   public void encode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.dev("Encoding message to server");
+    MagiksMostEvile.LOGGER.debug("Encoding message to server");
   }
 
   public static TransferEnergyMessageToServer decode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.dev("Decoding message to server");
+    MagiksMostEvile.LOGGER.debug("Decoding message to server");
     return new TransferEnergyMessageToServer();
   }
 

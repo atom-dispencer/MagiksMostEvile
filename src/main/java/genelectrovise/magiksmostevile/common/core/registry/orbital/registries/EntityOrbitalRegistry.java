@@ -55,7 +55,7 @@ public class EntityOrbitalRegistry implements IOrbitalRegistry {
   // =========MISC====================================================================================================================
   public static final RegistryObject<EntityType<SquidMissileEntity>> SQUID_MISSILE =
       ENTITIES.register("squid_missile",
-          () -> EntityType.Builder.<SquidMissileEntity>create(SquidMissileEntity::new, EntityClassification.MISC).setTrackingRange(8).size(1f, 1f).func_233608_b_(10) /* Update interval */
+          () -> EntityType.Builder.<SquidMissileEntity>create(SquidMissileEntity::new, EntityClassification.MISC).setTrackingRange(80).size(1f, 1f).func_233608_b_(2) /* Update interval */
               .build("squid_missile"));
 
   @Override

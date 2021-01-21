@@ -44,7 +44,7 @@ public class AltarCastButtonPressedMessageToClient {
    * @param buf
    */
   public void encode(PacketBuffer buf) {
-    MagiksMostEvile.LOGGER.dev("Encoding message to client");
+    MagiksMostEvile.LOGGER.debug("Encoding message to client");
     if (!messageIsValid)
       return;
   }
@@ -56,7 +56,7 @@ public class AltarCastButtonPressedMessageToClient {
    * @param buf
    */
   public static AltarCastButtonPressedMessageToClient decode(PacketBuffer buf) {
-    MagiksMostEvile.LOGGER.dev("Decoding message to client");
+    MagiksMostEvile.LOGGER.debug("Decoding message to client");
     return new AltarCastButtonPressedMessageToClient();
   }
 

@@ -16,7 +16,7 @@ public class EnderParticleMessageHandlerOnServer {
 
   public static void onMessageReceived(final EnderParticleMessageToServer message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
-    MagiksMostEvile.LOGGER.dev("Message recieved by server!");
+    MagiksMostEvile.LOGGER.debug("Message recieved by server!");
 
     ctxSupplier.get().setPacketHandled(true);
 

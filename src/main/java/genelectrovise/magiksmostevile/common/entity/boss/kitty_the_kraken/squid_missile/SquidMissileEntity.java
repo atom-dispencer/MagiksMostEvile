@@ -7,13 +7,16 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -30,15 +33,7 @@ public class SquidMissileEntity extends MobEntity {
   private boolean explosive = false;
   private int ticksUntilIgnition = 0;
 
-  public float squidPitch;
-  public float prevSquidPitch;
-  public float squidYaw;
-  public float prevSquidYaw;
-  public float squidRotation;
-  public float prevSquidRotation;
-  public float tentacleAngle;
-  public float lastTentacleAngle;
-  private float rotationVelocity;
+  private Vector3d direction = new Vector3d(0, 0, 0);
 
   public SquidMissileEntity(EntityType<? extends MobEntity> type, World worldIn) {
     super(type, worldIn);
@@ -76,10 +71,16 @@ public class SquidMissileEntity extends MobEntity {
   public CompoundNBT serializeNBT() {
     CompoundNBT superNbt = super.serializeNBT();
     CompoundNBT squidNbt = new CompoundNBT();
+    CompoundNBT directionNbt = new CompoundNBT();
 
     squidNbt.putInt("ticksUntilIgnition", ticksUntilIgnition);
     squidNbt.putBoolean("explosive", explosive);
 
+    directionNbt.putDouble("x", direction.x);
+    directionNbt.putDouble("y", direction.y);
+    directionNbt.putDouble("z", direction.z);
+
+    squidNbt.put("Direction", directionNbt);
     superNbt.put("SquidMissileData", squidNbt);
     return superNbt;
   }
@@ -88,19 +89,46 @@ public class SquidMissileEntity extends MobEntity {
   public void deserializeNBT(CompoundNBT nbt) {
     super.deserializeNBT(nbt);
     CompoundNBT squidNbt = nbt.getCompound("SquidMissileData");
-    
+    CompoundNBT directionNbt = squidNbt.getCompound("Direction");
+
+    double x = directionNbt.getDouble("x");
+    double y = directionNbt.getDouble("y");
+    double z = directionNbt.getDouble("z");
+    setDirection(new Vector3d(x, y, z));
+
     this.setExplosive(squidNbt.getBoolean("explosive"));
     this.setTicksUntilIgnition(squidNbt.getInt("ticksUntilIgnition"));
   }
 
   @Override
+  public void tick() {
+    super.tick();
+
+    handleMissileMovement();
+  }
+
+  @Override
   public void livingTick() {
+    super.livingTick();
 
     checkIgnitionTick();
 
-    changeSquidAngles();
-
     checkExplosions();
+  }
+
+  private void handleMissileMovement() {
+
+    float speed = (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue();
+
+    // Position
+    Vector3d currentMotion = this.getMotion();
+    double newPosX = this.getPosX() + currentMotion.x;
+    double newPosY = this.getPosY() + currentMotion.y;
+    double newPosZ = this.getPosZ() + currentMotion.z;
+    this.setPosition(newPosX, newPosY, newPosZ);
+
+    // Direction
+    this.setMotion(currentMotion.add(new Vector3d(direction.x * speed, direction.y * speed, direction.z * speed)).scale(0.01));
   }
 
   /**
@@ -113,17 +141,6 @@ public class SquidMissileEntity extends MobEntity {
     }
 
     setExplosive(true);
-  }
-
-  /**
-   * Update squid related variables
-   */
-  private void changeSquidAngles() {
-    this.prevSquidPitch = this.squidPitch;
-    this.prevSquidYaw = this.squidYaw;
-    this.prevSquidRotation = this.squidRotation;
-    this.lastTentacleAngle = this.tentacleAngle;
-    this.squidRotation += this.rotationVelocity;
   }
 
   /**
@@ -173,9 +190,6 @@ public class SquidMissileEntity extends MobEntity {
 
   // Get and set
 
-  public double getTentacleAngle() {
-    return tentacleAngle;
-  }
   public boolean isExplosive() {
     return explosive;
   }
@@ -186,6 +200,14 @@ public class SquidMissileEntity extends MobEntity {
 
   public void setTicksUntilIgnition(int i) {
     this.ticksUntilIgnition = i;
+  }
+  
+  public Vector3d getDirection() {
+    return direction;
+  }
+
+  public void setDirection(Vector3d direction) {
+    this.direction = direction;
   }
 
 }

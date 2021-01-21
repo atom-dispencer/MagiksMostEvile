@@ -20,13 +20,13 @@ public class AltarCastButtonPressedMessageToServer {
   }
 
   public void encode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.dev("Encoding AltarCastButtonPressedMessageToServer.");
+    MagiksMostEvile.LOGGER.debug("Encoding AltarCastButtonPressedMessageToServer.");
 
     buffer.writeResourceLocation(ritualResourceLocation);
   }
 
   public static AltarCastButtonPressedMessageToServer decode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.dev("Decoding AltarCastButtonPressedMessageToServer");
+    MagiksMostEvile.LOGGER.debug("Decoding AltarCastButtonPressedMessageToServer");
 
     ResourceLocation ritualResourceLocation = buffer.readResourceLocation();
 

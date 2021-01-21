@@ -190,7 +190,7 @@ public class VampireBatEntity extends MonsterEntity {
 
   @Override
   protected void registerGoals() {
-    // MagiksMostEvile.LOGGER.dev("Registering goals for new vampire bat!");
+    // MagiksMostEvile.LOGGER.debug("Registering goals for new vampire bat!");
     this.goalSelector.addGoal(1, new VampireBatBiteGoal(this));
     this.goalSelector.addGoal(19, new VampireBatHangGoal(this));
     this.goalSelector.addGoal(20, new VampireBatFlapGoal(this));

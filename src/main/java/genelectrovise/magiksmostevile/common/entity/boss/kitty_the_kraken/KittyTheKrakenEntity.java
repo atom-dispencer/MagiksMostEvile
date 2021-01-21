@@ -12,6 +12,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.monster.ShulkerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
@@ -34,10 +35,16 @@ public class KittyTheKrakenEntity extends BossMob {
   }
 
   @Override
+  public void tick() {
+    super.tick();
+  }
+
+  @Override
   protected void registerGoals() {
     this.goalSelector.addGoal(0, new SquidMissileAttackGoal(this));
 
     this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
+    this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<ShulkerEntity>(this, ShulkerEntity.class, false));
   }
 
   /**
