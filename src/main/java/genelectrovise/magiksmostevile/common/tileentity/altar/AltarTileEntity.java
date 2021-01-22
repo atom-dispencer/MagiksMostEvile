@@ -52,10 +52,10 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
  */
 public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
 
-  private static final int BASE_ENERGY_CAPACITY = 50;
+  private static final int BASE_ICHOR_CAPACITY = 50;
   private static final int ADDITIONAL_STORAGE_PER_CRYSTAL = 50;
-  private static final int DAY_ENERGY_PER_CRYSTAL = 1;
-  private static final int NIGHT_ENERGY_PER_CRYSTAL = 3;
+  private static final int DAY_ICHOR_PER_CRYSTAL = 1;
+  private static final int NIGHT_ICHOR_PER_CRYSTAL = 3;
 
   private int tickIncr = 0;
   private int recieveFluxCountdown = 0;
@@ -120,7 +120,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     };
 
     // IEnergyStorage
-    ichorStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0,
+    ichorStorage = new AltarEnergyStorage(BASE_ICHOR_CAPACITY, 1, 1, 0,
         MagiksMostEvile.MODID + ":energyStorage") {
 
     };
@@ -247,7 +247,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
         // Increase energy capacity
         ichorStorage
-            .setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
+            .setCapacity(BASE_ICHOR_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
       }
 
       // Receive amethyst flux
@@ -257,13 +257,13 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
             ichorStorage.receiveEnergy(1, false);
 
             if (new Random().nextInt(15) == 0) {
-              ichorStorage.receiveMax(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL);
+              ichorStorage.receiveMax(crystals.size() * NIGHT_ICHOR_PER_CRYSTAL);
             }
 
             recieveFluxCountdown = 0;
           } else {
             if (new Random().nextInt(25) == 0) {
-              ichorStorage.receiveMax(crystals.size() * DAY_ENERGY_PER_CRYSTAL);
+              ichorStorage.receiveMax(crystals.size() * DAY_ICHOR_PER_CRYSTAL);
             }
           }
         }
