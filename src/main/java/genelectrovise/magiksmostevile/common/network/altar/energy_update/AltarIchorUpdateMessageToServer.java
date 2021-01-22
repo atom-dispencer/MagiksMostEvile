@@ -7,11 +7,11 @@ import net.minecraft.network.PacketBuffer;
  * @author GenElectrovise 24 May 2020
  */
 @Deprecated
-public class AltarEnergyUpdateMessageToServer {
+public class AltarIchorUpdateMessageToServer {
 
   private static boolean messageIsValid;
 
-  public AltarEnergyUpdateMessageToServer() {
+  public AltarIchorUpdateMessageToServer() {
     messageIsValid = true;
   }
 
@@ -19,9 +19,9 @@ public class AltarEnergyUpdateMessageToServer {
     MagiksMostEvile.LOGGER.debug("Encoding message to server");
   }
 
-  public static AltarEnergyUpdateMessageToServer decode(PacketBuffer buffer) {
+  public static AltarIchorUpdateMessageToServer decode(PacketBuffer buffer) {
     MagiksMostEvile.LOGGER.debug("Decoding message to server");
-    return new AltarEnergyUpdateMessageToServer();
+    return new AltarIchorUpdateMessageToServer();
   }
 
   public boolean isValid() {

@@ -26,7 +26,7 @@ import net.minecraft.util.math.BlockPos;
  * @author GenElectrovise 24 May 2020
  */
 @Deprecated
-public class AltarEnergyUpdateMessageToClient {
+public class AltarIchorUpdateMessageToClient {
 
   private static boolean messageIsValid;
 
@@ -35,7 +35,7 @@ public class AltarEnergyUpdateMessageToClient {
   BlockPos blockPos;
   UUID playerUUID;
 
-  public AltarEnergyUpdateMessageToClient(int currentAmethystFlux, int maxAmethystFlux,
+  public AltarIchorUpdateMessageToClient(int currentAmethystFlux, int maxAmethystFlux,
       BlockPos blockPos, UUID playerUUID) {
     messageIsValid = true;
     this.currentAmethystFlux = currentAmethystFlux;
@@ -70,9 +70,9 @@ public class AltarEnergyUpdateMessageToClient {
    *
    * @param buf
    */
-  public static AltarEnergyUpdateMessageToClient decode(PacketBuffer buf) {
+  public static AltarIchorUpdateMessageToClient decode(PacketBuffer buf) {
     MagiksMostEvile.LOGGER.debug("Decoding message to client");
-    return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(),
+    return new AltarIchorUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(),
         buf.readUniqueId());
   }
 

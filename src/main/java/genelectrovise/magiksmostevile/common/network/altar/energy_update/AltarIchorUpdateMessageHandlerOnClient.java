@@ -17,13 +17,13 @@ import net.minecraftforge.fml.network.NetworkEvent;
  * @author GenElectrovise 24 May 2020
  */
 @Deprecated
-public class AltarEnergyUpdateMessageHandlerOnClient {
+public class AltarIchorUpdateMessageHandlerOnClient {
 
   /**
    * Called when a message is received of the appropriate type. CALLED BY THE NETWORK THREAD, NOT
    * THE CLIENT THREAD
    */
-  public static void onMessageReceived(final AltarEnergyUpdateMessageToClient message,
+  public static void onMessageReceived(final AltarIchorUpdateMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
     MagiksMostEvile.LOGGER.debug("Message recieved on client!");
@@ -48,7 +48,7 @@ public class AltarEnergyUpdateMessageHandlerOnClient {
   }
 
   // This message is called from the Client thread.
-  private static void processMessage(AltarEnergyUpdateMessageToClient message,
+  private static void processMessage(AltarIchorUpdateMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
     MagiksMostEvile.LOGGER.debug("Processing msg on client");
