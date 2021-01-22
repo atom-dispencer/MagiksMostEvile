@@ -109,7 +109,7 @@ public class SummonFlappyRitual extends Ritual {
     }
 
     if (isBetweenTicks(1, 60)) {
-      if (altar.removeIchor(1)) {
+      if (altar.drainIchor(1)) {
         return RitualResult.CASTING;
       } else {
         return RitualResult.CATACLYSM;

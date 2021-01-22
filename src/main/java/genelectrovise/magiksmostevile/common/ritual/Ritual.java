@@ -95,7 +95,7 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
    */
   protected boolean canStart() {
 
-    if (!(altar.getEnergyStored() > ichorRequirement / 2)) {
+    if (!(altar.getIchorStored() > ichorRequirement / 2)) {
       return false;
     }
 

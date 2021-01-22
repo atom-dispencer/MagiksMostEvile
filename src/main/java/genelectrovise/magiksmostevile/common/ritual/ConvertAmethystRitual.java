@@ -23,10 +23,10 @@ public class ConvertAmethystRitual extends Ritual {
   public static final String displayName = "Magikify Amethyst";
   public static final String description = "Imbue an amethyst with magiky powers!";
   public static final String information = "Convert an amethyst into a powered amethyst";
-  private static final int ichorRequirement = 50;
+  private static final int energyRequirement = 50;
 
   public ConvertAmethystRitual() {
-    super(displayName, description, information, ichorRequirement);
+    super(displayName, description, information, energyRequirement);
   }
 
   @Override
@@ -70,7 +70,7 @@ public class ConvertAmethystRitual extends Ritual {
     super.tick();
 
     if (isBetweenTicks(1, 50, true)) {
-      if (altar.removeIchor(1)) {
+      if (altar.drainIchor(1)) {
         return RitualResult.CASTING;
       } else {
         return RitualResult.CATACLYSM;

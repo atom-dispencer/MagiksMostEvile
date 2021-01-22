@@ -11,6 +11,7 @@ import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworking
 import genelectrovise.magiksmostevile.common.network.particle.transfer_energy.TransferEnergyMessageToClient;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
+import genelectrovise.magiksmostevile.common.tileentity.IchorFluidStorage;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EnchantingTableBlock;
@@ -19,6 +20,7 @@ import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.EnchantmentContainer;
 import net.minecraft.nbt.CompoundNBT;
@@ -34,7 +36,9 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -79,9 +83,9 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
   // IEnergyStorage
-  protected AltarIchorStorage ichorStorage;
+  protected IchorFluidStorage ichorStorage;
 
-  private final LazyOptional<IEnergyStorage> ichorStorageLazyOptional =
+  private final LazyOptional<IFluidTank> ichorStorageLazyOptional =
       LazyOptional.of(() -> ichorStorage);
 
   // Constructor
@@ -119,8 +123,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     };
 
     // IEnergyStorage
-    ichorStorage = new AltarIchorStorage(BASE_ICHOR_CAPACITY, 1, 1, 0,
-        MagiksMostEvile.MODID + ":energyStorage") {
+    ichorStorage = new IchorFluidStorage(BASE_ICHOR_CAPACITY, MagiksMostEvile.MODID + ":energyStorage") {
 
     };
   }
@@ -253,16 +256,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       if (recieveFluxCountdown > 20) {
         if (world instanceof ServerWorld) {
           if (!world.isDaytime()) {
-            ichorStorage.receiveEnergy(1, false);
+            ichorStorage.fill(new FluidStack(Fluids.LAVA, 1), FluidAction.EXECUTE);
 
             if (new Random().nextInt(15) == 0) {
-              ichorStorage.receiveMax(crystals.size() * NIGHT_ICHOR_PER_CRYSTAL);
+              ichorStorage.fill(new FluidStack(Fluids.LAVA, crystals.size() * NIGHT_ICHOR_PER_CRYSTAL), FluidAction.EXECUTE);
             }
 
             recieveFluxCountdown = 0;
           } else {
             if (new Random().nextInt(25) == 0) {
-              ichorStorage.receiveMax(crystals.size() * DAY_ICHOR_PER_CRYSTAL);
+              ichorStorage.fill(new FluidStack(Fluids.LAVA, crystals.size() * DAY_ICHOR_PER_CRYSTAL), FluidAction.EXECUTE);
             }
           }
         }
@@ -302,20 +305,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   /**
    * @return the energyStorage
    */
-  public int getEnergyStored() {
-    return ichorStorage.getEnergyStored();
+  public int getIchorStored() {
+    return ichorStorage.getFluidAmount();
   }
-
-  /**
-   * 
-   * @param ichor How much to extract
-   * @return Whether that amount was extracted.
-   */
-  public boolean removeIchor(int ichor) {
-    if (ichor == ichorStorage.extractEnergy(ichor, false)) {
-      return true;
-    }
-    return false;
+  
+  public boolean fillIchor(int amount) {
+    return ichorStorage.fill(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE) == amount;
+  }
+  
+  public boolean drainIchor(int amount) {
+    return ichorStorage.drain(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE).getAmount() == amount;
   }
 
   // Ritual handling
