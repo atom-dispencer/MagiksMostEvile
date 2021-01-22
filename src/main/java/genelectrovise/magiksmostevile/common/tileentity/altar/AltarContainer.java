@@ -38,8 +38,8 @@ public class AltarContainer extends CommonContainer {
     super(ContainerOrbitalRegistry.ALTAR_CONTAINER.get(), windowId, 4);
 
     this.setAltar(altar);
-    this.maxAmethystFlux = altar.energyStorage.maxAmethystFlux;
-    this.currentAmethystFlux = altar.energyStorage.currentAmethystFlux;
+    this.maxAmethystFlux = altar.ichorStorage.maxAmethystFlux;
+    this.currentAmethystFlux = altar.ichorStorage.currentAmethystFlux;
     this.inv = inv;
 
     trackInt(maxAmethystFlux);

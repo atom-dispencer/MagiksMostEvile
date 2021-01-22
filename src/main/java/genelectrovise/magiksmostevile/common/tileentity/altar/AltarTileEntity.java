@@ -79,10 +79,10 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
   // IEnergyStorage
-  protected AltarEnergyStorage energyStorage;
+  protected AltarEnergyStorage ichorStorage;
 
   private final LazyOptional<IEnergyStorage> energyStorageLazyOptional =
-      LazyOptional.of(() -> energyStorage);
+      LazyOptional.of(() -> ichorStorage);
 
   // Constructor
 
@@ -120,7 +120,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     };
 
     // IEnergyStorage
-    energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0,
+    ichorStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0,
         MagiksMostEvile.MODID + ":energyStorage") {
 
     };
@@ -179,7 +179,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
     slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
     slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
-    energyStorage.fromNbt(tag.getCompound(energyStorage.nbtKey));
+    ichorStorage.fromNbt(tag.getCompound(ichorStorage.nbtKey));
     setCasting(tag.getBoolean("casting"));
     ResourceLocation location = new ResourceLocation(tag.getString("ritual"));
     Ritual ritual = location.equals(Ritual.NONE) ? null : getRitualFromResourceLocation(location);
@@ -200,7 +200,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
     tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
     tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
-    tag.put(energyStorage.nbtKey, energyStorage.toNbt());
+    tag.put(ichorStorage.nbtKey, ichorStorage.toNbt());
     tag.putBoolean("casting", isCasting());
     tag.putInt("ritual_tick", currentRitual != null ? currentRitual.getTick() : 0);
     tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString()
@@ -246,7 +246,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
         }
 
         // Increase energy capacity
-        energyStorage
+        ichorStorage
             .setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
       }
 
@@ -254,16 +254,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       if (recieveFluxCountdown > 20) {
         if (world instanceof ServerWorld) {
           if (!world.isDaytime()) {
-            energyStorage.receiveEnergy(1, false);
+            ichorStorage.receiveEnergy(1, false);
 
             if (new Random().nextInt(15) == 0) {
-              energyStorage.receiveMax(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL);
+              ichorStorage.receiveMax(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL);
             }
 
             recieveFluxCountdown = 0;
           } else {
             if (new Random().nextInt(25) == 0) {
-              energyStorage.receiveMax(crystals.size() * DAY_ENERGY_PER_CRYSTAL);
+              ichorStorage.receiveMax(crystals.size() * DAY_ENERGY_PER_CRYSTAL);
             }
           }
         }
@@ -304,16 +304,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
    * @return the energyStorage
    */
   public int getEnergyStored() {
-    return energyStorage.getEnergyStored();
+    return ichorStorage.getEnergyStored();
   }
 
   /**
    * 
-   * @param energy How much to extract
+   * @param ichor How much to extract
    * @return Whether that amount was extracted.
    */
-  public boolean removeEnergy(int energy) {
-    if (energy == energyStorage.extractEnergy(energy, false)) {
+  public boolean removeIchor(int ichor) {
+    if (ichor == ichorStorage.extractEnergy(ichor, false)) {
       return true;
     }
     return false;

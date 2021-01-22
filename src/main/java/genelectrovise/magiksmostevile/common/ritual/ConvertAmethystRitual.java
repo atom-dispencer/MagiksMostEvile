@@ -70,7 +70,7 @@ public class ConvertAmethystRitual extends Ritual {
     super.tick();
 
     if (isBetweenTicks(1, 50, true)) {
-      if (altar.removeEnergy(1)) {
+      if (altar.removeIchor(1)) {
         return RitualResult.CASTING;
       } else {
         return RitualResult.CATACLYSM;
