@@ -23,7 +23,7 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
   protected final String displayName;
   protected final String description;
   protected final String information;
-  protected final int energyRequirement;
+  protected final int ichorRequirement;
   protected ResultHandler<?> resultHandler;
 
   protected AltarTileEntity altar;
@@ -43,11 +43,11 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
    * 
    * @param convertAmethystResultHandler
    */
-  public Ritual(String displayName, String description, String information, int energyRequirement) {
+  public Ritual(String displayName, String description, String information, int ichorRequirement) {
     this.displayName = displayName;
     this.description = description;
     this.information = information;
-    this.energyRequirement = energyRequirement;
+    this.ichorRequirement = ichorRequirement;
   }
 
   /**
@@ -95,7 +95,7 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
    */
   protected boolean canStart() {
 
-    if (!(altar.getEnergyStored() > energyRequirement / 2)) {
+    if (!(altar.getEnergyStored() > ichorRequirement / 2)) {
       return false;
     }
 
@@ -231,8 +231,8 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
   /**
    * @return the energyRequirement
    */
-  public final int getEnergyRequirement() {
-    return energyRequirement;
+  public final int getIchorRequirement() {
+    return ichorRequirement;
   }
 
   /**

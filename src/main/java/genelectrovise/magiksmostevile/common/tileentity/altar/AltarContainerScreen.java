@@ -108,7 +108,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
         new Integer(Math.round(baseY + seperator + 20)), 6961030);
 
     String energyRequirement = "Required Energy: "
-        + new Integer(altarContainer.getSelector().getRitualSupplier().get().getEnergyRequirement())
+        + new Integer(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement())
             .toString();
     this.font.drawString(stack, energyRequirement, new Integer(Math.round(baseX + 2)),
         new Integer(Math.round(baseY + seperator + 81)), 13018111);
