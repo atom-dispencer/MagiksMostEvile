@@ -35,9 +35,9 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -82,7 +82,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   private final LazyOptional<IItemHandler> allSlots =
       LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
-  // IEnergyStorage
+  // IFluidTank
   protected IchorFluidStorage ichorStorage;
 
   private final LazyOptional<IFluidTank> ichorStorageLazyOptional =
@@ -122,8 +122,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       }
     };
 
-    // IEnergyStorage
-    ichorStorage = new IchorFluidStorage(BASE_ICHOR_CAPACITY, MagiksMostEvile.MODID + ":energyStorage") {
+    // IFluidTank
+    ichorStorage = new IchorFluidStorage(BASE_ICHOR_CAPACITY, MagiksMostEvile.MODID + ":ichorStorage") {
 
     };
   }
@@ -144,8 +144,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       }
     }
 
-    // IEnergyStorage
-    if (capability == CapabilityEnergy.ENERGY) {
+    // IFluidTank
+    if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
       this.markDirty();
 
       // if the block at myself isn't myself, allow full access (Block Broken)
@@ -247,9 +247,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
           }
         }
 
-        // Increase energy capacity
-        ichorStorage
-            .setCapacity(BASE_ICHOR_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
+        // Increase ichor capacity
+        ichorStorage.setCapacity(BASE_ICHOR_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
       }
 
       // Receive amethyst flux
@@ -303,7 +302,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   }
 
   /**
-   * @return the energyStorage
+   * @return the ichorStorage
    */
   public int getIchorStored() {
     return ichorStorage.getFluidAmount();
