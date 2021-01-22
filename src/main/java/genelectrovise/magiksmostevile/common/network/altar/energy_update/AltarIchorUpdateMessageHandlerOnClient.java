@@ -26,17 +26,17 @@ public class AltarIchorUpdateMessageHandlerOnClient {
   public static void onMessageReceived(final AltarIchorUpdateMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
-    MagiksMostEvile.LOGGER.debug("Message recieved on client!");
+    MagiksMostEvile.LOGGER.debug("AltarIchorUpdateMessageToClient recieved on client!");
 
     ctxSupplier.get().setPacketHandled(true);
 
     if (!message.isValid()) {
-      MagiksMostEvile.LOGGER.warn("Invalid message received on client.");
+      MagiksMostEvile.LOGGER.warn("Invalid AltarIchorUpdateMessageToClient message received on client.");
       return;
     }
 
     if (ctxSupplier.get().getDirection().getReceptionSide() != LogicalSide.CLIENT) {
-      MagiksMostEvile.LOGGER.warn("Message recieved on incorrect side. (client) ");
+      MagiksMostEvile.LOGGER.warn("AltarIchorUpdateMessage- recieved on incorrect side. (client) ");
       return;
     }
 
@@ -51,7 +51,7 @@ public class AltarIchorUpdateMessageHandlerOnClient {
   private static void processMessage(AltarIchorUpdateMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
-    MagiksMostEvile.LOGGER.debug("Processing msg on client");
+    MagiksMostEvile.LOGGER.debug("Processing AltarIchorUpdateMessageToClient on client");
 
     // Here I need to get an instance of the world or player so I can access things
     ClientPlayerEntity player = Minecraft.getInstance().player;
@@ -59,8 +59,8 @@ public class AltarIchorUpdateMessageHandlerOnClient {
     if (containerRaw instanceof AltarContainer) {
       MagiksMostEvile.LOGGER.debug("instanceof AltarContainer. Updating values.");
       AltarContainer altarContainer = (AltarContainer) containerRaw;
-      altarContainer.setMaxAmethystFlux(message.maxAmethystFlux);
-      altarContainer.setCurrentAmethystFlux(message.currentAmethystFlux);
+      altarContainer.setIchorCapacity(message.maxAmethystFlux);
+      altarContainer.setCurrentIchor(message.currentAmethystFlux);
     }
   }
 

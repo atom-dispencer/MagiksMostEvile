@@ -20,8 +20,8 @@ import net.minecraftforge.items.ItemStackHandler;
 public class AltarContainer extends CommonContainer {
 
   private AltarTileEntity altar;
-  protected TrackableIntegerHolder currentAmethystFlux;
-  protected TrackableIntegerHolder maxAmethystFlux;
+  protected TrackableIntegerHolder currentIchor;
+  protected TrackableIntegerHolder maxIchor;
   public TrackableIntegerHolder isCasting = new TrackableIntegerHolder(0);
 
   protected PlayerInventory inv;
@@ -38,12 +38,12 @@ public class AltarContainer extends CommonContainer {
     super(ContainerOrbitalRegistry.ALTAR_CONTAINER.get(), windowId, 4);
 
     this.setAltar(altar);
-    this.maxAmethystFlux = altar.ichorStorage.maxIchor;
-    this.currentAmethystFlux = altar.ichorStorage.currentIchor;
+    this.maxIchor = altar.ichorStorage.maxIchor;
+    this.currentIchor = altar.ichorStorage.currentIchor;
     this.inv = inv;
 
-    trackInt(maxAmethystFlux);
-    trackInt(currentAmethystFlux);
+    trackInt(maxIchor);
+    trackInt(currentIchor);
     trackInt(isCasting);
 
     isCasting.set(altar.isCasting ? 1 : 0);
@@ -100,28 +100,28 @@ public class AltarContainer extends CommonContainer {
    * @return the currentAmethystFlux
    */
   public TrackableIntegerHolder getCurrentAmethystFlux() {
-    return currentAmethystFlux;
+    return currentIchor;
   }
 
   /**
    * @param currentAmethystFlux the currentAmethystFlux to set
    */
-  public void setCurrentAmethystFlux(int currentAmethystFlux) {
-    this.currentAmethystFlux.set(currentAmethystFlux);
+  public void setCurrentIchor(int currentAmethystFlux) {
+    this.currentIchor.set(currentAmethystFlux);
   }
 
   /**
    * @return the maxAmethystFlux
    */
   public TrackableIntegerHolder getMaxAmethystFlux() {
-    return maxAmethystFlux;
+    return maxIchor;
   }
 
   /**
    * @param maxAmethystFlux the maxAmethystFlux to set
    */
-  public void setMaxAmethystFlux(int maxAmethystFlux) {
-    this.maxAmethystFlux.set(maxAmethystFlux);
+  public void setIchorCapacity(int maxAmethystFlux) {
+    this.maxIchor.set(maxAmethystFlux);
   }
 
   /**

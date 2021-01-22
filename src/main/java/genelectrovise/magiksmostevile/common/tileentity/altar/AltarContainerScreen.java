@@ -15,6 +15,7 @@ import genelectrovise.magiksmostevile.common.network.altar.cast_button.AltarCast
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 
@@ -31,6 +32,10 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   private int halfHeight;
   private int scaledHeight;
   private int posY_main;
+
+  private String S_Ichor = I18n.format("genelectrovise.magiksmostevile.text.ichor");
+  private String S_RequiredIchor = I18n.format("genelectrovise.magiksmostevile.text.ritual.required_ichor");
+  private String S_Cast = I18n.format("genelectrovise.magiksmostevile.text.magik.ritual.cast");
 
   /**
    * @param altarContainer
@@ -92,10 +97,9 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
     // Used to use split = 100
 
     // Draw text
-    this.font.drawString(
-        stack, this.title.getString() + " - Amethyst Flux: " + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(), baseX, baseY, 4210752);
+    this.font.drawString(stack, this.title.getString() + " - " + S_Ichor + ": " + altarContainer.currentIchor.get() + "/" + altarContainer.maxIchor.get(), baseX, baseY, 4210752);
 
-    this.font.drawString(stack, "Cast", baseX + 3, baseY + 68, 4210752);
+    this.font.drawString(stack, S_Cast, baseX + 3, baseY + 68, 4210752);
 
     String displayName = altarContainer.getSelector().getRitualSupplier().get().getDisplayName();
     this.font.drawString(stack, displayName, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 10)), 11024322);
@@ -103,7 +107,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
     String description = altarContainer.getSelector().getRitualSupplier().get().getDescription();
     this.font.drawString(stack, description, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 20)), 6961030);
 
-    String energyRequirement = "Required Energy: " + new Integer(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement()).toString();
+    String energyRequirement = S_RequiredIchor + ": " + new Integer(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement()).toString();
     this.font.drawString(stack, energyRequirement, new Integer(Math.round(baseX + 2)), new Integer(Math.round(baseY + seperator + 81)), 13018111);
   }
 

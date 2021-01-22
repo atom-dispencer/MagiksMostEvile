@@ -31,6 +31,9 @@ public class IchorFluidStorage extends FluidTank {
 
     currentIchor = new TrackableIntegerHolder(getFluidAmount(), MagiksMostEvile.MODID + ":currentIchor");
     maxIchor = new TrackableIntegerHolder(getCapacity(), MagiksMostEvile.MODID + ":capacity");
+    
+    this.capacity = currentIchor.get();
+    this.fluid = new FluidStack(Fluids.LAVA, 10);
   }
 
   /**
