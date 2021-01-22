@@ -23,10 +23,10 @@ public class ConvertAmethystRitual extends Ritual {
   public static final String displayName = "Magikify Amethyst";
   public static final String description = "Imbue an amethyst with magiky powers!";
   public static final String information = "Convert an amethyst into a powered amethyst";
-  private static final int energyRequirement = 50;
+  private static final int ichorRequirement = 50;
 
   public ConvertAmethystRitual() {
-    super(displayName, description, information, energyRequirement);
+    super(displayName, description, information, ichorRequirement);
   }
 
   @Override
