@@ -79,16 +79,15 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
   // IEnergyStorage
-  protected AltarEnergyStorage ichorStorage;
+  protected AltarIchorStorage ichorStorage;
 
-  private final LazyOptional<IEnergyStorage> energyStorageLazyOptional =
+  private final LazyOptional<IEnergyStorage> ichorStorageLazyOptional =
       LazyOptional.of(() -> ichorStorage);
 
   // Constructor
 
   public AltarTileEntity() {
     super(TileEntityOrbitalRegistry.TILE_ENTITY_ALTAR.get());
-    MagiksMostEvile.LOGGER.debug("Constructing class : AltarTileEntity");
 
     // IItemHandler
     slot_0 = new ItemStackHandler() {
@@ -120,7 +119,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     };
 
     // IEnergyStorage
-    ichorStorage = new AltarEnergyStorage(BASE_ICHOR_CAPACITY, 1, 1, 0,
+    ichorStorage = new AltarIchorStorage(BASE_ICHOR_CAPACITY, 1, 1, 0,
         MagiksMostEvile.MODID + ":energyStorage") {
 
     };
@@ -148,10 +147,10 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
       // if the block at myself isn't myself, allow full access (Block Broken)
       if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
-        return energyStorageLazyOptional.cast();
+        return ichorStorageLazyOptional.cast();
       }
       if (facing == null) {
-        return energyStorageLazyOptional.cast();
+        return ichorStorageLazyOptional.cast();
       }
     }
 
@@ -169,7 +168,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     slot_3_holder.invalidate();
     allSlots.invalidate();
 
-    energyStorageLazyOptional.invalidate();
+    ichorStorageLazyOptional.invalidate();
   }
 
   @Override

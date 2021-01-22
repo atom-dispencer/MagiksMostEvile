@@ -3,12 +3,12 @@
  */
 package genelectrovise.magiksmostevile.common.tileentity.altar;
 
-import genelectrovise.magiksmostevile.common.tileentity.AmethystFluxEnergyStorage;
+import genelectrovise.magiksmostevile.common.tileentity.IchorFluidStorage;
 
 /**
  * @author GenElectrovise 23 May 2020
  */
-public class AltarEnergyStorage extends AmethystFluxEnergyStorage {
+public class AltarIchorStorage extends IchorFluidStorage {
 
   /**
    * @param capacity
@@ -17,7 +17,7 @@ public class AltarEnergyStorage extends AmethystFluxEnergyStorage {
    * @param energy
    * @param nbtKey
    */
-  public AltarEnergyStorage(int capacity, int maxReceive, int maxExtract, int energy,
+  public AltarIchorStorage(int capacity, int maxReceive, int maxExtract, int energy,
       String nbtKey) {
     super(capacity, maxReceive, maxExtract, energy, nbtKey);
   }

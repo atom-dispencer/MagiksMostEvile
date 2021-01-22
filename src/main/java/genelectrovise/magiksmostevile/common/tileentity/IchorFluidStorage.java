@@ -11,10 +11,10 @@ import net.minecraftforge.energy.EnergyStorage;
 /**
  * @author GenElectrovise 20 May 2020
  */
-public class AmethystFluxEnergyStorage extends EnergyStorage {
+public class IchorFluidStorage extends EnergyStorage {
 
-  public TrackableIntegerHolder maxAmethystFlux;
-  public TrackableIntegerHolder currentAmethystFlux;
+  public TrackableIntegerHolder maxIchor;
+  public TrackableIntegerHolder currentIchor;
   public String nbtKey;
 
   /**
@@ -23,28 +23,28 @@ public class AmethystFluxEnergyStorage extends EnergyStorage {
    * @param maxExtract
    * @param energy
    */
-  public AmethystFluxEnergyStorage(int capacity, int maxReceive, int maxExtract, int energy,
+  public IchorFluidStorage(int capacity, int maxReceive, int maxExtract, int energy,
       String nbtKey) {
     super(capacity, maxReceive, maxExtract, energy);
     this.nbtKey = nbtKey;
 
-    currentAmethystFlux = new TrackableIntegerHolder(getEnergyStored(),
-        MagiksMostEvile.MODID + ":currentAmethystFlux");
-    maxAmethystFlux = new TrackableIntegerHolder(getMaxEnergyStored(),
-        MagiksMostEvile.MODID + ":maxAmethystFlux");
+    currentIchor = new TrackableIntegerHolder(getEnergyStored(),
+        MagiksMostEvile.MODID + ":currentIchor");
+    maxIchor = new TrackableIntegerHolder(getMaxEnergyStored(),
+        MagiksMostEvile.MODID + ":maxIchor");
   }
 
   public void setCapacity(int capacity) {
     this.capacity = capacity;
-    maxAmethystFlux.set(this.capacity);
+    maxIchor.set(this.capacity);
   }
 
   /**
    * @param compound
    */
   public void fromNbt(CompoundNBT compound) {
-    maxAmethystFlux.set(compound.getInt("maxAmethystFlux"));
-    currentAmethystFlux.set(compound.getInt("currentAmethystFlux"));
+    maxIchor.set(compound.getInt("maxIchor"));
+    currentIchor.set(compound.getInt("currentIchor"));
     capacity = compound.getInt("capacity");
     maxReceive = compound.getInt("maxReceive");
     maxExtract = compound.getInt("maxExtract");
@@ -56,8 +56,8 @@ public class AmethystFluxEnergyStorage extends EnergyStorage {
    */
   public CompoundNBT toNbt() {
     CompoundNBT tag = new CompoundNBT();
-    tag.putInt("maxAmethystFlux", maxAmethystFlux.get());
-    tag.putInt("currentAmethystFlux", currentAmethystFlux.get());
+    tag.putInt("maxIchor", maxIchor.get());
+    tag.putInt("currentIchor", currentIchor.get());
     tag.putInt("capacity", capacity);
     tag.putInt("maxReceive", maxReceive);
     tag.putInt("maxExtract", maxExtract);
@@ -75,7 +75,7 @@ public class AmethystFluxEnergyStorage extends EnergyStorage {
     if (!simulate)
       energy += energyReceived;
 
-    currentAmethystFlux.set(energy);
+    currentIchor.set(energy);
 
     return energyReceived;
   }
@@ -89,7 +89,7 @@ public class AmethystFluxEnergyStorage extends EnergyStorage {
     if (!simulate)
       energy -= energyExtracted;
 
-    currentAmethystFlux.set(energy);
+    currentIchor.set(energy);
 
     return energyExtracted;
   }
