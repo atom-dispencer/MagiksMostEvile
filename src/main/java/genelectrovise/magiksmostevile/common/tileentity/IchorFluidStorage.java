@@ -29,11 +29,15 @@ public class IchorFluidStorage extends FluidTank {
     super(capacity);
     this.nbtKey = nbtKey;
 
-    currentIchor = new TrackableIntegerHolder(getFluidAmount(), MagiksMostEvile.MODID + ":currentIchor");
-    maxIchor = new TrackableIntegerHolder(getCapacity(), MagiksMostEvile.MODID + ":capacity");
+    currentIchor = new TrackableIntegerHolder(10, MagiksMostEvile.MODID + ":currentIchor");
+    maxIchor = new TrackableIntegerHolder(50, MagiksMostEvile.MODID + ":capacity");
     
-    this.capacity = currentIchor.get();
-    this.fluid = new FluidStack(Fluids.LAVA, 10);
+    update();
+  }
+  
+  public void update() {
+    this.currentIchor.set(this.getFluidAmount());
+    this.maxIchor.set(this.getCapacity());
   }
 
   /**
@@ -52,7 +56,6 @@ public class IchorFluidStorage extends FluidTank {
     tag.putInt("currentIchor", currentIchor.get());
     tag.putInt("capacity", capacity);
 
-
     return tag;
   }
 
@@ -63,12 +66,23 @@ public class IchorFluidStorage extends FluidTank {
 
   @Override
   public int fill(FluidStack resource, FluidAction action) {
-    return super.fill(resource, action);
+    int filled = super.fill(resource, action);
+    update();
+    return filled;
   }
 
   @Override
   public FluidStack drain(FluidStack resource, FluidAction action) {
-    return super.drain(resource, action);
+    FluidStack drained = super.drain(resource, action);
+    update();
+    return drained;
+  }
+
+  @Override
+  public FluidTank setCapacity(int capacity) {
+    FluidTank tank = super.setCapacity(capacity);
+    update();
+    return tank;
   }
 
 }

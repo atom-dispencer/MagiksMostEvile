@@ -3,6 +3,8 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Supplier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.BlockOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.RitualOrbitalRegistry;
@@ -55,6 +57,8 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
  * @author GenElectrovise 14 May 2020
  */
 public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
+  
+  public static final Logger LOGGER = LogManager.getLogger();
 
   private static final int BASE_ICHOR_CAPACITY = 50;
   private static final int ADDITIONAL_STORAGE_PER_CRYSTAL = 50;
@@ -63,8 +67,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
   private int tickIncr = 0;
   private int recieveFluxCountdown = 0;
-  private ArrayList<AmethystCrystalTileEntity> crystals =
-      new ArrayList<AmethystCrystalTileEntity>();
+  private ArrayList<AmethystCrystalTileEntity> crystals = new ArrayList<AmethystCrystalTileEntity>();
   public boolean isCasting = false;
   public Ritual currentRitual;
 
