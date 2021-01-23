@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package genelectrovise.magiksmostevile.tileentity;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
