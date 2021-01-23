@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "magiksmostevile:items/general/vampire_bat_tooth"
+       "layer0": "magiksmostevile:items/mob/vampire_bat_tooth"
    }
 }

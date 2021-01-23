@@ -35,7 +35,7 @@ public class ItemOrbitalRegistry implements IOrbitalRegistry {
   public static final RegistryObject<Item> GREATER_POWER_STONE = ITEMS.register("greater_power_stone", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
 
   // Tabulae
-  public static final RegistryObject<Item> BEESWAX = ITEMS.register("beeswax", () -> new Item(new Item.Properties()));
+  public static final RegistryObject<Item> BEESWAX = ITEMS.register("beeswax", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
   public static final RegistryObject<Item> BLANK_TABLULA = ITEMS.register("blank_tabula", () -> new BlankTabula());
 
   @Override

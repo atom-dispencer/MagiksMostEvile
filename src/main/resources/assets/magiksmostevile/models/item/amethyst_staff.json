@@ -1,6 +1,6 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "magiksmostevile:items/staff/amethyst_staff"
+       "layer0": "magiksmostevile:items/staffs/amethyst_staff"
    }
 }
