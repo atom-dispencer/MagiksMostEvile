@@ -25,7 +25,7 @@ public class SummonFlappyRitual extends Ritual {
   public static final String displayName = "Summon Flappy!";
   public static final String description = "Summon the almighty Flappy the Bat!";
   public static final String information = "Summons a vampire bat into the world!";
-  private static final int energyRequirement = 60;
+  private static final int ichorRequirement = 60;
 
   /**
    * @param registryName
@@ -33,7 +33,7 @@ public class SummonFlappyRitual extends Ritual {
    * @param description
    */
   public SummonFlappyRitual() {
-    super(displayName, description, information, energyRequirement);
+    super(displayName, description, information, ichorRequirement);
   }
 
   @Override
@@ -109,7 +109,7 @@ public class SummonFlappyRitual extends Ritual {
     }
 
     if (isBetweenTicks(1, 60)) {
-      if (altar.removeEnergy(1)) {
+      if (altar.drainIchor(1)) {
         return RitualResult.CASTING;
       } else {
         return RitualResult.CATACLYSM;

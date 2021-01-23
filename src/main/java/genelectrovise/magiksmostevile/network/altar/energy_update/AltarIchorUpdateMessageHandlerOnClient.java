@@ -17,7 +17,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
  * @author GenElectrovise 24 May 2020
  */
 @Deprecated
-public class AltarEnergyUpdateMessageHandlerOnClient {
+public class AltarIchorUpdateMessageHandlerOnClient {
 
   /**
    * Called when a message is received of the appropriate type. CALLED BY THE NETWORK THREAD, NOT

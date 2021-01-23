@@ -12,10 +12,10 @@ import genelectrovise.magiksmostevile.network.altar.cast_button.AltarCastButtonP
 import genelectrovise.magiksmostevile.network.altar.cast_button.AltarCastButtonPressedMessageHandlerOnServer;
 import genelectrovise.magiksmostevile.network.altar.cast_button.AltarCastButtonPressedMessageToClient;
 import genelectrovise.magiksmostevile.network.altar.cast_button.AltarCastButtonPressedMessageToServer;
-import genelectrovise.magiksmostevile.network.altar.energy_update.AltarEnergyUpdateMessageHandlerOnClient;
-import genelectrovise.magiksmostevile.network.altar.energy_update.AltarEnergyUpdateMessageHandlerOnServer;
-import genelectrovise.magiksmostevile.network.altar.energy_update.AltarEnergyUpdateMessageToClient;
-import genelectrovise.magiksmostevile.network.altar.energy_update.AltarEnergyUpdateMessageToServer;
+import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpdateMessageHandlerOnClient;
+import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpdateMessageHandlerOnServer;
+import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpdateMessageToClient;
+import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpdateMessageToServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +26,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 /**
  * @author GenElectrovise 23 May 2020
  */
+@SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AltarNetworkingManager {
 
@@ -58,16 +59,16 @@ public class AltarNetworkingManager {
     MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by AltarNetworkingManager!");
     CAltarEnergyUpdate = NetworkRegistry.newSimpleChannel(RLEnergyUpdate,
         () -> ENERGY_UPDATE_MESSAGE_PROTOCOL_VERSION,
-        AltarEnergyUpdateMessageHandlerOnClient::isProtocolAccepted,
-        AltarEnergyUpdateMessageHandlerOnServer::isProtocolAccepted);
+        AltarIchorUpdateMessageHandlerOnClient::isProtocolAccepted,
+        AltarIchorUpdateMessageHandlerOnServer::isProtocolAccepted);
     CAltarEnergyUpdate.registerMessage(ALTAR_ENERGY_UPDATE_TO_SERVER,
-        AltarEnergyUpdateMessageToServer.class, AltarEnergyUpdateMessageToServer::encode,
-        AltarEnergyUpdateMessageToServer::decode,
-        AltarEnergyUpdateMessageHandlerOnServer::onMessageReceived);
+        AltarIchorUpdateMessageToServer.class, AltarIchorUpdateMessageToServer::encode,
+        AltarIchorUpdateMessageToServer::decode,
+        AltarIchorUpdateMessageHandlerOnServer::onMessageReceived);
     CAltarEnergyUpdate.registerMessage(ALTAR_ENERGY_UPDATE_TO_CLIENT,
-        AltarEnergyUpdateMessageToClient.class, AltarEnergyUpdateMessageToClient::encode,
-        AltarEnergyUpdateMessageToClient::decode,
-        AltarEnergyUpdateMessageHandlerOnClient::onMessageReceived);
+        AltarIchorUpdateMessageToClient.class, AltarIchorUpdateMessageToClient::encode,
+        AltarIchorUpdateMessageToClient::decode,
+        AltarIchorUpdateMessageHandlerOnClient::onMessageReceived);
 
     CAltarCastButton = NetworkRegistry.newSimpleChannel(RLCastButtonPressed,
         () -> CAST_BUTTON_PRESSED_MESSAGE_PROTOCOL_VERSION,

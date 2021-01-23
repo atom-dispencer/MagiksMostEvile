@@ -13,7 +13,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
  * @author GenElectrovise 24 May 2020
  */
 @Deprecated
-public class AltarEnergyUpdateMessageHandlerOnServer {
+public class AltarIchorUpdateMessageHandlerOnServer {
 
   public static void onMessageReceived(final AltarIchorUpdateMessageToServer message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
