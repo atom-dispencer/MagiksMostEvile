@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 import genelectrovise.magiksmostevile.common.core.SetupManager;
 import genelectrovise.magiksmostevile.common.entity.boss.BossMob;
 import genelectrovise.magiksmostevile.common.entity.goal.SquidMissileAttackGoal;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -15,8 +14,6 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.ShulkerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 

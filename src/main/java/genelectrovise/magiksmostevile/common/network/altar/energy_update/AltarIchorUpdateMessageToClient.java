@@ -49,8 +49,8 @@ public class AltarIchorUpdateMessageToClient {
   }
 
   /**
-   * Called by the network code. Used to write the contents of your message member variables into
-   * the ByteBuf, ready for transmission over the network.
+   * Called by the network code. Used to write the contents of your message member variables into the
+   * ByteBuf, ready for transmission over the network.
    *
    * @param buf
    */
@@ -65,15 +65,14 @@ public class AltarIchorUpdateMessageToClient {
   }
 
   /**
-   * Called by the network code once it has received the message bytes over the network. Used to
-   * read the ByteBuf contents into your member variables
+   * Called by the network code once it has received the message bytes over the network. Used to read
+   * the ByteBuf contents into your member variables
    *
    * @param buf
    */
   public static AltarIchorUpdateMessageToClient decode(PacketBuffer buf) {
     MagiksMostEvile.LOGGER.debug("Decoding message to client");
-    return new AltarIchorUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(),
-        buf.readUniqueId());
+    return new AltarIchorUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUniqueId());
   }
 
   public String toString() {
