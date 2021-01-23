@@ -38,7 +38,7 @@ public final class SetupManager {
         // Tom the Trol
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(),
             TomTheTrollEntity.getEntityAttributes().create());
-        
+
         // Squid Missile
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.SQUID_MISSILE.get(),
             SquidMissileEntity.getEntityAttributes().create());

@@ -3,9 +3,9 @@ package genelectrovise.magiksmostevile.core;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
-import genelectrovise.magiksmostevile.particle.ParticleCommonStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -40,8 +40,7 @@ public class MagiksMostEvile {
     registerCommonEvents();
 
     // Handle orbital registries
-    new OrbitalRegistryGenerator(OrbitalRegistryGenerator.REFLECTIONS_CONFIGURATION)
-        .collectOrbitalRegistries();
+    new OrbitalRegistryGenerator(OrbitalRegistryGenerator.REFLECTIONS_CONFIGURATION).collectOrbitalRegistries();
 
   }
 
@@ -77,8 +76,8 @@ public class MagiksMostEvile {
 
   public static void registerCommonEvents() {
     LOGGER.debug("Registering MME common events");
-    MOD_EVENT_BUS.register(ParticleCommonStartup.class);
     MOD_EVENT_BUS.register(SetupManager.class);
+    MOD_EVENT_BUS.register(RecipeSetup.class);
   }
 
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.core.reference.ReflectionUtil;
 import genelectrovise.magiksmostevile.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
 import genelectrovise.magiksmostevile.world.gen.structure.shrine.OvergroundShrineStructure;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +37,7 @@ public class ModStructures {
   public static <F extends Structure<?>> void setupStructure(F structure, StructureSeparationSettings settings) {
 
     MagiksMostEvile.LOGGER.debug("Structure setup block starting for structure " + (structure != null ? structure.getRegistryName().toString() : "(name null)"));
-    
+
     SEPERATION_SETTINGS.put(structure, settings);
 
     // I dont like this bit :(
@@ -48,7 +49,7 @@ public class ModStructures {
       // Place into the structure seperation settings map
       try {
         Field mapField = ObfuscationReflectionHelper.findField(DimensionStructuresSettings.class, "field_236191_b_");
-        makeUniversallyAccessible(mapField);
+        ReflectionUtil.makeUniversallyAccessible(mapField);
         ImmutableMap<Structure<?>, StructureSeparationSettings> newSettings =
             ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
                 .putAll(DimensionStructuresSettings.field_236191_b_)
@@ -65,18 +66,18 @@ public class ModStructures {
       try {
         // Settings
         Field settingsField = ObfuscationReflectionHelper.findField(DimensionSettings.class, "field_242740_q");
-        makeUniversallyAccessible(settingsField);
+        ReflectionUtil.makeUniversallyAccessible(settingsField);
         DimensionSettings originalSettings = (DimensionSettings) settingsField.get(DimensionSettings.class);
         MagiksMostEvile.LOGGER.debug("Able to access dimension settings");
 
         // Structures map
         DimensionStructuresSettings structuresSettings = originalSettings.getStructures();
         Field mapField = ObfuscationReflectionHelper.findField(DimensionStructuresSettings.class, "field_236193_d_");
-        makeUniversallyAccessible(mapField);
+        ReflectionUtil.makeUniversallyAccessible(mapField);
         @SuppressWarnings("unchecked")
         Map<Structure<?>, StructureSeparationSettings> structureSettingsMap = (Map<Structure<?>, StructureSeparationSettings>) mapField.get(structuresSettings);
         structureSettingsMap.put(structure, SEPERATION_SETTINGS.get(structure));
-        
+
         MagiksMostEvile.LOGGER.debug("Reached end of setting block successfully.");
       } catch (IllegalArgumentException e) {
         MagiksMostEvile.LOGGER.error("Illegal argument for retrieving value of map in the given structureSettings");
@@ -93,30 +94,6 @@ public class ModStructures {
     } finally {
       MagiksMostEvile.LOGGER.debug("Structure setup block ending (success unknown) for structure " + structure != null ? structure.getRegistryName().toString() : "(name null)");
     }
-
-  }
-
-  public static void makeUniversallyAccessible(Field field) {
-
-    try {
-      Field modifiersField = Field.class.getDeclaredField("modifiers");
-      modifiersField.setAccessible(true);
-      modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-      return;
-
-      // Errors
-    } catch (NoSuchFieldException f) {
-      MagiksMostEvile.LOGGER.error("No such field 'modifiers' found in Field.class");
-      f.printStackTrace();
-    } catch (IllegalArgumentException e) {
-      MagiksMostEvile.LOGGER.error("Illegal argument for Field.modifiers.setInt");
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
-      MagiksMostEvile.LOGGER.error("Read/write access to Field.modifiers prohibited");
-      e.printStackTrace();
-    }
-
-    MagiksMostEvile.LOGGER.error("Unable to disable private/final modifiers of " + field);
 
   }
 
