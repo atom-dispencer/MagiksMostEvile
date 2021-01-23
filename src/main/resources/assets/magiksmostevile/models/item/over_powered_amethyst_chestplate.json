@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "magiksmostevile:items/equipment/armor/over_powered_amethyst_chestplate"
+       "layer0": "magiksmostevile:items/armor/over_powered_amethyst_chestplate"
    }
 }

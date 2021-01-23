@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "magiksmostevile:items/equipment/armor/amethyst_boots"
+       "layer0": "magiksmostevile:items/armor/amethyst_boots"
    }
 }

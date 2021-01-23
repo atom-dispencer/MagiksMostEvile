@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "magiksmostevile:items/general/lead_ingot"
+       "layer0": "magiksmostevile:items/material/lead_ingot"
    }
 }
