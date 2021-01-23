@@ -7,7 +7,7 @@ import net.minecraft.item.Rarity;
 public abstract class Tabula extends Item {
 
   public Tabula() {
-    super(new Item.Properties().maxStackSize(1).group(EvileItemGroup.ITEMGROUP_EVILE).rarity(Rarity.UNCOMMON));
+    super(new Item.Properties().maxStackSize(1).group(EvileItemGroup.MAGIKS_MOST_EVILE).rarity(Rarity.UNCOMMON));
   }
 
 }

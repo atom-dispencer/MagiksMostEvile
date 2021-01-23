@@ -29,7 +29,7 @@ public class EntityOrbitalRegistry implements IOrbitalRegistry {
           () -> EntityType.Builder.create(VampireBatEntity::new, EntityClassification.MONSTER).setTrackingRange(64).size(0.5f, 0.5f)
               .build("vampire_bat"));
   public static final RegistryObject<Item> VAMPIRE_BAT_EGG =
-      ItemOrbitalRegistry.ITEMS.register("vampire_bat_egg", () -> new VampireBatSpawnEgg(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE).maxStackSize(64)));
+      ItemOrbitalRegistry.ITEMS.register("vampire_bat_egg", () -> new VampireBatSpawnEgg(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE).maxStackSize(64)));
 
   // =========BOSSES====================================================================================================================
   public static final RegistryObject<EntityType<TomTheTrollEntity>> TOM_THE_TROLL =

@@ -20,22 +20,22 @@ public class ItemOrbitalRegistry implements IOrbitalRegistry {
   // =========ITEMS=======================================================================================================================
 
   // Material types
-  public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> POWERED_AMETHYST = ITEMS.register("powered_amethyst", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> OVER_POWERED_AMETHYST = ITEMS.register("over_powered_amethyst", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> LEAD_INGOT = ITEMS.register("lead_ingot", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+  public static final RegistryObject<Item> POWERED_AMETHYST = ITEMS.register("powered_amethyst", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+  public static final RegistryObject<Item> OVER_POWERED_AMETHYST = ITEMS.register("over_powered_amethyst", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+  public static final RegistryObject<Item> LEAD_INGOT = ITEMS.register("lead_ingot", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
   // Mobs
-  public static final RegistryObject<Item> VAMPIRE_BAT_TOOTH = ITEMS.register("vampire_bat_tooth", () -> new WrittenBookItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> VAMPIRE_BAT_TOOTH = ITEMS.register("vampire_bat_tooth", () -> new WrittenBookItem(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
   // General
   public static final RegistryObject<Item> GOING_TO_THE_BALL = ITEMS.register("going_to_the_ball", () -> new Item(new Item.Properties()));
-  public static final RegistryObject<Item> INTRO_BOOK = ITEMS.register("intro_book", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> LESSER_POWER_STONE = ITEMS.register("lesser_power_stone", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
-  public static final RegistryObject<Item> GREATER_POWER_STONE = ITEMS.register("greater_power_stone", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> INTRO_BOOK = ITEMS.register("intro_book", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+  public static final RegistryObject<Item> LESSER_POWER_STONE = ITEMS.register("lesser_power_stone", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+  public static final RegistryObject<Item> GREATER_POWER_STONE = ITEMS.register("greater_power_stone", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
   // Tabulae
-  public static final RegistryObject<Item> BEESWAX = ITEMS.register("beeswax", () -> new Item(new Item.Properties().group(EvileItemGroup.ITEMGROUP_EVILE)));
+  public static final RegistryObject<Item> BEESWAX = ITEMS.register("beeswax", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
   public static final RegistryObject<Item> BLANK_TABLULA = ITEMS.register("blank_tabula", () -> new BlankTabula());
 
   @Override
