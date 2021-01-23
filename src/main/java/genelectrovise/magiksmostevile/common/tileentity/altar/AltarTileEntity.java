@@ -3,6 +3,8 @@ package genelectrovise.magiksmostevile.common.tileentity.altar;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Supplier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import genelectrovise.magiksmostevile.common.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.BlockOrbitalRegistry;
 import genelectrovise.magiksmostevile.common.core.registry.orbital.registries.RitualOrbitalRegistry;
@@ -11,6 +13,7 @@ import genelectrovise.magiksmostevile.common.network.particle.ParticleNetworking
 import genelectrovise.magiksmostevile.common.network.particle.transfer_energy.TransferEnergyMessageToClient;
 import genelectrovise.magiksmostevile.common.ritual.Ritual;
 import genelectrovise.magiksmostevile.common.tileentity.ICustomContainer;
+import genelectrovise.magiksmostevile.common.tileentity.IchorFluidStorage;
 import genelectrovise.magiksmostevile.common.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EnchantingTableBlock;
@@ -19,6 +22,7 @@ import net.minecraft.client.particle.EnchantmentTableParticle.EnchantmentTable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.EnchantmentContainer;
 import net.minecraft.nbt.CompoundNBT;
@@ -33,8 +37,10 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -51,16 +57,17 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
  * @author GenElectrovise 14 May 2020
  */
 public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
+  
+  public static final Logger LOGGER = LogManager.getLogger();
 
-  private static final int BASE_ENERGY_CAPACITY = 50;
+  private static final int BASE_ICHOR_CAPACITY = 50;
   private static final int ADDITIONAL_STORAGE_PER_CRYSTAL = 50;
-  private static final int DAY_ENERGY_PER_CRYSTAL = 1;
-  private static final int NIGHT_ENERGY_PER_CRYSTAL = 3;
+  private static final int DAY_ICHOR_PER_CRYSTAL = 1;
+  private static final int NIGHT_ICHOR_PER_CRYSTAL = 3;
 
   private int tickIncr = 0;
   private int recieveFluxCountdown = 0;
-  private ArrayList<AmethystCrystalTileEntity> crystals =
-      new ArrayList<AmethystCrystalTileEntity>();
+  private ArrayList<AmethystCrystalTileEntity> crystals = new ArrayList<AmethystCrystalTileEntity>();
   public boolean isCasting = false;
   public Ritual currentRitual;
 
@@ -78,17 +85,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   private final LazyOptional<IItemHandler> allSlots =
       LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
-  // IEnergyStorage
-  protected AltarEnergyStorage energyStorage;
+  // IFluidTank
+  protected IchorFluidStorage ichorStorage;
 
-  private final LazyOptional<IEnergyStorage> energyStorageLazyOptional =
-      LazyOptional.of(() -> energyStorage);
+  private final LazyOptional<IFluidTank> ichorStorageLazyOptional =
+      LazyOptional.of(() -> ichorStorage);
 
   // Constructor
 
   public AltarTileEntity() {
     super(TileEntityOrbitalRegistry.TILE_ENTITY_ALTAR.get());
-    MagiksMostEvile.LOGGER.debug("Constructing class : AltarTileEntity");
 
     // IItemHandler
     slot_0 = new ItemStackHandler() {
@@ -119,9 +125,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       }
     };
 
-    // IEnergyStorage
-    energyStorage = new AltarEnergyStorage(BASE_ENERGY_CAPACITY, 1, 1, 0,
-        MagiksMostEvile.MODID + ":energyStorage") {
+    // IFluidTank
+    ichorStorage = new IchorFluidStorage(BASE_ICHOR_CAPACITY, MagiksMostEvile.MODID + ":ichorStorage") {
 
     };
   }
@@ -142,16 +147,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       }
     }
 
-    // IEnergyStorage
-    if (capability == CapabilityEnergy.ENERGY) {
+    // IFluidTank
+    if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
       this.markDirty();
 
       // if the block at myself isn't myself, allow full access (Block Broken)
       if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
-        return energyStorageLazyOptional.cast();
+        return ichorStorageLazyOptional.cast();
       }
       if (facing == null) {
-        return energyStorageLazyOptional.cast();
+        return ichorStorageLazyOptional.cast();
       }
     }
 
@@ -169,7 +174,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     slot_3_holder.invalidate();
     allSlots.invalidate();
 
-    energyStorageLazyOptional.invalidate();
+    ichorStorageLazyOptional.invalidate();
   }
 
   @Override
@@ -179,7 +184,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
     slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
     slot_3.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_3"));
-    energyStorage.fromNbt(tag.getCompound(energyStorage.nbtKey));
+    ichorStorage.fromNbt(tag.getCompound(ichorStorage.nbtKey));
     setCasting(tag.getBoolean("casting"));
     ResourceLocation location = new ResourceLocation(tag.getString("ritual"));
     Ritual ritual = location.equals(Ritual.NONE) ? null : getRitualFromResourceLocation(location);
@@ -200,7 +205,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
     tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
     tag.put(MagiksMostEvile.MODID + ":slot_3", slot_3.serializeNBT());
-    tag.put(energyStorage.nbtKey, energyStorage.toNbt());
+    tag.put(ichorStorage.nbtKey, ichorStorage.toNbt());
     tag.putBoolean("casting", isCasting());
     tag.putInt("ritual_tick", currentRitual != null ? currentRitual.getTick() : 0);
     tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString()
@@ -245,25 +250,24 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
           }
         }
 
-        // Increase energy capacity
-        energyStorage
-            .setCapacity(BASE_ENERGY_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
+        // Increase ichor capacity
+        ichorStorage.setCapacity(BASE_ICHOR_CAPACITY + (crystals.size() * ADDITIONAL_STORAGE_PER_CRYSTAL));
       }
 
       // Receive amethyst flux
       if (recieveFluxCountdown > 20) {
         if (world instanceof ServerWorld) {
           if (!world.isDaytime()) {
-            energyStorage.receiveEnergy(1, false);
+            ichorStorage.fill(new FluidStack(Fluids.LAVA, 1), FluidAction.EXECUTE);
 
             if (new Random().nextInt(15) == 0) {
-              energyStorage.receiveMax(crystals.size() * NIGHT_ENERGY_PER_CRYSTAL);
+              ichorStorage.fill(new FluidStack(Fluids.LAVA, crystals.size() * NIGHT_ICHOR_PER_CRYSTAL), FluidAction.EXECUTE);
             }
 
             recieveFluxCountdown = 0;
           } else {
             if (new Random().nextInt(25) == 0) {
-              energyStorage.receiveMax(crystals.size() * DAY_ENERGY_PER_CRYSTAL);
+              ichorStorage.fill(new FluidStack(Fluids.LAVA, crystals.size() * DAY_ICHOR_PER_CRYSTAL), FluidAction.EXECUTE);
             }
           }
         }
@@ -301,22 +305,18 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   }
 
   /**
-   * @return the energyStorage
+   * @return the ichorStorage
    */
-  public int getEnergyStored() {
-    return energyStorage.getEnergyStored();
+  public int getIchorStored() {
+    return ichorStorage.getFluidAmount();
   }
-
-  /**
-   * 
-   * @param energy How much to extract
-   * @return Whether that amount was extracted.
-   */
-  public boolean removeEnergy(int energy) {
-    if (energy == energyStorage.extractEnergy(energy, false)) {
-      return true;
-    }
-    return false;
+  
+  public boolean fillIchor(int amount) {
+    return ichorStorage.fill(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE) == amount;
+  }
+  
+  public boolean drainIchor(int amount) {
+    return ichorStorage.drain(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE).getAmount() == amount;
   }
 
   // Ritual handling

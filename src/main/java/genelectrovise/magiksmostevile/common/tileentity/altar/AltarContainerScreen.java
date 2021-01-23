@@ -15,6 +15,7 @@ import genelectrovise.magiksmostevile.common.network.altar.cast_button.AltarCast
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 
@@ -31,6 +32,10 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   private int halfHeight;
   private int scaledHeight;
   private int posY_main;
+
+  private String S_Ichor = I18n.format("genelectrovise.magiksmostevile.text.ichor");
+  private String S_RequiredIchor = I18n.format("genelectrovise.magiksmostevile.text.ritual.required_ichor");
+  private String S_Cast = I18n.format("genelectrovise.magiksmostevile.text.magik.ritual.cast");
 
   /**
    * @param altarContainer
@@ -92,26 +97,18 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
     // Used to use split = 100
 
     // Draw text
-    this.font.drawString(
-        stack, this.title.getString() + " - Amethyst Flux: "
-            + altarContainer.currentAmethystFlux.get() + "/" + altarContainer.maxAmethystFlux.get(),
-        baseX, baseY, 4210752);
+    this.font.drawString(stack, this.title.getString() + " - " + S_Ichor + ": " + altarContainer.currentIchor.get() + "/" + altarContainer.maxIchor.get(), baseX, baseY, 4210752);
 
-    this.font.drawString(stack, "Cast", baseX + 3, baseY + 68, 4210752);
+    this.font.drawString(stack, S_Cast, baseX + 3, baseY + 68, 4210752);
 
     String displayName = altarContainer.getSelector().getRitualSupplier().get().getDisplayName();
-    this.font.drawString(stack, displayName, new Integer(Math.round(baseX)),
-        new Integer(Math.round(baseY + seperator + 10)), 11024322);
+    this.font.drawString(stack, displayName, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 10)), 11024322);
 
     String description = altarContainer.getSelector().getRitualSupplier().get().getDescription();
-    this.font.drawString(stack, description, new Integer(Math.round(baseX)),
-        new Integer(Math.round(baseY + seperator + 20)), 6961030);
+    this.font.drawString(stack, description, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 20)), 6961030);
 
-    String energyRequirement = "Required Energy: "
-        + new Integer(altarContainer.getSelector().getRitualSupplier().get().getEnergyRequirement())
-            .toString();
-    this.font.drawString(stack, energyRequirement, new Integer(Math.round(baseX + 2)),
-        new Integer(Math.round(baseY + seperator + 81)), 13018111);
+    String energyRequirement = S_RequiredIchor + ": " + new Integer(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement()).toString();
+    this.font.drawString(stack, energyRequirement, new Integer(Math.round(baseX + 2)), new Integer(Math.round(baseY + seperator + 81)), 13018111);
   }
 
   private void evaluateDimensions() {
@@ -128,18 +125,14 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   private void drawMain(MatrixStack stack, int posX, int posY) {
     getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.Main.MAIN_TEXTURE);
 
-    blit(stack, posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH,
-        GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT,
-        GuiReference.Altar.Main.MAIN_WIDTH);
+    blit(stack, posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_WIDTH);
   }
 
   private void addCastButton(int posX, int posY) {
-    addButton(new ImageButton(posX + 9, posY + 72, GuiReference.Altar.CastButton.CAST_WIDTH,
-        GuiReference.Altar.CastButton.CAST_HEIGHT, 0, 0, 0,
-        GuiReference.Altar.CastButton.CAST_TEXTURE, (btn) -> {
-          castButtonPressed();
-          altarContainer.inv.player.closeScreen();
-        }));
+    addButton(new ImageButton(posX + 9, posY + 72, GuiReference.Altar.CastButton.CAST_WIDTH, GuiReference.Altar.CastButton.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.CastButton.CAST_TEXTURE, (btn) -> {
+      castButtonPressed();
+      altarContainer.inv.player.closeScreen();
+    }));
 
   }
 
@@ -153,26 +146,20 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
         GuiReference.Altar.ToggleButtons.LEFT_HEIGHT, GuiReference.Altar.ToggleButtons.LEFT_X,
         GuiReference.Altar.ToggleButtons.LEFT_Y, 0, GuiReference.Altar.ToggleButtons.TEXTURE,
         (btn) -> {
-          AltarNetworkingManager.CAltarToggleButton
-              .sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.LEFT,
-                  altarContainer.getSelector().getLocation()));
+          AltarNetworkingManager.CAltarToggleButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.LEFT, altarContainer.getSelector().getLocation()));
         }));
 
     // Right
-    addButton(new ImageButton(modX + 32 + 16, modY, GuiReference.Altar.ToggleButtons.RIGHT_WIDTH,
-        GuiReference.Altar.ToggleButtons.RIGHT_HEIGHT, GuiReference.Altar.ToggleButtons.RIGHT_X,
-        GuiReference.Altar.ToggleButtons.RIGHT_Y, 0, GuiReference.Altar.ToggleButtons.TEXTURE,
-        (btn) -> {
-          AltarNetworkingManager.CAltarToggleButton
-              .sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.RIGHT,
-                  altarContainer.getSelector().getLocation()));
+    addButton(new ImageButton(modX + 32 + 16, modY, GuiReference.Altar.ToggleButtons.RIGHT_WIDTH, GuiReference.Altar.ToggleButtons.RIGHT_HEIGHT, GuiReference.Altar.ToggleButtons.RIGHT_X,
+        GuiReference.Altar.ToggleButtons.RIGHT_Y, 0, GuiReference.Altar.ToggleButtons.TEXTURE, (btn) -> {
+          AltarNetworkingManager.CAltarToggleButton.sendToServer(new AltarToggleButtonMessageToServer(ToggleDirection.RIGHT,
+              altarContainer.getSelector().getLocation()));
         }));
   }
 
   private void castButtonPressed() {
     MagiksMostEvile.LOGGER.debug("Button pressed!");
-    AltarNetworkingManager.CAltarCastButton.sendToServer(
-        new AltarCastButtonPressedMessageToServer(altarContainer.getSelector().getLocation()));
+    AltarNetworkingManager.CAltarCastButton.sendToServer(new AltarCastButtonPressedMessageToServer(altarContainer.getSelector().getLocation()));
   }
 
 }
