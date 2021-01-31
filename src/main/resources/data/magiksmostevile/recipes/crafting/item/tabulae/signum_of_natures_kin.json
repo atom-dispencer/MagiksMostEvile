@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "magiksmostevile:blank_tabula"
+		},
+		{
+			"item": "magiksmostevile:signum_of_natures_kin"
+		}
+	],
+	"result": {
+		"item": "magiksmostevile:tabula_of_the_signum_of_natures_kin"
+	}
+}
