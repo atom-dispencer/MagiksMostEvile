@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "minecraft:crafting_table"
+		},
+		{
+			"item": "magiksmostevile:sandpaper"
+		},
+		{
+			"item": "magiksmostevile:sandpaper"
+		},
+		{
+			"item": "magiksmostevile:beeswax"
+		}
+	],
+	"result": {
+		"item": "magiksmostevile:inscription_table"
+	}
+}

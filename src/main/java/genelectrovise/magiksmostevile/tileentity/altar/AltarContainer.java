@@ -29,7 +29,7 @@ public class AltarContainer extends CommonContainer {
 
   protected PlayerInventory inv;
 
-  private RitualSelector selector;
+  private AltarRitualSelector selector;
 
   public AltarContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
     this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()));
@@ -49,7 +49,7 @@ public class AltarContainer extends CommonContainer {
 
     isCasting.set(altar.isCasting ? 1 : 0);
 
-    this.selector = new RitualSelector();
+    this.selector = new AltarRitualSelector();
 
     addSlots(inv, handler);
   }
@@ -95,10 +95,10 @@ public class AltarContainer extends CommonContainer {
     int yDiff = 22;
 
     // Altar
-    addSlot(new SlotAltar(handler, 0, x1, y1));
-    addSlot(new SlotAltar(handler, 1, x1 + xDiff, y1));
-    addSlot(new SlotAltar(handler, 2, x1, y1 + yDiff));
-    addSlot(new SlotAltar(handler, 3, x1 + xDiff, y1 + yDiff));
+    addSlot(new AltarSlot(handler, 0, x1, y1));
+    addSlot(new AltarSlot(handler, 1, x1 + xDiff, y1));
+    addSlot(new AltarSlot(handler, 2, x1, y1 + yDiff));
+    addSlot(new AltarSlot(handler, 3, x1 + xDiff, y1 + yDiff));
 
     // Player inventory
     for (int i = 0; i < 3; ++i) { // Y
@@ -117,7 +117,7 @@ public class AltarContainer extends CommonContainer {
   /**
    * @return the selector
    */
-  public RitualSelector getSelector() {
+  public AltarRitualSelector getSelector() {
     return selector;
   }
 

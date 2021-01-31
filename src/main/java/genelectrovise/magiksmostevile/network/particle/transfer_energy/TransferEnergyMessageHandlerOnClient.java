@@ -24,7 +24,7 @@ public class TransferEnergyMessageHandlerOnClient {
   public static void onMessageReceived(final TransferEnergyMessageToClient message,
       Supplier<NetworkEvent.Context> ctxSupplier) {
 
-    MagiksMostEvile.LOGGER.debug("Message recieved on client!");
+    //MagiksMostEvile.LOGGER.debug("TransferEnergyMessageHandlerOnClient recieved message!");
 
     ctxSupplier.get().setPacketHandled(true);
 

@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "magiksmostevile:items/tabulae/blank_tabula"
+		"layer0": "magiksmostevile:items/tabulae/tabula_of_the_signum_of_muddied_dust"
 	},
 	"display": {
 		"thirdperson_righthand": {

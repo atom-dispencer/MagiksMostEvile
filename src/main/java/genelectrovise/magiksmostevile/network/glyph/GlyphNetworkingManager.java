@@ -28,15 +28,9 @@ public class GlyphNetworkingManager {
   @SubscribeEvent
   public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
     MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by GlyphNetworkManager!");
-    CGlyph = NetworkRegistry.newSimpleChannel(RLGlyph, () -> GLYPH_MESSAGE_PROTOCOL_VERSION,
-        GlyphMessageHandlerOnClient::isProtocolAccepted,
-        GlyphMessageHandlerOnServer::isProtocolAccepted);
-    CGlyph.registerMessage(GLYPH_TO_SERVER, GlyphMessageToServer.class,
-        GlyphMessageToServer::encode, GlyphMessageToServer::decode,
-        GlyphMessageHandlerOnServer::onMessageReceived);
-    CGlyph.registerMessage(GLYPH_TO_CLIENT, GlyphMessageToClient.class,
-        GlyphMessageToClient::encode, GlyphMessageToClient::decode,
-        GlyphMessageHandlerOnClient::onMessageReceived);
+    CGlyph = NetworkRegistry.newSimpleChannel(RLGlyph, () -> GLYPH_MESSAGE_PROTOCOL_VERSION, GlyphMessageHandlerOnClient::isProtocolAccepted, GlyphMessageHandlerOnServer::isProtocolAccepted);
+    CGlyph.registerMessage(GLYPH_TO_SERVER, GlyphMessageToServer.class, GlyphMessageToServer::encode, GlyphMessageToServer::decode, GlyphMessageHandlerOnServer::onMessageReceived);
+    CGlyph.registerMessage(GLYPH_TO_CLIENT, GlyphMessageToClient.class, GlyphMessageToClient::encode, GlyphMessageToClient::decode, GlyphMessageHandlerOnClient::onMessageReceived);
   }
 
 }

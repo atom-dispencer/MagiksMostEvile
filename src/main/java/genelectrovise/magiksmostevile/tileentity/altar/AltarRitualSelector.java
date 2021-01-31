@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
  * 
  * @author GenElectrovise 10 Jun 2020
  */
-public class RitualSelector {
+public class AltarRitualSelector {
 
   private ResourceLocation location =
       new ResourceLocation(MagiksMostEvile.MODID, "convert_amethyst_ritual");

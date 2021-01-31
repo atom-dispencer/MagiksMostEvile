@@ -4,6 +4,7 @@ import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarContainer;
+import genelectrovise.magiksmostevile.tileentity.inscription_table.InscriptionTableContainer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
@@ -12,11 +13,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ContainerOrbitalRegistry implements IOrbitalRegistry {
 
-  public static final DeferredRegister<ContainerType<?>> CONTAINERS =
-      DeferredRegister.create(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
+  public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MagiksMostEvile.MODID);
 
-  public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER =
-      CONTAINERS.register("altar", () -> IForgeContainerType.create(AltarContainer::new));
+  public static final RegistryObject<ContainerType<AltarContainer>> ALTAR_CONTAINER = CONTAINERS.register("altar", () -> IForgeContainerType.create(AltarContainer::new));
+  public static final RegistryObject<ContainerType<InscriptionTableContainer>> INSCRIPTION_TABLE_CONTAINER =
+      CONTAINERS.register("inscription_table", () -> IForgeContainerType.create(InscriptionTableContainer::new));
 
   @Override
   public int priority() {

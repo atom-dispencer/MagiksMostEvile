@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.item.equipment.tabula;
+package genelectrovise.magiksmostevile.item.equipment.tabulae;
 
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import net.minecraft.item.Item;

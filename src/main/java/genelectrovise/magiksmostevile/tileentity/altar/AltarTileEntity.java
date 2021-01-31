@@ -57,7 +57,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
  * @author GenElectrovise 14 May 2020
  */
 public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
-  
+
   public static final Logger LOGGER = LogManager.getLogger();
 
   private static final int BASE_ICHOR_CAPACITY = 50;
@@ -82,14 +82,11 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   private final LazyOptional<IItemHandler> slot_2_holder = LazyOptional.of(() -> slot_2);
   private final LazyOptional<IItemHandler> slot_3_holder = LazyOptional.of(() -> slot_3);
 
-  private final LazyOptional<IItemHandler> allSlots =
-      LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
+  private final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3));
 
   // IFluidTank
   protected IchorFluidStorage ichorStorage;
-
-  private final LazyOptional<IFluidTank> ichorStorageLazyOptional =
-      LazyOptional.of(() -> ichorStorage);
+  private final LazyOptional<IFluidTank> ichorStorageLazyOptional = LazyOptional.of(() -> ichorStorage);
 
   // Constructor
 
@@ -133,7 +130,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
   // IItemHandler
   @Override
-  public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
+  public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
     // IItemHandler
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
       this.markDirty();
@@ -142,7 +139,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
         return allSlots.cast();
       }
-      if (facing == null) {
+      if (side == null) {
         return allSlots.cast();
       }
     }
@@ -155,12 +152,12 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
       if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
         return ichorStorageLazyOptional.cast();
       }
-      if (facing == null) {
+      if (side == null) {
         return ichorStorageLazyOptional.cast();
       }
     }
 
-    return super.getCapability(capability, facing);
+    return super.getCapability(capability, side);
   }
 
   // Generic stuff for tile entities
@@ -208,8 +205,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     tag.put(ichorStorage.nbtKey, ichorStorage.toNbt());
     tag.putBoolean("casting", isCasting());
     tag.putInt("ritual_tick", currentRitual != null ? currentRitual.getTick() : 0);
-    tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString()
-        : Ritual.NONE.toString());
+    tag.putString("ritual", currentRitual != null ? currentRitual.getRegistryName().toString() : Ritual.NONE.toString());
 
     return tag;
   }
@@ -288,8 +284,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
   @Override
   public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
-    return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3),
-        this);
+    return new AltarContainer(id, playerInv, new CombinedInvWrapper(slot_0, slot_1, slot_2, slot_3), this);
   }
 
   @Override
@@ -310,11 +305,11 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   public int getIchorStored() {
     return ichorStorage.getFluidAmount();
   }
-  
+
   public boolean fillIchor(int amount) {
     return ichorStorage.fill(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE) == amount;
   }
-  
+
   public boolean drainIchor(int amount) {
     return ichorStorage.drain(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE).getAmount() == amount;
   }

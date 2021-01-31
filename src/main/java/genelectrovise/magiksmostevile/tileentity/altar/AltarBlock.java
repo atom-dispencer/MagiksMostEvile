@@ -39,10 +39,8 @@ import net.minecraft.world.server.ServerWorld;
  */
 public class AltarBlock extends Block {
   // double x1, double y1, double z1, double x2, double y2, double z2
-  protected static final VoxelShape BODY_ADDON =
-      Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 14.0D, 15.0D);
-  protected static final VoxelShape BASE_ADDON =
-      Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+  protected static final VoxelShape BODY_ADDON = Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 14.0D, 15.0D);
+  protected static final VoxelShape BASE_ADDON = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
   protected static final VoxelShape COMBINED_SHAPE = VoxelShapes.or(BODY_ADDON, BASE_ADDON);
 
   public AltarBlock(Properties properties) {
@@ -60,14 +58,12 @@ public class AltarBlock extends Block {
   }
 
   @Override
-  public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos,
-      PathType type) {
+  public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
     return true;
   }
 
   @Override
-  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos,
-      ISelectionContext context) {
+  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
     return COMBINED_SHAPE;
   }
 
@@ -140,12 +136,13 @@ public class AltarBlock extends Block {
     try {
       if (worldIn.getTileEntity(pos) instanceof AltarTileEntity) {
         AltarTileEntity altar = (AltarTileEntity) worldIn.getTileEntity(pos);
+
+        // Guarentee casting
         if (!altar.isCasting()) {
           return;
         }
 
-        // Guaranteed to be casting
-
+        // Make particles
         int mod = 3;
         for (int i = 0; i < 2; i++) {
           worldIn.addParticle(ParticleTypes.ANGRY_VILLAGER, true,
@@ -162,8 +159,7 @@ public class AltarBlock extends Block {
 
   // Gui
 
-  public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-      PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
+  public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
     if (!worldIn.isRemote) {
       final ICustomContainer tileEntity = (ICustomContainer) worldIn.getTileEntity(pos);
       tileEntity.openGUI((ServerPlayerEntity) player);

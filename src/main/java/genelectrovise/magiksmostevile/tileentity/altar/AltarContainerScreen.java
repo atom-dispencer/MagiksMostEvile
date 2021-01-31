@@ -42,8 +42,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
    * @param inv
    * @param titleIn
    */
-  public AltarContainerScreen(AltarContainer altarContainer, PlayerInventory inv,
-      ITextComponent titleIn) {
+  public AltarContainerScreen(AltarContainer altarContainer, PlayerInventory inv, ITextComponent titleIn) {
     super(altarContainer, inv, titleIn);
     this.altarContainer = altarContainer;
   }
@@ -77,8 +76,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   // x image size (will scale image to fit)
 
   @Override
-  protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX,
-      int mouseY) {
+  protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
     // Flush the colour buffer
     RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -125,7 +123,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   private void drawMain(MatrixStack stack, int posX, int posY) {
     getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.Main.MAIN_TEXTURE);
 
-    blit(stack, posX, posY, 0, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_WIDTH);
+    blit(stack, posX, posY, ZERO, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_WIDTH);
   }
 
   private void addCastButton(int posX, int posY) {

@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.item.equipment.tabula;
+package genelectrovise.magiksmostevile.item.equipment.tabulae;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
