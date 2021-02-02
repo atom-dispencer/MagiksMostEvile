@@ -12,12 +12,10 @@ import genelectrovise.magiksmostevile.tileentity.ScreenHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.screen.inventory.CraftingScreen;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentUtils;
 
 /**
  * {@link CraftingScreen}
@@ -33,8 +31,6 @@ public class InscriptionTableContainerScreen extends ContainerScreen<Inscription
 
   private int signumTextureSideLength = 16;
   private int buttonSideLength = 16;
-  private Point woodButton = new Point(3, 169);
-  private Point goldButton = new Point(24, 169);
 
   private List<SignumButtonData> buttonDatas = new ArrayList<SignumButtonData>();
 
