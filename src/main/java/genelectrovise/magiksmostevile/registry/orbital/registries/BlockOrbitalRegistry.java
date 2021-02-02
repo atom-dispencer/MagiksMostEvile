@@ -53,8 +53,8 @@ public class BlockOrbitalRegistry implements IOrbitalRegistry {
       () -> new AmethystCrystalBlock(Block.Properties.create(Material.GLASS, MaterialColor.MAGENTA).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).hardnessAndResistance(2F, 10F)));
   public static final RegistryObject<Block> ALTAR =
       BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.create(Material.GLASS, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CLOTH).hardnessAndResistance(6F, 10F)));
-  public static final RegistryObject<Block> INSCRIPTION_TABLE =
-      BLOCKS.register("inscription_table", () -> new InscriptionTableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD)));
+  public static final RegistryObject<Block> INSCRIPTION_TABLE = BLOCKS.register("inscription_table", () -> new InscriptionTableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD)));
+  public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new Block(Block.Properties.create(Material.MISCELLANEOUS).zeroHardnessAndResistance().notSolid()));
 
   @Override
   public int priority() {

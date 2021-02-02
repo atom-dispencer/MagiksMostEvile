@@ -32,6 +32,7 @@ public class ItemOrbitalRegistry implements IOrbitalRegistry {
   public static final RegistryObject<Item> INTRO_BOOK = ITEMS.register("intro_book", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
   public static final RegistryObject<Item> LESSER_POWER_STONE = ITEMS.register("lesser_power_stone", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
   public static final RegistryObject<Item> GREATER_POWER_STONE = ITEMS.register("greater_power_stone", () -> new GlowingItem(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+  public static final RegistryObject<Item> CERAMIC_PESTLE = ITEMS.register("ceramic_pestle", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
   // Tabulae
   public static final RegistryObject<Item> BEESWAX = ITEMS.register("beeswax", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));

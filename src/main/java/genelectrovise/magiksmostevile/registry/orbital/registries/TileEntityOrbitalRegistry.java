@@ -6,6 +6,7 @@ import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarTileEntity;
 import genelectrovise.magiksmostevile.tileentity.amethyst_crystal.AmethystCrystalTileEntity;
 import genelectrovise.magiksmostevile.tileentity.inscription_table.InscriptionTableTileEntity;
+import genelectrovise.magiksmostevile.tileentity.mortar.MortarTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +22,8 @@ public class TileEntityOrbitalRegistry implements IOrbitalRegistry {
       TILE_ENTITIES.register("tile_entity_altar", () -> TileEntityType.Builder.create(AltarTileEntity::new, BlockOrbitalRegistry.ALTAR.get()).build(null));
   public static final RegistryObject<TileEntityType<InscriptionTableTileEntity>> TILE_ENTITY_INSCRIPTION_TABLE =
       TILE_ENTITIES.register("tile_entity_inscription_table", () -> TileEntityType.Builder.create(InscriptionTableTileEntity::new, BlockOrbitalRegistry.INSCRIPTION_TABLE.get()).build(null));
+  public static final RegistryObject<TileEntityType<MortarTileEntity>> TILE_ENTITY_MORTAR =
+      TILE_ENTITIES.register("tile_entity_mortar", () -> TileEntityType.Builder.create(MortarTileEntity::new, BlockOrbitalRegistry.MORTAR.get()).build(null));
 
   @Override
   public int priority() {

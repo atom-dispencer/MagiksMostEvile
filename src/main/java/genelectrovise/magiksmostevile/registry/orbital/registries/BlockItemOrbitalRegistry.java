@@ -29,13 +29,15 @@ public class BlockItemOrbitalRegistry implements IOrbitalRegistry {
   public static final RegistryObject<Item> LEAD_ORE_END_ITEM =
       ItemOrbitalRegistry.ITEMS.register("lead_ore_end", () -> new BlockItem(BlockOrbitalRegistry.LEAD_ORE_END.get(), new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
-  // Assorted
+  // Tile entity
   public static final RegistryObject<Item> AMETHYST_CRYSTAL_ITEM =
       ItemOrbitalRegistry.ITEMS.register("amethyst_crystal", () -> new BlockItem(BlockOrbitalRegistry.AMETHYST_CRYSTAL.get(), new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
   public static final RegistryObject<Item> ALTAR_ITEM =
       ItemOrbitalRegistry.ITEMS.register("altar", () -> new BlockItem(BlockOrbitalRegistry.ALTAR.get(), new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
   public static final RegistryObject<Item> INSCRIPTION_TABLE_ITEM =
       ItemOrbitalRegistry.ITEMS.register("inscription_table", () -> new BlockItem(BlockOrbitalRegistry.INSCRIPTION_TABLE.get(), new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+  public static final RegistryObject<Item> CERAMIC_MORTAR_ITEM =
+      ItemOrbitalRegistry.ITEMS.register("ceramic_mortar", () -> new BlockItem(BlockOrbitalRegistry.MORTAR.get(), new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
   @Override
   public int priority() {
