@@ -14,9 +14,9 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
 
-def mcVersion = "1.16.4"
+def mcVersion = "1.16.5"
 def modVersion = "1.0"
-def buildVersion = "0003"
+def buildVersion = "0004"
 def buildType = "alpha"
 
 group = "genelectrovise.magiksmostevile" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -82,7 +82,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.4-35.1.37'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.0.42'
 
     compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
 
