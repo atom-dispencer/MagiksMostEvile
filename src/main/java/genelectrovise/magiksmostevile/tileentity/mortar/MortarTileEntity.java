@@ -1,5 +1,8 @@
 package genelectrovise.magiksmostevile.tileentity.mortar;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.registry.orbital.registries.RecipeSerializerOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.registries.TileEntityOrbitalRegistry;
 import net.minecraft.entity.EntityType;
@@ -17,6 +20,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 public class MortarTileEntity extends TileEntity {
+  
+  public static final Logger LOGGER = LogManager.getLogger(MortarTileEntity.class);
 
   private ItemStackHandler slot = new ItemStackHandler() {
     protected void onContentsChanged(int slot) {
@@ -78,9 +83,16 @@ public class MortarTileEntity extends TileEntity {
     for (IRecipe<?> recipe : RecipeSerializerOrbitalRegistry.getRecipes(RecipeSerializerOrbitalRegistry.MORTAR_TYPE, this.world.getRecipeManager()).values()) {
       if (recipe instanceof MortarRecipe) {
 
+        IItemHandler handlerRealised = slotHandler.orElse(null);
+        if (handlerRealised == null) {
+          MortarTileEntity.LOGGER.error("Slot handler has been realised to null - unable to process recipe");
+          return;
+        }
+
         MortarRecipe mortarRecipe = (MortarRecipe) recipe;
         
-        //mortarRecipe.is
+        handlerRealised.extractItem(0, 6400, false);
+        handlerRealised.insertItem(0, mortarRecipe.getRecipeOutput(), false);
 
       }
     }

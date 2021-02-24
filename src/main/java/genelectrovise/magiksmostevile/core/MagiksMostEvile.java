@@ -22,7 +22,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(MagiksMostEvile.MODID)
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MagiksMostEvile {
-  public static final Logger LOGGER = LogManager.getLogger();
+  public static final Logger LOGGER = LogManager.getLogger(MagiksMostEvile.class);
   public static final String MODID = "magiksmostevile";
   public static final String VERSION = "alpha-1.0";
   public static final String NAME = "Magiks Most Evile";

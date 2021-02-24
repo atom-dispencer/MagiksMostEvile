@@ -55,7 +55,7 @@ public class RecipeSerializerOrbitalRegistry implements IOrbitalRegistry {
    */
   @SuppressWarnings("unchecked")
   public static Map<ResourceLocation, IRecipe<?>> getRecipes(IRecipeType<?> recipeType, RecipeManager manager) {
-    
+
     Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = new HashMap<>();
 
     try {
@@ -63,7 +63,7 @@ public class RecipeSerializerOrbitalRegistry implements IOrbitalRegistry {
       Field field = RecipeManager.class.getField("recipes");
       ReflectionUtil.makeUniversallyAccessible(field);
       recipesMap = (Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>>) field.get(RecipeManager.class);
-      
+
     } catch (Exception e) {
       e.printStackTrace();
     }
