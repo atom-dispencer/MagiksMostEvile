@@ -1,10 +1,12 @@
 package genelectrovise.magiksmostevile.tileentity.mortar;
 
+import genelectrovise.magiksmostevile.registry.orbital.registries.RecipeSerializerOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.registries.TileEntityOrbitalRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -68,7 +70,20 @@ public class MortarTileEntity extends TileEntity {
   }
 
   public void recipe() {
-    
+
+    if (world.isRemote) {
+      return;
+    }
+
+    for (IRecipe<?> recipe : RecipeSerializerOrbitalRegistry.getRecipes(RecipeSerializerOrbitalRegistry.MORTAR_TYPE, this.world.getRecipeManager()).values()) {
+      if (recipe instanceof MortarRecipe) {
+
+        MortarRecipe mortarRecipe = (MortarRecipe) recipe;
+        
+        //mortarRecipe.is
+
+      }
+    }
   }
 
 }

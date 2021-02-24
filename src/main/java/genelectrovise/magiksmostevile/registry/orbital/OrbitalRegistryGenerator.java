@@ -32,6 +32,7 @@ import net.minecraftforge.registries.DeferredRegister;
  * <li>particles (PARTICLES)
  * <li>structures (STRUCTURES)
  * <li>(WIP: features)
+ * <li>recipes (RECIPES)
  * </ol>
  * 
  * @author GenElectrovise
