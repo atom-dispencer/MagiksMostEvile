@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.data;
+package genelectrovise.magiksmostevile.data.tag;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import net.minecraft.block.Block;

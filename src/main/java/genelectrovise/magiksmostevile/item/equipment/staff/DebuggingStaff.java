@@ -1,6 +1,6 @@
 package genelectrovise.magiksmostevile.item.equipment.staff;
 
-import genelectrovise.magiksmostevile.data.ModdedTags;
+import genelectrovise.magiksmostevile.data.tag.ModdedTags;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
