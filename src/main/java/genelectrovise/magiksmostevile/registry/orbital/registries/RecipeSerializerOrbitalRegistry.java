@@ -8,7 +8,6 @@ import genelectrovise.magiksmostevile.core.reference.ReflectionUtil;
 import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
 import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
-import genelectrovise.magiksmostevile.tileentity.mortar.MortarRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -29,8 +28,9 @@ public class RecipeSerializerOrbitalRegistry implements IOrbitalRegistry {
   public static final RegistryObject<IRecipeSerializer<SimpleRecipe>> SIMPLE = RECIPE_SERIALIZERS.register("simple", () -> new SimpleRecipe());
   public static final IRecipeType<SimpleRecipe> SIMPLE_TYPE = new SimpleRecipe();
   // Mortar
-  public static final RegistryObject<IRecipeSerializer<MortarRecipe>> MORTAR = RECIPE_SERIALIZERS.register("mortar", () -> new MortarRecipe.Serializer());
-  public static final IRecipeType<MortarRecipe> MORTAR_TYPE = new MortarRecipe.Type();
+  // public static final RegistryObject<IRecipeSerializer<MortarRecipe>> MORTAR =
+  // RECIPE_SERIALIZERS.register("mortar", () -> new MortarRecipe.Serializer());
+  // public static final IRecipeType<MortarRecipe> MORTAR_TYPE = new MortarRecipe.Type();
 
   @Override
   public String name() {

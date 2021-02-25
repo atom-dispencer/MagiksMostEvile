@@ -2,7 +2,9 @@ package genelectrovise.magiksmostevile.tileentity.mortar;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jline.builtins.ssh.ShellFactoryImpl.ShellImpl;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
 import genelectrovise.magiksmostevile.registry.orbital.registries.RecipeSerializerOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.registries.TileEntityOrbitalRegistry;
 import net.minecraft.entity.EntityType;
@@ -20,7 +22,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 public class MortarTileEntity extends TileEntity {
-  
+
   public static final Logger LOGGER = LogManager.getLogger(MortarTileEntity.class);
 
   private ItemStackHandler slot = new ItemStackHandler() {
@@ -80,8 +82,8 @@ public class MortarTileEntity extends TileEntity {
       return;
     }
 
-    for (IRecipe<?> recipe : RecipeSerializerOrbitalRegistry.getRecipes(RecipeSerializerOrbitalRegistry.MORTAR_TYPE, this.world.getRecipeManager()).values()) {
-      if (recipe instanceof MortarRecipe) {
+    for (IRecipe<?> recipe : RecipeSerializerOrbitalRegistry.getRecipes(null/* RecipeSerializerOrbitalRegistry.MORTAR_TYPE */, this.world.getRecipeManager()).values()) {
+      if (recipe instanceof /* MortarRecipe */ SimpleRecipe) {
 
         IItemHandler handlerRealised = slotHandler.orElse(null);
         if (handlerRealised == null) {
@@ -89,10 +91,10 @@ public class MortarTileEntity extends TileEntity {
           return;
         }
 
-        MortarRecipe mortarRecipe = (MortarRecipe) recipe;
-        
+        /* MortarRecipe */SimpleRecipe castRecipe = (/* MortarRecipe */SimpleRecipe) recipe;
+
         handlerRealised.extractItem(0, 6400, false);
-        handlerRealised.insertItem(0, mortarRecipe.getRecipeOutput(), false);
+        handlerRealised.insertItem(0, castRecipe.getRecipeOutput(), false);
 
       }
     }
