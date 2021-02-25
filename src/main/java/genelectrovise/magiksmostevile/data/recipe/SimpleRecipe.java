@@ -21,8 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
- * A simple recipe for all of your simple recipe needs! Handles a list of inputs and outputs, extends
- * {@link ForgeRegistryEntry} so it can be directly registered, and implements
+ * A simple recipe for all of your simple recipe needs! Handles a list of inputs and outputs,
+ * extends {@link ForgeRegistryEntry} so it can be directly registered, and implements
  * {@link IRecipeSerializer}, {@link IRecipeType} and {@link IRecipe}, all typed to itself so it's
  * fully self contained.
  * 
@@ -31,7 +31,8 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
  */
 public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<SimpleRecipe>, IRecipe<IInventory>, IRecipeType<SimpleRecipe> {
 
-  public static final IRecipeSerializer<SimpleRecipe> SERIALIZER = new SimpleRecipe();
+  public static final IRecipeSerializer<SimpleRecipe> SERIALIZER = (IRecipeSerializer<SimpleRecipe>) new SimpleRecipe();
+  
   private ResourceLocation id;
   private ArrayList<Ingredient> ingredients;
   private ArrayList<ItemStack> results;
