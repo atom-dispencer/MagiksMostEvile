@@ -7,7 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import genelectrovise.magiksmostevile.registry.orbital.registries.RecipeSerializerOrbitalRegistry;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipe;
+import net.minecraft.item.crafting.CookingRecipeSerializer;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -21,7 +21,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
- * Deprecated! In development! Do not use! {@link FurnaceRecipe}
+ * A simple recipe for all of your simple recipe needs! Handles a list of inputs and outputs, extends
+ * {@link ForgeRegistryEntry} so it can be directly registered, and implements
+ * {@link IRecipeSerializer}, {@link IRecipeType} and {@link IRecipe}, all typed to itself so it's
+ * fully self contained.
  * 
  * @author GenElectrovise
  *
@@ -43,9 +46,7 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   }
 
   public SimpleRecipe(ResourceLocation id, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results, int primaryOutput) {
-    this.ingredients = ingredients;
-    this.results = results;
-    this.primaryOutput = primaryOutput;
+    this(id, ingredients, results, primaryOutput, 0, 0);
   }
 
   public SimpleRecipe(ResourceLocation id, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results, int primaryOutput, int processingTime, float experience) {
@@ -77,6 +78,9 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   }
 
 
+  /**
+   * Read whole recipe from JSON to Java
+   */
   @Override
   public SimpleRecipe read(ResourceLocation recipeId, JsonObject json) {
 
@@ -92,6 +96,9 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
     return new SimpleRecipe(recipeId, ingredients, results, processingTime, processingTime, experience);
   }
 
+  /**
+   * Read results from JSON to Java
+   */
   private static ArrayList<ItemStack> deserializeResults(ResourceLocation recipeId, JsonArray array) {
 
     ArrayList<ItemStack> results = new ArrayList<ItemStack>();
@@ -115,6 +122,13 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
     return results;
   }
 
+  /**
+   * Read ingredients from JSON to Java
+   * 
+   * @param recipeId
+   * @param array
+   * @return
+   */
   private static ArrayList<Ingredient> deserializeIngredients(ResourceLocation recipeId, JsonArray array) {
 
     ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
@@ -131,15 +145,66 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
     return ingredients;
   }
 
+  /**
+   * Read from a packet buffer
+   */
   @Override
   public SimpleRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-    return null;
+
+    // Read ingredients
+    int ingredientCount = buffer.readInt();
+    ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+    for (int i = 0; i < ingredientCount; i++) {
+      ingredients.add(Ingredient.read(buffer));
+    }
+
+    // Read results
+    int primaryResult = buffer.readInt();
+    int resultCount = buffer.readInt();
+    ArrayList<ItemStack> results = new ArrayList<ItemStack>();
+    for (int i = 0; i < resultCount; i++) {
+      results.add(buffer.readItemStack());
+    }
+
+    float experience = buffer.readFloat();
+    int processingTime = buffer.readVarInt();
+
+    return new SimpleRecipe(recipeId, ingredients, results, primaryResult, processingTime, experience);
   }
 
+  /**
+   * {@link CookingRecipeSerializer}
+   * <ol>
+   * <li>count of ingredients
+   * <li>ingredients
+   * <li>primaryResult
+   * <li>count of results
+   * <li>results
+   * <li>experience
+   * <li>processingTime
+   * </ol>
+   */
   @Override
   public void write(PacketBuffer buffer, SimpleRecipe recipe) {
 
+    // Write ingredients
+    buffer.writeInt(ingredients.size());
+    for (Ingredient ingredient : ingredients) {
+      ingredient.write(buffer);
+    }
+
+    // Write results
+    buffer.writeInt(primaryOutput);
+    buffer.writeInt(results.size());
+    for (ItemStack stack : results) {
+      buffer.writeItemStack(stack);
+    }
+
+    buffer.writeFloat(recipe.experience);
+    buffer.writeVarInt(recipe.processingTime);
   }
+
+  //
 
   @Override
   public ItemStack getCraftingResult(IInventory inv) {
@@ -176,10 +241,6 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
     return results.get(primaryOutput).copy();
   }
 
-  public int getProcessingTime() {
-    return processingTime;
-  }
-
   @Override
   public NonNullList<Ingredient> getIngredients() {
     return IRecipe.super.getIngredients();
@@ -188,6 +249,12 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   @Override
   public String getGroup() {
     return IRecipe.super.getGroup();
+  }
+
+  //
+
+  public int getProcessingTime() {
+    return processingTime;
   }
 
   public int getPrimaryOutput() {
@@ -201,4 +268,5 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   public float getExperience() {
     return experience;
   }
+
 }
