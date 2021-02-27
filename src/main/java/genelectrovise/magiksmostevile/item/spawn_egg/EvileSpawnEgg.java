@@ -115,9 +115,7 @@ public abstract class EvileSpawnEgg extends Item {
       }
 
       EntityType<?> entitytype = this.getEntityType();
-      if (entitytype.spawn((ServerWorld) world, itemstack, context.getPlayer(), blockpos1,
-          SpawnReason.SPAWN_EGG, true,
-          !Objects.equals(blockpos, blockpos1) && direction == Direction.UP) != null) {
+      if (entitytype.spawn((ServerWorld) world, itemstack, context.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG, true, (!Objects.equals(blockpos, blockpos1) && direction == Direction.UP)) != null) {
         itemstack.shrink(1);
       }
 
@@ -126,8 +124,8 @@ public abstract class EvileSpawnEgg extends Item {
   }
 
   /**
-   * Called to trigger the item's "innate" right click behavior. To handle when this item is used on
-   * a Block, see {@link #onItemUse}.
+   * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a
+   * Block, see {@link #onItemUse}.
    */
   public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn,
       Hand handIn) {

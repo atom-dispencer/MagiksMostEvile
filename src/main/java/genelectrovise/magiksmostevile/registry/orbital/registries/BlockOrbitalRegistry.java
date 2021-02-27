@@ -6,6 +6,7 @@ import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarBlock;
 import genelectrovise.magiksmostevile.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.tileentity.inscription_table.InscriptionTableBlock;
+import genelectrovise.magiksmostevile.tileentity.mortar.MortarBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
@@ -54,7 +55,7 @@ public class BlockOrbitalRegistry implements IOrbitalRegistry {
   public static final RegistryObject<Block> ALTAR =
       BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.create(Material.GLASS, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CLOTH).hardnessAndResistance(6F, 10F)));
   public static final RegistryObject<Block> INSCRIPTION_TABLE = BLOCKS.register("inscription_table", () -> new InscriptionTableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD)));
-  public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new Block(Block.Properties.create(Material.MISCELLANEOUS).zeroHardnessAndResistance().notSolid()));
+  public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(Block.Properties.create(Material.MISCELLANEOUS).zeroHardnessAndResistance().notSolid()));
 
   @Override
   public int priority() {

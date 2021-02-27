@@ -2,7 +2,7 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
 		{
-			"item": "minecraft:wooden_button"
+			"tag": "minecraft:wooden_buttons"
 		},
 		{
 			"item": "minecraft:iron_nugget"

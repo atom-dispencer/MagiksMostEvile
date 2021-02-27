@@ -1,6 +1,8 @@
 package genelectrovise.magiksmostevile.data.recipe;
 
 import java.util.ArrayList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -18,6 +20,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
@@ -29,10 +32,12 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
  * @author GenElectrovise
  *
  */
-public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<SimpleRecipe>, IRecipe<IInventory>, IRecipeType<SimpleRecipe> {
+public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<SimpleRecipe>, ICustomRecipe, IRecipeType<SimpleRecipe> {
+
+  public static final Logger LOGGER = LogManager.getLogger(SimpleRecipe.class);
 
   public static final IRecipeSerializer<SimpleRecipe> SERIALIZER = (IRecipeSerializer<SimpleRecipe>) new SimpleRecipe();
-  
+
   private ResourceLocation id;
   private ArrayList<Ingredient> ingredients;
   private ArrayList<ItemStack> results;
@@ -40,6 +45,9 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   private int processingTime;
   private float experience;
 
+  /**
+   * If you want to access the serializer and type methods etc, use this constructor.
+   */
   public SimpleRecipe() {}
 
   public SimpleRecipe(ResourceLocation id, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results) {
@@ -67,12 +75,32 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   @Override
   public boolean matches(IInventory inv, World worldIn) {
 
-    int i = 0;
-    for (Ingredient ing : ingredients) {
-      if (!ing.test(inv.getStackInSlot(i))) {
+    if (inv == null || worldIn == null) {
+      LOGGER.error("SimpleRecipe#matches(inv, world) found a parameter null. Unable to proceed with checks.");
+      return false;
+    }
+
+    for (int j = 0; j < ingredients.size(); j++) {
+      if (!ingredients.get(j).test(inv.getStackInSlot(0))) {
         return false;
       }
-      i++;
+    }
+
+    return true;
+  }
+
+  @Override
+  public boolean craftable(CombinedInvWrapper inv) {
+    
+    if (inv == null) {
+      LOGGER.error("SimpleRecipe#craftable(inv) found inv null. Unable to proceed with checks.");
+      return false;
+    }
+
+    for (int j = 0; j < ingredients.size(); j++) {
+      if (!ingredients.get(j).test(inv.getStackInSlot(0))) {
+        return false;
+      }
     }
 
     return true;
@@ -89,7 +117,7 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
       throw new JsonSyntaxException("Recipe " + recipeId + " does not contain all mandatory fields!");
     }
 
-    ArrayList<Ingredient> ingredients = deserializeIngredients(recipeId, JSONUtils.getJsonArray(json, "ingredient"));
+    ArrayList<Ingredient> ingredients = deserializeIngredients(recipeId, JSONUtils.getJsonArray(json, "ingredients"));
     ArrayList<ItemStack> results = deserializeResults(recipeId, JSONUtils.getJsonArray(json, "results"));
     float experience = JSONUtils.getFloat(json, "experience", 0.0F);
     int processingTime = JSONUtils.getInt(json, "processingtime", this.processingTime);
@@ -244,12 +272,12 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
 
   @Override
   public NonNullList<Ingredient> getIngredients() {
-    return IRecipe.super.getIngredients();
+    return ICustomRecipe.super.getIngredients();
   }
 
   @Override
   public String getGroup() {
-    return IRecipe.super.getGroup();
+    return ICustomRecipe.super.getGroup();
   }
 
   //

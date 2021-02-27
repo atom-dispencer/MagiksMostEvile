@@ -3,6 +3,7 @@ package genelectrovise.magiksmostevile.registry.orbital.registries;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.reference.ReflectionUtil;
 import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
@@ -13,7 +14,9 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -27,10 +30,6 @@ public class RecipeSerializerOrbitalRegistry implements IOrbitalRegistry {
   // Simple
   public static final RegistryObject<IRecipeSerializer<SimpleRecipe>> SIMPLE = RECIPE_SERIALIZERS.register("simple", () -> new SimpleRecipe());
   public static final IRecipeType<SimpleRecipe> SIMPLE_TYPE = new SimpleRecipe();
-  // Mortar
-  // public static final RegistryObject<IRecipeSerializer<MortarRecipe>> MORTAR =
-  // RECIPE_SERIALIZERS.register("mortar", () -> new MortarRecipe.Serializer());
-  // public static final IRecipeType<MortarRecipe> MORTAR_TYPE = new MortarRecipe.Type();
 
   @Override
   public String name() {
@@ -52,27 +51,26 @@ public class RecipeSerializerOrbitalRegistry implements IOrbitalRegistry {
    * this require an IInventory, and this allows you to skip that overhead. This method uses
    * reflection to get the recipes map, but an access transformer would also work.
    * 
-   * @param recipeType The type of recipe to grab.
-   * @param manager The recipe manager. This is generally taken from a World.
-   * @return A map containing all recipes for the passed recipe type. This map is immutable and can
-   *         not be modified.
+   * @param world The World instance.
+   * @return A map containing all recipes contained in the recipe manager for the World.
    */
   @SuppressWarnings("unchecked")
-  public static Map<ResourceLocation, IRecipe<?>> getRecipes(IRecipeType<?> recipeType, RecipeManager manager) {
+  public static Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> getRecipes(World world) {
 
-    Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = new HashMap<>();
+    Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = ImmutableMap.of();
 
     try {
 
-      Field field = RecipeManager.class.getField("recipes");
-      ReflectionUtil.makeUniversallyAccessible(field);
-      recipesMap = (Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>>) field.get(RecipeManager.class);
+      RecipeManager manager = world.getRecipeManager();
+      recipesMap = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, manager, "recipes");
+      //ReflectionUtil.makeUniversallyAccessible(field);
+      //recipesMap = (Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>>) field.get(manager);
 
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    return recipesMap.get(recipeType);
+    return recipesMap;
   }
 
 }
