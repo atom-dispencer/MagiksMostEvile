@@ -1,5 +1,8 @@
 {
 	"type": "magiksmostevile:simple",
+	"usages": [
+		"magiksmostevile:mortar"
+	],
 	"ingredients": [
 		{
 			"item": "minecraft:gravel"

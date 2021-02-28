@@ -3,6 +3,7 @@ package genelectrovise.magiksmostevile.data.recipe;
 import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -39,6 +40,7 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   public static final IRecipeSerializer<SimpleRecipe> SERIALIZER = (IRecipeSerializer<SimpleRecipe>) new SimpleRecipe();
 
   private ResourceLocation id;
+  private ArrayList<Usage> usages;
   private ArrayList<Ingredient> ingredients;
   private ArrayList<ItemStack> results;
   private int primaryOutput;
@@ -50,16 +52,17 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
    */
   public SimpleRecipe() {}
 
-  public SimpleRecipe(ResourceLocation id, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results) {
-    this(id, ingredients, results, 0);
+  public SimpleRecipe(ResourceLocation id, ArrayList<Usage> usages, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results) {
+    this(id, usages, ingredients, results, 0);
   }
 
-  public SimpleRecipe(ResourceLocation id, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results, int primaryOutput) {
-    this(id, ingredients, results, primaryOutput, 0, 0);
+  public SimpleRecipe(ResourceLocation id, ArrayList<Usage> usages, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results, int primaryOutput) {
+    this(id, usages, ingredients, results, primaryOutput, 0, 0);
   }
 
-  public SimpleRecipe(ResourceLocation id, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results, int primaryOutput, int processingTime, float experience) {
+  public SimpleRecipe(ResourceLocation id, ArrayList<Usage> usages, ArrayList<Ingredient> ingredients, ArrayList<ItemStack> results, int primaryOutput, int processingTime, float experience) {
     this.ingredients = ingredients;
+    this.usages = usages;
     this.results = results;
     this.primaryOutput = primaryOutput;
     this.processingTime = processingTime;
@@ -90,10 +93,15 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   }
 
   @Override
-  public boolean craftable(CombinedInvWrapper inv) {
-    
+  public boolean craftable(CombinedInvWrapper inv, Usage usage) {
+
+    if (!hasUsage(usage)) {
+      LOGGER.warn("SimpleRecipe#craftable(inv, usage):" + usage + " is not compatible with the provider.");
+      return false;
+    }
+
     if (inv == null) {
-      LOGGER.error("SimpleRecipe#craftable(inv) found inv null. Unable to proceed with checks.");
+      LOGGER.error("SimpleRecipe#craftable(inv, usage) found inv null. Unable to proceed with checks.");
       return false;
     }
 
@@ -117,12 +125,14 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
       throw new JsonSyntaxException("Recipe " + recipeId + " does not contain all mandatory fields!");
     }
 
+    ArrayList<Usage> usages = json.has("usages") ? Usage.deserialiseJsonArray(recipeId, JSONUtils.getJsonArray(json, "usages")) : new ArrayList<Usage>(Lists.newArrayList(Usage.ALL));
     ArrayList<Ingredient> ingredients = deserializeIngredients(recipeId, JSONUtils.getJsonArray(json, "ingredients"));
     ArrayList<ItemStack> results = deserializeResults(recipeId, JSONUtils.getJsonArray(json, "results"));
     float experience = JSONUtils.getFloat(json, "experience", 0.0F);
     int processingTime = JSONUtils.getInt(json, "processingtime", this.processingTime);
 
-    return new SimpleRecipe(recipeId, ingredients, results, processingTime, processingTime, experience);
+    // usages
+    return new SimpleRecipe(recipeId, usages, ingredients, results, processingTime, processingTime, experience);
   }
 
   /**
@@ -180,6 +190,13 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   @Override
   public SimpleRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
 
+    // Read usages
+    int usageCount = buffer.readInt();
+    ArrayList<Usage> usages = new ArrayList<Usage>();
+    for (int i = 0; i < usageCount; i++) {
+      usages.add(Usage.deserialise(buffer.readString()));
+    }
+
     // Read ingredients
     int ingredientCount = buffer.readInt();
     ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
@@ -198,12 +215,15 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
     float experience = buffer.readFloat();
     int processingTime = buffer.readVarInt();
 
-    return new SimpleRecipe(recipeId, ingredients, results, primaryResult, processingTime, experience);
+    // usages
+    return new SimpleRecipe(recipeId, usages, ingredients, results, primaryResult, processingTime, experience);
   }
 
   /**
    * {@link CookingRecipeSerializer}
    * <ol>
+   * <li>count of usages
+   * <li>usages
    * <li>count of ingredients
    * <li>ingredients
    * <li>primaryResult
@@ -215,6 +235,12 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
    */
   @Override
   public void write(PacketBuffer buffer, SimpleRecipe recipe) {
+
+    // Write usages
+    buffer.writeInt(usages.size());
+    for (Usage usage : usages) {
+      buffer.writeString(usage.serialise());
+    }
 
     // Write ingredients
     buffer.writeInt(ingredients.size());
@@ -231,6 +257,10 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
 
     buffer.writeFloat(recipe.experience);
     buffer.writeVarInt(recipe.processingTime);
+  }
+
+  public boolean hasUsage(Usage usage) {
+    return usages.contains(usage) || usage == Usage.ALL;
   }
 
   //
@@ -281,6 +311,10 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   }
 
   //
+
+  public ArrayList<Usage> getUsages() {
+    return usages;
+  }
 
   public int getProcessingTime() {
     return processingTime;

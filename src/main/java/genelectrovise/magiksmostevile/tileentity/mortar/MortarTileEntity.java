@@ -4,6 +4,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
+import genelectrovise.magiksmostevile.data.recipe.Usage;
 import genelectrovise.magiksmostevile.registry.orbital.registries.RecipeSerializerOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.registries.TileEntityOrbitalRegistry;
 import net.minecraft.block.Block;
@@ -12,7 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntity;
@@ -144,7 +144,7 @@ public class MortarTileEntity extends TileEntity {
 
           SimpleRecipe castRecipe = (SimpleRecipe) recipe;
 
-          if (!castRecipe.craftable((CombinedInvWrapper) allSlots.resolve().orElse(null))) {
+          if (!castRecipe.craftable((CombinedInvWrapper) allSlots.resolve().orElse(null), Usage.MORTAR)) {
             return;
           }
 

@@ -12,7 +12,8 @@ public interface ICustomRecipe extends IRecipe<IInventory> {
    * {@link CombinedInvWrapper} instead.
    * 
    * @param inv
+   * @param usage
    * @return
    */
-  boolean craftable(CombinedInvWrapper inv);
+  boolean craftable(CombinedInvWrapper inv, Usage usage);
 }
