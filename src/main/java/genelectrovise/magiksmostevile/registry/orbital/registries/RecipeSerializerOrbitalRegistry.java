@@ -1,11 +1,8 @@
 package genelectrovise.magiksmostevile.registry.orbital.registries;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.reference.ReflectionUtil;
 import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
 import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
@@ -54,7 +51,6 @@ public class RecipeSerializerOrbitalRegistry implements IOrbitalRegistry {
    * @param world The World instance.
    * @return A map containing all recipes contained in the recipe manager for the World.
    */
-  @SuppressWarnings("unchecked")
   public static Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> getRecipes(World world) {
 
     Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = ImmutableMap.of();

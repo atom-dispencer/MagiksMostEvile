@@ -43,8 +43,7 @@ public class DimensionWarpingStaff extends Item {
 
       // Server send message to player
       if (!worldIn.isRemote) {
-        playerIn.sendMessage(TextComponentUtils.toTextComponent(
-            () -> "You can only use this item in creative mode!"), Util.DUMMY_UUID);
+        playerIn.sendMessage(TextComponentUtils.toTextComponent(() -> "You can only use this item in creative mode!"), Util.DUMMY_UUID);
         // Util.DUMMY_UUID = CommandSource#189
         return ActionResult.resultPass(playerIn.getHeldItem(handIn));
       }
@@ -55,9 +54,8 @@ public class DimensionWarpingStaff extends Item {
     // Add particles in the old world
     if (worldIn.isRemote) {
       for (int i = 0; i < 32; ++i) {
-        playerIn.world.addParticle(ParticleTypes.PORTAL, true, playerIn.getPosX(),
-            playerIn.getPosY() + random.nextDouble() * 2.0D, playerIn.getPosZ(),
-            random.nextGaussian(), 0.0D, random.nextGaussian());
+        playerIn.world.addParticle(ParticleTypes.PORTAL, true, playerIn.getPosX(), playerIn.getPosY() + random.nextDouble() * 2.0D, playerIn.getPosZ(), random.nextGaussian(), 0.0D,
+            random.nextGaussian());
       }
     }
 
@@ -119,11 +117,9 @@ public class DimensionWarpingStaff extends Item {
   }
 
   @Override
-  public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip,
-      ITooltipFlag flagIn) {
+  public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 
-    tooltip.add(TextComponentUtils.toTextComponent(
-        () -> "Ever wanted to just right click to change dimension? Well now you can!"));
+    tooltip.add(TextComponentUtils.toTextComponent(() -> "Ever wanted to just right click to change dimension? Well now you can!"));
 
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }

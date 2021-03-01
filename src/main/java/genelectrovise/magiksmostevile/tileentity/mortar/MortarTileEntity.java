@@ -158,7 +158,7 @@ public class MortarTileEntity extends TileEntity {
           handlerRealised.insertItem(0, castRecipe.getRecipeOutput(), false);
           
           popContents();
-
+          break;
         }
       }
     } catch (Exception e) {

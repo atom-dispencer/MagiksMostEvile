@@ -59,37 +59,36 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
             for (k = posZ - 2; k < posZ + 3; k++) {
               BlockPos blockPos = new BlockPos(i, j, k);
               Block block = world.getBlockState(blockPos).getBlock();
-              doBlockReplacement(block, blockPos);
+              checkAndStartBlockReplacement(block, blockPos);
             }
 
           }
         }
         iteration = 1;
       } catch (NullPointerException e) {
-        MagiksMostEvile.LOGGER.error(
-            "NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
+        MagiksMostEvile.LOGGER.error("NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
         e.printStackTrace();
       } catch (Exception e) {
         e.printStackTrace();
       }
 
-      ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(),
-          new EnderParticleMessageToClient(this.getPos(), 1));
+      ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(), new EnderParticleMessageToClient(this.getPos(), 1));
     }
 
     iteration++;
   }
 
-  private void doBlockReplacement(Block block, BlockPos blockPos) {
+  private void checkAndStartBlockReplacement(Block block, BlockPos blockPos) {
     if (block instanceof PotatoBlock) {
 
-      if ((int) world.getBlockState(blockPos).get(PotatoBlock.AGE) == 7)
-        doReplacement(blockPos);
+      if ((int) world.getBlockState(blockPos).get(PotatoBlock.AGE) == 7) {
+        replacePotatoAtPosition(blockPos);
+      }
 
     }
   }
 
-  private void doReplacement(BlockPos blockPos) {
+  private void replacePotatoAtPosition(BlockPos blockPos) {
     BlockState air = Blocks.AIR.getDefaultState();
     world.setBlockState(blockPos, air);
     spawnEntityItemAmethystPotato(blockPos);
@@ -97,8 +96,7 @@ public class AmethystCrystalTileEntity extends TileEntity implements ITickableTi
 
   private void spawnEntityItemAmethystPotato(BlockPos blockPos) {
     if (!world.isRemote) {
-      Entity entity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-          new ItemStack(FoodOrbitalRegistry.AMETHYST_POTATO.get(), 1));
+      Entity entity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(FoodOrbitalRegistry.AMETHYST_POTATO.get(), 1));
       world.addEntity(entity);
     }
   }

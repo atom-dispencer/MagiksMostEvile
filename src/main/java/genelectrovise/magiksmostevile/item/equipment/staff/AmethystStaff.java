@@ -48,13 +48,11 @@ public class AmethystStaff extends ShootableItem {
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn,
-      Hand handIn) {
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
     try {
       if (worldIn.isRemote) {
-        Glyph glyph = new Glyph(new ResourceLocation(MagiksMostEvile.MODID,
-            "textures/items/general/powered_amethyst.png"));
+        Glyph glyph = new Glyph(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/powered_amethyst.png"));
         glyph.drawCentered(worldIn, playerIn.getPosition(), 0.5, GlyphOrientation.HORIZONTAL);
       }
     } catch (Exception e) {
@@ -63,17 +61,14 @@ public class AmethystStaff extends ShootableItem {
 
     ItemStack stack = playerIn.getHeldItem(handIn);
 
-    if (!getInventoryAmmoPredicate()
-        .test(playerIn.getHeldItem(handIn == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND))
-        && !playerIn.isCreative()) {
+    if (!getInventoryAmmoPredicate().test(playerIn.getHeldItem(handIn == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND)) && !playerIn.isCreative()) {
       return ActionResult.resultFail(stack);
     }
 
     Random random = new Random();
     int radius = 3;
 
-    AxisAlignedBB aabb = new AxisAlignedBB(playerIn.getPosition().east(radius).north(radius).up(),
-        playerIn.getPosition().west(3).south(3).down());
+    AxisAlignedBB aabb = new AxisAlignedBB(playerIn.getPosition().east(radius).north(radius).up(), playerIn.getPosition().west(3).south(3).down());
     List<Entity> entities = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, aabb);
 
     if (!worldIn.isRemote) {
@@ -87,8 +82,7 @@ public class AmethystStaff extends ShootableItem {
       for (Entity entity : entities) {
 
         double vec = (random.nextDouble() - 0.5) / 2;
-        worldIn.addParticle(new GlyphParticleData(Color.MAGENTA, 10), true, entity.getPosX(),
-            entity.getPosY(), entity.getPosZ(), vec, vec, vec);
+        worldIn.addParticle(new GlyphParticleData(Color.MAGENTA, 10), true, entity.getPosX(), entity.getPosY(), entity.getPosZ(), vec, vec, vec);
       }
     }
 

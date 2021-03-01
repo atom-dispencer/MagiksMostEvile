@@ -3,6 +3,7 @@ package genelectrovise.magiksmostevile.registry.orbital.registries;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.equipment.tabulae.BlankTabula;
+import genelectrovise.magiksmostevile.item.equipment.tabulae.TabulaMuddiedDust;
 import genelectrovise.magiksmostevile.item.glowing.GlowingItem;
 import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
@@ -49,7 +50,7 @@ public class ItemOrbitalRegistry implements IOrbitalRegistry {
   public static final RegistryObject<Item> SIGNUM_OF_NATURES_KIN = ITEMS.register("signum_of_natures_kin", () -> new Item(new Item.Properties().group(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
   public static final RegistryObject<Item> BLANK_TABLULA = ITEMS.register("blank_tabula", () -> new BlankTabula());
-  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_MUDDIED_DUST = ITEMS.register("tabula_of_the_signum_of_muddied_dust", () -> new BlankTabula());
+  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_MUDDIED_DUST = ITEMS.register("tabula_of_the_signum_of_muddied_dust", () -> new TabulaMuddiedDust());
   public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SOUL = ITEMS.register("tabula_of_the_signum_of_the_soul", () -> new BlankTabula());
   public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_REACHING_GAZE = ITEMS.register("tabula_of_the_signum_of_the_reaching_gaze", () -> new BlankTabula());
   public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SHAKEN_STONE = ITEMS.register("tabula_of_the_signum_of_the_shaken_stone", () -> new BlankTabula());
