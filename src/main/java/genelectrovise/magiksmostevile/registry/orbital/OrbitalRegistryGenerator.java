@@ -43,14 +43,12 @@ public class OrbitalRegistryGenerator {
   private boolean initialised;
   private Reflections reflections;
 
-  public static final ConfigurationBuilder REFLECTIONS_CONFIGURATION =
-      new ConfigurationBuilder().forPackages("genelectrovise");
+  public static final ConfigurationBuilder REFLECTIONS_CONFIGURATION = new ConfigurationBuilder().forPackages("genelectrovise");
   private static final Logger LOGGER = LogManager.getLogger(OrbitalRegistryGenerator.class);
 
   public OrbitalRegistryGenerator(@Nullable Configuration configuration) {
     this.setInitialised(false);
-    this.reflections =
-        new Reflections(configuration == null ? REFLECTIONS_CONFIGURATION : configuration);
+    this.reflections = new Reflections(configuration == null ? REFLECTIONS_CONFIGURATION : configuration);
   }
 
   public void collectOrbitalRegistries() {
@@ -63,8 +61,7 @@ public class OrbitalRegistryGenerator {
 
       MagiksMostEvile.LOGGER.debug("Collecting OrbitalRegistries");
 
-      Set<Class<? extends IOrbitalRegistry>> orbitals =
-          reflections.getSubTypesOf(IOrbitalRegistry.class);
+      Set<Class<? extends IOrbitalRegistry>> orbitals = reflections.getSubTypesOf(IOrbitalRegistry.class);
 
       Map<Integer, IOrbitalRegistry> registries = new HashMap<Integer, IOrbitalRegistry>();
 
@@ -78,8 +75,7 @@ public class OrbitalRegistryGenerator {
 
       for (Integer integer : keys) {
         IOrbitalRegistry registry = registries.get(integer);
-        MagiksMostEvile.LOGGER.info("Initialising MagiksMostEvile OrbitalRegistry: ("
-            + registry.priority() + ") [" + registry.name() + "]");
+        MagiksMostEvile.LOGGER.info("Initialising MagiksMostEvile OrbitalRegistry: (" + registry.priority() + ") [" + registry.name() + "]");
         registry.initialise();
       }
 
@@ -92,8 +88,7 @@ public class OrbitalRegistryGenerator {
   }
 
   public static void registerDeferredRegister(DeferredRegister<?> register) {
-    OrbitalRegistryGenerator.LOGGER.info("Registering MagiksMostEvile DeferredRegister<?> "
-        + register.toString() + " to the MOD_EVENT_BUS");
+    OrbitalRegistryGenerator.LOGGER.info("Registering MagiksMostEvile DeferredRegister<?> " + register.toString() + " to the MOD_EVENT_BUS");
     register.register(MagiksMostEvile.MOD_EVENT_BUS);
   }
 

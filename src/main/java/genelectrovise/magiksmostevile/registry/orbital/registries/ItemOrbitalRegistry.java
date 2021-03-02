@@ -4,6 +4,11 @@ import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.equipment.tabulae.BlankTabula;
 import genelectrovise.magiksmostevile.item.equipment.tabulae.TabulaMuddiedDust;
+import genelectrovise.magiksmostevile.item.equipment.tabulae.TabulaNaturesKin;
+import genelectrovise.magiksmostevile.item.equipment.tabulae.TabulaReachingGaze;
+import genelectrovise.magiksmostevile.item.equipment.tabulae.TabulaShakenStone;
+import genelectrovise.magiksmostevile.item.equipment.tabulae.TabulaSoul;
+import genelectrovise.magiksmostevile.item.equipment.tabulae.TabulaSpringBreeze;
 import genelectrovise.magiksmostevile.item.glowing.GlowingItem;
 import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
@@ -51,11 +56,11 @@ public class ItemOrbitalRegistry implements IOrbitalRegistry {
 
   public static final RegistryObject<Item> BLANK_TABLULA = ITEMS.register("blank_tabula", () -> new BlankTabula());
   public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_MUDDIED_DUST = ITEMS.register("tabula_of_the_signum_of_muddied_dust", () -> new TabulaMuddiedDust());
-  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SOUL = ITEMS.register("tabula_of_the_signum_of_the_soul", () -> new BlankTabula());
-  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_REACHING_GAZE = ITEMS.register("tabula_of_the_signum_of_the_reaching_gaze", () -> new BlankTabula());
-  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SHAKEN_STONE = ITEMS.register("tabula_of_the_signum_of_the_shaken_stone", () -> new BlankTabula());
-  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SPRING_BREEZE = ITEMS.register("tabula_of_the_signum_of_the_spring_breeze", () -> new BlankTabula());
-  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_NATURES_KIN = ITEMS.register("tabula_of_the_signum_of_natures_kin", () -> new BlankTabula());
+  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SOUL = ITEMS.register("tabula_of_the_signum_of_the_soul", () -> new TabulaSoul());
+  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_REACHING_GAZE = ITEMS.register("tabula_of_the_signum_of_the_reaching_gaze", () -> new TabulaReachingGaze());
+  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SHAKEN_STONE = ITEMS.register("tabula_of_the_signum_of_the_shaken_stone", () -> new TabulaShakenStone());
+  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_THE_SPRING_BREEZE = ITEMS.register("tabula_of_the_signum_of_the_spring_breeze", () -> new TabulaSpringBreeze());
+  public static final RegistryObject<Item> TABULA_OF_THE_SIGNUM_OF_NATURES_KIN = ITEMS.register("tabula_of_the_signum_of_natures_kin", () -> new TabulaNaturesKin());
 
   @Override
   public void initialise() {
