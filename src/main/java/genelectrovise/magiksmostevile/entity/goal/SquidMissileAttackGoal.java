@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.entity.goal;
@@ -38,11 +36,8 @@ public class SquidMissileAttackGoal extends Goal {
   private final KittyTheKrakenEntity kraken;
   private int attackTimer;
 
-  private static final int ZERO = 0;
   private static final int RANGE = 64;
   private static final int ATTACK_AT = 200;
-  private static final int LIMIT = 200;
-  private static final float MISSILE_SPEED_MODIFIER = 5;
 
   public SquidMissileAttackGoal(KittyTheKrakenEntity kraken) {
     this.kraken = kraken;
@@ -103,7 +98,7 @@ public class SquidMissileAttackGoal extends Goal {
           (SquidMissileEntity) EntityOrbitalRegistry.SQUID_MISSILE.get().spawn((ServerWorld) kraken.world, null, null, kraken.getPosition().up(5), SpawnReason.MOB_SUMMONED, false, false);
       missile.setExplosive(false);
       missile.setTicksUntilIgnition(20);
-      
+
       missile.setDirection(subtractedDirection);
     }
   }

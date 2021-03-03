@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.registry.orbital.registries;
@@ -70,7 +68,8 @@ public class BlockOrbitalRegistry implements IOrbitalRegistry {
       () -> new AmethystCrystalBlock(Block.Properties.create(Material.GLASS, MaterialColor.MAGENTA).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).hardnessAndResistance(2F, 10F)));
   public static final RegistryObject<Block> ALTAR =
       BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.create(Material.GLASS, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CLOTH).hardnessAndResistance(6F, 10F)));
-  public static final RegistryObject<Block> INSCRIPTION_TABLE = BLOCKS.register("inscription_table", () -> new InscriptionTableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD)));
+  public static final RegistryObject<Block> INSCRIPTION_TABLE =
+      BLOCKS.register("inscription_table", () -> new InscriptionTableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD)));
   public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(Block.Properties.create(Material.MISCELLANEOUS).zeroHardnessAndResistance().notSolid()));
 
   @Override

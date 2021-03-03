@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.mortar;
@@ -41,7 +39,7 @@ import net.minecraft.world.server.ServerWorld;
  *
  */
 public class MortarBlock extends Block {
-  
+
   protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
   public MortarBlock(Properties properties) {
@@ -57,11 +55,11 @@ public class MortarBlock extends Block {
   public boolean hasTileEntity(BlockState state) {
     return true;
   }
-  
+
   @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-      return SHAPE;
-    }
+  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    return SHAPE;
+  }
 
   @Override
   public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {

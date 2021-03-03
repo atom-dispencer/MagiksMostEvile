@@ -24,7 +24,7 @@ apply plugin: 'maven'
 
 def mcVersion = "1.16.5"
 def modVersion = "1.0"
-def buildVersion = "0006"
+def buildVersion = "0007"
 def buildType = "alpha" // alpha, beta, release
 
 group = "genelectrovise.magiksmostevile" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
