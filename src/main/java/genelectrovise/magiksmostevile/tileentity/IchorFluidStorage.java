@@ -17,17 +17,15 @@
  */
 package genelectrovise.magiksmostevile.tileentity;
 
-import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.support.TrackableIntegerHolder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 /**
  * @author GenElectrovise 20 May 2020
  */
-public class IchorFluidStorage extends FluidTank {
+public class IchorFluidStorage extends SingleTankFluidStorage {
 
   public TrackableIntegerHolder maxIchor;
   public TrackableIntegerHolder currentIchor;
@@ -40,13 +38,7 @@ public class IchorFluidStorage extends FluidTank {
    * @param energy
    */
   public IchorFluidStorage(int capacity, String nbtKey) {
-    super(capacity);
-    this.nbtKey = nbtKey;
-
-    currentIchor = new TrackableIntegerHolder(10, MagiksMostEvile.MODID + ":currentIchor");
-    maxIchor = new TrackableIntegerHolder(50, MagiksMostEvile.MODID + ":capacity");
-
-    update();
+    super(capacity, nbtKey);
   }
 
   public void update() {
@@ -58,8 +50,8 @@ public class IchorFluidStorage extends FluidTank {
    * @param compound
    */
   public void fromNbt(CompoundNBT compound) {
-    currentIchor.set(compound.getInt("currentIchor"));
-    capacity = compound.getInt("capacity");
+    currentIchor.set(compound.getInt("currentIchor"));    
+    setCapacity(compound.getInt("capacity"));
   }
 
   /**
@@ -68,7 +60,7 @@ public class IchorFluidStorage extends FluidTank {
   public CompoundNBT toNbt() {
     CompoundNBT tag = new CompoundNBT();
     tag.putInt("currentIchor", currentIchor.get());
-    tag.putInt("capacity", capacity);
+    tag.putInt("capacity", getCapacity());
 
     return tag;
   }
@@ -90,13 +82,6 @@ public class IchorFluidStorage extends FluidTank {
     FluidStack drained = super.drain(resource, action);
     update();
     return drained;
-  }
-
-  @Override
-  public FluidTank setCapacity(int capacity) {
-    FluidTank tank = super.setCapacity(capacity);
-    update();
-    return tank;
   }
 
 }

@@ -17,7 +17,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
-
+apply plugin: 'java'
 
 
 def mcVersion = "1.16.5"
@@ -36,7 +36,7 @@ println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getPro
 minecraft {
     // snapshot_YYYYMMDD / stable_# 
     mappings channel: 'snapshot', version: '20201028-1.16.3'
-    makeObfSourceJar = true // Make an Srg named sources jar (true by default)
+    // makeObfSourceJar = true // Make an Srg named sources jar (true by default)
     
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -90,6 +90,9 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.0.42'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
 }
 
 // Ensure that sources and javadocs are updated with the project (use scripts/ folder for helper .ps1 scripts)
@@ -152,7 +155,6 @@ publishing {
 // Cursegradle - Publish the artifact to curseforge https://www.curseforge.com/minecraft/mc-mods/magiksmostevile/
 curseforge {
 	apiKey = project.findProperty("curseforge.key") // This should really be in a gradle.properties file
-	println('Using apikey: ' + apiKey)
   	project {
    		id = '391212' // Project description -> 'About Project' sidebar -> Project ID
     	changelog = file('changelog.md')
@@ -169,4 +171,9 @@ curseforge {
       		//}
     	}
   	}
+}
+
+// Configure the test task
+test {
+	useJUnitPlatform()
 }
