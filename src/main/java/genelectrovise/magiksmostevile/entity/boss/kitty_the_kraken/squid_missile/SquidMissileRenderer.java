@@ -41,26 +41,26 @@ public class SquidMissileRenderer extends MobRenderer<SquidMissileEntity, SquidM
   }
 
   @Override
-  public ResourceLocation getEntityTexture(SquidMissileEntity entity) {
+  public ResourceLocation getTextureLocation(SquidMissileEntity entity) {
     return new ResourceLocation(MagiksMostEvile.MODID, "textures/entity/squid_missile/squid_missile.png");
   }
 
   @Override
-  protected void applyRotations(SquidMissileEntity missile, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+  protected void setupRotations(SquidMissileEntity missile, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 
     // + pitch squid backwards, - pitch squid forwards
     // + yaw ??
     // + rotate squid eyes to its left hand-side (do squid have hand-sides??)
 
     matrixStackIn.translate(0, 0, 0);
-    matrixStackIn.rotate(new Quaternion(0, 0, 0, true));
+    matrixStackIn.mulPose(new Quaternion(0, 0, 0, true));
   }
 
   /**
    * Defines what float the third param in setRotationAngles of ModelBase is
    */
   protected float handleRotationFloat(SquidEntity livingBase, float partialTicks) {
-    return MathHelper.lerp(partialTicks, livingBase.lastTentacleAngle, livingBase.tentacleAngle);
+    return MathHelper.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
   }
 
 }

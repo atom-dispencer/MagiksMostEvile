@@ -16,6 +16,7 @@ package genelectrovise.magiksmostevile.world.gen.structure.shrine;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 
 /**
  * {@link RuinedPortalPiece.Serializer}

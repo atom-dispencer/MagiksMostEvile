@@ -58,29 +58,29 @@ public class VampireBatBiteGoal extends MeleeAttackGoal {
   }
 
   @Override
-  public boolean shouldExecute() {
+  public boolean canUse() {
 
     if (!vampireBat.isInActiveLightLevel()) {
       return false;
     }
 
-    return super.shouldExecute();
+    return super.canUse();
   }
 
   private boolean shouldSummonAid() {
 
     if (cooldown == 0) {
 
-      if (vampireBat.getRNG().nextInt(VampireBatEntity.REINFORCEMENT_CHANCE) == 0
+      if (vampireBat.getRandom().nextInt(VampireBatEntity.REINFORCEMENT_CHANCE) == 0
           && vampireBat.batsWithinArea(VampireBatEntity.REINFORCEMENT_DETECTION_RADIUS)
               .size() < VampireBatEntity.MINIMUM_REINFORCEMENTS) {
         cooldown = cooldownMax;
         return true;
       } else {
-        if (vampireBat.getAttackTarget() != null & vampireBat.getAttackTarget().isAlive()) {
+        if (vampireBat.getTarget() != null & vampireBat.getTarget().isAlive()) {
           for (VampireBatEntity bat : vampireBat
               .batsWithinArea(VampireBatEntity.REINFORCEMENT_CALLING_RADIUS)) {
-            bat.setAttackTarget(vampireBat.getAttackTarget());
+            bat.setTarget(vampireBat.getTarget());
           }
         }
       }
@@ -96,16 +96,16 @@ public class VampireBatBiteGoal extends MeleeAttackGoal {
 
     MagiksMostEvile.LOGGER.debug("Flappys!");
 
-    if (vampireBat.world instanceof ServerWorld && vampireBat.getRandom().nextInt(10) == 0) {
-      ServerWorld world = (ServerWorld) vampireBat.world;
+    if (vampireBat.level instanceof ServerWorld && vampireBat.getRandom().nextInt(10) == 0) {
+      ServerWorld world = (ServerWorld) vampireBat.level;
 
       for (int i = 0; i < maxReinforcements + 1; i++) {
         Random rand = vampireBat.getRandom();
 
         if (rand.nextBoolean()) {
-          double x = vampireBat.getPosX();
-          double y = vampireBat.getPosY();
-          double z = vampireBat.getPosZ();
+          double x = vampireBat.getX();
+          double y = vampireBat.getY();
+          double z = vampireBat.getZ();
 
           double nearbyX = x + nearbyPos(rand, 5);
           double nearbyY = y + nearbyPos(rand, 5);
@@ -114,9 +114,9 @@ public class VampireBatBiteGoal extends MeleeAttackGoal {
           if (world.getBlockState(new BlockPos(nearbyX, nearbyY, nearbyZ))
               .getBlock() == Blocks.AIR) {
             VampireBatEntity newBat = (VampireBatEntity) vampireBat.getType().create(world);
-            newBat.setLocationAndAngles(nearbyX, nearbyY, nearbyZ, vampireBat.rotationYaw,
-                vampireBat.rotationPitch);
-            world.addEntity(newBat);
+            newBat.moveTo(nearbyX, nearbyY, nearbyZ, vampireBat.yRot,
+                vampireBat.xRot);
+            world.addFreshEntity(newBat);
           }
         }
       }
@@ -124,7 +124,7 @@ public class VampireBatBiteGoal extends MeleeAttackGoal {
 
     cooldown--;
 
-    super.startExecuting();
+    super.start();
   }
 
   private double nearbyPos(Random rand, int radius) {

@@ -45,15 +45,15 @@ public class BossMob extends MonsterEntity {
   public BossMob(EntityType<? extends BossMob> type, World worldIn, BossInfo.Color bossBarColor, BossInfo.Overlay bossBarType, boolean darkenSky, boolean createFog) {
     super(type, worldIn);
     this.serverBossInfo = new ServerBossInfo(this.getDisplayName(), bossBarColor, bossBarType);
-    this.serverBossInfo.setDarkenSky(darkenSky);
-    this.serverBossInfo.setCreateFog(createFog);
+    this.serverBossInfo.setDarkenScreen(darkenSky);
+    this.serverBossInfo.setCreateWorldFog(createFog);
   }
 
   /**
    * Update the AI task list for the {@link Entity}. In this case also updates the {@link BossInfo}
    */
   @Override
-  protected void updateAITasks() {
+  protected void registerGoals() {
     this.serverBossInfo.setPercent(this.getHealth() / this.getMaxHealth());
   }
 
@@ -62,7 +62,7 @@ public class BossMob extends MonsterEntity {
    * track a boss in order to view its associated boss bar.
    */
   public void addTrackingPlayer(ServerPlayerEntity player) {
-    super.addTrackingPlayer(player);
+    super.startSeenByPlayer(player);
     this.serverBossInfo.addPlayer(player);
   }
 
@@ -71,7 +71,7 @@ public class BossMob extends MonsterEntity {
    * {@link Entity#addTrackingPlayer} for more information on tracking.
    */
   public void removeTrackingPlayer(ServerPlayerEntity player) {
-    super.removeTrackingPlayer(player);
+    super.stopSeenByPlayer(player);
     this.serverBossInfo.removePlayer(player);
   }
 

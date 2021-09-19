@@ -22,6 +22,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 /**
  * Used by {@link SimpleRecipe}s to determine whether a recipe can be used by a recipe user. For

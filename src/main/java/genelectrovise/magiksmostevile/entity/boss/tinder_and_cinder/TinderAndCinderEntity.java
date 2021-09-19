@@ -42,12 +42,12 @@ public class TinderAndCinderEntity extends BossMob {
    * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
-    return MobEntity.func_233666_p_() //
-        .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
-        .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f)
-        .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0f)
-        .createMutableAttribute(Attributes.ATTACK_SPEED, 5.0f)
-        .createMutableAttribute(Attributes.FOLLOW_RANGE, 64.0f);
+    return MobEntity.createMobAttributes() //
+        .add(Attributes.MAX_HEALTH, 3.0D)
+        .add(Attributes.FLYING_SPEED, 2.0f)
+        .add(Attributes.ATTACK_DAMAGE, 1.0f)
+        .add(Attributes.ATTACK_SPEED, 5.0f)
+        .add(Attributes.FOLLOW_RANGE, 64.0f);
   }
 
 }

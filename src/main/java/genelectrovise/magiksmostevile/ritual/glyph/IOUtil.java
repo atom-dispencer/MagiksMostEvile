@@ -14,12 +14,17 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.ritual.glyph;
 
-import java.io.*;
-import java.nio.*;
-import java.nio.channels.*;
-import java.nio.file.*;
+import static org.lwjgl.BufferUtils.createByteBuffer;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.lwjgl.BufferUtils;
-import static org.lwjgl.BufferUtils.*;
 
 /**
  * Taken from {@link IOUtil} in my other project, <a href="https://github.com/Volts-of-Doom">Volts

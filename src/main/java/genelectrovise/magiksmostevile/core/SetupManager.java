@@ -36,27 +36,27 @@ public final class SetupManager {
 
         // Vampire Bat
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.VAMPIRE_BAT.get(),
-            VampireBatEntity.getEntityAttributes().create());
+            VampireBatEntity.getEntityAttributes().build());
 
         // Egg Capone
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.EGG_CAPONE.get(),
-            EggCaponeEntity.getEntityAttributes().create());
+            EggCaponeEntity.getEntityAttributes().build());
 
         // The Kraken
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.THE_KRAKEN.get(),
-            KittyTheKrakenEntity.getEntityAttributes().create());
+            KittyTheKrakenEntity.getEntityAttributes().build());
 
         // Tinder and Cinder
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TINDER_AND_CINDER.get(),
-            TinderAndCinderEntity.getEntityAttributes().create());
+            TinderAndCinderEntity.getEntityAttributes().build());
 
-        // Tom the Trol
+        // Tom the Troll
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(),
-            TomTheTrollEntity.getEntityAttributes().create());
+            TomTheTrollEntity.getEntityAttributes().build());
 
         // Squid Missile
         GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.SQUID_MISSILE.get(),
-            SquidMissileEntity.getEntityAttributes().create());
+            SquidMissileEntity.getEntityAttributes().build());
       }
 
       //

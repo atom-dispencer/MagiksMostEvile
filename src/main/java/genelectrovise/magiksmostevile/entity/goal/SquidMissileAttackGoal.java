@@ -45,9 +45,9 @@ public class SquidMissileAttackGoal extends Goal {
   }
 
   @Override
-  public boolean shouldExecute() {
+  public boolean canUse() {
 
-    if (kraken.getAttackTarget() == null)
+    if (kraken.getTarget() == null)
       return false;
     if (kraken.getFirstUsableArm() == null)
       return false;
@@ -56,22 +56,22 @@ public class SquidMissileAttackGoal extends Goal {
   }
 
   @Override
-  public void startExecuting() {
+  public void start() {
     this.attackTimer = 0;
   }
 
   @Override
-  public void resetTask() {
+  public void stop() {
     kraken.setSquidMissileAttacking(false);
   }
 
   @Override
   public void tick() {
-    LivingEntity target = kraken.getAttackTarget();
+    LivingEntity target = kraken.getTarget();
 
     MagiksMostEvile.LOGGER.debug("attackTimer: " + attackTimer);
 
-    if (kraken.canEntityBeSeen(target) /* target visible */ && kraken.getDistanceSq(target) < (RANGE * RANGE) /* range */) {
+    if (kraken.canSee(target) /* target visible */ && kraken.distanceToSqr(target) < (RANGE * RANGE) /* range */) {
 
       this.attackTimer++;
 
@@ -88,14 +88,14 @@ public class SquidMissileAttackGoal extends Goal {
 
   private void attack(LivingEntity target) {
 
-    if (!kraken.world.isRemote) {
-      Vector3d targetPosition = target.getPositionVec();
-      Vector3d krakenPosition = kraken.getPositionVec();
+    if (!kraken.level.isClientSide) {
+      Vector3d targetPosition = target.position();
+      Vector3d krakenPosition = kraken.position();
 
       Vector3d subtractedDirection = targetPosition.subtract(krakenPosition);
 
       SquidMissileEntity missile =
-          (SquidMissileEntity) EntityOrbitalRegistry.SQUID_MISSILE.get().spawn((ServerWorld) kraken.world, null, null, kraken.getPosition().up(5), SpawnReason.MOB_SUMMONED, false, false);
+          (SquidMissileEntity) EntityOrbitalRegistry.SQUID_MISSILE.get().spawn((ServerWorld) kraken.level, null, null, kraken.blockPosition().above(5), SpawnReason.MOB_SUMMONED, false, false);
       missile.setExplosive(false);
       missile.setTicksUntilIgnition(20);
 

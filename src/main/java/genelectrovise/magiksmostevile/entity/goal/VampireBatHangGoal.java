@@ -36,11 +36,11 @@ public class VampireBatHangGoal extends Goal {
    */
   public VampireBatHangGoal(VampireBatEntity vampireBat) {
     this.vampireBat = vampireBat;
-    this.world = vampireBat.world;
+    this.world = vampireBat.level;
   }
 
   @Override
-  public boolean shouldExecute() {
+  public boolean canUse() {
 
     if (!vampireBat.isInActiveLightLevel()) {
       return false;
@@ -50,7 +50,7 @@ public class VampireBatHangGoal extends Goal {
       return false;
     }
 
-    if (vampireBat.getAttackTarget() != null) {
+    if (vampireBat.getTarget() != null) {
       return false;
     }
 
@@ -65,7 +65,7 @@ public class VampireBatHangGoal extends Goal {
   }
 
   @Override
-  public boolean shouldContinueExecuting() {
+  public boolean canContinueToUse() {
 
     // Randomly, return false
     if (vampireBat.getRandom().nextInt(100) == 0) {
@@ -78,7 +78,7 @@ public class VampireBatHangGoal extends Goal {
       vampireBat.rotationYawHead = (float) vampireBat.getRandom().nextInt(360);
     }
 
-    return shouldExecute();
+    return canUse();
   }
 
   @Override

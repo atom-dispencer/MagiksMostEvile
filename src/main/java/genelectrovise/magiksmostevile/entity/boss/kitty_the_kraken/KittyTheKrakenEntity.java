@@ -32,6 +32,8 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 
 /**
+ * CreeperEntity
+ * 
  * @author GenElectrovise 23 Jun 2020
  */
 public class KittyTheKrakenEntity extends BossMob {
@@ -65,17 +67,17 @@ public class KittyTheKrakenEntity extends BossMob {
    * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
-    return MobEntity.func_233666_p_() //
-        .createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
-        .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f)
-        .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0f)
-        .createMutableAttribute(Attributes.ATTACK_SPEED, 5.0f)
-        .createMutableAttribute(Attributes.FOLLOW_RANGE, 64.0f);
+    return MobEntity.createMobAttributes() //
+        .add(Attributes.MAX_HEALTH, 100.0D)
+        .add(Attributes.FLYING_SPEED, 2.0f)
+        .add(Attributes.ATTACK_DAMAGE, 1.0f)
+        .add(Attributes.ATTACK_SPEED, 5.0f)
+        .add(Attributes.FOLLOW_RANGE, 64.0f);
   }
 
   @Override
-  public double getPosYEye() {
-    return this.getPosY() + 4.5;
+  public double getEyeY() {
+    return this.getY() + 4.5;
   }
 
   /**

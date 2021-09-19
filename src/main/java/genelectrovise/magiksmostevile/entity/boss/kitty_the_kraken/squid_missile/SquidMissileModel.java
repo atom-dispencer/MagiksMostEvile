@@ -45,7 +45,7 @@ public class SquidMissileModel<T extends Entity> extends SegmentedModel<T> {
     this.body = new ModelRenderer(this, 0, 0);
     this.body.addBox(-6.0F, -8.0F + yOffset, -6.0F, 12.0F, 16.0F, 12.0F);
 
-    this.body.rotationPointY += 8.0F;
+    this.body.y += 8.0F;
 
     // Legs
     for (int j = 0; j < this.legs.length; ++j) {
@@ -59,13 +59,13 @@ public class SquidMissileModel<T extends Entity> extends SegmentedModel<T> {
       float f1 = (float) Math.sin(d0) * 5.0F;
 
       // Rotation points
-      legRenderer.rotationPointX = f;
-      legRenderer.rotationPointZ = f1;
-      legRenderer.rotationPointY = 15.0F;
+      legRenderer.x = f;
+      legRenderer.z = f1;
+      legRenderer.y = 15.0F;
 
       // Angles
       d0 = (double) j * Math.PI * -2.0D / (double) this.legs.length + (Math.PI / 2D);
-      legRenderer.rotateAngleY = (float) d0;
+      legRenderer.yRot = (float) d0;
 
       body.addChild(legRenderer);
       this.legs[j] = legRenderer;
@@ -80,14 +80,14 @@ public class SquidMissileModel<T extends Entity> extends SegmentedModel<T> {
   /**
    * Sets this entity's model rotation angles
    */
-  public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+  public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
     for (ModelRenderer modelrenderer : this.legs) {
-      modelrenderer.rotateAngleX = (float) (((Math.sin(ageInTicks / 5)) / 2) + 0.5);
+      modelrenderer.xRot = (float) (((Math.sin(ageInTicks / 5)) / 2) + 0.5);
     }
 
   }
 
-  public Iterable<ModelRenderer> getParts() {
+  public Iterable<ModelRenderer> parts() {
     reload();
     return renderers;
   }

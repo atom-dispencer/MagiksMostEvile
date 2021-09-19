@@ -34,7 +34,7 @@ public class KrakenArm implements INBTSerializable<CompoundNBT> {
   public CompoundNBT serializeNBT() {
 
     CompoundNBT nbt = new CompoundNBT();
-    nbt.putString("krakenArmSide", side.getString());
+    nbt.putString("krakenArmSide", side.getSerializedName());
 
     return nbt;
   }
@@ -72,7 +72,7 @@ public class KrakenArm implements INBTSerializable<CompoundNBT> {
     LEFT, RIGHT;
 
     @Override
-    public String getString() {
+    public String getSerializedName() {
       return this.name();
     }
 

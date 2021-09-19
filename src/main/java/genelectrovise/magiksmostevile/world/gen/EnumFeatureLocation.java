@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.biome.Biome;
-import static net.minecraft.world.biome.Biome.*;
+import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 
 /**
  * {@link RuinedPortalPiece.Location}

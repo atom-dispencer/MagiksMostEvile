@@ -14,7 +14,6 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.core.support;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
@@ -40,13 +39,13 @@ public class EvileItemTags {
    * Contains and creates new tags
    */
   private static TagRegistry<Item> itemTags = TagRegistryManager.create(
-      new ResourceLocation(MagiksMostEvile.MODID, "itemTags"), ITagCollectionSupplier::getItemTags);
+      new ResourceLocation(MagiksMostEvile.MODID, "itemTags"), ITagCollectionSupplier::getItems);
 
   /**
    * @return A simple {@link INamedTag} of the given id.
    */
   public static INamedTag<Item> makeWrapperTag(String id) {
-    return itemTags.createTag(id);
+    return itemTags.bind(id);
   }
 
   /**
@@ -70,13 +69,13 @@ public class EvileItemTags {
    * @return An {@link ITagCollection} of the the registered {@link ITag}s.
    */
   public static ITagCollection<Item> getCollection() {
-    return itemTags.getCollection();
+    return itemTags.getAllTags();
   }
 
   /**
    * @return A list of each registered {@link INamedTag}
    */
-  public static List<? extends INamedTag<Item>> getAllTags() {
-    return itemTags.getTags();
+  public static ITagCollection<Item> getAllTags() {
+    return itemTags.getAllTags();
   }
 }
