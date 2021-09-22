@@ -30,20 +30,20 @@ import net.minecraft.world.World;
 public class TabulaSpringBreeze extends Tabula {
 
   public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-    ItemStack stack = player.getHeldItem(hand);
+    ItemStack stack = player.getItemInHand(hand);
 
     // Only operate on the server
-    if (world.isRemote) {
-      return ActionResult.resultPass(stack);
+    if (world.isClientSide) {
+      return ActionResult.pass(stack);
     }
 
     // Make sure the player is actually holding the item!
     if (!(stack.getItem() instanceof TabulaMuddiedDust)) {
-      return ActionResult.resultFail(stack);
+      return ActionResult.fail(stack);
     }
 
     // Logic
-    BlockPos position = player.getPosition();
+    BlockPos position = player.blockPosition();
     int lowerLimit = -1;
     int upperLimit = 1;
     for (int x = position.getX() + lowerLimit; x < position.getX() + upperLimit + 1; x++) {
@@ -53,18 +53,18 @@ public class TabulaSpringBreeze extends Tabula {
         BlockState state = world.getBlockState(movingPosition);
         // If dirt and 1/4 chance
         if (state.getBlock() == Blocks.DIRT && (world.getRandom().nextBoolean()) && world.getRandom().nextBoolean()) {
-          world.setBlockState(movingPosition, Blocks.GRASS_BLOCK.getDefaultState(), 2);
+          world.setBlock(movingPosition, Blocks.GRASS_BLOCK.defaultBlockState(), 2);
         }
       }
 
     }
 
-    return ActionResult.resultSuccess(stack);
+    return ActionResult.success(stack);
   }
 
   @Override
-  public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-    tooltip.add(TextComponentUtils.toTextComponent(() -> "The wind brushes your cheek and you feel invigorated..."));
-    super.addInformation(stack, worldIn, tooltip, flagIn);
+  public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    tooltip.add(TextComponentUtils.fromMessage(() -> "The wind brushes your cheek and you feel invigorated..."));
+    super.appendHoverText(stack, worldIn, tooltip, flagIn);
   }
 }

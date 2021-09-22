@@ -27,19 +27,19 @@ import net.minecraft.world.World;
 public class TabulaNaturesKin extends Tabula {
 
   public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-    ItemStack stack = player.getHeldItem(hand);
+    ItemStack stack = player.getItemInHand(hand);
 
     // Only operate on the server
-    if (world.isRemote) {
-      return ActionResult.resultPass(stack);
+    if (world.isClientSide) {
+      return ActionResult.pass(stack);
     }
 
-    return ActionResult.resultSuccess(stack);
+    return ActionResult.success(stack);
   }
 
   @Override
-  public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-    tooltip.add(TextComponentUtils.toTextComponent(() -> "You feel at peace with the world around you..."));
-    super.addInformation(stack, worldIn, tooltip, flagIn);
+  public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    tooltip.add(TextComponentUtils.fromMessage(() -> "You feel at peace with the world around you..."));
+    super.appendHoverText(stack, worldIn, tooltip, flagIn);
   }
 }

@@ -27,19 +27,19 @@ import net.minecraft.world.World;
 public class TabulaShakenStone extends Tabula {
 
   public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-    ItemStack stack = player.getHeldItem(hand);
+    ItemStack stack = player.getItemInHand(hand);
 
     // Only operate on the server
-    if (world.isRemote) {
-      return ActionResult.resultPass(stack);
+    if (world.isClientSide) {
+      return ActionResult.pass(stack);
     }
 
-    return ActionResult.resultSuccess(stack);
+    return ActionResult.success(stack);
   }
 
   @Override
-  public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-    tooltip.add(TextComponentUtils.toTextComponent(() -> "The earth trembles beneath you..."));
-    super.addInformation(stack, worldIn, tooltip, flagIn);
+  public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    tooltip.add(TextComponentUtils.fromMessage(() -> "The earth trembles beneath you..."));
+    super.appendHoverText(stack, worldIn, tooltip, flagIn);
   }
 }
