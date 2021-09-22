@@ -29,28 +29,20 @@ public class DebuggingStaff extends Item {
   }
 
   @Override
-  public ActionResultType onItemUse(ItemUseContext context) {
+  public ActionResultType useOn(ItemUseContext context) {
 
-    context.getPlayer().sendMessage(TextComponentUtils.toTextComponent(() -> "ItemUsed"),
-        Util.DUMMY_UUID);
-    context.getPlayer().sendMessage(TextComponentUtils.toTextComponent(
-        () -> context.getWorld().getBlockState(context.getPos()).getBlock().getTags().toString()),
-        Util.DUMMY_UUID);
+    context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "ItemUsed"), Util.NIL_UUID);
+    context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> context.getLevel().getBlockState(context.getClickedPos()).getBlock().getTags().toString()), Util.NIL_UUID);
 
     if (ModdedTags.AMETHYST_ORE_SPAWNABLE == null) {
-      context.getPlayer().sendMessage(TextComponentUtils.toTextComponent(() -> "#A_O_S nulled"),
-          Util.DUMMY_UUID);
-      return super.onItemUse(context);
+      context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "#A_O_S nulled"), Util.NIL_UUID);
+      return super.useOn(context);
     }
 
+    Block block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
+    context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "Block is in A_O_S: " + Boolean.valueOf(ModdedTags.AMETHYST_ORE_SPAWNABLE.contains(block)).toString()), Util.NIL_UUID);
 
-    Block block = context.getWorld().getBlockState(context.getPos()).getBlock();
-    context.getPlayer().sendMessage(
-        TextComponentUtils.toTextComponent(() -> "Block is in A_O_S: "
-            + new Boolean(ModdedTags.AMETHYST_ORE_SPAWNABLE.contains(block)).toString()),
-        Util.DUMMY_UUID);
-
-    return super.onItemUse(context);
+    return super.useOn(context);
   }
 
 }

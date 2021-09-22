@@ -37,25 +37,25 @@ public class VampireBatPathNavigator extends PathNavigator {
   }
 
   @Override
-  protected PathFinder getPathFinder(int p_179679_1_) {
+  protected PathFinder createPathFinder(int p_179679_1_) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  protected Vector3d getEntityPosition() {
+  protected Vector3d getTempMobPos() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  protected boolean canNavigate() {
+  protected boolean canUpdatePath() {
     // TODO Auto-generated method stub
     return false;
   }
 
   @Override
-  protected boolean isDirectPathBetweenPoints(Vector3d posVec31, Vector3d posVec32, int sizeX,
+  protected boolean canMoveDirectly(Vector3d posVec31, Vector3d posVec32, int sizeX,
       int sizeY, int sizeZ) {
     // TODO Auto-generated method stub
     return false;

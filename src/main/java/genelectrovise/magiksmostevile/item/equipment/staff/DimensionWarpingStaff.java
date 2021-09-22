@@ -49,50 +49,49 @@ public class DimensionWarpingStaff extends Item {
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn,
-      Hand handIn) {
+  public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn,      Hand handIn) {
 
     // If the player is in creative
     if (!playerIn.isCreative()) {
 
       // Server send message to player
-      if (!worldIn.isRemote) {
-        playerIn.sendMessage(TextComponentUtils.toTextComponent(() -> "You can only use this item in creative mode!"), Util.DUMMY_UUID);
+      if (!worldIn.isClientSide) {
+        playerIn.sendMessage(TextComponentUtils.fromMessage(() -> "You can only use this item in creative mode!"), Util.NIL_UUID);
         // Util.DUMMY_UUID = CommandSource#189
-        return ActionResult.resultPass(playerIn.getHeldItem(handIn));
+        return ActionResult.pass(playerIn.getItemInHand(handIn));
       }
 
     }
 
     // On client
     // Add particles in the old world
-    if (worldIn.isRemote) {
+    if (worldIn.isClientSide) {
       for (int i = 0; i < 32; ++i) {
-        playerIn.world.addParticle(ParticleTypes.PORTAL, true, playerIn.getPosX(), playerIn.getPosY() + random.nextDouble() * 2.0D, playerIn.getPosZ(), random.nextGaussian(), 0.0D,
+        playerIn.level.addParticle(ParticleTypes.PORTAL, true, playerIn.getX(), playerIn.getY() + random.nextDouble() * 2.0D, playerIn.getZ(), random.nextGaussian(), 0.0D,
             random.nextGaussian());
       }
     }
 
     // On the server
-    if (!worldIn.isRemote) {
+    if (!worldIn.isClientSide) {
       try {
 
         // Destination
         RegistryKey<World> worldKey;
 
         // Current
-        RegistryKey<World> currentWorld = playerIn.world.getDimensionKey();
+        RegistryKey<World> currentWorld = playerIn.level.dimension();
 
         // In Over-world
         if (currentWorld.compareTo(World.OVERWORLD) == 0) {
-          worldKey = World.THE_NETHER;
+          worldKey = World.NETHER;
         }
         // In Nether
-        else if (currentWorld.compareTo(World.THE_NETHER) == 0) {
-          worldKey = World.THE_END;
+        else if (currentWorld.compareTo(World.NETHER) == 0) {
+          worldKey = World.END;
         }
         // In End
-        else if (currentWorld.compareTo(World.THE_END) == 0) {
+        else if (currentWorld.compareTo(World.END) == 0) {
           worldKey = World.OVERWORLD;
         }
         // Default
@@ -106,10 +105,10 @@ public class DimensionWarpingStaff extends Item {
         e.printStackTrace();
       }
     } else {
-      return ActionResult.resultFail(playerIn.getHeldItem(handIn));
+      return ActionResult.fail(playerIn.getItemInHand(handIn));
     }
 
-    return super.onItemRightClick(worldIn, playerIn, handIn);
+    return super.use(worldIn, playerIn, handIn);
   }
 
   /**
@@ -121,7 +120,7 @@ public class DimensionWarpingStaff extends Item {
   private void changeDimension(Entity entityIn, World worldIn, RegistryKey<World> registryKey) {
 
     // Get the world of that key
-    ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getWorld(registryKey);
+    ServerWorld serverworld = ((ServerWorld) worldIn).getServer().getLevel(registryKey);
 
     // Change
     if (serverworld == null) {
@@ -131,11 +130,11 @@ public class DimensionWarpingStaff extends Item {
   }
 
   @Override
-  public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+  public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 
-    tooltip.add(TextComponentUtils.toTextComponent(() -> "Ever wanted to just right click to change dimension? Well now you can!"));
+    tooltip.add(TextComponentUtils.fromMessage(() -> "Ever wanted to just right click to change dimension? Well now you can!"));
 
-    super.addInformation(stack, worldIn, tooltip, flagIn);
+    super.appendHoverText(stack, worldIn, tooltip, flagIn);
   }
 
 }

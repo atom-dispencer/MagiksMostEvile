@@ -40,7 +40,7 @@ public class VampireBatFlapGoal extends Goal {
   @Override
   public boolean canUse() {
 
-    if (!vampireBat.isInActiveLightLevel() && vampireBat.getIsBatHanging()) {
+    if (vampireBat.getIsBatHanging()) {
       return false;
     }
 

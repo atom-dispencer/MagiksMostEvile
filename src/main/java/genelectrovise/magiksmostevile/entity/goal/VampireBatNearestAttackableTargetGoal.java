@@ -41,18 +41,18 @@ public class VampireBatNearestAttackableTargetGoal<T extends LivingEntity>
   }
 
   @Override
-  public boolean shouldExecute() {
+  public boolean canUse() {
 
-    if (!bat.isInActiveLightLevel() && bat.getAttackTarget() == null) {
+    if (bat.getTarget() == null) {
       return false;
     }
 
-    return super.shouldExecute();
+    return super.canUse();
   }
 
   @Override
-  public void startExecuting() {
-    super.startExecuting();
+  public void start() {
+    super.start();
   }
 
 }

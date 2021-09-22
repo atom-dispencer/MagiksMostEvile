@@ -31,20 +31,20 @@ import net.minecraft.world.World;
 public class TabulaMuddiedDust extends Tabula {
 
   public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-    ItemStack stack = player.getHeldItem(hand);
+    ItemStack stack = player.getItemInHand(hand);
 
     // Only operate on the server
-    if (world.isRemote) {
-      return ActionResult.resultPass(stack);
+    if (world.isClientSide) {
+      return ActionResult.pass(stack);
     }
 
     // Make sure the player is actually holding the item!
     if (!(stack.getItem() instanceof TabulaMuddiedDust)) {
-      return ActionResult.resultFail(stack);
+      return ActionResult.fail(stack);
     }
 
     // Logic
-    BlockPos position = player.getPosition();
+    BlockPos position = player.blockPosition();
     int lowerLimit = -1;
     int upperLimit = 1;
     for (int x = position.getX() + lowerLimit; x < position.getX() + upperLimit + 1; x++) {

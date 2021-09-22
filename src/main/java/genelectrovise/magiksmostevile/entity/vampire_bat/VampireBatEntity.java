@@ -82,17 +82,15 @@ import net.minecraft.world.World;
  * @see FlyingEntity
  * @see FlyingMovementController
  * @see ZombieEntity
+ * @see BatEntity
  * @author GenElectrovise 1 Jun 2020
  */
 public class VampireBatEntity extends MonsterEntity {
-  private static final DataParameter<Byte> HANGING =
-      EntityDataManager.createKey(VampireBatEntity.class, DataSerializers.BYTE);
-  public static final EntityPredicate entityPredicate =
-      new EntityPredicate().setDistance(4.0D).allowFriendlyFire();
+  private static final DataParameter<Byte> HANGING = EntityDataManager.defineId(VampireBatEntity.class, DataSerializers.BYTE);
+  public static final EntityPredicate entityPredicate = new EntityPredicate().range(4.0D).allowSameTeam();
   public BlockPos spawnPosition;
 
-  public static final ResourceLocation LOOT_TABLE =
-      new ResourceLocation(MagiksMostEvile.MODID, "loot_tab/vampire_bat");
+  public static final ResourceLocation LOOT_TABLE = new ResourceLocation(MagiksMostEvile.MODID, "loot_tab/vampire_bat");
 
   public static final int REINFORCEMENT_CHANCE = 2;
   public static final int REINFORCEMENT_COOLDOWN = 100;
@@ -104,21 +102,22 @@ public class VampireBatEntity extends MonsterEntity {
   public VampireBatEntity(EntityType<? extends VampireBatEntity> entityType, World world) {
     super(entityType, world);
     this.setIsBatHanging(false);
-    this.moveController = new VampireBatMoveHelperController(this, 60, true);
-    this.navigator = new FlyingPathNavigator(this, this.world);
+    this.moveControl = new VampireBatMoveHelperController(this, 60, true);
+    this.navigation = new FlyingPathNavigator(this, this.level);
 
-    navigator.setSpeed(this.getAttribute(Attributes.FLYING_SPEED).getValue());
-    navigator.setCanSwim(false);
+    navigation.setSpeedModifier(this.getAttribute(Attributes.FLYING_SPEED).getValue());
+    navigation.setCanFloat(false);
   }
 
   protected void registerData() {
-    super.registerData();
-    this.dataManager.register(HANGING, (byte) 0);
+    super.defineSynchedData();
+    this.entityData.define(HANGING, (byte) 0);
   }
 
   /**
    * Returns the volume for the sounds this mob makes.
    */
+  @Override
   protected float getSoundVolume() {
     return 0.1F;
   }
@@ -126,57 +125,62 @@ public class VampireBatEntity extends MonsterEntity {
   /**
    * Gets the pitch of living sounds in living entities.
    */
-  protected float getSoundPitch() {
-    return super.getSoundPitch() * 0.95F;
+  @Override
+  protected float getVoicePitch() {
+    return super.getVoicePitch() * 0.95F;
   }
 
+  @Override
   @Nullable
   public SoundEvent getAmbientSound() {
-    return this.getIsBatHanging() && this.rand.nextInt(4) != 0 ? null
-        : SoundEvents.ENTITY_BAT_AMBIENT;
+    return this.getIsBatHanging() && this.random.nextInt(4) != 0 ? null
+        : SoundEvents.BAT_AMBIENT;
   }
 
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-    return SoundEvents.ENTITY_BAT_HURT;
+    return SoundEvents.BAT_HURT;
   }
 
   protected SoundEvent getDeathSound() {
-    return SoundEvents.ENTITY_BAT_DEATH;
+    return SoundEvents.BAT_DEATH;
   }
 
   /**
    * Returns true if this entity should push and be pushed by other entities when colliding.
    */
-  public boolean canBePushed() {
+  @Override
+  public boolean isPushable() {
     return true;
   }
 
-  protected void collideWithEntity(Entity entityIn) {}
+  @Override
+  protected void doPush(Entity entityIn) {}
 
-  protected void collideWithNearbyEntities() {}
+  @Override
+  protected void pushEntities() {}
 
   /**
    * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
-    return MobEntity.func_233666_p_() //
-        .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
-        .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f)
-        .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0f)
-        .createMutableAttribute(Attributes.ATTACK_SPEED, 5.0f)
-        .createMutableAttribute(Attributes.FOLLOW_RANGE, 64.0f);
+    return MobEntity.createMobAttributes() //
+        .add(Attributes.MAX_HEALTH, 3.0D)
+        .add(Attributes.FLYING_SPEED, 2.0f)
+        .add(Attributes.ATTACK_DAMAGE, 1.0f)
+        .add(Attributes.ATTACK_SPEED, 5.0f)
+        .add(Attributes.FOLLOW_RANGE, 64.0f);
   }
 
   public boolean getIsBatHanging() {
-    return (this.dataManager.get(HANGING) & 1) != 0;
+    return (this.entityData.get(HANGING) & 1) != 0;
   }
 
   public void setIsBatHanging(boolean isHanging) {
-    byte b0 = this.dataManager.get(HANGING);
+    byte b0 = this.entityData.get(HANGING);
     if (isHanging) {
-      this.dataManager.set(HANGING, (byte) (b0 | 1));
+      this.entityData.set(HANGING, (byte) (b0 | 1));
     } else {
-      this.dataManager.set(HANGING, (byte) (b0 & -2));
+      this.entityData.set(HANGING, (byte) (b0 & -2));
     }
 
   }
@@ -184,20 +188,21 @@ public class VampireBatEntity extends MonsterEntity {
   /**
    * Called to update the entity's position/logic.
    */
+  @Override
   public void tick() {
     super.tick();
 
-    if (this.isInDaylight() && this.isAlive()) {
-      this.setFire(2);
+    if (this.isSunBurnTick() && this.isAlive()) {
+      this.setSecondsOnFire(2);
     }
 
     if (this.getIsBatHanging()) {
-      this.setMotion(Vector3d.ZERO);
-      this.setRawPosition(this.getPosX(),
-          (double) MathHelper.floor(this.getPosY()) + 1.0D - (double) this.getHeight(),
-          this.getPosZ());
+      this.setDeltaMovement(Vector3d.ZERO);
+      this.setPosRaw(this.getX(),
+          (double) MathHelper.floor(this.getY()) + 1.0D - (double) this.getBbHeight(),
+          this.getZ());
     } else {
-      this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
+      this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
     }
 
   }
@@ -210,7 +215,7 @@ public class VampireBatEntity extends MonsterEntity {
     this.goalSelector.addGoal(20, new VampireBatFlapGoal(this));
 
     this.targetSelector.addGoal(1,
-        (new HurtByTargetGoal(this)).setCallsForHelp(VampireBatEntity.class));
+        (new HurtByTargetGoal(this)).setAlertOthers(VampireBatEntity.class));
     this.targetSelector.addGoal(2, new VampireBatNearestAttackableTargetGoal<WanderingTraderEntity>(
         this, WanderingTraderEntity.class, false));
     this.targetSelector.addGoal(2, new VampireBatNearestAttackableTargetGoal<TraderLlamaEntity>(
@@ -231,72 +236,77 @@ public class VampireBatEntity extends MonsterEntity {
         new VampireBatNearestAttackableTargetGoal<WolfEntity>(this, WolfEntity.class, false));
   }
 
-  protected void updateAITasks() {
-    super.updateAITasks();
-  }
-
+  @Override
   public Random getRandom() {
-    return rand;
+    return random;
   }
 
   /**
    * AKA. Can this entity push other entities?
    */
-  protected boolean canTriggerWalking() {
+  @Override
+  protected boolean isMovementNoisy() {
     return true;
   }
 
   /**
    * How much damage should this entity take on falling?
    */
-  public boolean onLivingFall(float distance, float damageMultiplier) {
+  @Override
+  public boolean causeFallDamage(float distance, float damageMultiplier) {
     return false;
   }
 
   /**
    * Not really necessary as bats can't fall.
    */
-  protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+  @Override
+  protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
 
   }
 
   /**
    * Return whether this entity should NOT trigger a pressure plate or a tripwire.
    */
-  public boolean doesEntityNotTriggerPressurePlate() {
+  @Override
+  public boolean isIgnoringBlockTriggers() {
     return true;
   }
 
   /**
    * Called when the entity is attacked.
    */
-  public boolean attackEntityFrom(DamageSource source, float amount) {
+  @Override
+  public boolean hurt(DamageSource source, float amount) {
     if (this.isInvulnerableTo(source)) {
       return false;
     } else {
-      if (!this.world.isRemote && this.getIsBatHanging()) {
+      if (!this.level.isClientSide && this.getIsBatHanging()) {
         this.setIsBatHanging(false);
       }
 
-      return super.attackEntityFrom(source, amount);
+      return super.hurt(source, amount);
     }
   }
 
   /**
    * (abstract) Protected helper method to read subclass entity data from NBT.
    */
-  public void readAdditional(CompoundNBT compound) {
-    super.readAdditional(compound);
-    this.dataManager.set(HANGING, compound.getByte("BatFlags"));
-  }
-
-  public void writeAdditional(CompoundNBT compound) {
-    super.writeAdditional(compound);
-    compound.putByte("BatFlags", this.dataManager.get(HANGING));
+  @Override
+  public void readAdditionalSaveData(CompoundNBT compound) {
+    super.readAdditionalSaveData(compound);
+    this.entityData.set(HANGING, compound.getByte("BatFlags"));
   }
 
   @Override
-  protected ResourceLocation getLootTable() {
+  public void addAdditionalSaveData(CompoundNBT compound) {
+    super.addAdditionalSaveData(compound);
+    compound.putByte("BatFlags", this.entityData.get(HANGING));
+
+  }
+
+  @Override
+  protected ResourceLocation getDefaultLootTable() {
     // return LOOT_TABLE;
     return super.getLootTable();
   }
@@ -304,6 +314,8 @@ public class VampireBatEntity extends MonsterEntity {
   /**
    * Returns whether a bat can spawn here. Checks Y and light level, with increased spawns near
    * Halloween.
+   * 
+   * TODO Implement this! Check call heirarchy for usage example.
    * 
    * @param vampireBat
    * @param world
@@ -313,12 +325,11 @@ public class VampireBatEntity extends MonsterEntity {
    * @return
    */
   @SuppressWarnings("deprecation")
-  public static boolean func_223369_b(EntityType<BatEntity> vampireBat, IWorld world,
-      SpawnReason reason, BlockPos spawnPos, Random random) {
+  public static boolean checkBatSpawnRules(EntityType<BatEntity> vampireBat, IWorld world, SpawnReason reason, BlockPos spawnPos, Random random) {
     if (spawnPos.getY() >= world.getSeaLevel()) {
       return false;
     } else {
-      int i = world.getLight(spawnPos);
+      int i = world.getLightEmission(spawnPos);
       int j = 4;
       if (isNearHalloween()) {
         j = 7;
@@ -326,9 +337,13 @@ public class VampireBatEntity extends MonsterEntity {
         return false;
       }
 
-      return i > random.nextInt(j) ? false
-          : canSpawnOn(vampireBat, world, reason, spawnPos, random);
+      return i > random.nextInt(j) ? false : checkMobSpawnRules(vampireBat, world, reason, spawnPos, random);
     }
+  }
+
+  @Override
+  public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
+    return super.checkSpawnRules(world, reason);
   }
 
   private static boolean isNearHalloween() {
@@ -338,12 +353,9 @@ public class VampireBatEntity extends MonsterEntity {
     return j == 10 && i >= 20 || j == 11 && i <= 3;
   }
 
+  @Override
   protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
     return sizeIn.height / 2.0F;
-  }
-
-  public boolean isInActiveLightLevel() {
-    return this.world.getLightFor(LightType.SKY, getPosition()) < 8 || this.isInDaylight() == false;
   }
 
   /**
@@ -370,9 +382,9 @@ public class VampireBatEntity extends MonsterEntity {
    */
   public List<VampireBatEntity> batsWithinArea(double radius) {
     AxisAlignedBB bounds =
-        new AxisAlignedBB(this.getPosX() + radius, this.getPosY() + radius, this.getPosZ() + radius,
-            this.getPosX() - radius, this.getPosY() - radius, this.getPosZ() - radius);
-    return world.getEntitiesWithinAABB(VampireBatEntity.class, bounds);
+        new AxisAlignedBB(this.getX() + radius, this.getY() + radius, this.getZ() + radius,
+            this.getX() - radius, this.getY() - radius, this.getZ() - radius);
+    return this.level.getEntitiesOfClass(VampireBatEntity.class, bounds);
   }
 
 }

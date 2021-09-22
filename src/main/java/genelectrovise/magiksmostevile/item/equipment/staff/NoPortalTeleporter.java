@@ -28,14 +28,14 @@ public class NoPortalTeleporter extends Teleporter {
   public NoPortalTeleporter(ServerWorld worldIn) {
     super(worldIn);
   }
-
+  
   @Override
-  public Optional<Result> makePortal(BlockPos pos, Axis axis) {
+  public Optional<Result> createPortal(BlockPos pos, Axis axis) {
     return Optional.of(null);
   }
 
   @Override
-  public Optional<Result> getExistingPortal(BlockPos pos, boolean isNether) {
+  public Optional<Result> findPortalAround(BlockPos pos, boolean isNether) {
     return Optional.of(null);
   }
 

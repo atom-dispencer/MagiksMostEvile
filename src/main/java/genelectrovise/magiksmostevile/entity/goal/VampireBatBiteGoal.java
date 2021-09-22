@@ -60,10 +60,6 @@ public class VampireBatBiteGoal extends MeleeAttackGoal {
   @Override
   public boolean canUse() {
 
-    if (!vampireBat.isInActiveLightLevel()) {
-      return false;
-    }
-
     return super.canUse();
   }
 

@@ -42,10 +42,6 @@ public class VampireBatHangGoal extends Goal {
   @Override
   public boolean canUse() {
 
-    if (!vampireBat.isInActiveLightLevel()) {
-      return false;
-    }
-
     if (!blockAboveIsHangable()) {
       return false;
     }
@@ -75,31 +71,30 @@ public class VampireBatHangGoal extends Goal {
 
     // Randomly, rotate head
     if (vampireBat.getRandom().nextInt(200) == 0) {
-      vampireBat.rotationYawHead = (float) vampireBat.getRandom().nextInt(360);
+      vampireBat.yHeadRot = (float) vampireBat.getRandom().nextInt(360);
     }
 
     return canUse();
   }
 
   @Override
-  public void startExecuting() {
+  public void start() {
     vampireBat.setIsBatHanging(true);
   }
 
   // Logic
 
   private boolean blockAboveIsHangable() {
-    return world.getBlockState(vampireBat.getPosition().up()).isNormalCube(this.world,
-        vampireBat.getPosition().up());
+    return world.getBlockState(vampireBat.blockPosition().above()).isRedstoneConductor(this.world, vampireBat.blockPosition().above());
   }
 
   private void makeBatNotHang() {
     vampireBat.setIsBatHanging(false);
-    this.world.playEvent((PlayerEntity) null, 1025, vampireBat.getPosition(), 0);
+    this.world.levelEvent((PlayerEntity) null, 1025, vampireBat.blockPosition(), 0);
   }
 
   private PlayerEntity getClosestPredicateFulfillingPlayer() {
-    return this.world.getClosestPlayer(VampireBatEntity.entityPredicate, vampireBat);
+    return this.world.getNearestPlayer(VampireBatEntity.entityPredicate, vampireBat);
   }
 
   private boolean playerIsSurvivalAndNotNull(@Nullable PlayerEntity player) {

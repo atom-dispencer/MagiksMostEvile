@@ -27,8 +27,8 @@ public class BlankTabula extends Tabula {
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-    return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+  public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    return ActionResult.success(playerIn.getItemInHand(handIn));
   }
 
 }
