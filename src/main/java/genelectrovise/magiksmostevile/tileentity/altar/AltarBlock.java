@@ -53,8 +53,8 @@ import net.minecraft.world.server.ServerWorld;
  */
 public class AltarBlock extends Block {
   // double x1, double y1, double z1, double x2, double y2, double z2
-  protected static final VoxelShape BODY_ADDON = Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 14.0D, 15.0D);
-  protected static final VoxelShape BASE_ADDON = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+  protected static final VoxelShape BODY_ADDON = Block.box(1.0D, 0D, 1.0D, 15.0D, 14.0D, 15.0D);
+  protected static final VoxelShape BASE_ADDON = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
   protected static final VoxelShape COMBINED_SHAPE = VoxelShapes.or(BODY_ADDON, BASE_ADDON);
 
   public AltarBlock(Properties properties) {
@@ -62,17 +62,17 @@ public class AltarBlock extends Block {
   }
 
   @Override
-  public BlockRenderType getRenderType(BlockState state) {
+  public BlockRenderType getRenderShape(BlockState state) {
     return BlockRenderType.MODEL;
   }
-
+  
   @Override
-  public boolean isTransparent(BlockState state) {
+  public boolean useShapeForLightOcclusion(BlockState state) {
     return true;
   }
 
   @Override
-  public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+  public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
     return true;
   }
 
@@ -93,13 +93,13 @@ public class AltarBlock extends Block {
   public boolean hasTileEntity(BlockState state) {
     return true;
   }
-
+  
   @Override
-  public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+  public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
     if (entityIn instanceof LivingEntity) {
       EffectInstance levitation = new EffectInstance(Effects.LEVITATION, 30);
       LivingEntity entity = (LivingEntity) entityIn;
-      entity.addPotionEffect(levitation);
+      entity.addEffect(levitation);
     }
   }
 
@@ -107,11 +107,11 @@ public class AltarBlock extends Block {
       int silktouch) {
     return silktouch == 0 ? 5 * fortune : 0;
   }
-
+  
   @Override
-  public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
+  public void destroy(IWorld worldIn, BlockPos pos, BlockState state) {
     // On the server
-    if (!worldIn.isRemote()) {
+    if (!worldIn.isClientSide()) {
 
       // 15 times
       for (int i = 0; i < 15; i++) {
@@ -125,18 +125,18 @@ public class AltarBlock extends Block {
         // New lightning bolt
         LightningBoltEntity lightning =
             new LightningBoltEntity(EntityType.LIGHTNING_BOLT, serverWorld);
-        lightning.setPosition(pos.getX() + RANDOM.nextInt(21) - 5,
+        lightning.setPos(pos.getX() + RANDOM.nextInt(21) - 5,
             pos.getY() + RANDOM.nextInt(3) - 1, pos.getZ() + RANDOM.nextInt(21) - 5);
 
         // Summon
-        serverWorld.summonEntity(lightning);
+        serverWorld.addFreshEntity(lightning);
 
         // Get the closest player
         PlayerEntity player =
-            serverWorld.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
+            serverWorld.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
         // If not null, make an explosion - the player is the cause
         if (player != null) {
-          serverWorld.createExplosion(player, pos.getX(), pos.getY(), pos.getZ(), 2, true,
+          serverWorld.explode(player, pos.getX(), pos.getY(), pos.getZ(), 2, true,
               Explosion.Mode.BREAK);
 
         }
@@ -148,8 +148,8 @@ public class AltarBlock extends Block {
   @Override
   public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     try {
-      if (worldIn.getTileEntity(pos) instanceof AltarTileEntity) {
-        AltarTileEntity altar = (AltarTileEntity) worldIn.getTileEntity(pos);
+      if (worldIn.getBlockEntity(pos) instanceof AltarTileEntity) {
+        AltarTileEntity altar = (AltarTileEntity) worldIn.getBlockEntity(pos);
 
         // Guarentee casting
         if (!altar.isCasting()) {
@@ -174,8 +174,8 @@ public class AltarBlock extends Block {
   // Gui
 
   public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
-    if (!worldIn.isRemote) {
-      final ICustomContainer tileEntity = (ICustomContainer) worldIn.getTileEntity(pos);
+    if (!worldIn.isClientSide()) {
+      final ICustomContainer tileEntity = (ICustomContainer) worldIn.getBlockEntity(pos);
       tileEntity.openGUI((ServerPlayerEntity) player);
     }
 

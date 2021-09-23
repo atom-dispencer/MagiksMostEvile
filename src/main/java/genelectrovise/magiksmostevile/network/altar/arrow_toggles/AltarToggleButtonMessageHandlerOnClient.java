@@ -57,7 +57,7 @@ public class AltarToggleButtonMessageHandlerOnClient {
    */
   private static void processMessage(AltarToggleButtonMessageToClient message,
       Supplier<Context> ctxSupplier) {
-    Container container = Minecraft.getInstance().player.openContainer;
+    Container container = Minecraft.getInstance().player.containerMenu;
 
     // If the player's open container is not an altar container, return.
     if (!(container instanceof AltarContainer)) {

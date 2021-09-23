@@ -73,9 +73,7 @@ public class ConvertAmethystRitual extends Ritual {
   @Override
   public void begin() {
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
-        new GlyphMessageToClient(
-            new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/amethyst.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+        new GlyphMessageToClient(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/amethyst.png"), GlyphOrientation.VERTICAL, altar.getBlockPos().above(7), true, 0.5));
     super.begin();
   }
 

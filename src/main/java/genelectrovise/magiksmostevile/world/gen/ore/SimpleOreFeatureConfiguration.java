@@ -44,7 +44,7 @@ public class SimpleOreFeatureConfiguration extends OreFeatureConfig {
 
       @Override
       protected IRuleTestType<?> getType() {
-        return IRuleTestType.BLOCK_MATCH;
+        return IRuleTestType.BLOCK_TEST;
       }
     }, placedState, size);
   }

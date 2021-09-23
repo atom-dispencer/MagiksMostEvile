@@ -55,17 +55,17 @@ public class AltarCastButtonPressedMessageHandlerOnServer {
     MagiksMostEvile.LOGGER.debug("processing message!");
 
     // Get and check container
-    Container container = ctxSupplier.get().getSender().openContainer;
+    Container container = ctxSupplier.get().getSender().containerMenu;
 
     if (!(container instanceof AltarContainer)) {
       return;
     }
 
     AltarContainer altarContainer = (AltarContainer) container;
-    BlockPos pos = altarContainer.getAltar().getPos();
+    BlockPos pos = altarContainer.getAltar().getBlockPos();
 
     // Get and check tile entity
-    TileEntity tileEntity = ctxSupplier.get().getSender().world.getTileEntity(pos);
+    TileEntity tileEntity = ctxSupplier.get().getSender().level.getBlockEntity(pos);
 
     if (!(tileEntity instanceof AltarTileEntity)) {
       return;

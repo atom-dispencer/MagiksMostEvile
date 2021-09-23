@@ -26,7 +26,7 @@ public class ScreenHelper {
   public static final int ZERO = 0;
 
   public static void bind(Screen screen, ResourceLocation texture) {
-    screen.getMinecraft().getTextureManager().bindTexture(texture);
+    screen.getMinecraft().getTextureManager().bind(texture);
   }
 
   /**

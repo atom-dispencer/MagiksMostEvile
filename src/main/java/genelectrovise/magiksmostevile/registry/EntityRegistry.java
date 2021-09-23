@@ -51,11 +51,9 @@ public class EntityRegistry {
         biomes.forEachRemaining((biome) -> {
 
           // If biome is not the ocean, nether, or end, add a spawn
-          if (biome.getCategory() != Biome.Category.OCEAN
-              || biome.getCategory() != Biome.Category.NETHER
-              || biome.getCategory() != Biome.Category.THEEND) {
+          if (biome.getBiomeCategory() != Biome.Category.OCEAN || biome.getBiomeCategory() != Biome.Category.NETHER || biome.getBiomeCategory() != Biome.Category.THEEND) {
 
-            biome.getMobSpawnInfo().getEntityTypes().add(EntityOrbitalRegistry.VAMPIRE_BAT.get());
+            biome.getMobSettings().getEntityTypes().add(EntityOrbitalRegistry.VAMPIRE_BAT.get());
           }
         });
       });

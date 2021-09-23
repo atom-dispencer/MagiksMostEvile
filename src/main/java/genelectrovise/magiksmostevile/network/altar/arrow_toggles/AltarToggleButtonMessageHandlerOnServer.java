@@ -113,7 +113,7 @@ public class AltarToggleButtonMessageHandlerOnServer {
     }
 
     Advancement advancement =
-        sender.server.getAdvancementManager().getAdvancement(resourceLocation);
+        sender.server.getAdvancements().getAdvancement(resourceLocation);
 
     if (advancement == null) {
       MagiksMostEvile.LOGGER
@@ -121,7 +121,7 @@ public class AltarToggleButtonMessageHandlerOnServer {
       return false;
     }
 
-    if (sender.getAdvancements().getProgress(advancement).isDone()) {
+    if (sender.getAdvancements().getOrStartProgress(advancement).isDone()) {
       return true;
     }
 

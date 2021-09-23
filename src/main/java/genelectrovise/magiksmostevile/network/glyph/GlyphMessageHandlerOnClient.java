@@ -36,8 +36,7 @@ public class GlyphMessageHandlerOnClient {
    * Called when a message is received of the appropriate type. CALLED BY THE NETWORK THREAD, NOT THE
    * CLIENT THREAD
    */
-  public static void onMessageReceived(final GlyphMessageToClient message,
-      Supplier<NetworkEvent.Context> ctxSupplier) {
+  public static void onMessageReceived(final GlyphMessageToClient message, Supplier<NetworkEvent.Context> ctxSupplier) {
 
     ctxSupplier.get().setPacketHandled(true);
 
@@ -59,7 +58,7 @@ public class GlyphMessageHandlerOnClient {
       Supplier<NetworkEvent.Context> ctxSupplier) {
     Glyph glyph = new Glyph(message.getResource());
 
-    ClientWorld world = Minecraft.getInstance().player.worldClient;
+    ClientWorld world = Minecraft.getInstance().player.clientLevel;
     BlockPos position = message.getPosition();
     double spacing = message.getSpacing();
     GlyphOrientation orientation = message.getOrientation();

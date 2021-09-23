@@ -75,7 +75,7 @@ public class AltarEnergyUpdateMessageToClient {
     buf.writeInt(currentAmethystFlux);
     buf.writeInt(maxAmethystFlux);
     buf.writeBlockPos(blockPos);
-    buf.writeUniqueId(playerUUID);
+    buf.writeUUID(playerUUID);
   }
 
   /**
@@ -86,7 +86,7 @@ public class AltarEnergyUpdateMessageToClient {
    */
   public static AltarEnergyUpdateMessageToClient decode(PacketBuffer buf) {
     MagiksMostEvile.LOGGER.debug("Decoding message to client");
-    return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUniqueId());
+    return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUUID());
   }
 
   public String toString() {

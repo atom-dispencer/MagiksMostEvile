@@ -30,7 +30,7 @@ public class StructureAdditionManager {
     MagiksMostEvile.LOGGER.info("Adding MME structures to biome: " + event.getName());
 
     for (StructureFeature<?, ?> structure : ModConfiguredStructures.map.values()) {
-      event.getGeneration().withStructure(structure);
+      event.getGeneration().addStructureStart(structure);
     }
   }
 }

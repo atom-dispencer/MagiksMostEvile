@@ -31,13 +31,11 @@ public class GlyphParticleFactory implements IParticleFactory<GlyphParticleData>
 
   @Nullable
   @Override
-  public Particle makeParticle(GlyphParticleData glyphParticleData, ClientWorld world, double xPos,
-      double yPos, double zPos, double xVelocity, double yVelocity, double zVelocity) {
+  public Particle createParticle(GlyphParticleData glyphParticleData, ClientWorld world, double xPos, double yPos, double zPos, double xVelocity, double yVelocity, double zVelocity) {
 
     try {
-      GlyphParticle newParticle = new GlyphParticle(world, xPos, yPos, zPos, xVelocity, yVelocity,
-          zVelocity, glyphParticleData.getTint(), glyphParticleData.getDiameter(), sprites);
-      newParticle.selectSpriteRandomly(sprites); // choose a random sprite from the available list
+      GlyphParticle newParticle = new GlyphParticle(world, xPos, yPos, zPos, xVelocity, yVelocity, zVelocity, glyphParticleData.getTint(), glyphParticleData.getDiameter(), sprites);
+      newParticle.pickSprite(sprites); // choose a random sprite from the available list
                                                  // (in this case there is only
                                                  // one)
       return newParticle;

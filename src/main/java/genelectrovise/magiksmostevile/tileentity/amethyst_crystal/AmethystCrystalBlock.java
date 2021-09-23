@@ -24,12 +24,10 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
 public class AmethystCrystalBlock extends Block {
-  public static AxisAlignedBB AMETHYST_CRYSTAL_AABB =
-      new AxisAlignedBB(0.0625D, 0D, 0.0625D, 0.9375D, 0.625D, 0.9375D);
+  public static AxisAlignedBB AMETHYST_CRYSTAL_AABB = new AxisAlignedBB(0.0625D, 0D, 0.0625D, 0.9375D, 0.625D, 0.9375D);
 
   // double x1, double y1, double z1, double x2, double y2, double z2
-  protected static final VoxelShape BLOCK_SHAPE =
-      Block.makeCuboidShape(1.0D, 0D, 1.0D, 15.0D, 1.0D, 15.0D);
+  protected static final VoxelShape BLOCK_SHAPE = Block.box(1.0D, 0D, 1.0D, 15.0D, 1.0D, 15.0D);
 
   public AmethystCrystalBlock(Properties properties) {
     super(properties);

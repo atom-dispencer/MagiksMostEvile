@@ -59,7 +59,7 @@ public class EnderParticleMessageHandlerOnClient {
     Random random = new Random();
 
     for (int i = 0; i < message.getCount(); i++) {
-      Minecraft.getInstance().player.worldClient.addParticle(ParticleTypes.PORTAL, true,
+      Minecraft.getInstance().player.clientLevel.addParticle(ParticleTypes.PORTAL, true,
           message.getPosition().getX(), message.getPosition().getY() + random.nextDouble() * 2.0D,
           message.getPosition().getZ(), random.nextGaussian(), 0.0D, random.nextGaussian());
     }

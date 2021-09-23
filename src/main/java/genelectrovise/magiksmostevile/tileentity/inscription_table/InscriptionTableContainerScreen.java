@@ -95,7 +95,7 @@ public class InscriptionTableContainerScreen extends ContainerScreen<Inscription
       ImageButton button = ScreenHelper.createImageButton(data.getPoint().x, data.getPoint().y, buttonSideLength, buttonSideLength, ZERO, ZERO, ZERO, textureLocation, signumTextureSideLength,
           signumTextureSideLength,
           (btn) -> {
-            container.buttonPressed(data.getSignum().getName());
+            menu.buttonPressed(data.getSignum().getName());
           });
 
       addButton(button);
@@ -103,10 +103,10 @@ public class InscriptionTableContainerScreen extends ContainerScreen<Inscription
   }
 
   @Override
-  protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+  protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
 
-    int windowWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
-    int windowHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
+    int windowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+    int windowHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
 
     int halfWidth = windowWidth / 2;
     int halfHeight = windowHeight / 2;

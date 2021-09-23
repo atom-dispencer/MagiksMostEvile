@@ -69,7 +69,7 @@ public class AltarEnerUpdateMessageHandlerOnClient {
 
     // Here I need to get an instance of the world or player so I can access things
     ClientPlayerEntity player = Minecraft.getInstance().player;
-    Container containerRaw = player.openContainer;
+    Container containerRaw = player.containerMenu;
     if (containerRaw instanceof AltarContainer) {
       MagiksMostEvile.LOGGER.debug("instanceof AltarContainer. Updating values.");
       AltarContainer altarContainer = (AltarContainer) containerRaw;

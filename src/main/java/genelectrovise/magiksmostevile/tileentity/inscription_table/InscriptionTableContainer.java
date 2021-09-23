@@ -40,7 +40,7 @@ public class InscriptionTableContainer extends CommonContainer {
   private PlayerInventory playerInventory;
 
   public InscriptionTableContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-    this(windowId, inv, new ItemStackHandler(4), (InscriptionTableTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()));
+    this(windowId, inv, new ItemStackHandler(4), (InscriptionTableTileEntity) Minecraft.getInstance().level.getBlockEntity(data.readBlockPos()));
   }
 
   public InscriptionTableContainer(int windowId, PlayerInventory inv, IItemHandler handler, InscriptionTableTileEntity inscriptionTable) {

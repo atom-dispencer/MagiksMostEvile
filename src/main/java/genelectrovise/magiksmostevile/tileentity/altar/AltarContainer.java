@@ -46,7 +46,7 @@ public class AltarContainer extends CommonContainer {
   private AltarRitualSelector selector;
 
   public AltarContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-    this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()));
+    this(windowId, inv, new ItemStackHandler(4), (AltarTileEntity) Minecraft.getInstance().level.getBlockEntity(data.readBlockPos()));
   }
 
   public AltarContainer(int windowId, PlayerInventory inv, IItemHandler handler, AltarTileEntity altar) {
@@ -57,9 +57,9 @@ public class AltarContainer extends CommonContainer {
     this.currentIchor = altar.ichorStorage.currentIchor;
     this.inv = inv;
 
-    trackInt(maxIchor);
-    trackInt(currentIchor);
-    trackInt(isCasting);
+    addDataSlot(maxIchor);
+    addDataSlot(currentIchor);
+    addDataSlot(isCasting);
 
     isCasting.set(altar.isCasting ? 1 : 0);
 
@@ -69,8 +69,8 @@ public class AltarContainer extends CommonContainer {
   }
 
   @Override
-  public void detectAndSendChanges() {
-    super.detectAndSendChanges();
+  public void broadcastChanges() {
+    super.broadcastChanges();
 
     if (altar == null) {
       AltarTileEntity.LOGGER.error("TileEntityAltar at unknown BlockPos is null! This message was triggered by player " + inv.player.getName() + " opening an AltarContainer!");
@@ -88,7 +88,7 @@ public class AltarContainer extends CommonContainer {
       IFluidHandler fluidHandler = altar.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(null);
 
       if (fluidHandler == null) {
-        AltarTileEntity.LOGGER.error("AltarTileEntity at " + altar.getPos() + " does not have an IFluidHandler capability?!");
+        AltarTileEntity.LOGGER.error("AltarTileEntity at " + altar.getBlockPos() + " does not have an IFluidHandler capability?!");
         AltarTileEntity.LOGGER.error("This can either mean that the Altar has been removed, or it is errored. Try reloading the area. If that does not work, try replacing the Altar.");
         return;
       }
@@ -97,7 +97,7 @@ public class AltarContainer extends CommonContainer {
         this.currentIchor.set(((IchorFluidStorage) fluidHandler).currentIchor.get());
         this.maxIchor.set(((IchorFluidStorage) fluidHandler).maxIchor.get());
       } else {
-        AltarTileEntity.LOGGER.warn("Who's been tampering with my Altars!!? The IFluidHandler capability of the Altar at " + altar.getPos()
+        AltarTileEntity.LOGGER.warn("Who's been tampering with my Altars!!? The IFluidHandler capability of the Altar at " + altar.getBlockPos()
             + " is not an instance of IchorFluidStorage! (Will not update Ichor values, though will not stop the method)");
       }
     }
@@ -177,15 +177,15 @@ public class AltarContainer extends CommonContainer {
   public void setAltar(AltarTileEntity altar) {
     this.altar = altar;
   }
-
+  
   @Override
-  public boolean canInteractWith(PlayerEntity playerIn) {
+  public boolean stillValid(PlayerEntity playerIn) {
 
     if (altar.isCasting()) {
       return false;
     }
 
-    return super.canInteractWith(playerIn);
+    return super.stillValid(playerIn);
   }
 
 }

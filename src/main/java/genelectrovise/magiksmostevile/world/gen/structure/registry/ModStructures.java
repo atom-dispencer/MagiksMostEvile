@@ -57,7 +57,7 @@ public class ModStructures {
     try {
 
       // Add to the name map
-      Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);
+      Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 
       // Place into the structure seperation settings map
       try {
@@ -65,7 +65,7 @@ public class ModStructures {
         ReflectionUtil.makeUniversallyAccessible(mapField);
         ImmutableMap<Structure<?>, StructureSeparationSettings> newSettings =
             ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
-                .putAll(DimensionStructuresSettings.field_236191_b_)
+                .putAll(DimensionStructuresSettings.DEFAULTS)
                 .put(structure, SEPERATION_SETTINGS.get(structure))
                 .build();
         mapField.set(DimensionStructuresSettings.class, newSettings);
@@ -84,7 +84,7 @@ public class ModStructures {
         MagiksMostEvile.LOGGER.debug("Able to access dimension settings");
 
         // Structures map
-        DimensionStructuresSettings structuresSettings = originalSettings.getStructures();
+        DimensionStructuresSettings structuresSettings = originalSettings.structureSettings();
         Field mapField = ObfuscationReflectionHelper.findField(DimensionStructuresSettings.class, "field_236193_d_");
         ReflectionUtil.makeUniversallyAccessible(mapField);
         @SuppressWarnings("unchecked")

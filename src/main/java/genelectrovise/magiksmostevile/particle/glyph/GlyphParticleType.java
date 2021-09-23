@@ -41,7 +41,7 @@ public class GlyphParticleType extends ParticleType<GlyphParticleData> {
    * Get the {@link Codec} (Encoder/Decoder) of this particle.
    */
   @Override
-  public Codec<GlyphParticleData> func_230522_e_() {
+  public Codec<GlyphParticleData> codec() {
     return codec;
   }
 

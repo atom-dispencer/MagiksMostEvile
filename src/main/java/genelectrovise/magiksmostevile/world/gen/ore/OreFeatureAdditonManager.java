@@ -72,6 +72,6 @@ public class OreFeatureAdditonManager {
   private static void registerTo(BiomeGenerationSettingsBuilder builder,
       ConfiguredFeature<?, ?> feature) {
 
-    builder.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, feature);
+    builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, feature);
   }
 }

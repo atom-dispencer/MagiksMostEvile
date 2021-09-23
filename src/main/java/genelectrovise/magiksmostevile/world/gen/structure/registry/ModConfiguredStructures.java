@@ -27,7 +27,7 @@ public class ModConfiguredStructures {
 
   public static final HashMap<String, StructureFeature<?, ?>> map = new HashMap<String, StructureFeature<?, ?>>();
 
-  public static final StructureFeature<?, ?> OVERGROUND_SHRINE_default = ModStructures.OVERGROUND_SHRINE.withConfiguration(new OvergroundShrineFeatureConfig(EnumFeatureLocation.DEFAULT));
+  public static final StructureFeature<?, ?> OVERGROUND_SHRINE_default = ModStructures.OVERGROUND_SHRINE.configured(new OvergroundShrineFeatureConfig(EnumFeatureLocation.DEFAULT));
 
   public static void registerConfiguredStructures() {
     register(new ResourceLocation(MagiksMostEvile.MODID, "overground_shrine_default"), OVERGROUND_SHRINE_default);

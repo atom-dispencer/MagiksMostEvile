@@ -75,7 +75,7 @@ public class AltarIchorUpdateMessageToClient {
     buf.writeInt(currentAmethystFlux);
     buf.writeInt(maxAmethystFlux);
     buf.writeBlockPos(blockPos);
-    buf.writeUniqueId(playerUUID);
+    buf.writeUUID   (playerUUID);
   }
 
   /**
@@ -86,7 +86,7 @@ public class AltarIchorUpdateMessageToClient {
    */
   public static AltarIchorUpdateMessageToClient decode(PacketBuffer buf) {
     MagiksMostEvile.LOGGER.debug("Decoding message to client");
-    return new AltarIchorUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUniqueId());
+    return new AltarIchorUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUUID());
   }
 
   public String toString() {

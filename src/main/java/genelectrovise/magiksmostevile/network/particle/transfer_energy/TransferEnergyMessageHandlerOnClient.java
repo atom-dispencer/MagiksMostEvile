@@ -69,7 +69,7 @@ public class TransferEnergyMessageHandlerOnClient {
     double mul = 0.4;
     double yMul = mul * 10;
 
-    Minecraft.getInstance().player.worldClient.addParticle(ParticleTypes.TOTEM_OF_UNDYING, true,
+    Minecraft.getInstance().player.clientLevel.addParticle(ParticleTypes.TOTEM_OF_UNDYING, true,
         message.getDeparture().getX() + 0.5, message.getDeparture().getY() + 0.5,
         message.getDeparture().getZ() + 0.5, direction.x * mul, direction.y * yMul,
         direction.z * mul);

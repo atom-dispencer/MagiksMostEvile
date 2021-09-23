@@ -80,7 +80,7 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID,
                 "textures/items/general/powered_amethyst.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(7), true, 0.5));
 
   }
 
@@ -94,7 +94,7 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(7), true, 0.5));
     MagiksMostEvile.LOGGER.info("Failed!");
   }
 
@@ -103,7 +103,7 @@ public class ConvertAmethystResultHandler extends ResultHandler<ConvertAmethystR
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(7), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(7), true, 0.5));
     MagiksMostEvile.LOGGER.info("BOOM!");
   }
 

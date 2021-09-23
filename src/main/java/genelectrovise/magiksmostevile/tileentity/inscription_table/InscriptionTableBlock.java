@@ -54,16 +54,16 @@ public class InscriptionTableBlock extends HorizontalBlock {
   }
 
   public BlockState getStateForPlacement(BlockItemUseContext context) {
-    return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
+    return this.defaultBlockState().setValue(FACING, context.getClickedFace().getOpposite());
   }
 
   protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-    builder.add(HORIZONTAL_FACING);
+    builder.add(FACING);
   }
 
   public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
-    if (!worldIn.isRemote) {
-      final ICustomContainer tileEntity = (ICustomContainer) worldIn.getTileEntity(pos);
+    if (!worldIn.isClientSide) {
+      final ICustomContainer tileEntity = (ICustomContainer) worldIn.getBlockEntity(pos);
       tileEntity.openGUI((ServerPlayerEntity) player);
     }
 

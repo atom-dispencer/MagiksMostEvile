@@ -51,7 +51,7 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
     slot = new ItemStackHandler() {
       @Override
       protected void onContentsChanged(int slot) {
-        markDirty();
+        setChanged();
       }
     };
   }
@@ -61,10 +61,10 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
 
     // IItemHandler
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-      this.markDirty();
+      this.setChanged();
 
       // if the block at myself isn't myself, allow full access (Block Broken)
-      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
+      if (level != null && level.getBlockState(worldPosition).getBlock() != this.getBlockState().getBlock()) {
         return allSlots.cast();
       }
       if (side == null) {
@@ -76,10 +76,10 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
   }
 
   @Override
-  public void remove() {
+  public void setRemoved() {
     slot_handler.invalidate();
     allSlots.invalidate();
-    super.remove();
+    super.setRemoved();
   }
 
   @Override
@@ -90,7 +90,7 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
 
   @Override
   public void openGUI(ServerPlayerEntity player) {
-    NetworkHooks.openGui(player, this, getPos());
+    NetworkHooks.openGui(player, this, getBlockPos());
   }
 
   @Override

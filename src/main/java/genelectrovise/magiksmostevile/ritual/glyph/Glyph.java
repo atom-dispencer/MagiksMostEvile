@@ -76,7 +76,7 @@ public class Glyph {
   public boolean drawCentered(World world, BlockPos pos, double spacing,
       GlyphOrientation orientation) {
 
-    if (!world.isRemote) {
+    if (!world.isClientSide) {
       return false;
     }
 
@@ -108,13 +108,13 @@ public class Glyph {
   private boolean draw(World world, BlockPos pos, double spacing, GlyphOrientation orientation,
       boolean centered) {
 
-    if (!world.isRemote) {
+    if (!world.isClientSide) {
       return false;
     }
 
     try {
 
-      if (world.isRemote) {
+      if (world.isClientSide) {
         // Iterate through the width and height
         for (int x = 0; x < imageProperties.width; x++) {
           for (int y = 0; y < imageProperties.height; y++) {

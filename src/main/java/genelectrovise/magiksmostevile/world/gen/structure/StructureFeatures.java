@@ -30,7 +30,7 @@ public class StructureFeatures {
   @SuppressWarnings("deprecation")
   private static <F extends Structure<?>> F register(String name, F structure,
       GenerationStage.Decoration decorationStage) {
-    Structure.NAME_STRUCTURE_BIMAP.put(name.toLowerCase(Locale.ROOT), structure);
+    Structure.STRUCTURES_REGISTRY.put(name.toLowerCase(Locale.ROOT), structure);
     return Registry.register(Registry.STRUCTURE_FEATURE, name.toLowerCase(Locale.ROOT), structure);
   }
 }

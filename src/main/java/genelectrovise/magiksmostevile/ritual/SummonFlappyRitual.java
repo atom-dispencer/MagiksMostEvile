@@ -86,7 +86,7 @@ public class SummonFlappyRitual extends Ritual {
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID,
                 "textures/items/general/vampire_bat_tooth.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
 
     LazyOptional<IItemHandler> itemHandler =
         altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
@@ -118,7 +118,7 @@ public class SummonFlappyRitual extends Ritual {
   protected RitualResult tick() {
     super.tick();
 
-    if (altar.getWorld().isDaytime()) {
+    if (altar.getLevel().isDay()) {
       return RitualResult.FAILURE;
     }
 
@@ -132,7 +132,7 @@ public class SummonFlappyRitual extends Ritual {
 
     if (isBetweenTicks(100, 140)) {
       ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(),
-          new EnderParticleMessageToClient(altar.getPos().up(3), 2));
+          new EnderParticleMessageToClient(altar.getBlockPos().above(3), 2));
       return RitualResult.CASTING;
     }
 

@@ -77,8 +77,7 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
      * </ul>
      */
     @Override
-    public void func_230364_a_(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator,
-        TemplateManager templateManager, int chunkPosX, int chunkPosZ, Biome biome,
+    public void generatePieces(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator, TemplateManager templateManager, int chunkPosX, int chunkPosZ, Biome biome,
         OvergroundShrineFeatureConfig configuration) {
 
       OvergroundShrineStructureAestheticsSerializer serializer =
@@ -110,7 +109,7 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
       // Get the location of the template of the structure, i.e. chosen randomly to determine size
       ResourceLocation templateName;
 
-      float randomisedFloat = this.rand.nextFloat();
+      float randomisedFloat = this.random.nextFloat();
       // Make it big (5%)
       if (randomisedFloat < 0.05F) {
         templateName = formatTemplateName(Size.LARGE);
@@ -125,22 +124,20 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
       }
 
       // Create basic final data
-      Template template = templateManager.getTemplateDefaulted(templateName);
-      Rotation rotation = Util.getRandomObject(Rotation.values(), rand);
-      Mirror mirror = Util.getRandomObject(Mirror.values(), rand);
+      Template template = templateManager.get(templateName);
+      Rotation rotation = Util.getRandom(Rotation.values(), random);
+      Mirror mirror = Util.getRandom(Mirror.values(), random);
       BlockPos truePosition =
           new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
-      BlockPos chunkBlockPos = new ChunkPos(chunkPosX, chunkPosZ).asBlockPos();
+      BlockPos chunkBlockPos = new ChunkPos(chunkPosX, chunkPosZ).getWorldPosition();
       MutableBoundingBox mutableboundingbox =
-          template.func_237150_a_(chunkBlockPos, rotation, truePosition, mirror);
+          template.getBoundingBox(chunkBlockPos, rotation, truePosition, mirror);
 
       // Create bounding boxes
-      Vector3i vector3i = mutableboundingbox.func_215126_f();
+      Vector3i vector3i = mutableboundingbox.getCenter();
       int x = vector3i.getX();
       int z = vector3i.getZ();
-      int y =
-          chunkGenerator.getHeight(x, z, OvergroundShrineStructurePiece.getHeightMapType(location))
-              - 1;
+      int y = chunkGenerator.getBaseHeight(x, z, OvergroundShrineStructurePiece.getHeightMapType(location)) - 1;
       BlockPos finalPlacementPosition = new BlockPos(x, y, z);
 
       // Is the position cold?
@@ -151,9 +148,9 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
         serializer.isCold = isPlacementPositionCold(finalPlacementPosition, biome);
       }
 
-      this.components.add(new OvergroundShrineStructurePiece(finalPlacementPosition, location,
+      this.pieces.add(new OvergroundShrineStructurePiece(finalPlacementPosition, location,
           serializer, templateName, template, rotation, mirror, truePosition));
-      this.recalculateStructureSize();
+      this.calculateBoundingBox();
     }
 
     public static boolean isPlacementPositionCold(BlockPos pos, Biome biome) {
@@ -194,7 +191,7 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
       builder.append("_");
       // overground_shrine/large_
 
-      int choice = this.rand.nextInt(variantCount);
+      int choice = this.random.nextInt(variantCount);
       builder.append(choice);
       // overground_shrine/large_0
 

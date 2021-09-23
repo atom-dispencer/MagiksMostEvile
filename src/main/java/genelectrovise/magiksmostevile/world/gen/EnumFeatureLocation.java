@@ -42,7 +42,7 @@ public enum EnumFeatureLocation implements IStringSerializable {
 
   // Codec
   public static final Codec<EnumFeatureLocation> CODEC =
-      IStringSerializable.createEnumCodec(EnumFeatureLocation::values, EnumFeatureLocation::get);
+      IStringSerializable.fromEnum(EnumFeatureLocation::values, EnumFeatureLocation::get);
 
   // Map
   private static final Map<String, EnumFeatureLocation> MAP =
@@ -73,7 +73,8 @@ public enum EnumFeatureLocation implements IStringSerializable {
     return MAP.get(name);
   }
 
-  public String getString() {
+  @Override
+  public String getSerializedName() {
     return this.getName();
   }
 }

@@ -40,7 +40,7 @@ public class ParticleClientStartup {
     // with no console errors
     MagiksMostEvile.LOGGER.warn(
         "If this is the last thing you can see and Minecraft isn't loading, check in ParticleClientStartup for infinite loading loops.");
-    Minecraft.getInstance().particles.registerFactory(ParticleOrbitalRegistry.GLYPH_PARTICLE.get(),
+    Minecraft.getInstance().particleEngine.register(ParticleOrbitalRegistry.GLYPH_PARTICLE.get(),
         sprite -> new GlyphParticleFactory(sprite));
 
     // This lambda may not be obvious: its purpose is:

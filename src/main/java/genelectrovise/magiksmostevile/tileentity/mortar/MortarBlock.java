@@ -40,7 +40,7 @@ import net.minecraft.world.server.ServerWorld;
  */
 public class MortarBlock extends Block {
 
-  protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
+  protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
   public MortarBlock(Properties properties) {
     super(properties);
@@ -62,16 +62,16 @@ public class MortarBlock extends Block {
   }
 
   @Override
-  public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+  public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
     // On client
-    if (world.isRemote) {
+    if (world.isClientSide()) {
       return ActionResultType.SUCCESS;
     }
 
     // If the player is using a pestle
-    if (player.getHeldItem(handIn).getItem() instanceof Pestle) {
-      TileEntity tileEntity = world.getTileEntity(pos);
+    if (player.getItemInHand(handIn).getItem() instanceof Pestle) {
+      TileEntity tileEntity = world.getBlockEntity(pos);
       if (tileEntity instanceof MortarTileEntity) {
         ((MortarTileEntity) tileEntity).recipe();
       }
@@ -80,16 +80,16 @@ public class MortarBlock extends Block {
 
     // On server
     // If not air or null
-    if (player.getHeldItem(handIn).getItem() != null) {
+    if (player.getItemInHand(handIn).getItem() != null) {
 
       // Get the tile entity
-      TileEntity tileEntity = ((ServerWorld) world).getTileEntity(pos);
+      TileEntity tileEntity = ((ServerWorld) world).getBlockEntity(pos);
 
       // IF a Mortar
       if (tileEntity instanceof MortarTileEntity) {
 
         // Get the stack
-        ((MortarTileEntity) tileEntity).recieveItemStack(player.getHeldItem(handIn));
+        ((MortarTileEntity) tileEntity).recieveItemStack(player.getItemInHand(handIn));
       }
     }
 
@@ -100,8 +100,8 @@ public class MortarBlock extends Block {
   public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
 
     // Only on server
-    if (!world.isRemote) {
-      TileEntity tileEntity = world.getTileEntity(pos);
+    if (!world.isClientSide()) {
+      TileEntity tileEntity = world.getBlockEntity(pos);
       if (tileEntity instanceof MortarTileEntity) {
         ((MortarTileEntity) tileEntity).popContents();
       }

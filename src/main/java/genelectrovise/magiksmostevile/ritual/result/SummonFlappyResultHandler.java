@@ -47,18 +47,18 @@ public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual>
 
     ritual.setDone(true);
 
-    VampireBatEntity bat = EntityOrbitalRegistry.VAMPIRE_BAT.get().create(altar.getWorld());
+    VampireBatEntity bat = EntityOrbitalRegistry.VAMPIRE_BAT.get().create(altar.getLevel());
 
-    BlockPos altarPosUp = altar.getPos().up(3);
-    bat.setPosition(altarPosUp.getX(), altarPosUp.getY(), altarPosUp.getZ());
+    BlockPos altarPosUp = altar.getBlockPos().above(3);
+    bat.setPos(altarPosUp.getX(), altarPosUp.getY(), altarPosUp.getZ());
 
-    altar.getWorld().addEntity(bat);
+    altar.getLevel().addFreshEntity(bat);
 
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID,
                 "textures/items/general/vampire_bat_tooth.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
   }
 
   @Override
@@ -71,7 +71,7 @@ public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual>
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
   }
 
   @Override
@@ -79,7 +79,7 @@ public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual>
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
   }
 
 }

@@ -30,9 +30,9 @@ public class Pestle extends Item {
   public EnumPestleLevel getLevel() {
     return level;
   }
-
+  
   @Override
-  public ActionResultType onItemUse(ItemUseContext context) {
+  public ActionResultType useOn(ItemUseContext context) {
     return ActionResultType.PASS;
   }
 

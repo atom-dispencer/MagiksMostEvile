@@ -35,9 +35,9 @@ public class AltarSlot extends SlotItemHandler {
   public AltarSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
     super(itemHandler, index, xPosition, yPosition);
   }
-
+  
   @Override
-  public boolean isItemValid(ItemStack stack) {
+  public boolean mayPlace(ItemStack stack) {
     return true;
   }
 

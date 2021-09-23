@@ -40,9 +40,9 @@ public class CommonContainer extends Container {
     super(type, id);
     invenSize = size;
   }
-
+  
   @Override
-  public boolean canInteractWith(PlayerEntity playerIn) {
+  public boolean stillValid(PlayerEntity playerIn) {
     return true;
   }
 
@@ -60,26 +60,26 @@ public class CommonContainer extends Container {
 
   @Override
   @Nonnull
-  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+  public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
     ItemStack itemstack = ItemStack.EMPTY;
-    Slot slot = (Slot) this.inventorySlots.get(index);
+    Slot slot = (Slot) this.slots.get(index);
 
-    if (slot != null && slot.getHasStack()) {
-      ItemStack itemstack1 = slot.getStack();
+    if (slot != null && slot.hasItem()) {
+      ItemStack itemstack1 = slot.getItem();
       itemstack = itemstack1.copy();
 
       if (index < invenSize) {
-        if (!this.mergeItemStack(itemstack1, invenSize, this.inventorySlots.size(), true)) {
+        if (!this.moveItemStackTo(itemstack1, invenSize, this.slots.size(), true)) {
           return ItemStack.EMPTY;
         }
-      } else if (!this.mergeItemStack(itemstack1, 0, invenSize, false)) {
+      } else if (!this.moveItemStackTo(itemstack1, 0, invenSize, false)) {
         return ItemStack.EMPTY;
       }
 
       if (itemstack1.getCount() == 0) {
-        slot.putStack(ItemStack.EMPTY);
+        slot.set(ItemStack.EMPTY);
       } else {
-        slot.onSlotChanged();
+        slot.setChanged();
       }
     }
 

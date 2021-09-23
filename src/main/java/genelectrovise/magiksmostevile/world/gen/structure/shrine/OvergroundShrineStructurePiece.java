@@ -106,7 +106,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
         .getOrThrow(true, LOGGER::error);
 
     // Fetch Template
-    Template template = templateManager.getTemplateDefaulted(this.templateName);
+    Template template = templateManager.get(this.templateName);
 
     // Setup
     this.setupPlacement(template,
@@ -117,7 +117,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
 
     // Add processor to read the NBT ignoring structure blocks and air
     BlockIgnoreStructureProcessor blockignorestructureprocessor =
-        BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK;
+        BlockIgnoreStructureProcessor.STRUCTURE_AND_AIR;
 
     // Create a list of rules for replacing blocks
     List<RuleEntry> list = Lists.newArrayList();
@@ -132,7 +132,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
     PlacementSettings placementsettings = new PlacementSettings() // New
         .setRotation(this.rotation) // Rotation
         .setMirror(this.mirror) // Mirror
-        .setCenterOffset(centerOffset) // Center offset
+        .setRotationPivot(centerOffset) // Center offset
         .addProcessor(blockignorestructureprocessor) // Processor (ignore some)
         .addProcessor( // Add rules
             new RuleStructureProcessor(list)) // > from list
@@ -144,7 +144,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
 
     // Replace stone variants with blackstone
     if (this.serializer.replaceWithBlackstone) {
-      placementsettings.addProcessor(BlackStoneReplacementProcessor.field_237058_b_);
+      placementsettings.addProcessor(BlackStoneReplacementProcessor.INSTANCE);
     }
 
     this.setup(template, this.templatePosition, placementsettings);
@@ -153,8 +153,9 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
   /**
    * (abstract) Called on loading the structure to read data from the java to the NBT tag!
    */
-  protected void readAdditional(CompoundNBT tagCompound) {
-    super.readAdditional(tagCompound);
+  @Override
+  protected void addAdditionalSaveData(CompoundNBT tagCompound) {
+    super.addAdditionalSaveData(tagCompound);
     // Basic
     tagCompound.putString("Template", this.templateName.toString());
     tagCompound.putString("Rotation", this.rotation.name());

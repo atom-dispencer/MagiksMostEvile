@@ -58,17 +58,19 @@ public class GlyphParticleData implements IParticleData {
   // write the particle information to a PacketBuffer, ready for transmission to a
   // client
   @Override
-  public void write(PacketBuffer buf) {
+  public void writeToNetwork(PacketBuffer buf) {
     buf.writeInt(tint.getRed());
     buf.writeInt(tint.getGreen());
     buf.writeInt(tint.getBlue());
     buf.writeDouble(diameter);
   }
 
+  
+  
   // used for debugging I think; prints the data in human-readable format
   @Nonnull
   @Override
-  public String getParameters() {
+  public String writeToString() {
     return String.format(Locale.ROOT, "%s %.2f %i %i %i", this.getType().getRegistryName(), diameter, tint.getRed(), tint.getGreen(), tint.getBlue());
   }
 
@@ -90,7 +92,7 @@ public class GlyphParticleData implements IParticleData {
     // parse the parameters for this particle from a /particle command
     @Nonnull
     @Override
-    public GlyphParticleData deserialize(@Nonnull ParticleType<GlyphParticleData> type, @Nonnull StringReader reader) throws CommandSyntaxException {
+    public GlyphParticleData fromCommand(@Nonnull ParticleType<GlyphParticleData> type, @Nonnull StringReader reader) throws CommandSyntaxException {
       reader.expect(' ');
       double diameter = constrainDiameterToValidRange(reader.readDouble());
 
@@ -110,7 +112,7 @@ public class GlyphParticleData implements IParticleData {
     // read the particle information from a PacketBuffer after the client has
     // received it from the server
     @Override
-    public GlyphParticleData read(@Nonnull ParticleType<GlyphParticleData> type, PacketBuffer buf) {
+    public GlyphParticleData fromNetwork(@Nonnull ParticleType<GlyphParticleData> type, PacketBuffer buf) {
       // warning! never trust the data read in from a packet buffer.
 
       final int MIN_COLOUR = 0;
@@ -124,5 +126,6 @@ public class GlyphParticleData implements IParticleData {
 
       return new GlyphParticleData(color, diameter);
     }
+
   };
 }

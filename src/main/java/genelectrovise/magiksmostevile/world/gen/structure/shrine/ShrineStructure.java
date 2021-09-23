@@ -20,7 +20,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 public class ShrineStructure extends Structure<NoFeatureConfig> {
 
   public ShrineStructure() {
-    super(NoFeatureConfig.field_236558_a_);
+    super(NoFeatureConfig.CODEC);
   }
 
   @Override

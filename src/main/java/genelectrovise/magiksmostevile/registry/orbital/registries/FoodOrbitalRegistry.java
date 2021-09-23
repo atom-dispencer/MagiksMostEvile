@@ -27,9 +27,8 @@ public class FoodOrbitalRegistry implements IOrbitalRegistry {
   // =========FOOD========================================================================================================================
   public static final RegistryObject<Item> AMETHYST_POTATO =
       ItemOrbitalRegistry.ITEMS.register("amethyst_potato",
-          () -> new Item(new Item.Properties().food((new Food.Builder()).hunger(3).saturation(0.8F)
-              .effect(() -> new EffectInstance(Effects.SPEED, 400, 1), 1.0F).fastToEat().build())
-              .group(EvileItemGroup.MAGIKS_MOST_EVILE)));
+          () -> new Item(new Item.Properties().food((new Food.Builder()).nutrition(3).saturationMod(0.8F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 400, 1), 1.0F).fast().build())
+              .tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
   @Override
   public int priority() {

@@ -34,7 +34,7 @@ public class ContainerRegistry {
 
   @SubscribeEvent
   public static void registerFactories(FMLLoadCompleteEvent event) {
-    ScreenManager.registerFactory(ContainerOrbitalRegistry.ALTAR_CONTAINER.get(), new AltarScreenManager());
-    ScreenManager.registerFactory(ContainerOrbitalRegistry.INSCRIPTION_TABLE_CONTAINER.get(), new InscriptionTableScreenManager());
+    ScreenManager.register(ContainerOrbitalRegistry.ALTAR_CONTAINER.get(), new AltarScreenManager());
+    ScreenManager.register(ContainerOrbitalRegistry.INSCRIPTION_TABLE_CONTAINER.get(), new InscriptionTableScreenManager());
   }
 }

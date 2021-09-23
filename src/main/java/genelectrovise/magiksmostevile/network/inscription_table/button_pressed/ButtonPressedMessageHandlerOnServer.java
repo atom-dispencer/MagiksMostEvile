@@ -46,17 +46,17 @@ public class ButtonPressedMessageHandlerOnServer {
     MagiksMostEvile.LOGGER.debug("processing message!");
 
     // Get and check container
-    Container container = ctxSupplier.get().getSender().openContainer;
+    Container container = ctxSupplier.get().getSender().containerMenu;
 
     if (!(container instanceof InscriptionTableContainer)) {
       return;
     }
 
     InscriptionTableContainer inscriptionTable = (InscriptionTableContainer) container;
-    BlockPos pos = inscriptionTable.getInscriptionTable().getPos();
+    BlockPos pos = inscriptionTable.getInscriptionTable().getBlockPos();
 
     // Get and check tile entity
-    TileEntity tileEntity = ctxSupplier.get().getSender().world.getTileEntity(pos);
+    TileEntity tileEntity = ctxSupplier.get().getSender().level.getBlockEntity(pos);
 
     if (!(tileEntity instanceof InscriptionTableTileEntity)) {
       return;
