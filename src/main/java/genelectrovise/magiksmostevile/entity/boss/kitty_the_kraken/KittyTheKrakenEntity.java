@@ -18,7 +18,7 @@
 package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken;
 
 import javax.annotation.Nullable;
-import genelectrovise.magiksmostevile.core.SetupManager;
+import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.entity.boss.BossMob;
 import genelectrovise.magiksmostevile.entity.goal.SquidMissileAttackGoal;
 import net.minecraft.entity.EntityType;
@@ -64,7 +64,7 @@ public class KittyTheKrakenEntity extends BossMob {
   }
 
   /**
-   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
+   * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.createMobAttributes() //

@@ -19,6 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
+import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -90,7 +91,7 @@ public class MagiksMostEvile {
 
   public static void registerCommonEvents() {
     LOGGER.debug("Registering MME common events");
-    MOD_EVENT_BUS.register(SetupManager.class);
+    MOD_EVENT_BUS.register(EntityAttributeManager.class);
     MOD_EVENT_BUS.register(RecipeSetup.class);
   }
 

@@ -46,24 +46,21 @@ public class AltarNetworkingManager {
 
   // Energy update
   public static SimpleChannel CAltarEnergyUpdate;
-  public static final ResourceLocation RLEnergyUpdate =
-      new ResourceLocation(MagiksMostEvile.MODID, "altar_energy_update");
+  public static final ResourceLocation RLEnergyUpdate = new ResourceLocation(MagiksMostEvile.MODID, "altar_energy_update");
   public static final String ENERGY_UPDATE_MESSAGE_PROTOCOL_VERSION = "1.0";
   public static final int ALTAR_ENERGY_UPDATE_TO_SERVER = 11;
   public static final int ALTAR_ENERGY_UPDATE_TO_CLIENT = 12;
 
   // Cast button
   public static SimpleChannel CAltarCastButton;
-  public static final ResourceLocation RLCastButtonPressed =
-      new ResourceLocation(MagiksMostEvile.MODID, "altar_cast_button_pressed");
+  public static final ResourceLocation RLCastButtonPressed = new ResourceLocation(MagiksMostEvile.MODID, "altar_cast_button_pressed");
   public static final String CAST_BUTTON_PRESSED_MESSAGE_PROTOCOL_VERSION = "1.0";
   public static final int ALTAR_CAST_BUTTON_PRESSED_TO_SERVER = 21;
   public static final int ALTAR_CAST_BUTTON_PRESSED_TO_CLIENT = 22;
 
   // Arrow toggles
   public static SimpleChannel CAltarToggleButton;
-  public static final ResourceLocation RLToggleButton =
-      new ResourceLocation(MagiksMostEvile.MODID, "altar_toggle_button");
+  public static final ResourceLocation RLToggleButton = new ResourceLocation(MagiksMostEvile.MODID, "altar_toggle_button");
   public static final String TOGGLE_BUTTON_MESSAGE_PROTOCOL_VERSION = "1.0";
   public static final int ALTAR_TOGGLE_BUTTON_TO_SERVER = 31;
   public static final int ALTAR_TOGGLE_BUTTON_TO_CLIENT = 32;

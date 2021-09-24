@@ -17,6 +17,7 @@ package genelectrovise.magiksmostevile.world.gen;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.template.AlwaysTrueRuleTest;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.RandomBlockMatchRuleTest;
@@ -24,6 +25,12 @@ import net.minecraft.world.gen.feature.template.RuleEntry;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.server.ServerWorld;
 
+/**
+ * {@link Biome}
+ * 
+ * @author GenElectrovise
+ *
+ */
 public class StructureUtil {
 
   public void placeStructure(ServerWorld serverWorld, ChunkPos chunkPos,

@@ -16,7 +16,7 @@ package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.squid_missil
 
 import java.util.function.Function;
 import com.google.common.primitives.Doubles;
-import genelectrovise.magiksmostevile.core.SetupManager;
+import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -71,7 +71,7 @@ public class SquidMissileEntity extends MobEntity {
   };
 
   /**
-   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
+   * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.createMobAttributes() //

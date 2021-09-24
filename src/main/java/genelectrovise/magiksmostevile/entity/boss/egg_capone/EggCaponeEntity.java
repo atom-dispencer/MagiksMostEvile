@@ -17,7 +17,7 @@
  */
 package genelectrovise.magiksmostevile.entity.boss.egg_capone;
 
-import genelectrovise.magiksmostevile.core.SetupManager;
+import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.entity.boss.BossMob;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -39,7 +39,7 @@ public class EggCaponeEntity extends BossMob {
   }
 
   /**
-   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
+   * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.createMobAttributes() //

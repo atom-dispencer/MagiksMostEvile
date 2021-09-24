@@ -12,8 +12,9 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.core;
+package genelectrovise.magiksmostevile.entity;
 
+import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.entity.boss.egg_capone.EggCaponeEntity;
 import genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.KittyTheKrakenEntity;
 import genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.squid_missile.SquidMissileEntity;
@@ -22,54 +23,32 @@ import genelectrovise.magiksmostevile.entity.boss.tom_the_troll.TomTheTrollEntit
 import genelectrovise.magiksmostevile.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.registry.orbital.registries.EntityOrbitalRegistry;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 
-public final class SetupManager {
-
-  @SuppressWarnings("deprecation")
-  public static final Runnable[] tasks = {
-
-      // Setup entity attributes
-      () -> {
-        MagiksMostEvile.LOGGER.debug("Registering MME entity attributes");
-
-        // Vampire Bat
-        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.VAMPIRE_BAT.get(),
-            VampireBatEntity.getEntityAttributes().build());
-
-        // Egg Capone
-        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.EGG_CAPONE.get(),
-            EggCaponeEntity.getEntityAttributes().build());
-
-        // The Kraken
-        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.THE_KRAKEN.get(),
-            KittyTheKrakenEntity.getEntityAttributes().build());
-
-        // Tinder and Cinder
-        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TINDER_AND_CINDER.get(),
-            TinderAndCinderEntity.getEntityAttributes().build());
-
-        // Tom the Troll
-        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(),
-            TomTheTrollEntity.getEntityAttributes().build());
-
-        // Squid Missile
-        GlobalEntityTypeAttributes.put(EntityOrbitalRegistry.SQUID_MISSILE.get(),
-            SquidMissileEntity.getEntityAttributes().build());
-      }
-
-      //
-  };
+public final class EntityAttributeManager {
 
   @SubscribeEvent
-  public static void setup(ParallelDispatchEvent event) {
+  public static void addEntityAttributes(EntityAttributeCreationEvent event) {
+    MagiksMostEvile.LOGGER.debug("Registering MME entity attributes");
 
-    MagiksMostEvile.LOGGER.debug("SetupManager#setup() called for MME");
+    // Vampire Bat
+    event.put(EntityOrbitalRegistry.VAMPIRE_BAT.get(), VampireBatEntity.getEntityAttributes().build());
 
-    for (Runnable runnable : tasks) {
-      event.enqueueWork(runnable);
-    }
+    // Egg Capone
+    event.put(EntityOrbitalRegistry.EGG_CAPONE.get(), EggCaponeEntity.getEntityAttributes().build());
 
+    // The Kraken
+    event.put(EntityOrbitalRegistry.THE_KRAKEN.get(), KittyTheKrakenEntity.getEntityAttributes().build());
+
+    // Tinder and Cinder
+    event.put(EntityOrbitalRegistry.TINDER_AND_CINDER.get(), TinderAndCinderEntity.getEntityAttributes().build());
+
+    // Tom the Troll
+    event.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(), TomTheTrollEntity.getEntityAttributes().build());
+
+    // Squid Missile
+    event.put(EntityOrbitalRegistry.SQUID_MISSILE.get(), SquidMissileEntity.getEntityAttributes().build());
   }
 }

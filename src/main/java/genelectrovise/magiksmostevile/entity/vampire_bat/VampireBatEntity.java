@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.core.SetupManager;
+import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.entity.goal.VampireBatBiteGoal;
 import genelectrovise.magiksmostevile.entity.goal.VampireBatFlapGoal;
 import genelectrovise.magiksmostevile.entity.goal.VampireBatHangGoal;
@@ -160,7 +160,7 @@ public class VampireBatEntity extends MonsterEntity {
   protected void pushEntities() {}
 
   /**
-   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
+   * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
     return MobEntity.createMobAttributes() //

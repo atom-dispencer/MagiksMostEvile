@@ -35,8 +35,7 @@ public class ModStructures {
 
   public static final HashMap<Structure<?>, StructureSeparationSettings> SEPERATION_SETTINGS = new HashMap<>();
 
-  public static final Structure<OvergroundShrineFeatureConfig> OVERGROUND_SHRINE =
-      new OvergroundShrineStructure();
+  public static final Structure<OvergroundShrineFeatureConfig> OVERGROUND_SHRINE = new OvergroundShrineStructure();
 
   public static void registerStructures(Register<Structure<?>> event) {
     register(event.getRegistry(), OVERGROUND_SHRINE, "overground_shrine");
@@ -110,8 +109,7 @@ public class ModStructures {
 
   }
 
-  public static void register(IForgeRegistry<Structure<?>> registry, Structure<?> entry,
-      String registryKey) {
+  public static void register(IForgeRegistry<Structure<?>> registry, Structure<?> entry, String registryKey) {
 
     entry.setRegistryName(new ResourceLocation(MagiksMostEvile.MODID, registryKey));
     registry.register(entry);

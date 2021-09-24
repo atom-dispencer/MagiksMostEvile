@@ -72,9 +72,8 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
    * @param mirror
    * @param truePosition
    */
-  public OvergroundShrineStructurePiece(BlockPos blockPos, EnumFeatureLocation location,
-      OvergroundShrineStructureAestheticsSerializer serializer, ResourceLocation templateName,
-      Template template, Rotation rotation, Mirror mirror, BlockPos truePosition) {
+  public OvergroundShrineStructurePiece(BlockPos blockPos, EnumFeatureLocation location, OvergroundShrineStructureAestheticsSerializer serializer, ResourceLocation templateName, Template template,
+      Rotation rotation, Mirror mirror, BlockPos truePosition) {
     super(StructurePieces.OVERGROUND_SHRINE_PIECE, 0);
     this.templatePosition = blockPos;
     this.templateName = templateName;
@@ -116,8 +115,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
   private void setupPlacement(Template template, BlockPos centerOffset) {
 
     // Add processor to read the NBT ignoring structure blocks and air
-    BlockIgnoreStructureProcessor blockignorestructureprocessor =
-        BlockIgnoreStructureProcessor.STRUCTURE_AND_AIR;
+    BlockIgnoreStructureProcessor blockignorestructureprocessor = BlockIgnoreStructureProcessor.STRUCTURE_AND_AIR;
 
     // Create a list of rules for replacing blocks
     List<RuleEntry> list = Lists.newArrayList();

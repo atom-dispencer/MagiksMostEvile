@@ -31,7 +31,6 @@ public class ModConfiguredStructures {
 
   public static void registerConfiguredStructures() {
     register(new ResourceLocation(MagiksMostEvile.MODID, "overground_shrine_default"), OVERGROUND_SHRINE_default);
-
   }
 
   public static void register(ResourceLocation resourceLocation, StructureFeature<?, ?> feature) {

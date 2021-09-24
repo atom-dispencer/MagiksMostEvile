@@ -14,23 +14,37 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen.structure.registry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
+/**
+ * {@link Biome}
+ * 
+ * @author GenElectrovise
+ *
+ */
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Bus.FORGE)
 public class StructureAdditionManager {
+
+  public static final Logger LOGGER = LogManager.getLogger(StructureAdditionManager.class);
 
   @SubscribeEvent
   public static void addStructures(BiomeLoadingEvent event) {
 
-    MagiksMostEvile.LOGGER.info("Adding MME structures to biome: " + event.getName());
+    LOGGER.info("Adding MME structures to biome: " + event.getName());
 
     for (StructureFeature<?, ?> structure : ModConfiguredStructures.map.values()) {
       event.getGeneration().addStructureStart(structure);
     }
+
+
+    LOGGER.info("Done adding MME structures to biomes");
   }
 }

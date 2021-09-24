@@ -17,6 +17,9 @@
  */
 package genelectrovise.magiksmostevile.entity.boss;
 
+/**
+ * @see GlobalEntityTypeAttributes#put
+ */
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.WitherEntity;

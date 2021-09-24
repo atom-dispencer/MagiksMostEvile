@@ -34,8 +34,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityOrbitalRegistry implements IOrbitalRegistry {
 
-  public static final DeferredRegister<EntityType<?>> ENTITIES =
-      DeferredRegister.create(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
+  public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
 
   // =========MOBS====================================================================================================================
   public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT =
