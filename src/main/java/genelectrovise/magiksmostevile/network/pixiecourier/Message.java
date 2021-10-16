@@ -1,29 +1,30 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import genelectrovise.magiksmostevile.guice.Guicer;
 import net.minecraft.network.PacketBuffer;
 
 public class Message<T> {
 
-  private JsonObject contentJson;
-  private final Gson GSON = new GsonBuilder().create();
-  private final JsonParser PARSER = new JsonParser();
+  public static final String PROTOCOL_VERSION = "0007";
 
-  public Message(T contentJava) {
-    contentJson = parseToJsonObject(GSON.toJson(contentJson)).getAsJsonObject();
+  private JsonObject contentJson;
+  private Gson GSON = Guicer.get(Gson.class);
+  private JsonParser PARSER = Guicer.get(JsonParser.class);
+
+  public Message(JsonElement contentJson) {
+    this.contentJson = contentJson.getAsJsonObject();
   }
 
   public static boolean isProtocolGoodVersion(String protocolVersion) {
     return PixieCourier.MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
   }
-  
-  private JsonElement parseToJsonObject(String json) {
-    JsonParser parser = new JsonParser();
-    return parser.parse(GSON.toJson(json));
+
+  protected JsonElement parseToJsonObject(String json) {
+    return PARSER.parse(json);
   }
 
   public static Message<?> decode(PacketBuffer buffer) {
@@ -32,5 +33,17 @@ public class Message<T> {
 
   public Message<T> encode(PacketBuffer buffer) {
     return null;
+  }
+
+  public JsonObject getContentJson() {
+    return contentJson;
+  }
+
+  public Gson getGSON() {
+    return GSON;
+  }
+
+  public JsonParser getPARSER() {
+    return PARSER;
   }
 }

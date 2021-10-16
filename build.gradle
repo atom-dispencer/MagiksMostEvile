@@ -78,12 +78,17 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
+
+	// Compile
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
     implementation group: 'org.reflections', name: 'reflections', version: '0.9.12'
+	implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
+	
+	// Test
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
-
+	
 }
 
 // Ensure that sources and javadocs are updated with the project (use scripts/ folder for helper .ps1 scripts)
@@ -166,7 +171,7 @@ curseforge {
 
 // Configure the test task
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 

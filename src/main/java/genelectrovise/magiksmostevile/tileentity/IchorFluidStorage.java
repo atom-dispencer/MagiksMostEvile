@@ -84,4 +84,28 @@ public class IchorFluidStorage extends SingleTankFluidStorage {
     return drained;
   }
 
+  public TrackableIntegerHolder getMaxIchor() {
+    return maxIchor;
+  }
+
+  public void setMaxIchor(TrackableIntegerHolder maxIchor) {
+    this.maxIchor = maxIchor;
+  }
+
+  public TrackableIntegerHolder getCurrentIchor() {
+    return currentIchor;
+  }
+
+  public void setCurrentIchor(TrackableIntegerHolder currentIchor) {
+    this.currentIchor = currentIchor;
+  }
+
+  public String getNbtKey() {
+    return nbtKey;
+  }
+
+  public void setNbtKey(String nbtKey) {
+    this.nbtKey = nbtKey;
+  }
+
 }
