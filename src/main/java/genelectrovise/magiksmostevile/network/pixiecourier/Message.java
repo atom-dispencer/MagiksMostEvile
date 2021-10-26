@@ -2,7 +2,6 @@ package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import genelectrovise.magiksmostevile.guice.Guicer;
 import net.minecraft.network.PacketBuffer;
@@ -10,13 +9,20 @@ import net.minecraft.network.PacketBuffer;
 public class Message<T> {
 
   public static final String PROTOCOL_VERSION = "0007";
-
-  private JsonObject contentJson;
+  
   private Gson GSON = Guicer.get(Gson.class);
   private JsonParser PARSER = Guicer.get(JsonParser.class);
 
-  public Message(JsonElement contentJson) {
-    this.contentJson = contentJson.getAsJsonObject();
+  protected MessageContent<T> content;
+
+  public Message(T content, Class<T> type) {
+    
+    this.content = new MessageContent<>(type);
+    
+    // JSONify the given object
+    String json = GSON.toJson(content);
+    JsonElement parsed = PARSER.parse(json);
+    this.content.setContent(parsed.getAsJsonObject());
   }
 
   public static boolean isProtocolGoodVersion(String protocolVersion) {
@@ -35,8 +41,8 @@ public class Message<T> {
     return null;
   }
 
-  public JsonObject getContentJson() {
-    return contentJson;
+  public MessageContent<T> getContentJson() {
+    return content;
   }
 
   public Gson getGSON() {

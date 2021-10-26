@@ -15,13 +15,7 @@ public class MessageTest {
   final Injector injector = Guicer.createInjector();
   final String key_value = "{\"key\":\"value\"}";
 
-  @Inject
-  @Named("Message_Test") Message<JsonObject> message;
-
-  @BeforeEach
-  void beforeEach() {
-    injector.injectMembers(this);
-  }
+  final Message<JsonObject> message = new Message<>(null);
 
   @Test
   void ifProtocolIsGood_thenReturnTrue() {
