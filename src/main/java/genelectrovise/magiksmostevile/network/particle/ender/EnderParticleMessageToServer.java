@@ -36,6 +36,6 @@ public class EnderParticleMessageToServer {
   }
 
   public boolean isValid() {
-    return false;
+    return true;
   }
 }

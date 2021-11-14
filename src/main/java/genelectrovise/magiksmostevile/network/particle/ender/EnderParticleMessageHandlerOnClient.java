@@ -66,7 +66,6 @@ public class EnderParticleMessageHandlerOnClient {
   }
 
   public static boolean isProtocolAccepted(String protocolVersion) {
-    return ParticleNetworkingManager.ENDER_PARTICLE_MESSAGE_PROTOCOL_VERSION
-        .equals(protocolVersion);
+    return ParticleNetworkingManager.ENDER_PARTICLE_MESSAGE_PROTOCOL_VERSION.equals(protocolVersion);
   }
 }
