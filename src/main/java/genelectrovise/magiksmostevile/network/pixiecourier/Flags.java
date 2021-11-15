@@ -4,9 +4,13 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class Flags {
-  
+
+  /*
+   * The desired processor to process this packet (if no mapping for this, then will default to a
+   * processor for the class)
+   */
   public static final String F_PROCESSOR = "processor";
-  
+
   protected String[] flags;
   protected Map<String, Integer> mappings;
 
@@ -23,20 +27,20 @@ public class Flags {
     for (int i = 0; i < flags.length; i++) {
       ArrayUtils.add(this.flags, flags[i]);
     }
-    
+
     refreshMappings();
   }
-  
+
   protected void refreshMappings() {
     mappings.clear();
-    
+
     for (int i = 0; i < flags.length; i++) {
       String flag = flags[i];
-      
+
       mappings.put(flag, Integer.valueOf(i));
     }
   }
-  
+
   protected String get(String key) {
     return flags[mappings.get(key).intValue()];
   }

@@ -30,8 +30,8 @@ public class PixieCourier {
     channel.registerMessage(ID_TO_CLIENT, PixiePacket.class, PacketEncoder::encode, PacketEncoder::decode, PacketEncoder::recievePacket);
   }
 
-  public static void recieve(PixiePacket message, Context context) {
-    PixieProcessor processor = distributor.get(message.getType(), message.getFlags().get(Flags.F_PROCESSOR));
+  public static void recieve(PixiePacket packet, Context context) {
+    distributor.forwardPacketToProcessor(packet, context);
   }
 
 }
