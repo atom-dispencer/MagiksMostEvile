@@ -86,8 +86,7 @@ public class ModStructures {
         DimensionStructuresSettings structuresSettings = originalSettings.structureSettings();
         Field mapField = ObfuscationReflectionHelper.findField(DimensionStructuresSettings.class, "field_236193_d_");
         ReflectionUtil.makeUniversallyAccessible(mapField);
-        @SuppressWarnings("unchecked")
-        Map<Structure<?>, StructureSeparationSettings> structureSettingsMap = (Map<Structure<?>, StructureSeparationSettings>) mapField.get(structuresSettings);
+        @SuppressWarnings("unchecked") Map<Structure<?>, StructureSeparationSettings> structureSettingsMap = (Map<Structure<?>, StructureSeparationSettings>) mapField.get(structuresSettings);
         structureSettingsMap.put(structure, SEPERATION_SETTINGS.get(structure));
 
         MagiksMostEvile.LOGGER.debug("Reached end of setting block successfully.");

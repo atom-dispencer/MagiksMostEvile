@@ -43,8 +43,6 @@ public class MagiksMostEvile {
   public static final String VERSION = "alpha-1.0";
   public static final String NAME = "Magiks Most Evile";
   public static final String ACCEPTED_VERSIONS = "1.16.4";
-  
-  public static final PixieCourier COURIER = new PixieCourier();
 
   public static IEventBus MOD_EVENT_BUS;
   public static IEventBus FORGE_EVENT_BUS;

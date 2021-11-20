@@ -38,7 +38,5 @@ public class AltarEnergyUpdateMessageToServer {
     return new AltarEnergyUpdateMessageToServer();
   }
 
-  public boolean isValid() {
-    return messageIsValid;
-  }
+  public boolean isValid() { return messageIsValid; }
 }

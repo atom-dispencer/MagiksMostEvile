@@ -31,23 +31,25 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
  *
  */
 public class StructureFeatures {
-  
+
   public static final Logger LOGGER = LogManager.getLogger(StructureFeatures.class);
 
- // public static final Structure<NoFeatureConfig> SHRINE = register("MagiksMostEvile_Overground_Shrine", new ShrineStructure(), GenerationStage.Decoration.SURFACE_STRUCTURES);
+  // public static final Structure<NoFeatureConfig> SHRINE =
+  // register("MagiksMostEvile_Overground_Shrine", new ShrineStructure(),
+  // GenerationStage.Decoration.SURFACE_STRUCTURES);
 
   private static Map<Structure<?>, GenerationStage.Decoration> STEP;
 
   @SuppressWarnings("deprecation")
   private static <F extends Structure<?>> F register(String name, F structure, GenerationStage.Decoration decorationStage) {
-    
+
     LOGGER.info("Registering structure: " + name);
-    
-    if(STEP == null) {
+
+    if (STEP == null) {
       LOGGER.info("STEP map null, must fetch...");
       STEP = fetchStepMap(structure);
     }
-    
+
     Structure.STRUCTURES_REGISTRY.put(name.toLowerCase(Locale.ROOT), structure);
     STEP.put(structure, decorationStage);
     return Registry.register(Registry.STRUCTURE_FEATURE, name.toLowerCase(Locale.ROOT), structure);
@@ -56,5 +58,5 @@ public class StructureFeatures {
   private static Map<Structure<?>, Decoration> fetchStepMap(Structure<?> structure) {
     return ObfuscationReflectionHelper.getPrivateValue(Structure.class, structure, "STEP");
   }
-  
+
 }

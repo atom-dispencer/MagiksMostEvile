@@ -197,27 +197,19 @@ public class SquidMissileEntity extends MobEntity {
       // Like SquidEntity (if this works its easier than making a custom packet handler)
       // Maintains sided-ness because this method forces the server to send packets to the clients
       world.sendParticles(ParticleTypes.SQUID_INK, pX, pY, pZ, 1, vX, vY, vZ, 1);
-      
+
       // ^ used to be spawnParticle idk what this does now
     }
   }
 
   // Get and set
 
-  public boolean isExplosive() {
-    return explosive;
-  }
+  public boolean isExplosive() { return explosive; }
 
-  public void setExplosive(boolean explosive) {
-    this.explosive = explosive;
-  }
+  public void setExplosive(boolean explosive) { this.explosive = explosive; }
 
-  public void setTicksUntilIgnition(int i) {
-    this.ticksUntilIgnition = i;
-  }
+  public void setTicksUntilIgnition(int i) { this.ticksUntilIgnition = i; }
 
-  public void setDirection(Vector3d direction) {
-    this.direction = direction;
-  }
+  public void setDirection(Vector3d direction) { this.direction = direction; }
 
 }

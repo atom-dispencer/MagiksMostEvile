@@ -105,16 +105,10 @@ public class SquidMissileAttackGoal extends Goal {
 
   // Get and set
 
-  public KittyTheKrakenEntity getKraken() {
-    return kraken;
-  }
+  public KittyTheKrakenEntity getKraken() { return kraken; }
 
-  public int getAttackTimer() {
-    return attackTimer;
-  }
+  public int getAttackTimer() { return attackTimer; }
 
-  public void setAttackTimer(int attackTimer) {
-    this.attackTimer = attackTimer;
-  }
+  public void setAttackTimer(int attackTimer) { this.attackTimer = attackTimer; }
 
 }

@@ -71,21 +71,13 @@ public class InscriptionTableContainer extends CommonContainer {
 
   // Get and set
 
-  public InscriptionTableTileEntity getInscriptionTable() {
-    return inscriptionTable;
-  }
+  public InscriptionTableTileEntity getInscriptionTable() { return inscriptionTable; }
 
-  public PlayerInventory getPlayerInventory() {
-    return playerInventory;
-  }
+  public PlayerInventory getPlayerInventory() { return playerInventory; }
 
-  public void setInscriptionTable(InscriptionTableTileEntity inscriptionTable) {
-    this.inscriptionTable = inscriptionTable;
-  }
+  public void setInscriptionTable(InscriptionTableTileEntity inscriptionTable) { this.inscriptionTable = inscriptionTable; }
 
-  public void setPlayerInventory(PlayerInventory playerInventory) {
-    this.playerInventory = playerInventory;
-  }
+  public void setPlayerInventory(PlayerInventory playerInventory) { this.playerInventory = playerInventory; }
 
   public void buttonPressed(ResourceLocation signumName) {
     InscriptionTableNetworkingManager.CButtonPressed.sendToServer(new ButtonPressedMessageToServer(signumName));

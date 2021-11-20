@@ -59,13 +59,9 @@ public enum EnumFeatureLocation implements IStringSerializable {
     this.biomeCategory = biomeCategory;
   }
 
-  public String getName() {
-    return this.name;
-  }
+  public String getName() { return this.name; }
 
-  public Biome.Category getBiomeCategory() {
-    return biomeCategory;
-  }
+  public Biome.Category getBiomeCategory() { return biomeCategory; }
 
   // IStringSerializable
 
@@ -74,7 +70,5 @@ public enum EnumFeatureLocation implements IStringSerializable {
   }
 
   @Override
-  public String getSerializedName() {
-    return this.getName();
-  }
+  public String getSerializedName() { return this.getName(); }
 }

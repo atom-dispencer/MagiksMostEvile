@@ -36,8 +36,8 @@ public class GlyphParticleFactory implements IParticleFactory<GlyphParticleData>
     try {
       GlyphParticle newParticle = new GlyphParticle(world, xPos, yPos, zPos, xVelocity, yVelocity, zVelocity, glyphParticleData.getTint(), glyphParticleData.getDiameter(), sprites);
       newParticle.pickSprite(sprites); // choose a random sprite from the available list
-                                                 // (in this case there is only
-                                                 // one)
+                                       // (in this case there is only
+                                       // one)
       return newParticle;
     } catch (Exception e) {
       e.printStackTrace();

@@ -50,7 +50,7 @@ public class IchorFluidStorage extends SingleTankFluidStorage {
    * @param compound
    */
   public void fromNbt(CompoundNBT compound) {
-    currentIchor.set(compound.getInt("currentIchor"));    
+    currentIchor.set(compound.getInt("currentIchor"));
     setCapacity(compound.getInt("capacity"));
   }
 
@@ -84,28 +84,16 @@ public class IchorFluidStorage extends SingleTankFluidStorage {
     return drained;
   }
 
-  public TrackableIntegerHolder getMaxIchor() {
-    return maxIchor;
-  }
+  public TrackableIntegerHolder getMaxIchor() { return maxIchor; }
 
-  public void setMaxIchor(TrackableIntegerHolder maxIchor) {
-    this.maxIchor = maxIchor;
-  }
+  public void setMaxIchor(TrackableIntegerHolder maxIchor) { this.maxIchor = maxIchor; }
 
-  public TrackableIntegerHolder getCurrentIchor() {
-    return currentIchor;
-  }
+  public TrackableIntegerHolder getCurrentIchor() { return currentIchor; }
 
-  public void setCurrentIchor(TrackableIntegerHolder currentIchor) {
-    this.currentIchor = currentIchor;
-  }
+  public void setCurrentIchor(TrackableIntegerHolder currentIchor) { this.currentIchor = currentIchor; }
 
-  public String getNbtKey() {
-    return nbtKey;
-  }
+  public String getNbtKey() { return nbtKey; }
 
-  public void setNbtKey(String nbtKey) {
-    this.nbtKey = nbtKey;
-  }
+  public void setNbtKey(String nbtKey) { this.nbtKey = nbtKey; }
 
 }

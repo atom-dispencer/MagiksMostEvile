@@ -33,8 +33,6 @@ public class VampireBatSpawnEgg extends EvileSpawnEgg {
   }
 
   @Override
-  public EntityType<?> getEntityType() {
-    return EntityOrbitalRegistry.VAMPIRE_BAT.get();
-  }
+  public EntityType<?> getEntityType() { return EntityOrbitalRegistry.VAMPIRE_BAT.get(); }
 
 }

@@ -94,9 +94,7 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
   }
 
   @Override
-  public ITextComponent getDisplayName() {
-    return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.inscription_table");
-  }
+  public ITextComponent getDisplayName() { return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.inscription_table"); }
 
   public void recipe(ResourceLocation signumName) {
     Signum signum = Signa.SIGNA.get(signumName);

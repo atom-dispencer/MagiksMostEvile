@@ -35,7 +35,5 @@ public class GlyphMessageToServer {
     return new GlyphMessageToServer();
   }
 
-  public boolean isValid() {
-    return false;
-  }
+  public boolean isValid() { return false; }
 }

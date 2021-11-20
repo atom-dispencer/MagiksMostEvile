@@ -68,14 +68,10 @@ public class EvileItemTags {
   /**
    * @return An {@link ITagCollection} of the the registered {@link ITag}s.
    */
-  public static ITagCollection<Item> getCollection() {
-    return itemTags.getAllTags();
-  }
+  public static ITagCollection<Item> getCollection() { return itemTags.getAllTags(); }
 
   /**
    * @return A list of each registered {@link INamedTag}
    */
-  public static ITagCollection<Item> getAllTags() {
-    return itemTags.getAllTags();
-  }
+  public static ITagCollection<Item> getAllTags() { return itemTags.getAllTags(); }
 }

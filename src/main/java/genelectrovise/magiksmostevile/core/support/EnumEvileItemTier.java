@@ -49,28 +49,16 @@ public enum EnumEvileItemTier implements IItemTier {
     this.repairMaterial = new LazyValue<>(repairMaterialIn);
   }
 
-  public int getUses() {
-    return this.maxUses;
-  }
+  public int getUses() { return this.maxUses; }
 
-  public float getSpeed() {
-    return this.efficiency;
-  }
+  public float getSpeed() { return this.efficiency; }
 
-  public float getAttackDamageBonus() {
-    return this.attackDamage;
-  }
+  public float getAttackDamageBonus() { return this.attackDamage; }
 
-  public int getLevel() {
-    return this.harvestLevel;
-  }
+  public int getLevel() { return this.harvestLevel; }
 
-  public int getEnchantmentValue() {
-    return this.enchantability;
-  }
+  public int getEnchantmentValue() { return this.enchantability; }
 
-  public Ingredient getRepairIngredient() {
-    return this.repairMaterial.get();
-  }
+  public Ingredient getRepairIngredient() { return this.repairMaterial.get(); }
 
 }

@@ -34,21 +34,15 @@ public class AltarRitualSelector {
   /**
    * @param location
    */
-  public void setLocation(ResourceLocation location) {
-    this.location = location;
-  }
+  public void setLocation(ResourceLocation location) { this.location = location; }
 
   /**
    * @return the location
    */
-  public ResourceLocation getLocation() {
-    return location != null ? location
-        : new ResourceLocation(MagiksMostEvile.MODID, "convert_amethyst_ritual");
-  }
+  public ResourceLocation getLocation() { return location != null ? location
+      : new ResourceLocation(MagiksMostEvile.MODID, "convert_amethyst_ritual"); }
 
-  public Supplier<Ritual> getRitualSupplier() {
-    return getRitualSupplier(location);
-  }
+  public Supplier<Ritual> getRitualSupplier() { return getRitualSupplier(location); }
 
   public Supplier<Ritual> getRitualSupplier(ResourceLocation location) {
 

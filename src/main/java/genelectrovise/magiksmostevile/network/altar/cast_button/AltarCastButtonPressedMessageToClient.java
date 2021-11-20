@@ -47,9 +47,7 @@ public class AltarCastButtonPressedMessageToClient {
         "A AltarCastButtonPressedMessageToClient is being constructed! Why is this happening! Have invalidated message as this should not occur!!");
   }
 
-  public boolean isMessageValid() {
-    return messageIsValid;
-  }
+  public boolean isMessageValid() { return messageIsValid; }
 
   /**
    * Called by the network code. Used to write the contents of your message member variables into the
@@ -74,7 +72,5 @@ public class AltarCastButtonPressedMessageToClient {
     return new AltarCastButtonPressedMessageToClient();
   }
 
-  public boolean isValid() {
-    return messageIsValid;
-  }
+  public boolean isValid() { return messageIsValid; }
 }

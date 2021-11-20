@@ -106,8 +106,6 @@ public class AmethystStaff extends ShootableItem {
   }
 
   @Override
-  public int getDefaultProjectileRange() {
-    return 10;
-  }
+  public int getDefaultProjectileRange() { return 10; }
 
 }

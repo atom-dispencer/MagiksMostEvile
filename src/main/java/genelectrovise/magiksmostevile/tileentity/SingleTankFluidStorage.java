@@ -85,21 +85,21 @@ public class SingleTankFluidStorage implements IFluidHandler, IFluidTank {
 
   @Override
   public int fill(FluidStack resource, FluidAction action) {
-    
+
     if (resource.isEmpty() || !isFluidValid(resource)) {
       return 0;
     }
 
     if (action.simulate()) {
-      
+
       if (fluidStack.isEmpty()) {
         return Math.min(capacity, resource.getAmount());
       }
-      
+
       if (!fluidStack.isFluidEqual(resource)) {
         return 0;
       }
-      
+
       return Math.min(capacity - fluidStack.getAmount(), resource.getAmount());
     }
 
@@ -156,28 +156,18 @@ public class SingleTankFluidStorage implements IFluidHandler, IFluidTank {
   }
 
   @Override
-  public FluidStack getFluid() {
-    return fluidStack;
-  }
+  public FluidStack getFluid() { return fluidStack; }
 
   @Override
-  public int getFluidAmount() {
-    return fluidStack.getAmount();
-  }
+  public int getFluidAmount() { return fluidStack.getAmount(); }
 
   @Override
-  public int getCapacity() {
-    return capacity;
-  }
+  public int getCapacity() { return capacity; }
 
-  public void setCapacity(int capacity) {
-    this.capacity = capacity;
-  }
+  public void setCapacity(int capacity) { this.capacity = capacity; }
 
   @Override
-  public int getTanks() {
-    return 1;
-  }
+  public int getTanks() { return 1; }
 
   @Override
   public FluidStack getFluidInTank(int tank) {

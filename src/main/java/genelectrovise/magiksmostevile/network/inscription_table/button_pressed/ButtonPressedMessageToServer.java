@@ -41,12 +41,8 @@ public class ButtonPressedMessageToServer {
     return new ButtonPressedMessageToServer(buttonName);
   }
 
-  public ResourceLocation getSignumName() {
-    return buttonName;
-  }
+  public ResourceLocation getSignumName() { return buttonName; }
 
-  public boolean isValid() {
-    return messageIsValid;
-  }
+  public boolean isValid() { return messageIsValid; }
 
 }

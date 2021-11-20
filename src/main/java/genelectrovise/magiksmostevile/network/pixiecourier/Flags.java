@@ -20,7 +20,7 @@ public class Flags {
   public Flags(String[] flags) {
     this.mappings = Maps.newHashMap();
     this.flags = new String[] {};
-    
+
     addFlags(flags);
   }
 
@@ -53,20 +53,12 @@ public class Flags {
 
   // Get and set
 
-  public String[] getFlags() {
-    return flags;
-  }
+  public String[] getFlags() { return flags; }
 
-  public void setFlags(String[] flags) {
-    this.flags = flags;
-  }
+  public void setFlags(String[] flags) { this.flags = flags; }
 
-  public Map<String, Integer> getMappings() {
-    return mappings;
-  }
+  public Map<String, Integer> getMappings() { return mappings; }
 
-  public void setMappings(Map<String, Integer> mappings) {
-    this.mappings = mappings;
-  }
+  public void setMappings(Map<String, Integer> mappings) { this.mappings = mappings; }
 
 }

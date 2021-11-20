@@ -44,9 +44,7 @@ public class GlyphMessageToClient {
     this.spacing = spacing;
   }
 
-  public boolean isMessageValid() {
-    return messageIsValid;
-  }
+  public boolean isMessageValid() { return messageIsValid; }
 
   /**
    * Called by the network code. Used to write the contents of your message member variables into the
@@ -79,42 +77,30 @@ public class GlyphMessageToClient {
     return new GlyphMessageToClient(resource, orientaion, position, centered, spacing);
   }
 
-  public boolean isValid() {
-    return resource != null && orientation != null && position != null && spacing != 0;
-  }
+  public boolean isValid() { return resource != null && orientation != null && position != null && spacing != 0; }
 
   /**
    * @return the resource
    */
-  public ResourceLocation getResource() {
-    return resource;
-  }
+  public ResourceLocation getResource() { return resource; }
 
   /**
    * @return the orientation
    */
-  public GlyphOrientation getOrientation() {
-    return orientation;
-  }
+  public GlyphOrientation getOrientation() { return orientation; }
 
   /**
    * @return the position
    */
-  public BlockPos getPosition() {
-    return position;
-  }
+  public BlockPos getPosition() { return position; }
 
   /**
    * @return the spacing
    */
-  public double getSpacing() {
-    return spacing;
-  }
+  public double getSpacing() { return spacing; }
 
   /**
    * @return the centered
    */
-  public boolean isCentered() {
-    return centered;
-  }
+  public boolean isCentered() { return centered; }
 }

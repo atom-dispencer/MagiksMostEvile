@@ -55,7 +55,5 @@ public class AltarToggleButtonMessageToClient {
   /**
    * @return the location
    */
-  public ResourceLocation getLocation() {
-    return location;
-  }
+  public ResourceLocation getLocation() { return location; }
 }

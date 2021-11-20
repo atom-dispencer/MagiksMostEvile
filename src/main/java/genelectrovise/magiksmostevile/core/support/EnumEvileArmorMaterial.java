@@ -76,33 +76,21 @@ public enum EnumEvileArmorMaterial implements IArmorMaterial {
   }
 
   @Override
-  public int getEnchantmentValue() {
-    return this.enchantability;
-  }
+  public int getEnchantmentValue() { return this.enchantability; }
 
   @Override
-  public SoundEvent getEquipSound() {
-    return this.soundEvent;
-  }
+  public SoundEvent getEquipSound() { return this.soundEvent; }
 
   @Override
-  public Ingredient getRepairIngredient() {
-    return this.repairMaterial.get();
-  }
+  public Ingredient getRepairIngredient() { return this.repairMaterial.get(); }
 
   @OnlyIn(Dist.CLIENT)
-  public String getName() {
-    return this.name;
-  }
+  public String getName() { return this.name; }
 
   @Override
-  public float getToughness() {
-    return this.toughness;
-  }
+  public float getToughness() { return this.toughness; }
 
   @Override
-  public float getKnockbackResistance() {
-    return this.knockbackResistance;
-  }
+  public float getKnockbackResistance() { return this.knockbackResistance; }
 
 }

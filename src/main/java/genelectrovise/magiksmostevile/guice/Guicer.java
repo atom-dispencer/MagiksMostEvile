@@ -20,10 +20,8 @@ public class Guicer {
     return injector;
   }
 
-  public static List<AbstractModule> getModules() {
-    return modules;
-  }
-  
+  public static List<AbstractModule> getModules() { return modules; }
+
   public static <T> T get(Class<T> clazz) {
     return getInjector().getInstance(clazz);
   }

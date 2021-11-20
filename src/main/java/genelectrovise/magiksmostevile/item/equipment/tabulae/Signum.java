@@ -30,17 +30,11 @@ public class Signum {
     this.item = item;
   }
 
-  public ResourceLocation getName() {
-    return name;
-  }
+  public ResourceLocation getName() { return name; }
 
-  public EnumSignumMaterialType getType() {
-    return type;
-  }
+  public EnumSignumMaterialType getType() { return type; }
 
-  public Supplier<Item> getItem() {
-    return item;
-  }
+  public Supplier<Item> getItem() { return item; }
 
   public static enum EnumSignumMaterialType {
     WOOD, GOLD;

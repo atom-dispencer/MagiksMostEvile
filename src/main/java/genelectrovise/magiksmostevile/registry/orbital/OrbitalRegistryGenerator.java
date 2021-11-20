@@ -108,19 +108,11 @@ public class OrbitalRegistryGenerator {
 
   // Get and set
 
-  public boolean isInitialised() {
-    return initialised;
-  }
+  public boolean isInitialised() { return initialised; }
 
-  public void setInitialised(boolean initialised) {
-    this.initialised = initialised;
-  }
+  public void setInitialised(boolean initialised) { this.initialised = initialised; }
 
-  public Reflections getReflections() {
-    return reflections;
-  }
+  public Reflections getReflections() { return reflections; }
 
-  public void setReflections(Reflections reflections) {
-    this.reflections = reflections;
-  }
+  public void setReflections(Reflections reflections) { this.reflections = reflections; }
 }

@@ -97,8 +97,6 @@ public class ConvertAmethystRitual extends Ritual {
   }
 
   @Override
-  public ResultHandler<?> getResultHandler() {
-    return new ConvertAmethystResultHandler(getAltar(), this);
-  }
+  public ResultHandler<?> getResultHandler() { return new ConvertAmethystResultHandler(getAltar(), this); }
 
 }

@@ -33,9 +33,7 @@ public class TransferEnergyMessageToClient {
     this.destination = destination;
   }
 
-  public boolean isMessageValid() {
-    return departure != null && destination != null;
-  }
+  public boolean isMessageValid() { return departure != null && destination != null; }
 
   /**
    * Called by the network code. Used to write the contents of your message member variables into the
@@ -61,21 +59,15 @@ public class TransferEnergyMessageToClient {
     return new TransferEnergyMessageToClient(departure, destination);
   }
 
-  public boolean isValid() {
-    return departure != null && destination != null;
-  }
+  public boolean isValid() { return departure != null && destination != null; }
 
   /**
    * @return the departure
    */
-  public BlockPos getDeparture() {
-    return departure;
-  }
+  public BlockPos getDeparture() { return departure; }
 
   /**
    * @return the destination
    */
-  public BlockPos getDestination() {
-    return destination;
-  }
+  public BlockPos getDestination() { return destination; }
 }

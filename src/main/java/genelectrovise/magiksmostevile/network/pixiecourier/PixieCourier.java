@@ -13,6 +13,10 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PixieCourier {
 
+  private static final PixieCourier INSTANCE = new PixieCourier();
+
+  public static PixieCourier getInstance() { return INSTANCE; }
+
   // Protocol
   public static final String MESSAGE_PROTOCOL_VERSION = "1.0";
   public static final int ID_TO_SERVER = 1;
@@ -27,7 +31,7 @@ public class PixieCourier {
   protected PacketDistributor distributor = new PacketDistributor();
   protected PacketEncoder encoder = new PacketEncoder();
 
-  public PixieCourier() {}
+  private PixieCourier() {}
 
   @SubscribeEvent
   public static void onCommonSetupEvent(FMLCommonSetupEvent event) throws CourierException {
@@ -35,9 +39,9 @@ public class PixieCourier {
 
 
 
-    MagiksMostEvile.COURIER.channel =
+    INSTANCE.channel =
         NetworkRegistry.newSimpleChannel(channelLocationSupplier.get(), () -> MESSAGE_PROTOCOL_VERSION, (ver) -> PacketEncoder.isValidVersion(ver), (ver) -> PacketEncoder.isValidVersion(ver));
-    MagiksMostEvile.COURIER.channel.registerMessage(ID_TO_CLIENT, PixiePacket.class,
+    INSTANCE.channel.registerMessage(ID_TO_CLIENT, PixiePacket.class,
 
         // Encode packet
         (t, u) -> {
@@ -55,7 +59,7 @@ public class PixieCourier {
   }
 
   public static void recieve(final PixiePacket message, Supplier<NetworkEvent.Context> contextSupplier) {
-    MagiksMostEvile.COURIER.distributor.forwardPacketToProcessor(message, contextSupplier.get());
+    INSTANCE.distributor.forwardPacketToProcessor(message, contextSupplier.get());
   }
 
   public static void send() {

@@ -13,8 +13,8 @@ import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
 public class PixiePacketJsonDeserializer implements JsonDeserializer<PixiePacket> {
 
   @Override
-  public PixiePacket deserialize(JsonElement json, Type packetType, JsonDeserializationContext context) throws JsonParseException {
-    JsonObject object = json.getAsJsonObject();
+  public PixiePacket deserialize(JsonElement element, Type packetType, JsonDeserializationContext context) throws JsonParseException {
+    JsonObject object = element.getAsJsonObject();
 
     Gson gson = GsonConfigurator.newConfiguredInstance();
     String typeName = object.get(PixiePacket.TYPE).getAsString();
@@ -23,13 +23,13 @@ public class PixiePacketJsonDeserializer implements JsonDeserializer<PixiePacket
 
     // Default to JsonObject if fails later
     Class<?> type = JsonObject.class;
-    
+
     try {
       type = Class.forName(typeName);
     } catch (ClassNotFoundException cnf) {
       cnf.printStackTrace();
     }
-    
+
     return new PixiePacket(type, content, flags);
   }
 

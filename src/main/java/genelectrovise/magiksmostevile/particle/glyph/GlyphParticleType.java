@@ -33,9 +33,7 @@ public class GlyphParticleType extends ParticleType<GlyphParticleData> {
     super(ALWAYS_SHOW_REGARDLESS_OF_DISTANCE_FROM_PLAYER, GlyphParticleData.DESERIALIZER);
   }
 
-  public GlyphParticleType getThis() {
-    return this;
-  }
+  public GlyphParticleType getThis() { return this; }
 
   /**
    * Get the {@link Codec} (Encoder/Decoder) of this particle.

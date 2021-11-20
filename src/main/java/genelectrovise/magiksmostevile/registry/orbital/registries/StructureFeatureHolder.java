@@ -28,8 +28,9 @@ public class StructureFeatureHolder<FC extends IFeatureConfig, T extends Structu
 
   private StructureFeature<FC, ? extends Structure<FC>> feature;
   private Collection<EnumFeatureLocation> categories;
-  
-  // private static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, MagiksMostEvile.MODID);
+
+  // private static final DeferredRegister<Structure<?>> STRUCTURES =
+  // DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, MagiksMostEvile.MODID);
 
   public StructureFeatureHolder(StructureFeature<FC, ? extends Structure<FC>> feature, EnumFeatureLocation... enumFeatureLocations) {
 
@@ -37,12 +38,8 @@ public class StructureFeatureHolder<FC extends IFeatureConfig, T extends Structu
     this.categories = Arrays.asList(enumFeatureLocations);
   }
 
-  public StructureFeature<FC, ? extends Structure<FC>> getFeature() {
-    return feature;
-  }
+  public StructureFeature<FC, ? extends Structure<FC>> getFeature() { return feature; }
 
-  public Collection<EnumFeatureLocation> getLocations() {
-    return categories;
-  }
+  public Collection<EnumFeatureLocation> getLocations() { return categories; }
 
 }

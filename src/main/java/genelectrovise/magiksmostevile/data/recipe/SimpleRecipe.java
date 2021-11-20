@@ -290,60 +290,36 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   }
 
   @Override
-  public ItemStack getResultItem() {
-    return results.get(primaryOutput).copy();
-  }
+  public ItemStack getResultItem() { return results.get(primaryOutput).copy(); }
 
   @Override
-  public ResourceLocation getId() {
-    return id;
-  }
+  public ResourceLocation getId() { return id; }
 
   @Override
-  public IRecipeSerializer<?> getSerializer() {
-    return SimpleRecipe.SERIALIZER;
-  }
+  public IRecipeSerializer<?> getSerializer() { return SimpleRecipe.SERIALIZER; }
 
   @Override
-  public IRecipeType<?> getType() {
-    return RecipeSerializerOrbitalRegistry.SIMPLE_TYPE;
-  }
+  public IRecipeType<?> getType() { return RecipeSerializerOrbitalRegistry.SIMPLE_TYPE; }
 
   @Override
-  public ItemStack getToastSymbol() {
-    return results.get(primaryOutput).copy();
-  }
-  
-  @Override
-  public NonNullList<Ingredient> getIngredients() {
-    return ICustomRecipe.super.getIngredients();
-  }
+  public ItemStack getToastSymbol() { return results.get(primaryOutput).copy(); }
 
   @Override
-  public String getGroup() {
-    return ICustomRecipe.super.getGroup();
-  }
+  public NonNullList<Ingredient> getIngredients() { return ICustomRecipe.super.getIngredients(); }
+
+  @Override
+  public String getGroup() { return ICustomRecipe.super.getGroup(); }
 
   //
 
-  public ArrayList<Usage> getUsages() {
-    return usages;
-  }
+  public ArrayList<Usage> getUsages() { return usages; }
 
-  public int getProcessingTime() {
-    return processingTime;
-  }
+  public int getProcessingTime() { return processingTime; }
 
-  public int getPrimaryOutput() {
-    return primaryOutput;
-  }
+  public int getPrimaryOutput() { return primaryOutput; }
 
-  public ArrayList<ItemStack> getResults() {
-    return results;
-  }
+  public ArrayList<ItemStack> getResults() { return results; }
 
-  public float getExperience() {
-    return experience;
-  }
+  public float getExperience() { return experience; }
 
 }

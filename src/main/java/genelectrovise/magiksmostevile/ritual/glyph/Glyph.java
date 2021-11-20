@@ -197,40 +197,24 @@ public class Glyph {
     private BufferedImage image;
 
     // Width
-    public void setWidth(int width) {
-      this.width = width;
-    }
+    public void setWidth(int width) { this.width = width; }
 
-    public int getWidth() {
-      return width;
-    }
+    public int getWidth() { return width; }
 
     // Height
-    public int getHeight() {
-      return height;
-    }
+    public int getHeight() { return height; }
 
-    public void setHeight(int height) {
-      this.height = height;
-    }
+    public void setHeight(int height) { this.height = height; }
 
     // Pixels
-    public Color[] getPixels() {
-      return pixels;
-    }
+    public Color[] getPixels() { return pixels; }
 
-    public void setPixels(Color[] colors) {
-      this.pixels = colors;
-    }
+    public void setPixels(Color[] colors) { this.pixels = colors; }
 
     // Image
-    public BufferedImage getImage() {
-      return image;
-    }
+    public BufferedImage getImage() { return image; }
 
-    public void setImage(BufferedImage image) {
-      this.image = image;
-    }
+    public void setImage(BufferedImage image) { this.image = image; }
   }
 
   public static enum GlyphOrientation {

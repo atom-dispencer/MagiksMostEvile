@@ -76,34 +76,22 @@ public class KittyTheKrakenEntity extends BossMob {
   }
 
   @Override
-  public double getEyeY() {
-    return this.getY() + 4.5;
-  }
+  public double getEyeY() { return this.getY() + 4.5; }
 
   /**
    * @return {@link #leftArm}, otherwise {@link #rightArm}. If {@link #rightArm} is not usable, null.
    */
   @Nullable
-  public KrakenArm getFirstUsableArm() {
-    return leftArm.isUsable() ? leftArm : (rightArm.isUsable() ? rightArm : null);
-  }
+  public KrakenArm getFirstUsableArm() { return leftArm.isUsable() ? leftArm : (rightArm.isUsable() ? rightArm : null); }
 
   // Get and set
 
-  public boolean isSquidMissileAttacking() {
-    return squidMissileAttacking;
-  }
+  public boolean isSquidMissileAttacking() { return squidMissileAttacking; }
 
-  public void setSquidMissileAttacking(boolean squidMissileAttacking) {
-    this.squidMissileAttacking = squidMissileAttacking;
-  }
+  public void setSquidMissileAttacking(boolean squidMissileAttacking) { this.squidMissileAttacking = squidMissileAttacking; }
 
-  public KrakenArm getLeftArm() {
-    return leftArm;
-  }
+  public KrakenArm getLeftArm() { return leftArm; }
 
-  public KrakenArm getRightArm() {
-    return rightArm;
-  }
+  public KrakenArm getRightArm() { return rightArm; }
 
 }

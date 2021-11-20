@@ -56,9 +56,7 @@ public class Usage {
     return usage;
   }
 
-  public ResourceLocation getId() {
-    return id;
-  }
+  public ResourceLocation getId() { return id; }
 
   public String serialise() {
     return id.toString();

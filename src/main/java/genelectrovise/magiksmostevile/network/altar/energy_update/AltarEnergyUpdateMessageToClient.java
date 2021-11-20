@@ -58,9 +58,7 @@ public class AltarEnergyUpdateMessageToClient {
     this.playerUUID = playerUUID;
   }
 
-  public boolean isMessageValid() {
-    return messageIsValid;
-  }
+  public boolean isMessageValid() { return messageIsValid; }
 
   /**
    * Called by the network code. Used to write the contents of your message member variables into the
@@ -93,7 +91,5 @@ public class AltarEnergyUpdateMessageToClient {
     return "AltarEnergyUpdateMessageToClient{TODO toString}";
   }
 
-  public boolean isValid() {
-    return messageIsValid;
-  }
+  public boolean isValid() { return messageIsValid; }
 }

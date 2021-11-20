@@ -46,8 +46,8 @@ public class GlyphParticle extends SpriteTexturedParticle {
     final float PARTICLE_SCALE_FOR_ONE_METRE = 0.5F; // if the particleScale is 0.5, the texture
                                                      // will be rendered as 1 metre high
     quadSize = PARTICLE_SCALE_FOR_ONE_METRE * (float) diameter; // sets the rendering size of
-                                                                     // the particle for a
-                                                                     // TexturedParticle.
+                                                                // the particle for a
+                                                                // TexturedParticle.
 
     lifetime = 100; // lifetime in ticks: 100 ticks = 5 seconds
 
@@ -93,9 +93,7 @@ public class GlyphParticle extends SpriteTexturedParticle {
   // difference. In previous versions of minecraft,
   // "lit" particles changed brightness depending on world lighting i.e. block
   // light + sky light
-  public IParticleRenderType getRenderType() {
-    return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
-  }
+  public IParticleRenderType getRenderType() { return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT; }
 
   /**
    * call once per tick to update the Particle position, calculate collisions, remove when max
@@ -111,7 +109,7 @@ public class GlyphParticle extends SpriteTexturedParticle {
     zo = z;
 
     move(xd, yd, zd); // simple linear motion. You can change speed by changing
-                                     // motionX, motionY,
+                      // motionX, motionY,
     // motionZ every tick. For example - you can make the particle accelerate
     // downwards due to gravity by
     // final double GRAVITY_ACCELERATION_PER_TICK = -0.02;
@@ -126,7 +124,7 @@ public class GlyphParticle extends SpriteTexturedParticle {
     }
 
     if (yo == y && yd > 0) { // detect a collision while moving upwards (can't move up
-                                           // at all)
+                             // at all)
       this.remove();
     }
 
@@ -135,8 +133,7 @@ public class GlyphParticle extends SpriteTexturedParticle {
     }
   }
 
-  @SuppressWarnings("unused")
-  private final IAnimatedSprite sprites; // contains a list of textures; choose one using either
+  @SuppressWarnings("unused") private final IAnimatedSprite sprites; // contains a list of textures; choose one using either
   // newParticle.selectSpriteRandomly(sprites); or
   // newParticle.selectSpriteWithAge(sprites);
 }

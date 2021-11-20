@@ -35,7 +35,5 @@ public class TransferEnergyMessageToServer {
     return new TransferEnergyMessageToServer();
   }
 
-  public boolean isValid() {
-    return false;
-  }
+  public boolean isValid() { return false; }
 }

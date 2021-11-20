@@ -38,7 +38,5 @@ public class AltarIchorUpdateMessageToServer {
     return new AltarIchorUpdateMessageToServer();
   }
 
-  public boolean isValid() {
-    return messageIsValid;
-  }
+  public boolean isValid() { return messageIsValid; }
 }

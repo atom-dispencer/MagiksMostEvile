@@ -93,9 +93,7 @@ public class VampireBatHangGoal extends Goal {
     this.world.levelEvent((PlayerEntity) null, 1025, vampireBat.blockPosition(), 0);
   }
 
-  private PlayerEntity getClosestPredicateFulfillingPlayer() {
-    return this.world.getNearestPlayer(VampireBatEntity.entityPredicate, vampireBat);
-  }
+  private PlayerEntity getClosestPredicateFulfillingPlayer() { return this.world.getNearestPlayer(VampireBatEntity.entityPredicate, vampireBat); }
 
   private boolean playerIsSurvivalAndNotNull(@Nullable PlayerEntity player) {
     if (player != null && !player.isCreative() && !player.isSpectator()) {

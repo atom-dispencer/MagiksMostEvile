@@ -81,11 +81,7 @@ public class BossMob extends MonsterEntity {
   /**
    * @return the bossInfo
    */
-  public ServerBossInfo getServerBossInfo() {
-    return serverBossInfo;
-  }
+  public ServerBossInfo getServerBossInfo() { return serverBossInfo; }
 
-  public void setServerBossInfo(ServerBossInfo bossInfo) {
-    this.serverBossInfo = bossInfo;
-  }
+  public void setServerBossInfo(ServerBossInfo bossInfo) { this.serverBossInfo = bossInfo; }
 }

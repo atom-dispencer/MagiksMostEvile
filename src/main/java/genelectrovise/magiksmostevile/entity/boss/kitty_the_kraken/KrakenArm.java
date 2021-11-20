@@ -46,25 +46,15 @@ public class KrakenArm implements INBTSerializable<CompoundNBT> {
 
   // Get and set
 
-  public KittyTheKrakenEntity getKraken() {
-    return kraken;
-  }
+  public KittyTheKrakenEntity getKraken() { return kraken; }
 
-  public KrakenArmSide getSide() {
-    return side;
-  }
+  public KrakenArmSide getSide() { return side; }
 
-  public void setSide(KrakenArmSide side) {
-    this.side = side;
-  }
+  public void setSide(KrakenArmSide side) { this.side = side; }
 
-  public boolean isUsable() {
-    return usable;
-  }
+  public boolean isUsable() { return usable; }
 
-  public void setUsable(boolean usable) {
-    this.usable = usable;
-  }
+  public void setUsable(boolean usable) { this.usable = usable; }
 
   // Classes
 
@@ -72,9 +62,7 @@ public class KrakenArm implements INBTSerializable<CompoundNBT> {
     LEFT, RIGHT;
 
     @Override
-    public String getSerializedName() {
-      return this.name();
-    }
+    public String getSerializedName() { return this.name(); }
 
     public static KrakenArmSide fromString(String string) {
       return KrakenArmSide.valueOf(string);

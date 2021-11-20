@@ -41,7 +41,7 @@ public class PacketEncoderTest {
 
       PacketEncoder.encode(pixiePacket, packetBuffer);
     });
-    
+
     String expectedMessage = PacketEncoder.PACKET_BUFFER_IS_NOT_WRITABLE_FOR_ENCODING_PIXIE_PACKET;
     Assertions.assertTrue(exception.getMessage().contains(expectedMessage));
   }

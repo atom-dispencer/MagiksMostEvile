@@ -33,9 +33,7 @@ public class EnderParticleMessageToClient {
     this.count = count;
   }
 
-  public boolean isMessageValid() {
-    return position != null && count != 0;
-  }
+  public boolean isMessageValid() { return position != null && count != 0; }
 
   /**
    * Called by the network code. Used to write the contents of your message member variables into the
@@ -61,21 +59,15 @@ public class EnderParticleMessageToClient {
     return new EnderParticleMessageToClient(position, count);
   }
 
-  public boolean isValid() {
-    return position != null && count != 0;
-  }
+  public boolean isValid() { return position != null && count != 0; }
 
   /**
    * @return the position
    */
-  public BlockPos getPosition() {
-    return position;
-  }
+  public BlockPos getPosition() { return position; }
 
   /**
    * @return the spacing
    */
-  public double getCount() {
-    return count;
-  }
+  public double getCount() { return count; }
 }

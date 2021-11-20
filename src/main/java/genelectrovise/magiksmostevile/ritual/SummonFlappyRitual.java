@@ -144,8 +144,6 @@ public class SummonFlappyRitual extends Ritual {
   }
 
   @Override
-  public ResultHandler<?> getResultHandler() {
-    return new SummonFlappyResultHandler(getAltar(), this);
-  }
+  public ResultHandler<?> getResultHandler() { return new SummonFlappyResultHandler(getAltar(), this); }
 
 }

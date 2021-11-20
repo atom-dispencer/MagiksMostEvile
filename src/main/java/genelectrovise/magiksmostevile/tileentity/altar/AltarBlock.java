@@ -65,7 +65,7 @@ public class AltarBlock extends Block {
   public BlockRenderType getRenderShape(BlockState state) {
     return BlockRenderType.MODEL;
   }
-  
+
   @Override
   public boolean useShapeForLightOcclusion(BlockState state) {
     return true;
@@ -93,7 +93,7 @@ public class AltarBlock extends Block {
   public boolean hasTileEntity(BlockState state) {
     return true;
   }
-  
+
   @Override
   public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
     if (entityIn instanceof LivingEntity) {
@@ -107,7 +107,7 @@ public class AltarBlock extends Block {
       int silktouch) {
     return silktouch == 0 ? 5 * fortune : 0;
   }
-  
+
   @Override
   public void destroy(IWorld worldIn, BlockPos pos, BlockState state) {
     // On the server

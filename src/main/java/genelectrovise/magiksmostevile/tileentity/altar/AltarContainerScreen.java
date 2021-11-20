@@ -74,7 +74,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
     addCastButton(posX_main, posY_main);
     addArrowToggles(posX_main, posY_main);
   }
-  
+
   // Drawing
   @Override
   protected void renderLabels(MatrixStack stack, int mouseX, int mouseY) {
@@ -93,7 +93,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   // y image size (will stretch image to fit)
   // x image size (will scale image to fit)
 
-  
+
   @SuppressWarnings("deprecation")
   @Override
   protected void renderBg(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
@@ -120,13 +120,13 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
     this.font.draw(stack, S_Cast, baseX + 3, baseY + 68, 4210752);
 
     String displayName = altarContainer.getSelector().getRitualSupplier().get().getDisplayName();
-    this.font.draw(stack, displayName, Integer.valueOf(Math.round(baseX)),  Integer.valueOf(Math.round(baseY + seperator + 10)), 11024322);
+    this.font.draw(stack, displayName, Integer.valueOf(Math.round(baseX)), Integer.valueOf(Math.round(baseY + seperator + 10)), 11024322);
 
     String description = altarContainer.getSelector().getRitualSupplier().get().getDescription();
-    this.font.draw(stack, description, Integer.valueOf(Math.round(baseX)).intValue(),  Integer.valueOf(Math.round(baseY + seperator + 20)).intValue(), 6961030);
+    this.font.draw(stack, description, Integer.valueOf(Math.round(baseX)).intValue(), Integer.valueOf(Math.round(baseY + seperator + 20)).intValue(), 6961030);
 
-    String energyRequirement = S_RequiredIchor + ": " +  Integer.valueOf(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement()).toString();
-    this.font.draw(stack, energyRequirement, Integer.valueOf(Math.round(baseX + 2)),  Integer.valueOf(Math.round(baseY + seperator + 81)), 13018111);
+    String energyRequirement = S_RequiredIchor + ": " + Integer.valueOf(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement()).toString();
+    this.font.draw(stack, energyRequirement, Integer.valueOf(Math.round(baseX + 2)), Integer.valueOf(Math.round(baseY + seperator + 81)), 13018111);
   }
 
   private void evaluateDimensions() {

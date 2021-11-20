@@ -27,10 +27,8 @@ public class Pestle extends Item {
     this.level = level;
   }
 
-  public EnumPestleLevel getLevel() {
-    return level;
-  }
-  
+  public EnumPestleLevel getLevel() { return level; }
+
   @Override
   public ActionResultType useOn(ItemUseContext context) {
     return ActionResultType.PASS;

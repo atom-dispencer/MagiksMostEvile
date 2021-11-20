@@ -40,7 +40,7 @@ public class CommonContainer extends Container {
     super(type, id);
     invenSize = size;
   }
-  
+
   @Override
   public boolean stillValid(PlayerEntity playerIn) {
     return true;

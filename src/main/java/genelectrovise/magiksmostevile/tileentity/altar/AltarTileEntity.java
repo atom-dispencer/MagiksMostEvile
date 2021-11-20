@@ -308,16 +308,12 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   }
 
   @Override
-  public ITextComponent getDisplayName() {
-    return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar");
-  }
+  public ITextComponent getDisplayName() { return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar"); }
 
   /**
    * @return the ichorStorage
    */
-  public int getIchorStored() {
-    return ichorStorage.getFluidAmount();
-  }
+  public int getIchorStored() { return ichorStorage.getFluidAmount(); }
 
   public boolean fillIchor(int amount) {
     return ichorStorage.fill(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE) == amount;
@@ -332,16 +328,12 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   /**
    * @return the isCasting
    */
-  public boolean isCasting() {
-    return isCasting;
-  }
+  public boolean isCasting() { return isCasting; }
 
   /**
    * @param isCasting the isCasting to set
    */
-  public void setCasting(boolean isCasting) {
-    this.isCasting = isCasting;
-  }
+  public void setCasting(boolean isCasting) { this.isCasting = isCasting; }
 
   /**
    * @param resourceLocation

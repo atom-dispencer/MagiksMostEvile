@@ -11,19 +11,15 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
 public class TestIchorFluidStorage {
 
-  @Mock
-  private FluidStack fluid;
-  
-  @Mock
-  private TrackableIntegerHolder maxIchor;
-  
-  @Mock
-  private TrackableIntegerHolder currentIchor;
-  
+  @Mock private FluidStack fluid;
+
+  @Mock private TrackableIntegerHolder maxIchor;
+
+  @Mock private TrackableIntegerHolder currentIchor;
+
   private final String nbtKey = "ichor_fluid_storage";
-  
-  @InjectMocks
-  private IchorFluidStorage storage;
+
+  @InjectMocks private IchorFluidStorage storage;
 
   @BeforeAll
   void before() {

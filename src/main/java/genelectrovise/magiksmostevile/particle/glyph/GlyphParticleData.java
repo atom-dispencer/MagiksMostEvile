@@ -38,22 +38,16 @@ public class GlyphParticleData implements IParticleData {
     this.diameter = constrainDiameterToValidRange(diameter);
   }
 
-  public Color getTint() {
-    return tint;
-  }
+  public Color getTint() { return tint; }
 
   /**
    * @return get diameter of particle in metres
    */
-  public double getDiameter() {
-    return diameter;
-  }
+  public double getDiameter() { return diameter; }
 
   @Nonnull
   @Override
-  public ParticleType<GlyphParticleData> getType() {
-    return ParticleOrbitalRegistry.GLYPH_PARTICLE.get();
-  }
+  public ParticleType<GlyphParticleData> getType() { return ParticleOrbitalRegistry.GLYPH_PARTICLE.get(); }
 
   // write the particle information to a PacketBuffer, ready for transmission to a
   // client
@@ -65,8 +59,8 @@ public class GlyphParticleData implements IParticleData {
     buf.writeDouble(diameter);
   }
 
-  
-  
+
+
   // used for debugging I think; prints the data in human-readable format
   @Nonnull
   @Override
@@ -86,8 +80,7 @@ public class GlyphParticleData implements IParticleData {
   // The DESERIALIZER is used to construct FlameParticleData from either command
   // line parameters or from a network packet
 
-  @SuppressWarnings("deprecation")
-  public static final IDeserializer<GlyphParticleData> DESERIALIZER = new IDeserializer<GlyphParticleData>() {
+  @SuppressWarnings("deprecation") public static final IDeserializer<GlyphParticleData> DESERIALIZER = new IDeserializer<GlyphParticleData>() {
 
     // parse the parameters for this particle from a /particle command
     @Nonnull

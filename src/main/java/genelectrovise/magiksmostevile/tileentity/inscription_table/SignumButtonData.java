@@ -26,11 +26,7 @@ public class SignumButtonData {
     this.signum = signum;
   }
 
-  public Point getPoint() {
-    return point;
-  }
+  public Point getPoint() { return point; }
 
-  public Signum getSignum() {
-    return signum;
-  }
+  public Signum getSignum() { return signum; }
 }

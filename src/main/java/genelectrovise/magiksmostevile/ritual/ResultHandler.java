@@ -27,13 +27,9 @@ public abstract class ResultHandler<T extends Ritual> {
     this.ritual = ritual;
   }
 
-  public final AltarTileEntity getAltar() {
-    return altar;
-  }
+  public final AltarTileEntity getAltar() { return altar; }
 
-  public final T getRitual() {
-    return ritual;
-  }
+  public final T getRitual() { return ritual; }
 
   public void handle(RitualResult type) {
     switch (type) {

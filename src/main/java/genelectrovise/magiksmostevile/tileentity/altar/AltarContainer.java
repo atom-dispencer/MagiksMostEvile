@@ -132,16 +132,12 @@ public class AltarContainer extends CommonContainer {
   /**
    * @return the selector
    */
-  public AltarRitualSelector getSelector() {
-    return selector;
-  }
+  public AltarRitualSelector getSelector() { return selector; }
 
   /**
    * @return the currentAmethystFlux
    */
-  public TrackableIntegerHolder getCurrentAmethystFlux() {
-    return currentIchor;
-  }
+  public TrackableIntegerHolder getCurrentAmethystFlux() { return currentIchor; }
 
   /**
    * @param currentAmethystFlux the currentAmethystFlux to set
@@ -153,9 +149,7 @@ public class AltarContainer extends CommonContainer {
   /**
    * @return the maxAmethystFlux
    */
-  public TrackableIntegerHolder getMaxAmethystFlux() {
-    return maxIchor;
-  }
+  public TrackableIntegerHolder getMaxAmethystFlux() { return maxIchor; }
 
   /**
    * @param maxAmethystFlux the maxAmethystFlux to set
@@ -167,17 +161,13 @@ public class AltarContainer extends CommonContainer {
   /**
    * @return the altar
    */
-  public AltarTileEntity getAltar() {
-    return altar;
-  }
+  public AltarTileEntity getAltar() { return altar; }
 
   /**
    * @param altar the altar to set
    */
-  public void setAltar(AltarTileEntity altar) {
-    this.altar = altar;
-  }
-  
+  public void setAltar(AltarTileEntity altar) { this.altar = altar; }
+
   @Override
   public boolean stillValid(PlayerEntity playerIn) {
 

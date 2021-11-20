@@ -49,7 +49,7 @@ public class DimensionWarpingStaff extends Item {
   }
 
   @Override
-  public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn,      Hand handIn) {
+  public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
     // If the player is in creative
     if (!playerIn.isCreative()) {

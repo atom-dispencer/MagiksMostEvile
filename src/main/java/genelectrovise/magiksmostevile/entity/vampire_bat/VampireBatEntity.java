@@ -118,40 +118,30 @@ public class VampireBatEntity extends MonsterEntity {
    * Returns the volume for the sounds this mob makes.
    */
   @Override
-  protected float getSoundVolume() {
-    return 0.1F;
-  }
+  protected float getSoundVolume() { return 0.1F; }
 
   /**
    * Gets the pitch of living sounds in living entities.
    */
   @Override
-  protected float getVoicePitch() {
-    return super.getVoicePitch() * 0.95F;
-  }
+  protected float getVoicePitch() { return super.getVoicePitch() * 0.95F; }
 
   @Override
   @Nullable
-  public SoundEvent getAmbientSound() {
-    return this.getIsBatHanging() && this.random.nextInt(4) != 0 ? null
-        : SoundEvents.BAT_AMBIENT;
-  }
+  public SoundEvent getAmbientSound() { return this.getIsBatHanging() && this.random.nextInt(4) != 0 ? null
+      : SoundEvents.BAT_AMBIENT; }
 
   protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
     return SoundEvents.BAT_HURT;
   }
 
-  protected SoundEvent getDeathSound() {
-    return SoundEvents.BAT_DEATH;
-  }
+  protected SoundEvent getDeathSound() { return SoundEvents.BAT_DEATH; }
 
   /**
    * Returns true if this entity should push and be pushed by other entities when colliding.
    */
   @Override
-  public boolean isPushable() {
-    return true;
-  }
+  public boolean isPushable() { return true; }
 
   @Override
   protected void doPush(Entity entityIn) {}
@@ -171,9 +161,7 @@ public class VampireBatEntity extends MonsterEntity {
         .add(Attributes.FOLLOW_RANGE, 64.0f);
   }
 
-  public boolean getIsBatHanging() {
-    return (this.entityData.get(HANGING) & 1) != 0;
-  }
+  public boolean getIsBatHanging() { return (this.entityData.get(HANGING) & 1) != 0; }
 
   public void setIsBatHanging(boolean isHanging) {
     byte b0 = this.entityData.get(HANGING);
@@ -237,17 +225,13 @@ public class VampireBatEntity extends MonsterEntity {
   }
 
   @Override
-  public Random getRandom() {
-    return random;
-  }
+  public Random getRandom() { return random; }
 
   /**
    * AKA. Can this entity push other entities?
    */
   @Override
-  protected boolean isMovementNoisy() {
-    return true;
-  }
+  protected boolean isMovementNoisy() { return true; }
 
   /**
    * How much damage should this entity take on falling?
@@ -269,9 +253,7 @@ public class VampireBatEntity extends MonsterEntity {
    * Return whether this entity should NOT trigger a pressure plate or a tripwire.
    */
   @Override
-  public boolean isIgnoringBlockTriggers() {
-    return true;
-  }
+  public boolean isIgnoringBlockTriggers() { return true; }
 
   /**
    * Called when the entity is attacked.

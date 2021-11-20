@@ -53,9 +53,7 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
   }
 
   @Override
-  public IStartFactory<OvergroundShrineFeatureConfig> getStartFactory() {
-    return OvergroundShrineStructure.Start::new;
-  }
+  public IStartFactory<OvergroundShrineFeatureConfig> getStartFactory() { return OvergroundShrineStructure.Start::new; }
 
   @Override
   public GenerationStage.Decoration step() {
@@ -152,10 +150,10 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
 
       int variantCount = size.getCount();
 
-      StringBuilder builder = new StringBuilder("overground_shrine/");      // overground_shrine/
-      appendSize(size, builder);                                            // overground_shrine/large
-      builder.append("_");                                                  // overground_shrine/large_
-      appendVariantNumber(variantCount, builder);                           // overground_shrine/large_0
+      StringBuilder builder = new StringBuilder("overground_shrine/"); // overground_shrine/
+      appendSize(size, builder); // overground_shrine/large
+      builder.append("_"); // overground_shrine/large_
+      appendVariantNumber(variantCount, builder); // overground_shrine/large_0
 
       return new ResourceLocation(MagiksMostEvile.MODID, builder.toString());
     }
@@ -196,13 +194,9 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
       this.count = count;
     }
 
-    public String getName() {
-      return name;
-    }
+    public String getName() { return name; }
 
-    public int getCount() {
-      return count;
-    }
+    public int getCount() { return count; }
 
   }
 

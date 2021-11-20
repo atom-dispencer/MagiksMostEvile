@@ -66,16 +66,12 @@ public class AltarToggleButtonMessageToServer {
   /**
    * @return the ritualRL
    */
-  public ResourceLocation getRitualRL() {
-    return ritualRL;
-  }
+  public ResourceLocation getRitualRL() { return ritualRL; }
 
   /**
    * @return the toggleDirection
    */
-  public ToggleDirection getToggleDirection() {
-    return toggleDirection;
-  }
+  public ToggleDirection getToggleDirection() { return toggleDirection; }
 
   public static enum ToggleDirection {
     LEFT, RIGHT;

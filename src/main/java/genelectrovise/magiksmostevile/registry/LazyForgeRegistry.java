@@ -47,19 +47,13 @@ public class LazyForgeRegistry<V extends IForgeRegistryEntry<V>> implements IFor
     return new LazyForgeRegistry<>(registryType);
   }
 
-  private IForgeRegistry<V> getRegistry() {
-    return registry.get();
-  }
+  private IForgeRegistry<V> getRegistry() { return registry.get(); }
 
   @Override
-  public ResourceLocation getRegistryName() {
-    return getRegistry().getRegistryName();
-  }
+  public ResourceLocation getRegistryName() { return getRegistry().getRegistryName(); }
 
   @Override
-  public Class<V> getRegistrySuperType() {
-    return getRegistry().getRegistrySuperType();
-  }
+  public Class<V> getRegistrySuperType() { return getRegistry().getRegistrySuperType(); }
 
   @Override
   public void register(final V value) {
@@ -83,9 +77,7 @@ public class LazyForgeRegistry<V extends IForgeRegistryEntry<V>> implements IFor
   }
 
   @Override
-  public boolean isEmpty() {
-    return getRegistry().isEmpty();
-  }
+  public boolean isEmpty() { return getRegistry().isEmpty(); }
 
   @Override
   @Nullable
@@ -101,27 +93,19 @@ public class LazyForgeRegistry<V extends IForgeRegistryEntry<V>> implements IFor
 
   @Override
   @Nullable
-  public ResourceLocation getDefaultKey() {
-    return getRegistry().getDefaultKey();
-  }
+  public ResourceLocation getDefaultKey() { return getRegistry().getDefaultKey(); }
 
   @Override
   @Nonnull
-  public Set<ResourceLocation> getKeys() {
-    return getRegistry().getKeys();
-  }
+  public Set<ResourceLocation> getKeys() { return getRegistry().getKeys(); }
 
   @Override
   @Nonnull
-  public Collection<V> getValues() {
-    return getRegistry().getValues();
-  }
+  public Collection<V> getValues() { return getRegistry().getValues(); }
 
   @Override
   @Nonnull
-  public Set<Entry<RegistryKey<V>, V>> getEntries() {
-    return getRegistry().getEntries();
-  }
+  public Set<Entry<RegistryKey<V>, V>> getEntries() { return getRegistry().getEntries(); }
 
   @Override
   public <T> T getSlaveMap(final ResourceLocation slaveMapName, final Class<T> type) {

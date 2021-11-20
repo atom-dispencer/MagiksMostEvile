@@ -182,79 +182,57 @@ public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializab
   /**
    * @return The name
    */
-  public final String getDisplayName() {
-    return displayName;
-  }
+  public final String getDisplayName() { return displayName; }
 
   /**
    * @return The description of the ritual
    */
-  public final String getDescription() {
-    return description;
-  }
+  public final String getDescription() { return description; }
 
   /**
    * @return the altar
    */
-  public final AltarTileEntity getAltar() {
-    return altar;
-  }
+  public final AltarTileEntity getAltar() { return altar; }
 
   /**
    * @param done the done to set
    */
-  public void setDone(boolean done) {
-    this.done = done;
-  }
+  public void setDone(boolean done) { this.done = done; }
 
   /**
    * @return the done
    */
-  public boolean isDone() {
-    return done;
-  }
+  public boolean isDone() { return done; }
 
   /**
    * @return the tick
    */
-  public int getTick() {
-    return tick;
-  }
+  public int getTick() { return tick; }
 
   /**
    * @param tick the tick to set
    */
-  public void setTick(int tick) {
-    this.tick = tick;
-  }
+  public void setTick(int tick) { this.tick = tick; }
 
   /**
    * @param resultHandler the resultHandler to set
    */
-  public void setResultHandler(ResultHandler<?> resultHandler) {
-    this.resultHandler = resultHandler;
-  }
+  public void setResultHandler(ResultHandler<?> resultHandler) { this.resultHandler = resultHandler; }
 
   /**
    * @return the resultHandler
    */
-  public ResultHandler<?> getResultHandler() {
-    return resultHandler;
-  }
+  public ResultHandler<?> getResultHandler() { return resultHandler; }
 
   /**
    * @return the energyRequirement
    */
-  public final int getIchorRequirement() {
-    return ichorRequirement;
-  }
+  public final int getIchorRequirement() { return ichorRequirement; }
 
   /**
    * @return the information
    */
-  public final String getInformation() {
-    return information;
-  }
+  public final String getInformation() { return information; }
 
   /**
    * How can a {@link Ritual} end? <br>

@@ -47,14 +47,10 @@ public class AltarCastButtonPressedMessageToServer {
     return new AltarCastButtonPressedMessageToServer(ritualResourceLocation);
   }
 
-  public boolean isValid() {
-    return messageIsValid;
-  }
+  public boolean isValid() { return messageIsValid; }
 
   /**
    * @return the ritualName
    */
-  public ResourceLocation getRitualResourceLocation() {
-    return ritualResourceLocation;
-  }
+  public ResourceLocation getRitualResourceLocation() { return ritualResourceLocation; }
 }
