@@ -12,7 +12,6 @@ public class PixiePacket {
   protected Flags flags;
   protected JsonObject content;
 
-
   public PixiePacket(Class<?> type, JsonObject content, Flags flags) {
     this.type = type;
     this.content = content;
@@ -33,4 +32,20 @@ public class PixiePacket {
 
   public void setContent(JsonObject content) { this.content = content; }
 
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof PixiePacket))
+      return false;
+
+    PixiePacket packet = (PixiePacket) obj;
+
+    if (!type.equals(packet.getType()))
+      return false;
+    if (!flags.equals(packet.getFlags()))
+      return false;
+    if (!content.equals(packet.getContent()))
+      return false;
+    
+    return true;
+  }
 }

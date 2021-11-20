@@ -1,6 +1,7 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import java.util.Map;
+import java.util.Objects;
 import org.apache.commons.lang3.ArrayUtils;
 import com.google.common.collect.Maps;
 
@@ -19,7 +20,7 @@ public class Flags {
 
   public Flags(String[] flags) {
     this.mappings = Maps.newHashMap();
-    this.flags = new String[] {};
+    this.flags = flags;
 
     addFlags(flags);
   }
@@ -61,4 +62,22 @@ public class Flags {
 
   public void setMappings(Map<String, Integer> mappings) { this.mappings = mappings; }
 
+  @Override
+  public boolean equals(Object obj) {
+
+    if (!(obj instanceof Flags))
+      return false;
+
+    Flags flags = (Flags) obj;
+
+    if (!Objects.deepEquals(this.flags, flags.flags))
+      return false;
+
+    return true;
+  }
+  
+  @Override
+  public String toString() {
+    return String.format("Flags{%s}", ArrayUtils.toString(flags));
+  }
 }

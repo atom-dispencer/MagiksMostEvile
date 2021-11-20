@@ -6,20 +6,20 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
 import genelectrovise.magiksmostevile.network.pixiecourier.Flags;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
 
-public class PixiePacketJsonDeserializerTest {
+public class PixiePacketJsonSerializerTest {
 
-  PixiePacketJsonDeserializer deserializer = new PixiePacketJsonDeserializer();
+  final PixiePacketJsonSerializer serializer = new PixiePacketJsonSerializer();
 
-  final Gson gson = new Gson();
+  final Gson gson = GsonConfigurator.newConfiguredInstance();
   final PixiePacket idealPacket = new PixiePacket(String.class, gson.fromJson("{\"key\":\"value\"}", JsonObject.class), new Flags(new String[] {"flag1", "flag2"}));
   final String idealString = "{\"type\":\"java.lang.String\",\"flags\":{\"flags\":[\"flag1\",\"flag2\"]},\"content\":{\"key\":\"value\"}}";
 
-  @Mock JsonDeserializationContext context;
+  @Mock JsonSerializationContext context;
 
   @BeforeEach
   void beforeEach() {
@@ -27,9 +27,9 @@ public class PixiePacketJsonDeserializerTest {
   }
 
   @Test
-  void testDeserialize() {
-    JsonObject object = gson.fromJson(idealString, JsonObject.class);
-    PixiePacket actual = deserializer.deserialize(object, PixiePacket.class, context);
-    assertEquals(idealPacket, actual);
+  void testSerialize() {
+    JsonObject idealResult = gson.fromJson(idealString, JsonObject.class);
+    JsonObject actualResult = (JsonObject) serializer.serialize(idealPacket, PixiePacket.class, context);
+    assertEquals(idealResult, actualResult);
   }
 }

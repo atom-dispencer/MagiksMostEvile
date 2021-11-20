@@ -16,8 +16,8 @@ public class PixiePacketJsonSerializer implements JsonSerializer<PixiePacket> {
 
     JsonObject object = new JsonObject();
     object.addProperty(PixiePacket.TYPE, packet.getType().getName());
-    object.addProperty(PixiePacket.FLAGS, gson.toJson(packet.getFlags()));
-    object.addProperty(PixiePacket.CONTENT, packet.getContent().toString());
+    object.add(PixiePacket.FLAGS, gson.toJsonTree(packet.getFlags()));
+    object.add(PixiePacket.CONTENT, gson.toJsonTree(packet.getContent()));
 
     return object;
   }
