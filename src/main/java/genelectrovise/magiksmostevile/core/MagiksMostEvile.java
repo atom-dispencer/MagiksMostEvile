@@ -85,8 +85,8 @@ public class MagiksMostEvile {
   @SubscribeEvent
   public static void enqueueIMC(final InterModEnqueueEvent event) {
     InterModComms.sendTo("examplemod", "helloworld", () -> {
-      LOGGER.info("Hello world from the MDK");
-      return "Hello world";
+      LOGGER.info("MagiksMostEvile Inter-Mod Communications is active");
+      return "Success";
     });
   }
 

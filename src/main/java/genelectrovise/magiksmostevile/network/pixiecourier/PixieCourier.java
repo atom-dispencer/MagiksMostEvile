@@ -45,7 +45,6 @@ public class PixieCourier {
           try {
             PacketEncoder.encode(t, u);
           } catch (CourierException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
           }
         },
