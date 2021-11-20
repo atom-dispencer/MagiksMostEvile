@@ -37,10 +37,7 @@ public class PixieCourier {
   public static void onCommonSetupEvent(FMLCommonSetupEvent event) throws CourierException {
     MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by PixieCourier!");
 
-
-
-    INSTANCE.channel =
-        NetworkRegistry.newSimpleChannel(channelLocationSupplier.get(), () -> MESSAGE_PROTOCOL_VERSION, (ver) -> PacketEncoder.isValidVersion(ver), (ver) -> PacketEncoder.isValidVersion(ver));
+    INSTANCE.channel = NetworkRegistry.newSimpleChannel(channelLocationSupplier.get(), () -> MESSAGE_PROTOCOL_VERSION, (ver) -> PacketEncoder.isValidVersion(ver), (ver) -> PacketEncoder.isValidVersion(ver));
     INSTANCE.channel.registerMessage(ID_TO_CLIENT, PixiePacket.class,
 
         // Encode packet
@@ -53,13 +50,24 @@ public class PixieCourier {
           }
         },
         // Decode packet
-        PacketEncoder::decode,
+        (t) -> {
+          try {
+            return PacketEncoder.decode(t);
+          } catch (CourierException e) {
+            e.printStackTrace();
+          }
+          return null;
+        },
         // Recieve packet
         PixieCourier::recieve);
   }
 
   public static void recieve(final PixiePacket message, Supplier<NetworkEvent.Context> contextSupplier) {
-    INSTANCE.distributor.forwardPacketToProcessor(message, contextSupplier.get());
+    try {
+      INSTANCE.distributor.forwardPacketToProcessor(message, contextSupplier.get());
+    } catch (CourierException c) {
+      c.printStackTrace();
+    }
   }
 
   public static void send() {

@@ -4,12 +4,14 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.google.common.collect.Maps;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
 public class PacketDistributor {
+
+  public static final String PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_NO_NULL_PROCESSOR_WAS_FOUND = "PixiePacket could not be processed as no (null) processor was found.";
+  public static final String PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_THE_PACKET_WAS_NULL = "PixiePacket could not be processed as the packet was null.";
 
   public static final Logger LOGGER = LogManager.getLogger(PacketDistributor.class);
 
@@ -32,51 +34,21 @@ public class PacketDistributor {
     cla_processors = Maps.newHashMap();
   }
 
-  public void forwardPacketToProcessor(PixiePacket packet, Context context) {
-
-    // Indicator to tidy up the code a bit. Any exceptions will trigger this to be set false
-    // So any errors, and the finally block will print debug information
-    // Info is the same for any exception, so no need to duplicate the code!
-    boolean allIsWell = true;
-
-    try {
+  public void forwardPacketToProcessor(PixiePacket packet, Context context) throws CourierException {
 
       // Null check packet
       if (packet == null)
-        throw new IllegalArgumentException("PixiePacket could not be processed as the packet was null!");
+        throw new CourierException(PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_THE_PACKET_WAS_NULL);
 
       // Find the processor for the packet type
       PixieProcessor processor = get(packet.getType(), packet.getFlags().get(Flags.F_PROCESSOR));
       if (processor == null) {
-        throw new IllegalArgumentException("PixiePacket could not be processed as the processor was null!");
+        throw new CourierException(PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_NO_NULL_PROCESSOR_WAS_FOUND);
       }
 
       // Process
       processor.process(packet, context);
 
-      // Error during pre-processing
-    } catch (IllegalArgumentException a) {
-      allIsWell = false;
-      LOGGER.error("Unable to process packet! (pre-processing error, debug follows)");
-      a.printStackTrace();
-
-      // Any other error (don't want to crash the server so catches any exceptions)
-    } catch (Exception e) {
-      allIsWell = false;
-      LOGGER.error("Unable to process packet! (see debug for further messages)");
-      e.printStackTrace();
-
-      // Always executed.
-      // Print debug info if not everything is well :(
-    } finally {
-      if (!allIsWell) {
-        LOGGER.debug("Packet error debug: ");
-        LOGGER.debug("packet=" + packet.toString());
-        LOGGER.debug("content=" + packet.getContent());
-        LOGGER.debug("type=" + (packet.getType() != null ? packet.getType().getName() : packet.getType()));
-        LOGGER.debug("flags=" + packet.getFlags());
-      }
-    }
   }
 
   /**
