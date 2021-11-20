@@ -2,6 +2,7 @@ package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
+import com.google.common.collect.Maps;
 
 public class Flags {
 
@@ -11,10 +12,15 @@ public class Flags {
    */
   public static final String F_PROCESSOR = "processor";
 
+  public static final Flags NO_FLAGS = new Flags(new String[] {});
+
   protected String[] flags;
   protected Map<String, Integer> mappings;
 
   public Flags(String[] flags) {
+    this.mappings = Maps.newHashMap();
+    this.flags = new String[] {};
+    
     addFlags(flags);
   }
 

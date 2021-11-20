@@ -1,22 +1,30 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
-import java.util.function.Supplier;
 import com.google.gson.Gson;
 import genelectrovise.magiksmostevile.gson.GsonConfigurator;
 import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
 
 public class PacketEncoder {
 
-  private PacketEncoder() {}
+  public static final String PACKET_BUFFER_IS_NOT_WRITABLE_FOR_ENCODING_PIXIE_PACKET = "PacketBuffer is not writable for encoding PixiePacket";
+
+  public PacketEncoder() {}
   
-  public static void recievePacket(final PixiePacket message, Supplier<NetworkEvent.Context> contextSupplier) {
-    PixieCourier.recieve(message, contextSupplier.get());
-  }
-  
-  public static void encode(PixiePacket packet, PacketBuffer buffer) {
+  public static String encode(PixiePacket packet, PacketBuffer buffer) throws CourierException {
     Gson gson = GsonConfigurator.newConfiguredInstance();
-    buffer.writeUtf(gson.toJson(packet));
+    String json = gson.toJson(packet);
+    
+    if(!buffer.isWritable()) {
+      throw new CourierException(PACKET_BUFFER_IS_NOT_WRITABLE_FOR_ENCODING_PIXIE_PACKET);
+    }
+    
+    buffer.writeUtf(json);
+    return json;
+  }
+
+  private static boolean isBufferEmpty(PacketBuffer buffer) {
+    // TODO Auto-generated method stub
+    return false;
   }
 
   public static PixiePacket decode(PacketBuffer buffer) {
