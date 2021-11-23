@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -40,39 +38,34 @@ public class GlyphParticleData implements IParticleData {
     this.diameter = constrainDiameterToValidRange(diameter);
   }
 
-  public Color getTint() {
-    return tint;
-  }
+  public Color getTint() { return tint; }
 
   /**
    * @return get diameter of particle in metres
    */
-  public double getDiameter() {
-    return diameter;
-  }
+  public double getDiameter() { return diameter; }
 
   @Nonnull
   @Override
-  public ParticleType<GlyphParticleData> getType() {
-    return ParticleOrbitalRegistry.GLYPH_PARTICLE.get();
-  }
+  public ParticleType<GlyphParticleData> getType() { return ParticleOrbitalRegistry.GLYPH_PARTICLE.get(); }
 
   // write the particle information to a PacketBuffer, ready for transmission to a
   // client
   @Override
-  public void write(PacketBuffer buf) {
+  public void writeToNetwork(PacketBuffer buf) {
     buf.writeInt(tint.getRed());
     buf.writeInt(tint.getGreen());
     buf.writeInt(tint.getBlue());
     buf.writeDouble(diameter);
   }
 
+
+
   // used for debugging I think; prints the data in human-readable format
   @Nonnull
   @Override
-  public String getParameters() {
-    return String.format(Locale.ROOT, "%s %.2f %i %i %i", this.getType().getRegistryName(),
-        diameter, tint.getRed(), tint.getGreen(), tint.getBlue());
+  public String writeToString() {
+    return String.format(Locale.ROOT, "%s %.2f %i %i %i", this.getType().getRegistryName(), diameter, tint.getRed(), tint.getGreen(), tint.getBlue());
   }
 
   private static double constrainDiameterToValidRange(double diameter) {
@@ -87,47 +80,45 @@ public class GlyphParticleData implements IParticleData {
   // The DESERIALIZER is used to construct FlameParticleData from either command
   // line parameters or from a network packet
 
-  public static final IDeserializer<GlyphParticleData> DESERIALIZER =
-      new IDeserializer<GlyphParticleData>() {
+  @SuppressWarnings("deprecation") public static final IDeserializer<GlyphParticleData> DESERIALIZER = new IDeserializer<GlyphParticleData>() {
 
-        // parse the parameters for this particle from a /particle command
-        @Nonnull
-        @Override
-        public GlyphParticleData deserialize(@Nonnull ParticleType<GlyphParticleData> type,
-            @Nonnull StringReader reader) throws CommandSyntaxException {
-          reader.expect(' ');
-          double diameter = constrainDiameterToValidRange(reader.readDouble());
+    // parse the parameters for this particle from a /particle command
+    @Nonnull
+    @Override
+    public GlyphParticleData fromCommand(@Nonnull ParticleType<GlyphParticleData> type, @Nonnull StringReader reader) throws CommandSyntaxException {
+      reader.expect(' ');
+      double diameter = constrainDiameterToValidRange(reader.readDouble());
 
-          final int MIN_COLOUR = 0;
-          final int MAX_COLOUR = 255;
-          reader.expect(' ');
-          int red = MathHelper.clamp(reader.readInt(), MIN_COLOUR, MAX_COLOUR);
-          reader.expect(' ');
-          int green = MathHelper.clamp(reader.readInt(), MIN_COLOUR, MAX_COLOUR);
-          reader.expect(' ');
-          int blue = MathHelper.clamp(reader.readInt(), MIN_COLOUR, MAX_COLOUR);
-          Color color = new Color(red, green, blue);
+      final int MIN_COLOUR = 0;
+      final int MAX_COLOUR = 255;
+      reader.expect(' ');
+      int red = MathHelper.clamp(reader.readInt(), MIN_COLOUR, MAX_COLOUR);
+      reader.expect(' ');
+      int green = MathHelper.clamp(reader.readInt(), MIN_COLOUR, MAX_COLOUR);
+      reader.expect(' ');
+      int blue = MathHelper.clamp(reader.readInt(), MIN_COLOUR, MAX_COLOUR);
+      Color color = new Color(red, green, blue);
 
-          return new GlyphParticleData(color, diameter);
-        }
+      return new GlyphParticleData(color, diameter);
+    }
 
-        // read the particle information from a PacketBuffer after the client has
-        // received it from the server
-        @Override
-        public GlyphParticleData read(@Nonnull ParticleType<GlyphParticleData> type,
-            PacketBuffer buf) {
-          // warning! never trust the data read in from a packet buffer.
+    // read the particle information from a PacketBuffer after the client has
+    // received it from the server
+    @Override
+    public GlyphParticleData fromNetwork(@Nonnull ParticleType<GlyphParticleData> type, PacketBuffer buf) {
+      // warning! never trust the data read in from a packet buffer.
 
-          final int MIN_COLOUR = 0;
-          final int MAX_COLOUR = 255;
-          int red = MathHelper.clamp(buf.readInt(), MIN_COLOUR, MAX_COLOUR);
-          int green = MathHelper.clamp(buf.readInt(), MIN_COLOUR, MAX_COLOUR);
-          int blue = MathHelper.clamp(buf.readInt(), MIN_COLOUR, MAX_COLOUR);
-          Color color = new Color(red, green, blue);
+      final int MIN_COLOUR = 0;
+      final int MAX_COLOUR = 255;
+      int red = MathHelper.clamp(buf.readInt(), MIN_COLOUR, MAX_COLOUR);
+      int green = MathHelper.clamp(buf.readInt(), MIN_COLOUR, MAX_COLOUR);
+      int blue = MathHelper.clamp(buf.readInt(), MIN_COLOUR, MAX_COLOUR);
+      Color color = new Color(red, green, blue);
 
-          double diameter = constrainDiameterToValidRange(buf.readDouble());
+      double diameter = constrainDiameterToValidRange(buf.readDouble());
 
-          return new GlyphParticleData(color, diameter);
-        }
-      };
+      return new GlyphParticleData(color, diameter);
+    }
+
+  };
 }

@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.mortar;
@@ -41,8 +39,8 @@ import net.minecraft.world.server.ServerWorld;
  *
  */
 public class MortarBlock extends Block {
-  
-  protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
+
+  protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
   public MortarBlock(Properties properties) {
     super(properties);
@@ -57,23 +55,23 @@ public class MortarBlock extends Block {
   public boolean hasTileEntity(BlockState state) {
     return true;
   }
-  
-  @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-      return SHAPE;
-    }
 
   @Override
-  public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+  public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    return SHAPE;
+  }
+
+  @Override
+  public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
     // On client
-    if (world.isRemote) {
+    if (world.isClientSide()) {
       return ActionResultType.SUCCESS;
     }
 
     // If the player is using a pestle
-    if (player.getHeldItem(handIn).getItem() instanceof Pestle) {
-      TileEntity tileEntity = world.getTileEntity(pos);
+    if (player.getItemInHand(handIn).getItem() instanceof Pestle) {
+      TileEntity tileEntity = world.getBlockEntity(pos);
       if (tileEntity instanceof MortarTileEntity) {
         ((MortarTileEntity) tileEntity).recipe();
       }
@@ -82,16 +80,16 @@ public class MortarBlock extends Block {
 
     // On server
     // If not air or null
-    if (player.getHeldItem(handIn).getItem() != null) {
+    if (player.getItemInHand(handIn).getItem() != null) {
 
       // Get the tile entity
-      TileEntity tileEntity = ((ServerWorld) world).getTileEntity(pos);
+      TileEntity tileEntity = ((ServerWorld) world).getBlockEntity(pos);
 
       // IF a Mortar
       if (tileEntity instanceof MortarTileEntity) {
 
         // Get the stack
-        ((MortarTileEntity) tileEntity).recieveItemStack(player.getHeldItem(handIn));
+        ((MortarTileEntity) tileEntity).recieveItemStack(player.getItemInHand(handIn));
       }
     }
 
@@ -102,8 +100,8 @@ public class MortarBlock extends Block {
   public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
 
     // Only on server
-    if (!world.isRemote) {
-      TileEntity tileEntity = world.getTileEntity(pos);
+    if (!world.isClientSide()) {
+      TileEntity tileEntity = world.getBlockEntity(pos);
       if (tileEntity instanceof MortarTileEntity) {
         ((MortarTileEntity) tileEntity).popContents();
       }

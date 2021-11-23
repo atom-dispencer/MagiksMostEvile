@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.ritual.result;
@@ -49,18 +47,18 @@ public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual>
 
     ritual.setDone(true);
 
-    VampireBatEntity bat = EntityOrbitalRegistry.VAMPIRE_BAT.get().create(altar.getWorld());
+    VampireBatEntity bat = EntityOrbitalRegistry.VAMPIRE_BAT.get().create(altar.getLevel());
 
-    BlockPos altarPosUp = altar.getPos().up(3);
-    bat.setPosition(altarPosUp.getX(), altarPosUp.getY(), altarPosUp.getZ());
+    BlockPos altarPosUp = altar.getBlockPos().above(3);
+    bat.setPos(altarPosUp.getX(), altarPosUp.getY(), altarPosUp.getZ());
 
-    altar.getWorld().addEntity(bat);
+    altar.getLevel().addFreshEntity(bat);
 
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID,
                 "textures/items/general/vampire_bat_tooth.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
   }
 
   @Override
@@ -73,7 +71,7 @@ public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual>
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
   }
 
   @Override
@@ -81,7 +79,7 @@ public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual>
     GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
   }
 
 }

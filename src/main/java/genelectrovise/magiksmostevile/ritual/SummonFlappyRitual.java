@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -88,7 +86,7 @@ public class SummonFlappyRitual extends Ritual {
         new GlyphMessageToClient(
             new ResourceLocation(MagiksMostEvile.MODID,
                 "textures/items/general/vampire_bat_tooth.png"),
-            GlyphOrientation.VERTICAL, altar.getPos().up(5), true, 0.5));
+            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
 
     LazyOptional<IItemHandler> itemHandler =
         altar.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
@@ -120,7 +118,7 @@ public class SummonFlappyRitual extends Ritual {
   protected RitualResult tick() {
     super.tick();
 
-    if (altar.getWorld().isDaytime()) {
+    if (altar.getLevel().isDay()) {
       return RitualResult.FAILURE;
     }
 
@@ -134,7 +132,7 @@ public class SummonFlappyRitual extends Ritual {
 
     if (isBetweenTicks(100, 140)) {
       ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(),
-          new EnderParticleMessageToClient(altar.getPos().up(3), 2));
+          new EnderParticleMessageToClient(altar.getBlockPos().above(3), 2));
       return RitualResult.CASTING;
     }
 
@@ -146,8 +144,6 @@ public class SummonFlappyRitual extends Ritual {
   }
 
   @Override
-  public ResultHandler<?> getResultHandler() {
-    return new SummonFlappyResultHandler(getAltar(), this);
-  }
+  public ResultHandler<?> getResultHandler() { return new SummonFlappyResultHandler(getAltar(), this); }
 
 }

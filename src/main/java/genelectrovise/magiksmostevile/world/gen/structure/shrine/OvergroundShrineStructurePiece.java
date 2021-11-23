@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen.structure.shrine;
@@ -35,6 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.BlackStoneReplacementProcessor;
 import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
@@ -73,9 +72,8 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
    * @param mirror
    * @param truePosition
    */
-  public OvergroundShrineStructurePiece(BlockPos blockPos, EnumFeatureLocation location,
-      OvergroundShrineStructureAestheticsSerializer serializer, ResourceLocation templateName,
-      Template template, Rotation rotation, Mirror mirror, BlockPos truePosition) {
+  public OvergroundShrineStructurePiece(BlockPos blockPos, EnumFeatureLocation location, OvergroundShrineStructureAestheticsSerializer serializer, ResourceLocation templateName, Template template,
+      Rotation rotation, Mirror mirror, BlockPos truePosition) {
     super(StructurePieces.OVERGROUND_SHRINE_PIECE, 0);
     this.templatePosition = blockPos;
     this.templateName = templateName;
@@ -107,7 +105,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
         .getOrThrow(true, LOGGER::error);
 
     // Fetch Template
-    Template template = templateManager.getTemplateDefaulted(this.templateName);
+    Template template = templateManager.get(this.templateName);
 
     // Setup
     this.setupPlacement(template,
@@ -117,8 +115,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
   private void setupPlacement(Template template, BlockPos centerOffset) {
 
     // Add processor to read the NBT ignoring structure blocks and air
-    BlockIgnoreStructureProcessor blockignorestructureprocessor =
-        BlockIgnoreStructureProcessor.AIR_AND_STRUCTURE_BLOCK;
+    BlockIgnoreStructureProcessor blockignorestructureprocessor = BlockIgnoreStructureProcessor.STRUCTURE_AND_AIR;
 
     // Create a list of rules for replacing blocks
     List<RuleEntry> list = Lists.newArrayList();
@@ -133,7 +130,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
     PlacementSettings placementsettings = new PlacementSettings() // New
         .setRotation(this.rotation) // Rotation
         .setMirror(this.mirror) // Mirror
-        .setCenterOffset(centerOffset) // Center offset
+        .setRotationPivot(centerOffset) // Center offset
         .addProcessor(blockignorestructureprocessor) // Processor (ignore some)
         .addProcessor( // Add rules
             new RuleStructureProcessor(list)) // > from list
@@ -145,7 +142,7 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
 
     // Replace stone variants with blackstone
     if (this.serializer.replaceWithBlackstone) {
-      placementsettings.addProcessor(BlackStoneReplacementProcessor.field_237058_b_);
+      placementsettings.addProcessor(BlackStoneReplacementProcessor.INSTANCE);
     }
 
     this.setup(template, this.templatePosition, placementsettings);
@@ -154,8 +151,9 @@ public class OvergroundShrineStructurePiece extends TemplateStructurePiece {
   /**
    * (abstract) Called on loading the structure to read data from the java to the NBT tag!
    */
-  protected void readAdditional(CompoundNBT tagCompound) {
-    super.readAdditional(tagCompound);
+  @Override
+  protected void addAdditionalSaveData(CompoundNBT tagCompound) {
+    super.addAdditionalSaveData(tagCompound);
     // Basic
     tagCompound.putString("Template", this.templateName.toString());
     tagCompound.putString("Rotation", this.rotation.name());

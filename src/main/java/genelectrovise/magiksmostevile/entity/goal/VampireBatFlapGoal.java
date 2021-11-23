@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -40,9 +38,9 @@ public class VampireBatFlapGoal extends Goal {
   }
 
   @Override
-  public boolean shouldExecute() {
+  public boolean canUse() {
 
-    if (!vampireBat.isInActiveLightLevel() && vampireBat.getIsBatHanging()) {
+    if (vampireBat.getIsBatHanging()) {
       return false;
     }
 
@@ -52,13 +50,13 @@ public class VampireBatFlapGoal extends Goal {
     }
 
     // If has a target, return false.
-    if (vampireBat.getAttackTarget() != null) {
+    if (vampireBat.getTarget() != null) {
       return false;
     }
 
     // If block above can be hung on, return false.
-    if (vampireBat.world.getBlockState(vampireBat.getPosition().up()).isNormalCube(vampireBat.world,
-        vampireBat.getPosition().up())) {
+    if (vampireBat.level.getBlockState(vampireBat.blockPosition().above()).isSolidRender(vampireBat.level,
+        vampireBat.blockPosition().above())) {
       return false;
     }
 
@@ -67,14 +65,14 @@ public class VampireBatFlapGoal extends Goal {
   }
 
   @Override
-  public boolean shouldContinueExecuting() {
+  public boolean canContinueToUse() {
 
     // Check normal conditions.
-    return shouldExecute();
+    return canUse();
   }
 
   @Override
-  public void startExecuting() {
+  public void start() {
     execute();
   }
 
@@ -90,20 +88,20 @@ public class VampireBatFlapGoal extends Goal {
   }
 
   private void moveRandomly() {
-    double d0 = (double) vampireBat.spawnPosition.getX() + 0.5D - vampireBat.getPosX();
-    double d1 = (double) vampireBat.spawnPosition.getY() + 0.1D - vampireBat.getPosY();
-    double d2 = (double) vampireBat.spawnPosition.getZ() + 0.5D - vampireBat.getPosZ();
+    double d0 = (double) vampireBat.spawnPosition.getX() + 0.5D - vampireBat.getX();
+    double d1 = (double) vampireBat.spawnPosition.getY() + 0.1D - vampireBat.getY();
+    double d2 = (double) vampireBat.spawnPosition.getZ() + 0.5D - vampireBat.getZ();
 
-    Vector3d vec3d = vampireBat.getMotion();
+    Vector3d vec3d = vampireBat.getDeltaMovement();
     Vector3d vec3d1 = vec3d.add((Math.signum(d0) * 0.5D - vec3d.x) * (double) 0.1F,
         (Math.signum(d1) * (double) 0.7F - vec3d.y) * (double) 0.1F,
         (Math.signum(d2) * 0.5D - vec3d.z) * (double) 0.1F);
-    vampireBat.setMotion(vec3d1);
+    vampireBat.setDeltaMovement(vec3d1);
     float f =
         (float) (MathHelper.atan2(vec3d1.z, vec3d1.x) * (double) (180F / (float) Math.PI)) - 90.0F;
-    float f1 = MathHelper.wrapDegrees(f - vampireBat.rotationYaw);
-    vampireBat.moveForward = 0.5F;
-    vampireBat.rotationYaw += f1;
+    float f1 = MathHelper.wrapDegrees(f - vampireBat.yRot);
+    vampireBat.zza = 0.5F;
+    vampireBat.yRot += f1;
   }
 
   private void resetSpawnLocation() {
@@ -112,10 +110,10 @@ public class VampireBatFlapGoal extends Goal {
     }
 
     if (spawnPosNullOrWithinRange()) {
-      double newX = vampireBat.getPosX() + (double) vampireBat.getRandom().nextInt(7)
+      double newX = vampireBat.getX() + (double) vampireBat.getRandom().nextInt(7)
           - (double) vampireBat.getRandom().nextInt(7);
-      double newY = vampireBat.getPosY() + (double) vampireBat.getRandom().nextInt(6) - 2.0D;
-      double newZ = vampireBat.getPosZ() + (double) vampireBat.getRandom().nextInt(7)
+      double newY = vampireBat.getY() + (double) vampireBat.getRandom().nextInt(6) - 2.0D;
+      double newZ = vampireBat.getZ() + (double) vampireBat.getRandom().nextInt(7)
           - (double) vampireBat.getRandom().nextInt(7);
 
       vampireBat.spawnPosition = new BlockPos(newX, newY, newZ);
@@ -124,12 +122,12 @@ public class VampireBatFlapGoal extends Goal {
 
   private boolean spawnPosNullOrWithinRange() {
     return (vampireBat.spawnPosition == null || vampireBat.getRandom().nextInt(30) == 0
-        || vampireBat.spawnPosition.withinDistance(vampireBat.getPositionVec(), 2.0D));
+        || vampireBat.spawnPosition.closerThan(vampireBat.position(), 2.0D));
   }
 
   private boolean hasValidSpawnLocation() {
     return (vampireBat.spawnPosition != null
-        && (!vampireBat.world.isAirBlock(vampireBat.spawnPosition)
+        && (!vampireBat.level.getBlockState(vampireBat.spawnPosition).isAir()
             || vampireBat.spawnPosition.getY() < 1));
   }
 

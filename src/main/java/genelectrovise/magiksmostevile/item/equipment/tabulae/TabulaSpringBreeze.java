@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.item.equipment.tabulae;
@@ -32,20 +30,20 @@ import net.minecraft.world.World;
 public class TabulaSpringBreeze extends Tabula {
 
   public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-    ItemStack stack = player.getHeldItem(hand);
+    ItemStack stack = player.getItemInHand(hand);
 
     // Only operate on the server
-    if (world.isRemote) {
-      return ActionResult.resultPass(stack);
+    if (world.isClientSide) {
+      return ActionResult.pass(stack);
     }
 
     // Make sure the player is actually holding the item!
     if (!(stack.getItem() instanceof TabulaMuddiedDust)) {
-      return ActionResult.resultFail(stack);
+      return ActionResult.fail(stack);
     }
 
     // Logic
-    BlockPos position = player.getPosition();
+    BlockPos position = player.blockPosition();
     int lowerLimit = -1;
     int upperLimit = 1;
     for (int x = position.getX() + lowerLimit; x < position.getX() + upperLimit + 1; x++) {
@@ -55,18 +53,18 @@ public class TabulaSpringBreeze extends Tabula {
         BlockState state = world.getBlockState(movingPosition);
         // If dirt and 1/4 chance
         if (state.getBlock() == Blocks.DIRT && (world.getRandom().nextBoolean()) && world.getRandom().nextBoolean()) {
-          world.setBlockState(movingPosition, Blocks.GRASS_BLOCK.getDefaultState(), 2);
+          world.setBlock(movingPosition, Blocks.GRASS_BLOCK.defaultBlockState(), 2);
         }
       }
 
     }
 
-    return ActionResult.resultSuccess(stack);
+    return ActionResult.success(stack);
   }
 
   @Override
-  public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-    tooltip.add(TextComponentUtils.toTextComponent(() -> "The wind brushes your cheek and you feel invigorated..."));
-    super.addInformation(stack, worldIn, tooltip, flagIn);
+  public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    tooltip.add(TextComponentUtils.fromMessage(() -> "The wind brushes your cheek and you feel invigorated..."));
+    super.appendHoverText(stack, worldIn, tooltip, flagIn);
   }
 }

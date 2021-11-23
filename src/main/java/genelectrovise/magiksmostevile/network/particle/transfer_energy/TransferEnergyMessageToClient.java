@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -35,13 +33,11 @@ public class TransferEnergyMessageToClient {
     this.destination = destination;
   }
 
-  public boolean isMessageValid() {
-    return departure != null && destination != null;
-  }
+  public boolean isMessageValid() { return departure != null && destination != null; }
 
   /**
-   * Called by the network code. Used to write the contents of your message member variables into
-   * the ByteBuf, ready for transmission over the network.
+   * Called by the network code. Used to write the contents of your message member variables into the
+   * ByteBuf, ready for transmission over the network.
    *
    * @param buf
    */
@@ -51,8 +47,8 @@ public class TransferEnergyMessageToClient {
   }
 
   /**
-   * Called by the network code once it has received the message bytes over the network. Used to
-   * read the ByteBuf contents into your member variables
+   * Called by the network code once it has received the message bytes over the network. Used to read
+   * the ByteBuf contents into your member variables
    *
    * @param buf
    */
@@ -63,21 +59,15 @@ public class TransferEnergyMessageToClient {
     return new TransferEnergyMessageToClient(departure, destination);
   }
 
-  public boolean isValid() {
-    return departure != null && destination != null;
-  }
+  public boolean isValid() { return departure != null && destination != null; }
 
   /**
    * @return the departure
    */
-  public BlockPos getDeparture() {
-    return departure;
-  }
+  public BlockPos getDeparture() { return departure; }
 
   /**
    * @return the destination
    */
-  public BlockPos getDestination() {
-    return destination;
-  }
+  public BlockPos getDestination() { return destination; }
 }

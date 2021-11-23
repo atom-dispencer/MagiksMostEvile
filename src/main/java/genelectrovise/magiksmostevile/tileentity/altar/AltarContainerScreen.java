@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -30,12 +28,16 @@ import genelectrovise.magiksmostevile.network.altar.arrow_toggles.AltarToggleBut
 import genelectrovise.magiksmostevile.network.altar.cast_button.AltarCastButtonPressedMessageToServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screen.inventory.FurnaceScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.FurnaceContainer;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.fml.client.gui.GuiUtils;
 
 /**
+ * @see FurnaceScreen
  * @author GenElectrovise 14 May 2020
  */
 public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
@@ -49,9 +51,9 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   private int scaledHeight;
   private int posY_main;
 
-  private String S_Ichor = I18n.format("genelectrovise.magiksmostevile.text.ichor");
-  private String S_RequiredIchor = I18n.format("genelectrovise.magiksmostevile.text.ritual.required_ichor");
-  private String S_Cast = I18n.format("genelectrovise.magiksmostevile.text.magik.ritual.cast");
+  private String S_Ichor = I18n.get("genelectrovise.magiksmostevile.text.ichor");
+  private String S_RequiredIchor = I18n.get("genelectrovise.magiksmostevile.text.ritual.required_ichor");
+  private String S_Cast = I18n.get("genelectrovise.magiksmostevile.text.magik.ritual.cast");
 
   /**
    * @param altarContainer
@@ -75,7 +77,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
 
   // Drawing
   @Override
-  protected void drawGuiContainerForegroundLayer(MatrixStack stack, int mouseX, int mouseY) {
+  protected void renderLabels(MatrixStack stack, int mouseX, int mouseY) {
 
     drawText(stack);
   }
@@ -91,8 +93,10 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   // y image size (will stretch image to fit)
   // x image size (will scale image to fit)
 
+
+  @SuppressWarnings("deprecation")
   @Override
-  protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
+  protected void renderBg(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
     // Flush the colour buffer
     RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -111,33 +115,33 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
     // Used to use split = 100
 
     // Draw text
-    this.font.drawString(stack, this.title.getString() + " - " + S_Ichor + ": " + altarContainer.currentIchor.get() + "/" + altarContainer.maxIchor.get(), baseX, baseY, 4210752);
+    this.font.draw(stack, this.title.getString() + " - " + S_Ichor + ": " + altarContainer.currentIchor.get() + "/" + altarContainer.maxIchor.get(), baseX, baseY, 4210752);
 
-    this.font.drawString(stack, S_Cast, baseX + 3, baseY + 68, 4210752);
+    this.font.draw(stack, S_Cast, baseX + 3, baseY + 68, 4210752);
 
     String displayName = altarContainer.getSelector().getRitualSupplier().get().getDisplayName();
-    this.font.drawString(stack, displayName, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 10)), 11024322);
+    this.font.draw(stack, displayName, Integer.valueOf(Math.round(baseX)), Integer.valueOf(Math.round(baseY + seperator + 10)), 11024322);
 
     String description = altarContainer.getSelector().getRitualSupplier().get().getDescription();
-    this.font.drawString(stack, description, new Integer(Math.round(baseX)), new Integer(Math.round(baseY + seperator + 20)), 6961030);
+    this.font.draw(stack, description, Integer.valueOf(Math.round(baseX)).intValue(), Integer.valueOf(Math.round(baseY + seperator + 20)).intValue(), 6961030);
 
-    String energyRequirement = S_RequiredIchor + ": " + new Integer(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement()).toString();
-    this.font.drawString(stack, energyRequirement, new Integer(Math.round(baseX + 2)), new Integer(Math.round(baseY + seperator + 81)), 13018111);
+    String energyRequirement = S_RequiredIchor + ": " + Integer.valueOf(altarContainer.getSelector().getRitualSupplier().get().getIchorRequirement()).toString();
+    this.font.draw(stack, energyRequirement, Integer.valueOf(Math.round(baseX + 2)), Integer.valueOf(Math.round(baseY + seperator + 81)), 13018111);
   }
 
   private void evaluateDimensions() {
     // Find dimensions
-    scaledWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
+    scaledWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
     halfWidth = scaledWidth / 2;
     posX_main = halfWidth - (GuiReference.Altar.Main.MAIN_WIDTH / 2);
 
-    scaledHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
+    scaledHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
     halfHeight = scaledHeight / 2;
     posY_main = halfHeight - (GuiReference.Altar.Main.MAIN_HEIGHT / 2);
   }
 
   private void drawMain(MatrixStack stack, int posX, int posY) {
-    getMinecraft().getTextureManager().bindTexture(GuiReference.Altar.Main.MAIN_TEXTURE);
+    getMinecraft().getTextureManager().bind(BACKGROUND_LOCATION);
 
     blit(stack, posX, posY, ZERO, ZERO, ZERO, GuiReference.Altar.Main.MAIN_WIDTH, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_HEIGHT, GuiReference.Altar.Main.MAIN_WIDTH);
   }
@@ -145,7 +149,7 @@ public class AltarContainerScreen extends ContainerScreen<AltarContainer> {
   private void addCastButton(int posX, int posY) {
     addButton(new ImageButton(posX + 9, posY + 72, GuiReference.Altar.CastButton.CAST_WIDTH, GuiReference.Altar.CastButton.CAST_HEIGHT, 0, 0, 0, GuiReference.Altar.CastButton.CAST_TEXTURE, (btn) -> {
       castButtonPressed();
-      altarContainer.inv.player.closeScreen();
+      altarContainer.inv.player.closeContainer();
     }));
 
   }

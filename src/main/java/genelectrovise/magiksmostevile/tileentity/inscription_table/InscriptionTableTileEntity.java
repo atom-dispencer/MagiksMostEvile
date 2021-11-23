@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.inscription_table;
@@ -53,7 +51,7 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
     slot = new ItemStackHandler() {
       @Override
       protected void onContentsChanged(int slot) {
-        markDirty();
+        setChanged();
       }
     };
   }
@@ -63,10 +61,10 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
 
     // IItemHandler
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-      this.markDirty();
+      this.setChanged();
 
       // if the block at myself isn't myself, allow full access (Block Broken)
-      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
+      if (level != null && level.getBlockState(worldPosition).getBlock() != this.getBlockState().getBlock()) {
         return allSlots.cast();
       }
       if (side == null) {
@@ -78,10 +76,10 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
   }
 
   @Override
-  public void remove() {
+  public void setRemoved() {
     slot_handler.invalidate();
     allSlots.invalidate();
-    super.remove();
+    super.setRemoved();
   }
 
   @Override
@@ -92,27 +90,25 @@ public class InscriptionTableTileEntity extends TileEntity implements ICustomCon
 
   @Override
   public void openGUI(ServerPlayerEntity player) {
-    NetworkHooks.openGui(player, this, getPos());
+    NetworkHooks.openGui(player, this, getBlockPos());
   }
 
   @Override
-  public ITextComponent getDisplayName() {
-    return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.inscription_table");
-  }
+  public ITextComponent getDisplayName() { return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.inscription_table"); }
 
   public void recipe(ResourceLocation signumName) {
     Signum signum = Signa.SIGNA.get(signumName);
 
     slot_handler.ifPresent((itemHandler) -> {
-      
+
       ItemStack stackInSlot = itemHandler.getStackInSlot(0).getStack();
-      
-      if(stackInSlot.getItem() == ItemOrbitalRegistry.BLANK_SIGNUM.get()) {
+
+      if (stackInSlot.getItem() == ItemOrbitalRegistry.BLANK_SIGNUM.get()) {
         itemHandler.extractItem(0, 64, false);
         itemHandler.insertItem(0, new ItemStack(signum.getItem().get(), 1), false);
       }
     });
-    
+
   }
 }
 

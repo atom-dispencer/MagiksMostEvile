@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen.ore;
@@ -49,8 +47,8 @@ public class OreFeatures {
   /**
    * Definitions:
    * <ul>
-   * <li><code>DepthAverageConfig(baseline, spread)</code> == "Most common on baseline, forming a
-   * bell curve of frequency to a range (each side?) of the spread"
+   * <li><code>DepthAverageConfig(baseline, spread)</code> == "Most common on baseline, forming a bell
+   * curve of frequency to a range (each side?) of the spread"
    * <li><code>.func_242731_b(2)</code> == "spawn attempts per chunk"?
    * </ul>
    * 
@@ -65,83 +63,83 @@ public class OreFeatures {
     AMETHYST_ORE_OVERWORLD = Registry.register( //
         WorldGenRegistries.CONFIGURED_FEATURE, //
         "amethyst_ore_overworld_generation", //
-        Feature.ORE.withConfiguration( //
+        Feature.ORE.configured( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
-                BlockOrbitalRegistry.AMETHYST_ORE_OVERWORLD.get().getDefaultState(), //
+                BlockOrbitalRegistry.AMETHYST_ORE_OVERWORLD.get().defaultBlockState(), //
                 7)) //
-            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+            .decorated(Placement.DEPTH_AVERAGE.configured( //
                 new DepthAverageConfig(32, 32))) //
-            .func_242731_b(1)); //
+            .count(1)); //
 
     // Amethyst Ore Nether
     AMETHYST_ORE_NETHER = Registry.register( //
         WorldGenRegistries.CONFIGURED_FEATURE, //
         "amethyst_ore_nether_generation", //
-        Feature.ORE.withConfiguration( //
+        Feature.ORE.configured( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
-                BlockOrbitalRegistry.AMETHYST_ORE_NETHER.get().getDefaultState(), //
+                BlockOrbitalRegistry.AMETHYST_ORE_NETHER.get().defaultBlockState(), //
                 7)) //
-            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+            .decorated(Placement.DEPTH_AVERAGE.configured( //
                 new DepthAverageConfig(32, 32))//
-                .func_242731_b(2)) //
+                .count(2)) //
     ); //
 
     // Amethyst Ore End
     AMETHYST_ORE_END = Registry.register( //
         WorldGenRegistries.CONFIGURED_FEATURE, //
         "amethyst_ore_end_generation", //
-        Feature.ORE.withConfiguration( //
+        Feature.ORE.configured( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.AMETHYST_ORE_SPAWNABLE), //
-                BlockOrbitalRegistry.AMETHYST_ORE_END.get().getDefaultState(), //
+                BlockOrbitalRegistry.AMETHYST_ORE_END.get().defaultBlockState(), //
                 7)) //
-            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+            .decorated(Placement.DEPTH_AVERAGE.configured( //
                 new DepthAverageConfig(40, 20))//
-                .func_242731_b(4)) //
+                .count(4)) //
     ); //
 
     // Lead Ore Overworld
     LEAD_ORE_OVERWORLD = Registry.register( //
         WorldGenRegistries.CONFIGURED_FEATURE, //
         "lead_ore_overworld_generation", //
-        Feature.ORE.withConfiguration( //
+        Feature.ORE.configured( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
-                BlockOrbitalRegistry.LEAD_ORE_OVERWORLD.get().getDefaultState(), //
+                BlockOrbitalRegistry.LEAD_ORE_OVERWORLD.get().defaultBlockState(), //
                 7)) //
-            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+            .decorated(Placement.DEPTH_AVERAGE.configured( //
                 new DepthAverageConfig(40, 32))//
-                .func_242731_b(2)) //
+                .count(2)) //
     ); //
 
     // Lead Ore Nether
     LEAD_ORE_NETHER = Registry.register( //
         WorldGenRegistries.CONFIGURED_FEATURE, //
         "lead_ore_overworld_generation", //
-        Feature.ORE.withConfiguration( //
+        Feature.ORE.configured( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
-                BlockOrbitalRegistry.LEAD_ORE_NETHER.get().getDefaultState(), //
+                BlockOrbitalRegistry.LEAD_ORE_NETHER.get().defaultBlockState(), //
                 7)) //
-            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+            .decorated(Placement.DEPTH_AVERAGE.configured( //
                 new DepthAverageConfig(65, 20))//
-                .func_242731_b(3)) //
+                .count(3)) //
     ); //
 
     // Lead Ore End
     LEAD_ORE_END = Registry.register( //
         WorldGenRegistries.CONFIGURED_FEATURE, //
         "lead_ore_overworld_generation", //
-        Feature.ORE.withConfiguration( //
+        Feature.ORE.configured( //
             new OreFeatureConfig( //
                 new TagMatchRuleTest(ModdedTags.LEAD_ORE_SPAWNABLE), //
-                BlockOrbitalRegistry.LEAD_ORE_END.get().getDefaultState(), //
+                BlockOrbitalRegistry.LEAD_ORE_END.get().defaultBlockState(), //
                 7)) //
-            .withPlacement(Placement.DEPTH_AVERAGE.configure( //
+            .decorated(Placement.DEPTH_AVERAGE.configured( //
                 new DepthAverageConfig(40, 32))//
-                .func_242731_b(1)) //
+                .count(1)) //
     ); //
 
     applyToLists();

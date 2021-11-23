@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.data.recipe;
@@ -100,7 +98,7 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
     }
 
     for (int j = 0; j < ingredients.size(); j++) {
-      if (!ingredients.get(j).test(inv.getStackInSlot(0))) {
+      if (!ingredients.get(j).test(inv.getItem(0))) {
         return false;
       }
     }
@@ -135,17 +133,17 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
    * Read whole recipe from JSON to Java
    */
   @Override
-  public SimpleRecipe read(ResourceLocation recipeId, JsonObject json) {
+  public SimpleRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
 
     if (!(json.has("results") || json.has("ingredients"))) {
       throw new JsonSyntaxException("Recipe " + recipeId + " does not contain all mandatory fields!");
     }
 
-    ArrayList<Usage> usages = json.has("usages") ? Usage.deserialiseJsonArray(recipeId, JSONUtils.getJsonArray(json, "usages")) : new ArrayList<Usage>(Lists.newArrayList(Usage.ALL));
-    ArrayList<Ingredient> ingredients = deserializeIngredients(recipeId, JSONUtils.getJsonArray(json, "ingredients"));
-    ArrayList<ItemStack> results = deserializeResults(recipeId, JSONUtils.getJsonArray(json, "results"));
-    float experience = JSONUtils.getFloat(json, "experience", 0.0F);
-    int processingTime = JSONUtils.getInt(json, "processingtime", this.processingTime);
+    ArrayList<Usage> usages = json.has("usages") ? Usage.deserialiseJsonArray(recipeId, JSONUtils.getAsJsonArray(json, "usages")) : new ArrayList<Usage>(Lists.newArrayList(Usage.ALL));
+    ArrayList<Ingredient> ingredients = deserializeIngredients(recipeId, JSONUtils.getAsJsonArray(json, "ingredients"));
+    ArrayList<ItemStack> results = deserializeResults(recipeId, JSONUtils.getAsJsonArray(json, "results"));
+    float experience = JSONUtils.getAsFloat(json, "experience", 0.0F);
+    int processingTime = JSONUtils.getAsInt(json, "processingtime", this.processingTime);
 
     // usages
     return new SimpleRecipe(recipeId, usages, ingredients, results, processingTime, processingTime, experience);
@@ -170,7 +168,7 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
         throw new JsonSyntaxException("Results of recipe " + recipeId + "  must all contain an item or tag.");
       }
 
-      ItemStack stack = ShapedRecipe.deserializeItem(obj);
+      ItemStack stack = ShapedRecipe.itemFromJson(obj);
       results.add(stack);
     });
 
@@ -193,7 +191,7 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
         throw new JsonSyntaxException("Entries in recipe " + recipeId + " #ingredients must all be JsonObjects.");
       }
 
-      Ingredient ingredient = Ingredient.deserialize(elem);
+      Ingredient ingredient = Ingredient.fromJson(elem);
       ingredients.add(ingredient);
     });
 
@@ -204,20 +202,20 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
    * Read from a packet buffer
    */
   @Override
-  public SimpleRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+  public SimpleRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
 
     // Read usages
     int usageCount = buffer.readInt();
     ArrayList<Usage> usages = new ArrayList<Usage>();
     for (int i = 0; i < usageCount; i++) {
-      usages.add(Usage.deserialise(buffer.readString()));
+      usages.add(Usage.deserialise(buffer.readUtf()));
     }
 
     // Read ingredients
     int ingredientCount = buffer.readInt();
     ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     for (int i = 0; i < ingredientCount; i++) {
-      ingredients.add(Ingredient.read(buffer));
+      ingredients.add(Ingredient.fromNetwork(buffer));
     }
 
     // Read results
@@ -225,7 +223,7 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
     int resultCount = buffer.readInt();
     ArrayList<ItemStack> results = new ArrayList<ItemStack>();
     for (int i = 0; i < resultCount; i++) {
-      results.add(buffer.readItemStack());
+      results.add(buffer.readItem());
     }
 
     float experience = buffer.readFloat();
@@ -250,25 +248,25 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
    * </ol>
    */
   @Override
-  public void write(PacketBuffer buffer, SimpleRecipe recipe) {
+  public void toNetwork(PacketBuffer buffer, SimpleRecipe recipe) {
 
     // Write usages
     buffer.writeInt(usages.size());
     for (Usage usage : usages) {
-      buffer.writeString(usage.serialise());
+      buffer.writeUtf(usage.serialise());
     }
 
     // Write ingredients
     buffer.writeInt(ingredients.size());
     for (Ingredient ingredient : ingredients) {
-      ingredient.write(buffer);
+      ingredient.toNetwork(buffer);
     }
 
     // Write results
     buffer.writeInt(primaryOutput);
     buffer.writeInt(results.size());
     for (ItemStack stack : results) {
-      buffer.writeItemStack(stack);
+      buffer.writeItem(stack);
     }
 
     buffer.writeFloat(recipe.experience);
@@ -282,70 +280,46 @@ public class SimpleRecipe extends ForgeRegistryEntry<IRecipeSerializer<?>> imple
   //
 
   @Override
-  public ItemStack getCraftingResult(IInventory inv) {
+  public ItemStack assemble(IInventory inv) {
     return results.get(primaryOutput).copy();
   }
 
   @Override
-  public boolean canFit(int width, int height) {
+  public boolean canCraftInDimensions(int width, int height) {
     return (width * height) >= ingredients.size();
   }
 
   @Override
-  public ItemStack getRecipeOutput() {
-    return results.get(primaryOutput).copy();
-  }
+  public ItemStack getResultItem() { return results.get(primaryOutput).copy(); }
 
   @Override
-  public ResourceLocation getId() {
-    return id;
-  }
+  public ResourceLocation getId() { return id; }
 
   @Override
-  public IRecipeSerializer<?> getSerializer() {
-    return SimpleRecipe.SERIALIZER;
-  }
+  public IRecipeSerializer<?> getSerializer() { return SimpleRecipe.SERIALIZER; }
 
   @Override
-  public IRecipeType<?> getType() {
-    return RecipeSerializerOrbitalRegistry.SIMPLE_TYPE;
-  }
+  public IRecipeType<?> getType() { return RecipeSerializerOrbitalRegistry.SIMPLE_TYPE; }
 
   @Override
-  public ItemStack getIcon() {
-    return results.get(primaryOutput).copy();
-  }
+  public ItemStack getToastSymbol() { return results.get(primaryOutput).copy(); }
 
   @Override
-  public NonNullList<Ingredient> getIngredients() {
-    return ICustomRecipe.super.getIngredients();
-  }
+  public NonNullList<Ingredient> getIngredients() { return ICustomRecipe.super.getIngredients(); }
 
   @Override
-  public String getGroup() {
-    return ICustomRecipe.super.getGroup();
-  }
+  public String getGroup() { return ICustomRecipe.super.getGroup(); }
 
   //
 
-  public ArrayList<Usage> getUsages() {
-    return usages;
-  }
+  public ArrayList<Usage> getUsages() { return usages; }
 
-  public int getProcessingTime() {
-    return processingTime;
-  }
+  public int getProcessingTime() { return processingTime; }
 
-  public int getPrimaryOutput() {
-    return primaryOutput;
-  }
+  public int getPrimaryOutput() { return primaryOutput; }
 
-  public ArrayList<ItemStack> getResults() {
-    return results;
-  }
+  public ArrayList<ItemStack> getResults() { return results; }
 
-  public float getExperience() {
-    return experience;
-  }
+  public float getExperience() { return experience; }
 
 }

@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.squid_missile;
@@ -47,9 +45,9 @@ public class SquidMissileModel<T extends Entity> extends SegmentedModel<T> {
     this.body = new ModelRenderer(this, 0, 0);
     this.body.addBox(-6.0F, -8.0F + yOffset, -6.0F, 12.0F, 16.0F, 12.0F);
 
-    this.body.rotationPointY += 8.0F;
+    this.body.y += 8.0F;
 
-    //Legs
+    // Legs
     for (int j = 0; j < this.legs.length; ++j) {
 
       // Create leg
@@ -61,13 +59,13 @@ public class SquidMissileModel<T extends Entity> extends SegmentedModel<T> {
       float f1 = (float) Math.sin(d0) * 5.0F;
 
       // Rotation points
-      legRenderer.rotationPointX = f;
-      legRenderer.rotationPointZ = f1;
-      legRenderer.rotationPointY = 15.0F;
+      legRenderer.x = f;
+      legRenderer.z = f1;
+      legRenderer.y = 15.0F;
 
       // Angles
       d0 = (double) j * Math.PI * -2.0D / (double) this.legs.length + (Math.PI / 2D);
-      legRenderer.rotateAngleY = (float) d0;
+      legRenderer.yRot = (float) d0;
 
       body.addChild(legRenderer);
       this.legs[j] = legRenderer;
@@ -82,14 +80,14 @@ public class SquidMissileModel<T extends Entity> extends SegmentedModel<T> {
   /**
    * Sets this entity's model rotation angles
    */
-  public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+  public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
     for (ModelRenderer modelrenderer : this.legs) {
-      modelrenderer.rotateAngleX = (float) (((Math.sin(ageInTicks / 5)) / 2) + 0.5);
+      modelrenderer.xRot = (float) (((Math.sin(ageInTicks / 5)) / 2) + 0.5);
     }
 
   }
 
-  public Iterable<ModelRenderer> getParts() {
+  public Iterable<ModelRenderer> parts() {
     reload();
     return renderers;
   }

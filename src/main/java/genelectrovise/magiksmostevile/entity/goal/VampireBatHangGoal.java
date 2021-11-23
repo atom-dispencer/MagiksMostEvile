@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -38,21 +36,17 @@ public class VampireBatHangGoal extends Goal {
    */
   public VampireBatHangGoal(VampireBatEntity vampireBat) {
     this.vampireBat = vampireBat;
-    this.world = vampireBat.world;
+    this.world = vampireBat.level;
   }
 
   @Override
-  public boolean shouldExecute() {
-
-    if (!vampireBat.isInActiveLightLevel()) {
-      return false;
-    }
+  public boolean canUse() {
 
     if (!blockAboveIsHangable()) {
       return false;
     }
 
-    if (vampireBat.getAttackTarget() != null) {
+    if (vampireBat.getTarget() != null) {
       return false;
     }
 
@@ -67,7 +61,7 @@ public class VampireBatHangGoal extends Goal {
   }
 
   @Override
-  public boolean shouldContinueExecuting() {
+  public boolean canContinueToUse() {
 
     // Randomly, return false
     if (vampireBat.getRandom().nextInt(100) == 0) {
@@ -77,32 +71,29 @@ public class VampireBatHangGoal extends Goal {
 
     // Randomly, rotate head
     if (vampireBat.getRandom().nextInt(200) == 0) {
-      vampireBat.rotationYawHead = (float) vampireBat.getRandom().nextInt(360);
+      vampireBat.yHeadRot = (float) vampireBat.getRandom().nextInt(360);
     }
 
-    return shouldExecute();
+    return canUse();
   }
 
   @Override
-  public void startExecuting() {
+  public void start() {
     vampireBat.setIsBatHanging(true);
   }
 
   // Logic
 
   private boolean blockAboveIsHangable() {
-    return world.getBlockState(vampireBat.getPosition().up()).isNormalCube(this.world,
-        vampireBat.getPosition().up());
+    return world.getBlockState(vampireBat.blockPosition().above()).isRedstoneConductor(this.world, vampireBat.blockPosition().above());
   }
 
   private void makeBatNotHang() {
     vampireBat.setIsBatHanging(false);
-    this.world.playEvent((PlayerEntity) null, 1025, vampireBat.getPosition(), 0);
+    this.world.levelEvent((PlayerEntity) null, 1025, vampireBat.blockPosition(), 0);
   }
 
-  private PlayerEntity getClosestPredicateFulfillingPlayer() {
-    return this.world.getClosestPlayer(VampireBatEntity.entityPredicate, vampireBat);
-  }
+  private PlayerEntity getClosestPredicateFulfillingPlayer() { return this.world.getNearestPlayer(VampireBatEntity.entityPredicate, vampireBat); }
 
   private boolean playerIsSurvivalAndNotNull(@Nullable PlayerEntity player) {
     if (player != null && !player.isCreative() && !player.isSpectator()) {

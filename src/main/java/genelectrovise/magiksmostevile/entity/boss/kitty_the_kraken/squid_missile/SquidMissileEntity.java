@@ -1,35 +1,31 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.squid_missile;
 
 import java.util.function.Function;
 import com.google.common.primitives.Doubles;
-import genelectrovise.magiksmostevile.core.SetupManager;
+import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.vector.Vector3d;
@@ -63,7 +59,7 @@ public class SquidMissileEntity extends MobEntity {
    */
   Function<Double, Double> positionSalter = (input) -> {
     final int RANGE = 5;
-    return input + (rand.nextDouble() * (rand.nextInt(RANGE) + rand.nextDouble()));
+    return input + (random.nextDouble() * (random.nextInt(RANGE) + random.nextDouble()));
   };
 
   /**
@@ -71,16 +67,16 @@ public class SquidMissileEntity extends MobEntity {
    */
   Function<Double, Double> velocitySalter = (input) -> {
     final double RANGE = 0.5;
-    return Doubles.constrainToRange(rand.nextDouble(), 0, RANGE) - (RANGE / 2);
+    return Doubles.constrainToRange(random.nextDouble(), 0, RANGE) - (RANGE / 2);
   };
 
   /**
-   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
+   * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
-    return MobEntity.func_233666_p_() //
-        .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
-        .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f);
+    return MobEntity.createMobAttributes() //
+        .add(Attributes.MAX_HEALTH, 3.0D)
+        .add(Attributes.FLYING_SPEED, 2.0f);
   }
 
   @Override
@@ -124,8 +120,8 @@ public class SquidMissileEntity extends MobEntity {
   }
 
   @Override
-  public void livingTick() {
-    super.livingTick();
+  public void aiStep() {
+    super.aiStep();
 
     checkIgnitionTick();
 
@@ -137,14 +133,14 @@ public class SquidMissileEntity extends MobEntity {
     float speed = (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue();
 
     // Position
-    Vector3d currentMotion = this.getMotion();
-    double newPosX = this.getPosX() + currentMotion.x;
-    double newPosY = this.getPosY() + currentMotion.y;
-    double newPosZ = this.getPosZ() + currentMotion.z;
-    this.setPosition(newPosX, newPosY, newPosZ);
+    Vector3d currentMotion = this.getDeltaMovement();
+    double newPosX = this.getX() + currentMotion.x;
+    double newPosY = this.getY() + currentMotion.y;
+    double newPosZ = this.getZ() + currentMotion.z;
+    this.setPos(newPosX, newPosY, newPosZ);
 
     // Direction
-    this.setMotion(currentMotion.add(new Vector3d(direction.x * speed, direction.y * speed, direction.z * speed)).scale(0.01));
+    this.setDeltaMovement(currentMotion.add(new Vector3d(direction.x * speed, direction.y * speed, direction.z * speed)).scale(0.01));
   }
 
   /**
@@ -163,17 +159,17 @@ public class SquidMissileEntity extends MobEntity {
    * Check if this entity is colliding, and explode if needed.
    */
   private void checkExplosions() {
-    if (!isNotColliding(this.world) && explosive) {
+    if (!checkSpawnObstruction(this.level) && explosive) {
 
       // Server
-      if (!this.world.isRemote) {
-        ServerWorld serverWorld = (ServerWorld) world;
+      if (!this.level.isClientSide) {
+        ServerWorld serverWorld = (ServerWorld) level;
 
         // Get the griefing event caused by this
-        boolean flag = ForgeEventFactory.getMobGriefingEvent(this.world, this);
+        boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level, this);
 
         // flag = (causesFire), (mode ? DESTROY : NONE)
-        serverWorld.createExplosion((Entity) null, this.getPosX(), this.getPosY(), this.getPosZ(), (float) SquidMissileEntity.EXPLOSION_POWER, flag,
+        serverWorld.explode((Entity) null, this.getX(), this.getY(), this.getZ(), (float) SquidMissileEntity.EXPLOSION_POWER, flag,
             flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
 
         spawnInkBySendingPacketFromServer(serverWorld, MAX_PARTICLES);
@@ -189,41 +185,31 @@ public class SquidMissileEntity extends MobEntity {
     for (int spawned = 0; spawned < particles; spawned++) {
 
       // Get the position of this
-      double pX = positionSalter.apply(this.getPosX());
-      double pY = positionSalter.apply(this.getPosY());
-      double pZ = positionSalter.apply(this.getPosZ());
+      double pX = positionSalter.apply(this.getX());
+      double pY = positionSalter.apply(this.getY());
+      double pZ = positionSalter.apply(this.getZ());
 
       // Clamp each in 0.0-0.5, then take 0.25 to give a possible negative
-      double vX = velocitySalter.apply(rand.nextDouble());
-      double vY = velocitySalter.apply(rand.nextDouble());
-      double vZ = velocitySalter.apply(rand.nextDouble());
+      double vX = velocitySalter.apply(random.nextDouble());
+      double vY = velocitySalter.apply(random.nextDouble());
+      double vZ = velocitySalter.apply(random.nextDouble());
 
       // Like SquidEntity (if this works its easier than making a custom packet handler)
       // Maintains sided-ness because this method forces the server to send packets to the clients
-      world.spawnParticle(ParticleTypes.SQUID_INK, pX, pY, pZ, 1, vX, vY, vZ, 1);
+      world.sendParticles(ParticleTypes.SQUID_INK, pX, pY, pZ, 1, vX, vY, vZ, 1);
+
+      // ^ used to be spawnParticle idk what this does now
     }
   }
 
   // Get and set
 
-  public boolean isExplosive() {
-    return explosive;
-  }
+  public boolean isExplosive() { return explosive; }
 
-  public void setExplosive(boolean explosive) {
-    this.explosive = explosive;
-  }
+  public void setExplosive(boolean explosive) { this.explosive = explosive; }
 
-  public void setTicksUntilIgnition(int i) {
-    this.ticksUntilIgnition = i;
-  }
-  
-  public Vector3d getDirection() {
-    return direction;
-  }
+  public void setTicksUntilIgnition(int i) { this.ticksUntilIgnition = i; }
 
-  public void setDirection(Vector3d direction) {
-    this.direction = direction;
-  }
+  public void setDirection(Vector3d direction) { this.direction = direction; }
 
 }

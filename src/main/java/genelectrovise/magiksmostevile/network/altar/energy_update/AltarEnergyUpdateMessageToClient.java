@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -60,9 +58,7 @@ public class AltarEnergyUpdateMessageToClient {
     this.playerUUID = playerUUID;
   }
 
-  public boolean isMessageValid() {
-    return messageIsValid;
-  }
+  public boolean isMessageValid() { return messageIsValid; }
 
   /**
    * Called by the network code. Used to write the contents of your message member variables into the
@@ -77,7 +73,7 @@ public class AltarEnergyUpdateMessageToClient {
     buf.writeInt(currentAmethystFlux);
     buf.writeInt(maxAmethystFlux);
     buf.writeBlockPos(blockPos);
-    buf.writeUniqueId(playerUUID);
+    buf.writeUUID(playerUUID);
   }
 
   /**
@@ -88,14 +84,12 @@ public class AltarEnergyUpdateMessageToClient {
    */
   public static AltarEnergyUpdateMessageToClient decode(PacketBuffer buf) {
     MagiksMostEvile.LOGGER.debug("Decoding message to client");
-    return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUniqueId());
+    return new AltarEnergyUpdateMessageToClient(buf.readInt(), buf.readInt(), buf.readBlockPos(), buf.readUUID());
   }
 
   public String toString() {
     return "AltarEnergyUpdateMessageToClient{TODO toString}";
   }
 
-  public boolean isValid() {
-    return messageIsValid;
-  }
+  public boolean isValid() { return messageIsValid; }
 }

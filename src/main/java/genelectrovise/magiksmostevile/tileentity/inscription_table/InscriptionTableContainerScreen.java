@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.inscription_table;
@@ -74,7 +72,7 @@ public class InscriptionTableContainerScreen extends ContainerScreen<Inscription
         horizontalCount++;
         verticalCount = 0;
       }
-      
+
       int startX = 401;
       int startY = 188;
 
@@ -88,16 +86,16 @@ public class InscriptionTableContainerScreen extends ContainerScreen<Inscription
   private void activateButtons() {
 
     for (SignumButtonData data : buttonDatas) {
-      
+
       String namespace = data.getSignum().getName().getNamespace();
       String path = "textures/items/tabulae/" + data.getSignum().getName().getPath() + ".png";
-      
+
       ResourceLocation textureLocation = new ResourceLocation(namespace, path);
-      
+
       ImageButton button = ScreenHelper.createImageButton(data.getPoint().x, data.getPoint().y, buttonSideLength, buttonSideLength, ZERO, ZERO, ZERO, textureLocation, signumTextureSideLength,
           signumTextureSideLength,
           (btn) -> {
-            container.buttonPressed(data.getSignum().getName());
+            menu.buttonPressed(data.getSignum().getName());
           });
 
       addButton(button);
@@ -105,10 +103,10 @@ public class InscriptionTableContainerScreen extends ContainerScreen<Inscription
   }
 
   @Override
-  protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+  protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
 
-    int windowWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
-    int windowHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
+    int windowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+    int windowHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
 
     int halfWidth = windowWidth / 2;
     int halfHeight = windowHeight / 2;

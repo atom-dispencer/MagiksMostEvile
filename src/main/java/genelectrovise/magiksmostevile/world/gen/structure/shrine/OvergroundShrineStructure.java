@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen.structure.shrine;
@@ -29,7 +27,9 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.feature.structure.RuinedPortalStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
@@ -45,19 +45,18 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 public class OvergroundShrineStructure extends Structure<OvergroundShrineFeatureConfig> {
 
   public static final int bigVariants = 1;
-  public static final int smallVariants = 2;
   public static final int mediumVariants = 3;
+  public static final int smallVariants = 3;
 
   public OvergroundShrineStructure() {
     super(OvergroundShrineFeatureConfig.CODEC);
   }
 
   @Override
-  public IStartFactory<OvergroundShrineFeatureConfig> getStartFactory() {
-    return OvergroundShrineStructure.Start::new;
-  }
+  public IStartFactory<OvergroundShrineFeatureConfig> getStartFactory() { return OvergroundShrineStructure.Start::new; }
 
-  public net.minecraft.world.gen.GenerationStage.Decoration getDecorationStage() {
+  @Override
+  public GenerationStage.Decoration step() {
     return Decoration.SURFACE_STRUCTURES;
   };
 
@@ -78,70 +77,32 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
      * </ul>
      */
     @Override
-    public void func_230364_a_(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator,
-        TemplateManager templateManager, int chunkPosX, int chunkPosZ, Biome biome,
+    public void generatePieces(DynamicRegistries dynamicRegistries, ChunkGenerator chunkGenerator, TemplateManager templateManager, int chunkPosX, int chunkPosZ, Biome biome,
         OvergroundShrineFeatureConfig configuration) {
 
-      OvergroundShrineStructureAestheticsSerializer serializer =
-          new OvergroundShrineStructureAestheticsSerializer();
+      OvergroundShrineStructureAestheticsSerializer serializer = new OvergroundShrineStructureAestheticsSerializer();
       EnumFeatureLocation location = configuration.location;
 
-      // Configure aesthetics (block replacement)
-      switch (location) {
-        case DEFAULT:
-          break;
-        case DESERT:
-          break;
-        case END:
-          break;
-        case JUNGLE:
-          break;
-        case NETHER:
-          break;
-        case OCEAN:
-          break;
-        case SWAMP:
-          break;
-        case ICY:
-          break;
-        default:
-          break;
-      }
-
       // Get the location of the template of the structure, i.e. chosen randomly to determine size
-      ResourceLocation templateName;
-
-      float randomisedFloat = this.rand.nextFloat();
-      // Make it big (5%)
-      if (randomisedFloat < 0.05F) {
-        templateName = formatTemplateName(Size.LARGE);
-      }
-      // Make it medium (25%)
-      else if (randomisedFloat < 0.35) {
-        templateName = formatTemplateName(Size.MEDIUM);
-      }
-      // Make it small (65%)
-      else {
-        templateName = formatTemplateName(Size.SMALL);
-      }
+      ResourceLocation templateName = generateTemplateName();
 
       // Create basic final data
-      Template template = templateManager.getTemplateDefaulted(templateName);
-      Rotation rotation = Util.getRandomObject(Rotation.values(), rand);
-      Mirror mirror = Util.getRandomObject(Mirror.values(), rand);
-      BlockPos truePosition =
-          new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
-      BlockPos chunkBlockPos = new ChunkPos(chunkPosX, chunkPosZ).asBlockPos();
-      MutableBoundingBox mutableboundingbox =
-          template.func_237150_a_(chunkBlockPos, rotation, truePosition, mirror);
+      Template template = templateManager.get(templateName);
+
+      if (template == null)
+        throw new NullPointerException("Could not find template for " + getClass().getName() + " by name " + templateName);
+
+      Rotation rotation = Util.getRandom(Rotation.values(), random);
+      Mirror mirror = Util.getRandom(Mirror.values(), random);
+      BlockPos truePosition = new BlockPos(template.getSize().getX() / 2, 0, template.getSize().getZ() / 2);
+      BlockPos chunkBlockPos = new ChunkPos(chunkPosX, chunkPosZ).getWorldPosition();
+      MutableBoundingBox mutableboundingbox = template.getBoundingBox(chunkBlockPos, rotation, truePosition, mirror);
 
       // Create bounding boxes
-      Vector3i vector3i = mutableboundingbox.func_215126_f();
+      Vector3i vector3i = mutableboundingbox.getCenter();
       int x = vector3i.getX();
       int z = vector3i.getZ();
-      int y =
-          chunkGenerator.getHeight(x, z, OvergroundShrineStructurePiece.getHeightMapType(location))
-              - 1;
+      int y = chunkGenerator.getBaseHeight(x, z, OvergroundShrineStructurePiece.getHeightMapType(location)) - 1;
       BlockPos finalPlacementPosition = new BlockPos(x, y, z);
 
       // Is the position cold?
@@ -152,60 +113,93 @@ public class OvergroundShrineStructure extends Structure<OvergroundShrineFeature
         serializer.isCold = isPlacementPositionCold(finalPlacementPosition, biome);
       }
 
-      this.components.add(new OvergroundShrineStructurePiece(finalPlacementPosition, location,
+      this.pieces.add(new OvergroundShrineStructurePiece(finalPlacementPosition, location,
           serializer, templateName, template, rotation, mirror, truePosition));
-      this.recalculateStructureSize();
+      this.calculateBoundingBox();
+    }
+
+    private ResourceLocation generateTemplateName() {
+      float randomisedFloat = this.random.nextFloat();
+      Size size = Size.SMALL;
+      // Make it big (5%)
+      if (randomisedFloat < 0.05F) {
+        size = Size.LARGE;
+      }
+      // Make it medium (25%)
+      else if (randomisedFloat < 0.35) {
+        size = Size.MEDIUM;
+      }
+      // Make it small (65%)
+      else {
+        size = Size.SMALL;
+      }
+
+      return getLocationOfSizedTemplate(size);
     }
 
     public static boolean isPlacementPositionCold(BlockPos pos, Biome biome) {
       return biome.getTemperature(pos) < 0.15F;
     }
 
-    private ResourceLocation formatTemplateName(Size size) {
+    /**
+     * 
+     * @param size
+     * @return The name of a random shrine template
+     */
+    private ResourceLocation getLocationOfSizedTemplate(Size size) {
 
-      int variantCount;
+      int variantCount = size.getCount();
 
-      switch (size) {
-        case LARGE:
-          variantCount = bigVariants;
-          break;
-        case MEDIUM:
-          variantCount = mediumVariants;
-          break;
-        case SMALL:
-          variantCount = smallVariants;
-          break;
-        default:
-          variantCount = mediumVariants;
-          break;
-      }
-
-      StringBuilder builder = new StringBuilder("overground_shrine/");
-      // overground_shrine/
-
-      if (size == Size.SMALL) {
-        builder.append("small");
-      } else if (size == Size.MEDIUM) {
-        builder.append("large");
-      } else if (size == Size.LARGE) {
-        builder.append("large");
-      }
-      // overground_shrine/large
-
-      builder.append("_");
-      // overground_shrine/large_
-
-      int choice = this.rand.nextInt(variantCount);
-      builder.append(choice);
-      // overground_shrine/large_0
+      StringBuilder builder = new StringBuilder("overground_shrine/"); // overground_shrine/
+      appendSize(size, builder); // overground_shrine/large
+      builder.append("_"); // overground_shrine/large_
+      appendVariantNumber(variantCount, builder); // overground_shrine/large_0
 
       return new ResourceLocation(MagiksMostEvile.MODID, builder.toString());
     }
 
+
+
+    /**
+     * overground_shrine/ + large
+     * 
+     * @param size
+     * @param builder
+     */
+    private void appendSize(Size size, StringBuilder builder) {
+      builder.append(size.getName());
+    }
+
+    /**
+     * overground_shrine/large_ + 0
+     * 
+     * @param variantCount
+     * @param builder
+     */
+    private void appendVariantNumber(int variantCount, StringBuilder builder) {
+      int choice = this.random.nextInt(variantCount);
+      builder.append(choice);
+    }
+
   }
 
-  private static enum Size {
-    SMALL, MEDIUM, LARGE;
+  protected static enum Size {
+    SMALL("small", 3), MEDIUM("medium", 3), LARGE("large", 1);
+
+    private String name;
+    private int count;
+
+    private Size(String name, int count) {
+      this.name = name;
+      this.count = count;
+    }
+
+    public String getName() { return name; }
+
+    public int getCount() { return count; }
+
   }
 
 }
+
+

@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -53,7 +51,7 @@ public class AmethystStaff extends ShootableItem {
   }
 
   @Override
-  public Predicate<ItemStack> getInventoryAmmoPredicate() {
+  public Predicate<ItemStack> getAllSupportedProjectiles() {
     return new Predicate<ItemStack>() {
 
       @Override
@@ -64,53 +62,50 @@ public class AmethystStaff extends ShootableItem {
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+  public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
     try {
-      if (worldIn.isRemote) {
+      if (worldIn.isClientSide) {
         Glyph glyph = new Glyph(new ResourceLocation(MagiksMostEvile.MODID, "textures/items/general/powered_amethyst.png"));
-        glyph.drawCentered(worldIn, playerIn.getPosition(), 0.5, GlyphOrientation.HORIZONTAL);
+        glyph.drawCentered(worldIn, playerIn.blockPosition(), 0.5, GlyphOrientation.HORIZONTAL);
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    ItemStack stack = playerIn.getHeldItem(handIn);
+    ItemStack stack = playerIn.getItemInHand(handIn);
 
-    if (!getInventoryAmmoPredicate().test(playerIn.getHeldItem(handIn == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND)) && !playerIn.isCreative()) {
-      return ActionResult.resultFail(stack);
+    if (!getAllSupportedProjectiles().test(playerIn.getItemInHand(handIn == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND)) && !playerIn.isCreative()) {
+      return ActionResult.fail(stack);
     }
 
     Random random = new Random();
     int radius = 3;
 
-    AxisAlignedBB aabb = new AxisAlignedBB(playerIn.getPosition().east(radius).north(radius).up(), playerIn.getPosition().west(3).south(3).down());
-    List<Entity> entities = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, aabb);
+    AxisAlignedBB aabb = new AxisAlignedBB(playerIn.blockPosition().east(radius).north(radius).above(), playerIn.blockPosition().west(3).south(3).below());
+    List<Entity> entities = worldIn.getEntities(playerIn, aabb);
 
-    if (!worldIn.isRemote) {
+    if (!worldIn.isClientSide) {
       for (Entity entity : entities) {
-        playerIn.attackTargetEntityWithCurrentItem(entity);
-        entity.setFire(1);
+        if (!entity.equals(playerIn)) {
+          playerIn.attack(entity);
+          entity.setSecondsOnFire(1);
+        }
       }
     }
 
-    if (worldIn.isRemote) {
+    if (worldIn.isClientSide) {
       for (Entity entity : entities) {
 
         double vec = (random.nextDouble() - 0.5) / 2;
-        worldIn.addParticle(new GlyphParticleData(Color.MAGENTA, 10), true, entity.getPosX(), entity.getPosY(), entity.getPosZ(), vec, vec, vec);
+        worldIn.addParticle(new GlyphParticleData(Color.MAGENTA, 10), true, entity.getX(), entity.getY(), entity.getZ(), vec, vec, vec);
       }
     }
 
-    return ActionResult.resultSuccess(stack);
+    return ActionResult.success(stack);
   }
 
-  /**
-   * I have no idea what this is. Cross-bow = 8, Bow = 15!!?
-   */
   @Override
-  public int func_230305_d_() {
-    return 10;
-  }
+  public int getDefaultProjectileRange() { return 10; }
 
 }

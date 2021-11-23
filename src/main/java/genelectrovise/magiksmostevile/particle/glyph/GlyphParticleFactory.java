@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.particle.glyph;
@@ -33,15 +31,13 @@ public class GlyphParticleFactory implements IParticleFactory<GlyphParticleData>
 
   @Nullable
   @Override
-  public Particle makeParticle(GlyphParticleData glyphParticleData, ClientWorld world, double xPos,
-      double yPos, double zPos, double xVelocity, double yVelocity, double zVelocity) {
+  public Particle createParticle(GlyphParticleData glyphParticleData, ClientWorld world, double xPos, double yPos, double zPos, double xVelocity, double yVelocity, double zVelocity) {
 
     try {
-      GlyphParticle newParticle = new GlyphParticle(world, xPos, yPos, zPos, xVelocity, yVelocity,
-          zVelocity, glyphParticleData.getTint(), glyphParticleData.getDiameter(), sprites);
-      newParticle.selectSpriteRandomly(sprites); // choose a random sprite from the available list
-                                                 // (in this case there is only
-                                                 // one)
+      GlyphParticle newParticle = new GlyphParticle(world, xPos, yPos, zPos, xVelocity, yVelocity, zVelocity, glyphParticleData.getTint(), glyphParticleData.getDiameter(), sprites);
+      newParticle.pickSprite(sprites); // choose a random sprite from the available list
+                                       // (in this case there is only
+                                       // one)
       return newParticle;
     } catch (Exception e) {
       e.printStackTrace();

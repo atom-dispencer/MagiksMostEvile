@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -20,7 +18,7 @@
 package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken;
 
 import javax.annotation.Nullable;
-import genelectrovise.magiksmostevile.core.SetupManager;
+import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.entity.boss.BossMob;
 import genelectrovise.magiksmostevile.entity.goal.SquidMissileAttackGoal;
 import net.minecraft.entity.EntityType;
@@ -34,6 +32,8 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 
 /**
+ * CreeperEntity
+ * 
  * @author GenElectrovise 23 Jun 2020
  */
 public class KittyTheKrakenEntity extends BossMob {
@@ -64,46 +64,34 @@ public class KittyTheKrakenEntity extends BossMob {
   }
 
   /**
-   * Static! Non-inherited! Create a map of attributes. Called from {@link SetupManager}.
+   * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
    */
   public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
-    return MobEntity.func_233666_p_() //
-        .createMutableAttribute(Attributes.MAX_HEALTH, 100.0D)
-        .createMutableAttribute(Attributes.FLYING_SPEED, 2.0f)
-        .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0f)
-        .createMutableAttribute(Attributes.ATTACK_SPEED, 5.0f)
-        .createMutableAttribute(Attributes.FOLLOW_RANGE, 64.0f);
+    return MobEntity.createMobAttributes() //
+        .add(Attributes.MAX_HEALTH, 100.0D)
+        .add(Attributes.FLYING_SPEED, 2.0f)
+        .add(Attributes.ATTACK_DAMAGE, 1.0f)
+        .add(Attributes.ATTACK_SPEED, 5.0f)
+        .add(Attributes.FOLLOW_RANGE, 64.0f);
   }
 
   @Override
-  public double getPosYEye() {
-    return this.getPosY() + 4.5;
-  }
+  public double getEyeY() { return this.getY() + 4.5; }
 
   /**
    * @return {@link #leftArm}, otherwise {@link #rightArm}. If {@link #rightArm} is not usable, null.
    */
   @Nullable
-  public KrakenArm getFirstUsableArm() {
-    return leftArm.isUsable() ? leftArm : (rightArm.isUsable() ? rightArm : null);
-  }
+  public KrakenArm getFirstUsableArm() { return leftArm.isUsable() ? leftArm : (rightArm.isUsable() ? rightArm : null); }
 
   // Get and set
 
-  public boolean isSquidMissileAttacking() {
-    return squidMissileAttacking;
-  }
+  public boolean isSquidMissileAttacking() { return squidMissileAttacking; }
 
-  public void setSquidMissileAttacking(boolean squidMissileAttacking) {
-    this.squidMissileAttacking = squidMissileAttacking;
-  }
+  public void setSquidMissileAttacking(boolean squidMissileAttacking) { this.squidMissileAttacking = squidMissileAttacking; }
 
-  public KrakenArm getLeftArm() {
-    return leftArm;
-  }
+  public KrakenArm getLeftArm() { return leftArm; }
 
-  public KrakenArm getRightArm() {
-    return rightArm;
-  }
+  public KrakenArm getRightArm() { return rightArm; }
 
 }

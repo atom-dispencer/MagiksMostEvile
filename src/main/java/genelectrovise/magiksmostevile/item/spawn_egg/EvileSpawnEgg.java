@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.item.spawn_egg;
@@ -69,12 +67,12 @@ public abstract class EvileSpawnEgg extends Item {
      * Dispense the specified stack, play the dispense sound and spawn particles.
      */
     @Override
-    public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+    public ItemStack execute(IBlockSource source, ItemStack stack) {
       try {
-        Direction direction = source.getBlockState().get(DispenserBlock.FACING);
+        Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
         EntityType<?> entitytype = ((EvileSpawnEgg) stack.getItem()).getEntityType();
-        entitytype.spawn(source.getWorld(), stack, (PlayerEntity) null,
-            source.getBlockPos().offset(direction), SpawnReason.DISPENSER,
+        entitytype.spawn(source.getLevel(), stack, (PlayerEntity) null,
+            source.getPos().relative(direction), SpawnReason.DISPENSER,
             direction != Direction.UP, false);
         stack.shrink(1);
       } catch (Exception e) {
@@ -88,36 +86,35 @@ public abstract class EvileSpawnEgg extends Item {
   public EvileSpawnEgg(Item.Properties properties) {
     super(properties);
 
-    DispenserBlock.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
+    DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
   }
 
   /**
    * Called when this item is used when targetting a Block
    */
   public ActionResultType onItemUse(ItemUseContext context) {
-    World world = context.getWorld();
+    World world = context.getLevel();
 
     // If client, return
-    if (world.isRemote) {
+    if (world.isClientSide) {
       return ActionResultType.SUCCESS;
     }
 
     // If server
     else {
-      ItemStack itemstack = context.getItem();
-      BlockPos blockpos = context.getPos();
-      Direction direction = context.getFace();
+      ItemStack itemstack = context.getItemInHand();
+      BlockPos blockpos = context.getClickedPos();
+      Direction direction = context.getClickedFace();
       BlockState blockstate = world.getBlockState(blockpos);
       Block block = blockstate.getBlock();
       if (block == Blocks.SPAWNER) {
-        TileEntity tileentity = world.getTileEntity(blockpos);
+        TileEntity tileentity = world.getBlockEntity(blockpos);
         if (tileentity instanceof MobSpawnerTileEntity) {
-          AbstractSpawner abstractspawner =
-              ((MobSpawnerTileEntity) tileentity).getSpawnerBaseLogic();
+          AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
           EntityType<?> entitytype1 = this.getEntityType();
-          abstractspawner.setEntityType(entitytype1);
-          tileentity.markDirty();
-          world.notifyBlockUpdate(blockpos, blockstate, blockstate, 3);
+          abstractspawner.setEntityId(entitytype1);
+          tileentity.setChanged();
+          world.sendBlockUpdated(blockpos, blockstate, blockstate, 3);
           itemstack.shrink(1);
           return ActionResultType.SUCCESS;
         }
@@ -127,7 +124,7 @@ public abstract class EvileSpawnEgg extends Item {
       if (blockstate.getCollisionShape(world, blockpos).isEmpty()) {
         blockpos1 = blockpos;
       } else {
-        blockpos1 = blockpos.offset(direction);
+        blockpos1 = blockpos.relative(direction);
       }
 
       EntityType<?> entitytype = this.getEntityType();
@@ -147,33 +144,32 @@ public abstract class EvileSpawnEgg extends Item {
       Hand handIn) {
 
     // Hand
-    ItemStack itemstack = playerIn.getHeldItem(handIn);
+    ItemStack itemstack = playerIn.getItemInHand(handIn);
 
     // What are they looking at
-    RayTraceResult raytraceresult =
-        rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
+    RayTraceResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
 
     // If is not a block return pass
     if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
-      return ActionResult.resultPass(itemstack);
+      return ActionResult.pass(itemstack);
     }
     // Otherwise give the client success
-    else if (worldIn.isRemote) {
-      return ActionResult.resultSuccess(itemstack);
+    else if (worldIn.isClientSide) {
+      return ActionResult.success(itemstack);
     }
     // And give the server spawning logic
     else {
       BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
-      BlockPos blockpos = blockraytraceresult.getPos();
+      BlockPos blockpos = blockraytraceresult.getBlockPos();
 
       // If not a fluid
       if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
-        return ActionResult.resultPass(itemstack);
+        return ActionResult.pass(itemstack);
       }
       // Can the targetted block be modified by the player? Can the player edit the targetted face
       // with this itemstack?
-      else if (worldIn.isBlockModifiable(playerIn, blockpos)
-          && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
+      else if (worldIn.mayInteract(playerIn, blockpos)
+          && playerIn.mayUseItemAt(blockpos, blockraytraceresult.getDirection(), itemstack)) {
 
         // Type to spawn
         EntityType<?> entitytype = this.getEntityType();
@@ -181,23 +177,23 @@ public abstract class EvileSpawnEgg extends Item {
         // If null spawned, pass
         if (entitytype.spawn((ServerWorld) worldIn, itemstack, playerIn, blockpos,
             SpawnReason.SPAWN_EGG, false, false) == null) {
-          return ActionResult.resultPass(itemstack);
+          return ActionResult.pass(itemstack);
         }
         // Else shrink the stack if the player is not creative
         else {
-          if (!playerIn.abilities.isCreativeMode) {
+          if (!playerIn.abilities.mayfly) {
             itemstack.shrink(1);
           }
 
           // Record usage and succeed
-          playerIn.addStat(Stats.ITEM_USED.get(this));
-          return ActionResult.resultSuccess(itemstack);
+          playerIn.awardStat(Stats.ITEM_USED.get(this));
+          return ActionResult.success(itemstack);
         }
       }
 
       // If the block was not modifiable, fail
       else {
-        return ActionResult.resultFail(itemstack);
+        return ActionResult.fail(itemstack);
       }
     }
   }

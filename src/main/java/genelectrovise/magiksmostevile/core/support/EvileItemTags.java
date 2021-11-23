@@ -1,22 +1,19 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.core.support;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
@@ -42,13 +39,13 @@ public class EvileItemTags {
    * Contains and creates new tags
    */
   private static TagRegistry<Item> itemTags = TagRegistryManager.create(
-      new ResourceLocation(MagiksMostEvile.MODID, "itemTags"), ITagCollectionSupplier::getItemTags);
+      new ResourceLocation(MagiksMostEvile.MODID, "itemTags"), ITagCollectionSupplier::getItems);
 
   /**
    * @return A simple {@link INamedTag} of the given id.
    */
   public static INamedTag<Item> makeWrapperTag(String id) {
-    return itemTags.createTag(id);
+    return itemTags.bind(id);
   }
 
   /**
@@ -71,14 +68,10 @@ public class EvileItemTags {
   /**
    * @return An {@link ITagCollection} of the the registered {@link ITag}s.
    */
-  public static ITagCollection<Item> getCollection() {
-    return itemTags.getCollection();
-  }
+  public static ITagCollection<Item> getCollection() { return itemTags.getAllTags(); }
 
   /**
    * @return A list of each registered {@link INamedTag}
    */
-  public static List<? extends INamedTag<Item>> getAllTags() {
-    return itemTags.getTags();
-  }
+  public static ITagCollection<Item> getAllTags() { return itemTags.getAllTags(); }
 }

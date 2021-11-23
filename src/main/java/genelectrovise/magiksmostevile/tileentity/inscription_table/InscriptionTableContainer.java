@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.inscription_table;
@@ -42,7 +40,7 @@ public class InscriptionTableContainer extends CommonContainer {
   private PlayerInventory playerInventory;
 
   public InscriptionTableContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-    this(windowId, inv, new ItemStackHandler(4), (InscriptionTableTileEntity) Minecraft.getInstance().world.getTileEntity(data.readBlockPos()));
+    this(windowId, inv, new ItemStackHandler(4), (InscriptionTableTileEntity) Minecraft.getInstance().level.getBlockEntity(data.readBlockPos()));
   }
 
   public InscriptionTableContainer(int windowId, PlayerInventory inv, IItemHandler handler, InscriptionTableTileEntity inscriptionTable) {
@@ -73,21 +71,13 @@ public class InscriptionTableContainer extends CommonContainer {
 
   // Get and set
 
-  public InscriptionTableTileEntity getInscriptionTable() {
-    return inscriptionTable;
-  }
+  public InscriptionTableTileEntity getInscriptionTable() { return inscriptionTable; }
 
-  public PlayerInventory getPlayerInventory() {
-    return playerInventory;
-  }
+  public PlayerInventory getPlayerInventory() { return playerInventory; }
 
-  public void setInscriptionTable(InscriptionTableTileEntity inscriptionTable) {
-    this.inscriptionTable = inscriptionTable;
-  }
+  public void setInscriptionTable(InscriptionTableTileEntity inscriptionTable) { this.inscriptionTable = inscriptionTable; }
 
-  public void setPlayerInventory(PlayerInventory playerInventory) {
-    this.playerInventory = playerInventory;
-  }
+  public void setPlayerInventory(PlayerInventory playerInventory) { this.playerInventory = playerInventory; }
 
   public void buttonPressed(ResourceLocation signumName) {
     InscriptionTableNetworkingManager.CButtonPressed.sendToServer(new ButtonPressedMessageToServer(signumName));

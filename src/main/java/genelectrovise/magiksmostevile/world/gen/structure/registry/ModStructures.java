@@ -1,23 +1,20 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen.structure.registry;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.common.collect.ImmutableMap;
@@ -38,8 +35,7 @@ public class ModStructures {
 
   public static final HashMap<Structure<?>, StructureSeparationSettings> SEPERATION_SETTINGS = new HashMap<>();
 
-  public static final Structure<OvergroundShrineFeatureConfig> OVERGROUND_SHRINE =
-      new OvergroundShrineStructure();
+  public static final Structure<OvergroundShrineFeatureConfig> OVERGROUND_SHRINE = new OvergroundShrineStructure();
 
   public static void registerStructures(Register<Structure<?>> event) {
     register(event.getRegistry(), OVERGROUND_SHRINE, "overground_shrine");
@@ -60,7 +56,7 @@ public class ModStructures {
     try {
 
       // Add to the name map
-      Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);
+      Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 
       // Place into the structure seperation settings map
       try {
@@ -68,7 +64,7 @@ public class ModStructures {
         ReflectionUtil.makeUniversallyAccessible(mapField);
         ImmutableMap<Structure<?>, StructureSeparationSettings> newSettings =
             ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
-                .putAll(DimensionStructuresSettings.field_236191_b_)
+                .putAll(DimensionStructuresSettings.DEFAULTS)
                 .put(structure, SEPERATION_SETTINGS.get(structure))
                 .build();
         mapField.set(DimensionStructuresSettings.class, newSettings);
@@ -87,11 +83,10 @@ public class ModStructures {
         MagiksMostEvile.LOGGER.debug("Able to access dimension settings");
 
         // Structures map
-        DimensionStructuresSettings structuresSettings = originalSettings.getStructures();
+        DimensionStructuresSettings structuresSettings = originalSettings.structureSettings();
         Field mapField = ObfuscationReflectionHelper.findField(DimensionStructuresSettings.class, "field_236193_d_");
         ReflectionUtil.makeUniversallyAccessible(mapField);
-        @SuppressWarnings("unchecked")
-        Map<Structure<?>, StructureSeparationSettings> structureSettingsMap = (Map<Structure<?>, StructureSeparationSettings>) mapField.get(structuresSettings);
+        @SuppressWarnings("unchecked") Map<Structure<?>, StructureSeparationSettings> structureSettingsMap = (Map<Structure<?>, StructureSeparationSettings>) mapField.get(structuresSettings);
         structureSettingsMap.put(structure, SEPERATION_SETTINGS.get(structure));
 
         MagiksMostEvile.LOGGER.debug("Reached end of setting block successfully.");
@@ -113,8 +108,7 @@ public class ModStructures {
 
   }
 
-  public static void register(IForgeRegistry<Structure<?>> registry, Structure<?> entry,
-      String registryKey) {
+  public static void register(IForgeRegistry<Structure<?>> registry, Structure<?> entry, String registryKey) {
 
     entry.setRegistryName(new ResourceLocation(MagiksMostEvile.MODID, registryKey));
     registry.register(entry);

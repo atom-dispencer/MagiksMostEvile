@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.registry;
@@ -49,19 +47,13 @@ public class LazyForgeRegistry<V extends IForgeRegistryEntry<V>> implements IFor
     return new LazyForgeRegistry<>(registryType);
   }
 
-  private IForgeRegistry<V> getRegistry() {
-    return registry.getValue();
-  }
+  private IForgeRegistry<V> getRegistry() { return registry.get(); }
 
   @Override
-  public ResourceLocation getRegistryName() {
-    return getRegistry().getRegistryName();
-  }
+  public ResourceLocation getRegistryName() { return getRegistry().getRegistryName(); }
 
   @Override
-  public Class<V> getRegistrySuperType() {
-    return getRegistry().getRegistrySuperType();
-  }
+  public Class<V> getRegistrySuperType() { return getRegistry().getRegistrySuperType(); }
 
   @Override
   public void register(final V value) {
@@ -85,9 +77,7 @@ public class LazyForgeRegistry<V extends IForgeRegistryEntry<V>> implements IFor
   }
 
   @Override
-  public boolean isEmpty() {
-    return getRegistry().isEmpty();
-  }
+  public boolean isEmpty() { return getRegistry().isEmpty(); }
 
   @Override
   @Nullable
@@ -103,27 +93,19 @@ public class LazyForgeRegistry<V extends IForgeRegistryEntry<V>> implements IFor
 
   @Override
   @Nullable
-  public ResourceLocation getDefaultKey() {
-    return getRegistry().getDefaultKey();
-  }
+  public ResourceLocation getDefaultKey() { return getRegistry().getDefaultKey(); }
 
   @Override
   @Nonnull
-  public Set<ResourceLocation> getKeys() {
-    return getRegistry().getKeys();
-  }
+  public Set<ResourceLocation> getKeys() { return getRegistry().getKeys(); }
 
   @Override
   @Nonnull
-  public Collection<V> getValues() {
-    return getRegistry().getValues();
-  }
+  public Collection<V> getValues() { return getRegistry().getValues(); }
 
   @Override
   @Nonnull
-  public Set<Entry<RegistryKey<V>, V>> getEntries() {
-    return getRegistry().getEntries();
-  }
+  public Set<Entry<RegistryKey<V>, V>> getEntries() { return getRegistry().getEntries(); }
 
   @Override
   public <T> T getSlaveMap(final ResourceLocation slaveMapName, final Class<T> type) {

@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.entity.goal;
@@ -38,11 +36,8 @@ public class SquidMissileAttackGoal extends Goal {
   private final KittyTheKrakenEntity kraken;
   private int attackTimer;
 
-  private static final int ZERO = 0;
   private static final int RANGE = 64;
   private static final int ATTACK_AT = 200;
-  private static final int LIMIT = 200;
-  private static final float MISSILE_SPEED_MODIFIER = 5;
 
   public SquidMissileAttackGoal(KittyTheKrakenEntity kraken) {
     this.kraken = kraken;
@@ -50,9 +45,9 @@ public class SquidMissileAttackGoal extends Goal {
   }
 
   @Override
-  public boolean shouldExecute() {
+  public boolean canUse() {
 
-    if (kraken.getAttackTarget() == null)
+    if (kraken.getTarget() == null)
       return false;
     if (kraken.getFirstUsableArm() == null)
       return false;
@@ -61,22 +56,22 @@ public class SquidMissileAttackGoal extends Goal {
   }
 
   @Override
-  public void startExecuting() {
+  public void start() {
     this.attackTimer = 0;
   }
 
   @Override
-  public void resetTask() {
+  public void stop() {
     kraken.setSquidMissileAttacking(false);
   }
 
   @Override
   public void tick() {
-    LivingEntity target = kraken.getAttackTarget();
+    LivingEntity target = kraken.getTarget();
 
     MagiksMostEvile.LOGGER.debug("attackTimer: " + attackTimer);
 
-    if (kraken.canEntityBeSeen(target) /* target visible */ && kraken.getDistanceSq(target) < (RANGE * RANGE) /* range */) {
+    if (kraken.canSee(target) /* target visible */ && kraken.distanceToSqr(target) < (RANGE * RANGE) /* range */) {
 
       this.attackTimer++;
 
@@ -93,33 +88,27 @@ public class SquidMissileAttackGoal extends Goal {
 
   private void attack(LivingEntity target) {
 
-    if (!kraken.world.isRemote) {
-      Vector3d targetPosition = target.getPositionVec();
-      Vector3d krakenPosition = kraken.getPositionVec();
+    if (!kraken.level.isClientSide) {
+      Vector3d targetPosition = target.position();
+      Vector3d krakenPosition = kraken.position();
 
       Vector3d subtractedDirection = targetPosition.subtract(krakenPosition);
 
       SquidMissileEntity missile =
-          (SquidMissileEntity) EntityOrbitalRegistry.SQUID_MISSILE.get().spawn((ServerWorld) kraken.world, null, null, kraken.getPosition().up(5), SpawnReason.MOB_SUMMONED, false, false);
+          (SquidMissileEntity) EntityOrbitalRegistry.SQUID_MISSILE.get().spawn((ServerWorld) kraken.level, null, null, kraken.blockPosition().above(5), SpawnReason.MOB_SUMMONED, false, false);
       missile.setExplosive(false);
       missile.setTicksUntilIgnition(20);
-      
+
       missile.setDirection(subtractedDirection);
     }
   }
 
   // Get and set
 
-  public KittyTheKrakenEntity getKraken() {
-    return kraken;
-  }
+  public KittyTheKrakenEntity getKraken() { return kraken; }
 
-  public int getAttackTimer() {
-    return attackTimer;
-  }
+  public int getAttackTimer() { return attackTimer; }
 
-  public void setAttackTimer(int attackTimer) {
-    this.attackTimer = attackTimer;
-  }
+  public void setAttackTimer(int attackTimer) { this.attackTimer = attackTimer; }
 
 }

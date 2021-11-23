@@ -1,0 +1,12 @@
+
+Pretty
+{
+	"type": "java.lang.String",
+	"flags": ["flag1", "flag2"],
+	"content": {
+		"key":"value"
+	}
+}
+
+Not pretty
+{"type":"java.lang.String","flags":["flag1","flag2"],"content":{"key":"value"}}

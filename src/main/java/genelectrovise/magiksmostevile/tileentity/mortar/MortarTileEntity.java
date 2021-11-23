@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.mortar;
@@ -50,7 +48,7 @@ public class MortarTileEntity extends TileEntity {
 
   private ItemStackHandler slot = new ItemStackHandler() {
     protected void onContentsChanged(int slot) {
-      markDirty();
+      setChanged();
     };
   };
   protected final LazyOptional<IItemHandler> slotHandler = LazyOptional.of(() -> slot);
@@ -65,10 +63,10 @@ public class MortarTileEntity extends TileEntity {
 
     // IItemHandler
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-      this.markDirty();
+      this.setChanged();
 
       // if the block at myself isn't myself, allow full access (Block Broken)
-      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
+      if (level != null && level.getBlockState(getBlockPos()).getBlock() != this.getBlockState().getBlock()) {
         return allSlots.cast();
       }
 
@@ -89,7 +87,7 @@ public class MortarTileEntity extends TileEntity {
    * @param playerHeldStack
    */
   public void recieveItemStack(ItemStack playerHeldStack) {
-    if (!this.world.isRemote) {
+    if (!this.level.isClientSide()) {
       slotHandler.ifPresent((handler) -> {
         inner_recieveItemStack(playerHeldStack, handler);
       });
@@ -101,11 +99,11 @@ public class MortarTileEntity extends TileEntity {
    * {@link ItemStack} in. Called from the lambda of {@link #recieveItemStack(ItemStack)}.
    */
   private void inner_recieveItemStack(ItemStack playerHeldStack, IItemHandler handler) {
-    if (!this.world.isRemote) {
+    if (!this.level.isClientSide()) {
       popContents();
       handler.insertItem(0, new ItemStack(playerHeldStack.getItem(), 1), false);
       playerHeldStack.shrink(1);
-      markDirty();
+      setChanged();
     }
   }
 
@@ -115,7 +113,7 @@ public class MortarTileEntity extends TileEntity {
    * lambdas is a pain.
    */
   public void popContents() {
-    if (!this.world.isRemote) {
+    if (!this.level.isClientSide()) {
       slotHandler.ifPresent((handler) -> {
         inner_popContents(handler);
       });
@@ -131,13 +129,13 @@ public class MortarTileEntity extends TileEntity {
    * @param handler
    */
   private void inner_popContents(IItemHandler handler) {
-    if (!this.world.isRemote) {
+    if (!this.level.isClientSide()) {
       ItemStack out = handler.extractItem(0, 1, false);
 
-      ItemEntity entity = (ItemEntity) EntityType.ITEM.spawn((ServerWorld) world, null, null, getPos().add(0, 1, 0), SpawnReason.EVENT, false, false);
+      ItemEntity entity = (ItemEntity) EntityType.ITEM.spawn((ServerWorld) level, null, null, getBlockPos().offset(0, 1, 0), SpawnReason.EVENT, false, false);
       entity.setItem(out);
 
-      markDirty();
+      setChanged();
     }
   }
 
@@ -148,13 +146,13 @@ public class MortarTileEntity extends TileEntity {
   public void recipe() {
 
     // Do nothing on the client
-    if (world.isRemote) {
+    if (level.isClientSide()) {
       return;
     }
 
     // Handle the recipe on the server. Don't let exceptions leak!
     try {
-      Map<ResourceLocation, IRecipe<?>> recipes = RecipeSerializerOrbitalRegistry.getRecipes(this.world).get(RecipeSerializerOrbitalRegistry.SIMPLE_TYPE);
+      Map<ResourceLocation, IRecipe<?>> recipes = RecipeSerializerOrbitalRegistry.getRecipes(this.level).get(RecipeSerializerOrbitalRegistry.SIMPLE_TYPE);
       for (IRecipe<?> recipe : recipes.values()) {
         if (recipe instanceof SimpleRecipe) {
 
@@ -171,8 +169,8 @@ public class MortarTileEntity extends TileEntity {
           }
 
           handlerRealised.extractItem(0, 6400, false);
-          handlerRealised.insertItem(0, castRecipe.getRecipeOutput(), false);
-          
+          handlerRealised.insertItem(0, castRecipe.getResultItem(), false);
+
           popContents();
           break;
         }

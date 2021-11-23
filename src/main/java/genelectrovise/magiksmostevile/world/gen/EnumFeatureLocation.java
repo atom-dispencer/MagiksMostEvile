@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen;
@@ -22,7 +20,8 @@ import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.biome.Biome;
-import static net.minecraft.world.biome.Biome.*;
+import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 
 /**
  * {@link RuinedPortalPiece.Location}
@@ -43,7 +42,7 @@ public enum EnumFeatureLocation implements IStringSerializable {
 
   // Codec
   public static final Codec<EnumFeatureLocation> CODEC =
-      IStringSerializable.createEnumCodec(EnumFeatureLocation::values, EnumFeatureLocation::get);
+      IStringSerializable.fromEnum(EnumFeatureLocation::values, EnumFeatureLocation::get);
 
   // Map
   private static final Map<String, EnumFeatureLocation> MAP =
@@ -60,13 +59,9 @@ public enum EnumFeatureLocation implements IStringSerializable {
     this.biomeCategory = biomeCategory;
   }
 
-  public String getName() {
-    return this.name;
-  }
+  public String getName() { return this.name; }
 
-  public Biome.Category getBiomeCategory() {
-    return biomeCategory;
-  }
+  public Biome.Category getBiomeCategory() { return biomeCategory; }
 
   // IStringSerializable
 
@@ -74,7 +69,6 @@ public enum EnumFeatureLocation implements IStringSerializable {
     return MAP.get(name);
   }
 
-  public String getString() {
-    return this.getName();
-  }
+  @Override
+  public String getSerializedName() { return this.getName(); }
 }

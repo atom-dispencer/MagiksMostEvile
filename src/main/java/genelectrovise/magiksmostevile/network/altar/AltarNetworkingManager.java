@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
@@ -48,24 +46,21 @@ public class AltarNetworkingManager {
 
   // Energy update
   public static SimpleChannel CAltarEnergyUpdate;
-  public static final ResourceLocation RLEnergyUpdate =
-      new ResourceLocation(MagiksMostEvile.MODID, "altar_energy_update");
+  public static final ResourceLocation RLEnergyUpdate = new ResourceLocation(MagiksMostEvile.MODID, "altar_energy_update");
   public static final String ENERGY_UPDATE_MESSAGE_PROTOCOL_VERSION = "1.0";
   public static final int ALTAR_ENERGY_UPDATE_TO_SERVER = 11;
   public static final int ALTAR_ENERGY_UPDATE_TO_CLIENT = 12;
 
   // Cast button
   public static SimpleChannel CAltarCastButton;
-  public static final ResourceLocation RLCastButtonPressed =
-      new ResourceLocation(MagiksMostEvile.MODID, "altar_cast_button_pressed");
+  public static final ResourceLocation RLCastButtonPressed = new ResourceLocation(MagiksMostEvile.MODID, "altar_cast_button_pressed");
   public static final String CAST_BUTTON_PRESSED_MESSAGE_PROTOCOL_VERSION = "1.0";
   public static final int ALTAR_CAST_BUTTON_PRESSED_TO_SERVER = 21;
   public static final int ALTAR_CAST_BUTTON_PRESSED_TO_CLIENT = 22;
 
   // Arrow toggles
   public static SimpleChannel CAltarToggleButton;
-  public static final ResourceLocation RLToggleButton =
-      new ResourceLocation(MagiksMostEvile.MODID, "altar_toggle_button");
+  public static final ResourceLocation RLToggleButton = new ResourceLocation(MagiksMostEvile.MODID, "altar_toggle_button");
   public static final String TOGGLE_BUTTON_MESSAGE_PROTOCOL_VERSION = "1.0";
   public static final int ALTAR_TOGGLE_BUTTON_TO_SERVER = 31;
   public static final int ALTAR_TOGGLE_BUTTON_TO_CLIENT = 32;

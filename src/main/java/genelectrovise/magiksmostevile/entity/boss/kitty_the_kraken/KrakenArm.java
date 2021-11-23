@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken;
@@ -36,7 +34,7 @@ public class KrakenArm implements INBTSerializable<CompoundNBT> {
   public CompoundNBT serializeNBT() {
 
     CompoundNBT nbt = new CompoundNBT();
-    nbt.putString("krakenArmSide", side.getString());
+    nbt.putString("krakenArmSide", side.getSerializedName());
 
     return nbt;
   }
@@ -48,25 +46,15 @@ public class KrakenArm implements INBTSerializable<CompoundNBT> {
 
   // Get and set
 
-  public KittyTheKrakenEntity getKraken() {
-    return kraken;
-  }
+  public KittyTheKrakenEntity getKraken() { return kraken; }
 
-  public KrakenArmSide getSide() {
-    return side;
-  }
+  public KrakenArmSide getSide() { return side; }
 
-  public void setSide(KrakenArmSide side) {
-    this.side = side;
-  }
+  public void setSide(KrakenArmSide side) { this.side = side; }
 
-  public boolean isUsable() {
-    return usable;
-  }
+  public boolean isUsable() { return usable; }
 
-  public void setUsable(boolean usable) {
-    this.usable = usable;
-  }
+  public void setUsable(boolean usable) { this.usable = usable; }
 
   // Classes
 
@@ -74,9 +62,7 @@ public class KrakenArm implements INBTSerializable<CompoundNBT> {
     LEFT, RIGHT;
 
     @Override
-    public String getString() {
-      return this.name();
-    }
+    public String getSerializedName() { return this.name(); }
 
     public static KrakenArmSide fromString(String string) {
       return KrakenArmSide.valueOf(string);

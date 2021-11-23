@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise    
+ * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
  *
- * This file is part of Magiks Most Evile.
- * Magiks Most Evile is free software: you can redistribute it and/or modify it under the terms 
- * of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
+ * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any later version.
  *
- * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  
- * See the GNU General Public License for more details.
+ * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along with Magiks Most Evile. 
+ * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.altar;
@@ -113,28 +111,28 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
     slot_0 = new ItemStackHandler() {
       @Override
       protected void onContentsChanged(int slot) {
-        markDirty();
+        setChanged();
       }
     };
 
     slot_1 = new ItemStackHandler() {
       @Override
       protected void onContentsChanged(int slot) {
-        markDirty();
+        setChanged();
       }
     };
 
     slot_2 = new ItemStackHandler() {
       @Override
       protected void onContentsChanged(int slot) {
-        markDirty();
+        setChanged();
       }
     };
 
     slot_3 = new ItemStackHandler() {
       @Override
       protected void onContentsChanged(int slot) {
-        markDirty();
+        setChanged();
       }
     };
 
@@ -149,10 +147,10 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
     // IItemHandler
     if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-      this.markDirty();
+      this.setChanged();
 
       // if the block at myself isn't myself, allow full access (Block Broken)
-      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
+      if (level != null && level.getBlockState(worldPosition).getBlock() != this.getBlockState().getBlock()) {
         return allSlots.cast();
       }
       if (side == null) {
@@ -162,10 +160,10 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
     // IFluidTank
     if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-      this.markDirty();
+      this.setChanged();
 
       // if the block at myself isn't myself, allow full access (Block Broken)
-      if (world != null && world.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
+      if (level != null && level.getBlockState(worldPosition).getBlock() != this.getBlockState().getBlock()) {
         return ichorStorageLazyOptional.cast();
       }
       if (side == null) {
@@ -179,8 +177,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   // Generic stuff for tile entities
 
   @Override
-  public void remove() {
-    super.remove();
+  public void setRemoved() {
+    super.setRemoved();
     slot_0_holder.invalidate();
     slot_1_holder.invalidate();
     slot_2_holder.invalidate();
@@ -191,8 +189,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   }
 
   @Override
-  public void read(BlockState state, CompoundNBT tag) {
-    super.read(state, tag);
+  public void load(BlockState state, CompoundNBT tag) {
+    super.load(state, tag);
     slot_0.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_0"));
     slot_1.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_1"));
     slot_2.deserializeNBT(tag.getCompound(MagiksMostEvile.MODID + ":slot_2"));
@@ -212,8 +210,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   }
 
   @Override
-  public CompoundNBT write(CompoundNBT tag) {
-    tag = super.write(tag);
+  public CompoundNBT save(CompoundNBT tag) {
+    tag = super.save(tag);
     tag.put(MagiksMostEvile.MODID + ":slot_0", slot_0.serializeNBT());
     tag.put(MagiksMostEvile.MODID + ":slot_1", slot_1.serializeNBT());
     tag.put(MagiksMostEvile.MODID + ":slot_2", slot_2.serializeNBT());
@@ -235,16 +233,16 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   @Override
   public void tick() {
 
-    if (!world.isRemote) {
+    if (!level.isClientSide) {
       if (tickIncr % 100 == 0) {
         for (AmethystCrystalTileEntity te : crystals) {
           ParticleNetworkingManager.CTransferEnergy.send(PacketDistributor.ALL.noArg(),
-              new TransferEnergyMessageToClient(te.getPos(), this.getPos()));
+              new TransferEnergyMessageToClient(te.getBlockPos(), this.getBlockPos()));
         }
       }
     }
 
-    if (!world.isRemote) {
+    if (!level.isClientSide) {
       // Test for crystals nearby
       if (tickIncr % 100 == 0) {
         crystals.clear();
@@ -252,11 +250,10 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
         for (int x = -4; x < 4; x++) {
           for (int y = -4; y < 4; y++) {
             for (int z = -4; z < 4; z++) {
-              BlockPos position = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-              BlockState state = world.getBlockState(position);
-              if (state.getBlock() == BlockOrbitalRegistry.AMETHYST_CRYSTAL.get()
-                  || world.getTileEntity(position) instanceof AmethystCrystalTileEntity) {
-                crystals.add((AmethystCrystalTileEntity) world.getTileEntity(position));
+              BlockPos position = new BlockPos(worldPosition.getX() + x, worldPosition.getY() + y, worldPosition.getZ() + z);
+              BlockState state = level.getBlockState(position);
+              if (state.getBlock() == BlockOrbitalRegistry.AMETHYST_CRYSTAL.get() || level.getBlockEntity(position) instanceof AmethystCrystalTileEntity) {
+                crystals.add((AmethystCrystalTileEntity) level.getBlockEntity(position));
               }
             }
           }
@@ -268,8 +265,8 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
       // Receive amethyst flux
       if (recieveFluxCountdown > 20) {
-        if (world instanceof ServerWorld) {
-          if (!world.isDaytime()) {
+        if (level instanceof ServerWorld) {
+          if (!level.isDay()) {
             ichorStorage.fill(new FluidStack(Fluids.LAVA, 1), FluidAction.EXECUTE);
 
             if (new Random().nextInt(15) == 0) {
@@ -305,22 +302,18 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
   @Override
   public void openGUI(ServerPlayerEntity player) {
-    if (!world.isRemote && !isCasting()) {
-      NetworkHooks.openGui(player, this, getPos());
+    if (!level.isClientSide && !isCasting()) {
+      NetworkHooks.openGui(player, this, getBlockPos());
     }
   }
 
   @Override
-  public ITextComponent getDisplayName() {
-    return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar");
-  }
+  public ITextComponent getDisplayName() { return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.altar"); }
 
   /**
    * @return the ichorStorage
    */
-  public int getIchorStored() {
-    return ichorStorage.getFluidAmount();
-  }
+  public int getIchorStored() { return ichorStorage.getFluidAmount(); }
 
   public boolean fillIchor(int amount) {
     return ichorStorage.fill(new FluidStack(Fluids.LAVA, amount), FluidAction.EXECUTE) == amount;
@@ -335,16 +328,12 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
   /**
    * @return the isCasting
    */
-  public boolean isCasting() {
-    return isCasting;
-  }
+  public boolean isCasting() { return isCasting; }
 
   /**
    * @param isCasting the isCasting to set
    */
-  public void setCasting(boolean isCasting) {
-    this.isCasting = isCasting;
-  }
+  public void setCasting(boolean isCasting) { this.isCasting = isCasting; }
 
   /**
    * @param resourceLocation
