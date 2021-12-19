@@ -18,6 +18,7 @@
 package genelectrovise.magiksmostevile.entity.goal;
 
 import genelectrovise.magiksmostevile.entity.vampire_bat.VampireBatEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;

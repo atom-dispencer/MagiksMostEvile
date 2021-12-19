@@ -20,7 +20,6 @@ import org.apache.logging.log4j.Logger;
 import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
-import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraftforge.common.MinecraftForge;

@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -69,8 +70,12 @@ public class PixieCourier {
     }
   }
 
-  public static void send() {
-
+  public static void send(PacketTarget target, PixiePacket packet) {
+    try {
+      INSTANCE.channel.send(target, packet);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 }

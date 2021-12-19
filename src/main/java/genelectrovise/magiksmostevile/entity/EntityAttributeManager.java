@@ -22,10 +22,8 @@ import genelectrovise.magiksmostevile.entity.boss.tinder_and_cinder.TinderAndCin
 import genelectrovise.magiksmostevile.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.registry.orbital.registries.EntityOrbitalRegistry;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 
 public final class EntityAttributeManager {
 

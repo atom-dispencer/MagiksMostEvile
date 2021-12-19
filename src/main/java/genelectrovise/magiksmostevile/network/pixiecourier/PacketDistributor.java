@@ -13,6 +13,14 @@ public class PacketDistributor {
 
   public PacketDistributor() {}
 
+  /**
+   * Uses {@link #findProcessor(PixiePacket)}, then runs
+   * {@link PixieProcessor#process(PixiePacket, Context)} (with added validity checks).
+   * 
+   * @param packet
+   * @param context
+   * @throws CourierException
+   */
   public void forwardPacketToProcessor(PixiePacket packet, Context context) throws CourierException {
 
     // Null check packet
@@ -20,7 +28,7 @@ public class PacketDistributor {
       throw new CourierException(PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_THE_PACKET_WAS_NULL);
 
     // Find the processor for the packet type
-    PixieProcessor processor = PixieProcessor.Registry.INSTANCE.get(packet.getType());
+    PixieProcessor processor = findProcessor(packet);
     if (processor == null) {
       throw new CourierException(PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_NO_NULL_PROCESSOR_WAS_FOUND);
     }
@@ -28,6 +36,11 @@ public class PacketDistributor {
     // Process
     processor.process(packet, context);
 
+  }
+
+  protected PixieProcessor findProcessor(PixiePacket packet) throws CourierException {
+    PixieProcessor processor = PixieProcessor.Registry.INSTANCE.get(packet.getType());
+    return processor;
   }
 
 }
