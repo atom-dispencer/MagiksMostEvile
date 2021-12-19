@@ -1,16 +1,21 @@
 
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.minecraft.network.PacketBuffer;
 
 public class PacketEncoderTest {
+
+  private final String SAMPLE_JSON = "{\"type\":\"java.lang.String\",\"flags\":{\"flags\":[\"flag1\",\"flag2\"]},\"content\":{\"key\":\"value\"}}";
 
   @BeforeEach
   void beforeEach() {
@@ -43,6 +48,44 @@ public class PacketEncoderTest {
     });
 
     String expectedMessage = PacketEncoder.PACKET_BUFFER_IS_NOT_WRITABLE_FOR_ENCODING_PIXIE_PACKET;
+    Assertions.assertTrue(exception.getMessage().contains(expectedMessage));
+  }
+
+  @Test
+  void testDecodePacket() throws CourierException {
+    PacketBuffer packetBuffer = Mockito.mock(PacketBuffer.class);
+
+    when(packetBuffer.readUtf()).thenReturn(SAMPLE_JSON);
+    when(packetBuffer.isReadable()).thenReturn(true);
+
+    PixiePacket pixiePacket = PacketEncoder.decode(packetBuffer);
+    verify(packetBuffer, times(1)).readUtf();
+
+    assertEquals(String.class, pixiePacket.getType());
+    assertEquals(new Flags(new String[] {"flag1", "flag2"}), pixiePacket.getFlags());
+    JsonObject object = new JsonObject();
+    object.addProperty("key", "value");
+    assertEquals(object, pixiePacket.getContent());
+  }
+
+  @Test
+  void testDecodePacket_throwsCourier() throws CourierException {
+
+    CourierException exception = assertThrows(CourierException.class, () -> {
+      PacketBuffer packetBuffer = Mockito.mock(PacketBuffer.class);
+
+      when(packetBuffer.readUtf()).thenReturn(SAMPLE_JSON);
+      when(packetBuffer.isReadable()).thenReturn(false);
+
+      PixiePacket pixiePacket = PacketEncoder.decode(packetBuffer);
+      verify(packetBuffer, times(1)).readUtf();
+
+      assertEquals(String.class, pixiePacket.getType());
+      assertEquals(new Flags(new String[] {"flag1", "flag2"}), pixiePacket.getFlags());
+      assertEquals(new Gson().toJsonTree("{\"key\":\"value\"}").getAsJsonObject(), pixiePacket.getContent());
+    });
+
+    String expectedMessage = PacketEncoder.PACKET_BUFFER_IS_NOT_READABLE_FOR_DECODING_PIXIE_PACKET;
     Assertions.assertTrue(exception.getMessage().contains(expectedMessage));
   }
 

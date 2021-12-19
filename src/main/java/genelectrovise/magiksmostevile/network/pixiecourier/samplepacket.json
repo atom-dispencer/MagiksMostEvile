@@ -9,4 +9,4 @@ Pretty
 }
 
 Not pretty
-{"type":"java.lang.String","flags":["flag1","flag2"],"content":{"key":"value"}}
+{"type":"java.lang.String","flags":{"flags":["flag1","flag2"]},"content":{"key":"value"}}
