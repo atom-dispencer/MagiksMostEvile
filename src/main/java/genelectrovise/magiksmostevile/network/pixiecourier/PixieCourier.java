@@ -64,7 +64,7 @@ public class PixieCourier {
 
   public static void recieve(final PixiePacket message, Supplier<NetworkEvent.Context> contextSupplier) {
     try {
-      INSTANCE.distributor.forwardPacketToProcessor(message, contextSupplier.get());
+      INSTANCE.distributor.processPacketWithChecks(message, contextSupplier.get(), INSTANCE.distributor.findProcessor(message, PixieProcessor.Registry.getInstance()));
     } catch (CourierException c) {
       c.printStackTrace();
     }

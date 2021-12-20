@@ -12,22 +12,65 @@ public interface PixieProcessor {
 
   public static class Registry {
 
-    public static final Registry INSTANCE = new Registry();
+    public static final String CANNOT_REGISTER_PROCESSOR_AS_TYPE_NULL = "Cannot register processor as type null";
+    public static final String CANNOT_REGISTER_PROCESSOR_AS_PROCESSOR_NULL = "Cannot register processor as processor null";
+    public static final String NO_PROCESSOR_FOR_TYPE = "No processor for type";
+    public static final String CANNOT_GET_PROCESSOR_AS_TYPE_NULL = "Cannot get processor as type null";
+
+
+
+    // Static
+    protected static final Registry INSTANCE = new Registry();
+
+    public static Registry getInstance() { return INSTANCE; }
+
+    // Instance
     protected Map<Class<?>, PixieProcessor> processors = Maps.newHashMap();
 
     private Registry() {}
 
-    public static Registry getInstance() { return INSTANCE; }
+    /**
+     * Associates the given type and processor in the {@link #processors} {@link Map}.
+     * 
+     * @param type
+     * @param processor
+     * @throws CourierException
+     */
+    public void register(Class<?> type, PixieProcessor processor) throws CourierException {
 
-    public void register(Class<?> type, PixieProcessor processor) {
-      INSTANCE.processors.put(type, processor);
+      // Null check type
+      if (type == null) {
+        throw new CourierException(CANNOT_REGISTER_PROCESSOR_AS_TYPE_NULL);
+      }
+
+      // Null check processor
+      if (processor == null) {
+        throw new CourierException(CANNOT_REGISTER_PROCESSOR_AS_PROCESSOR_NULL);
+      }
+
+      // Put
+      processors.put(type, processor);
     }
 
+    /**
+     * Gets a processor for the given type from the {@link #processors} {@link Map}.
+     * 
+     * @param type
+     * @return
+     * @throws CourierException
+     */
     public PixieProcessor get(Class<?> type) throws CourierException {
-      PixieProcessor processor = PixieProcessor.Registry.INSTANCE.get(type);
 
+      // Null check type
+      if (type == null) {
+        throw new CourierException(CANNOT_GET_PROCESSOR_AS_TYPE_NULL);
+      }
+      
+      PixieProcessor processor = processors.get(type);
+      
+      // Null check processor
       if (processor == null) {
-        throw new CourierException("No " + PixieProcessor.class.getSimpleName() + " registered for type=" + type.getName());
+        throw new CourierException(NO_PROCESSOR_FOR_TYPE + ": " + type.getName());
       }
 
       return processor;
