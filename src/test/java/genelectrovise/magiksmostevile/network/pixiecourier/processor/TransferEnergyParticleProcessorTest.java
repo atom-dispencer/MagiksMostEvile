@@ -6,6 +6,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doCallRealMethod;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -25,24 +27,26 @@ public class TransferEnergyParticleProcessorTest {
   @Mock TransferEnergyParticleProcessor processor;
   @Mock PixiePacket packet;
   @Mock Context context;
-  @Mock Gson gson;
+  Gson gson;
 
   @Test
   void testWhenToClient_workEnqueued() {
     when(context.getDirection()).thenReturn(NetworkDirection.PLAY_TO_CLIENT);
-    doNothing().when(context).enqueueWork(any());
+    doNothing().when(processor).enqueueParticleSpawn(any(), any(), any());
+    doCallRealMethod().when(processor).process(any(), any(), any());
 
     processor.process(packet, context, gson);
-    verify(context, times(1)).enqueueWork(any());
+    verify(processor, times(1)).enqueueParticleSpawn(any(), any(), any());
   }
 
   @Test
   void testWhenToServer_noWorkEnqueued() {
     when(context.getDirection()).thenReturn(NetworkDirection.PLAY_TO_SERVER);
-    doNothing().when(context).enqueueWork(any());
+    doNothing().when(processor).enqueueParticleSpawn(any(), any(), any());
+    doCallRealMethod().when(processor).process(any(), any(), any());
 
     processor.process(packet, context, gson);
-    verify(context, never()).enqueueWork(any());
+    verify(processor, never()).enqueueParticleSpawn(any(), any(), any());
   }
 
 }
