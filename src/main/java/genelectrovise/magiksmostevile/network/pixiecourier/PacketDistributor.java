@@ -2,6 +2,7 @@ package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import genelectrovise.magiksmostevile.gson.GsonConfigurator;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
 public class PacketDistributor {
@@ -30,14 +31,14 @@ public class PacketDistributor {
     // Null check packet
     if (context == null)
       throw new CourierException(PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_THE_PACKET_WAS_NULL);
-    
+
     // Null check processor
     if (processor == null) {
       throw new CourierException(PIXIE_PACKET_COULD_NOT_BE_PROCESSED_AS_NO_NULL_PROCESSOR_WAS_FOUND);
     }
 
     // Process
-    processor.process(packet, context);
+    processor.process(packet, context, GsonConfigurator.newConfiguredInstance());
 
   }
 

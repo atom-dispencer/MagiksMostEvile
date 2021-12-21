@@ -56,12 +56,9 @@ public class TransferEnergyMessageHandlerOnClient {
   }
 
   // This message is called from the Client thread.
-  private static void processMessage(TransferEnergyMessageToClient message,
-      Supplier<NetworkEvent.Context> ctxSupplier) {
-    Vector3d crystal = new Vector3d(message.getDeparture().getX(), message.getDeparture().getY(),
-        message.getDeparture().getZ());
-    Vector3d altar = new Vector3d(message.getDestination().getX(), message.getDestination().getY(),
-        message.getDestination().getZ());
+  private static void processMessage(TransferEnergyMessageToClient message, Supplier<NetworkEvent.Context> ctxSupplier) {
+    Vector3d crystal = new Vector3d(message.getDeparture().getX(), message.getDeparture().getY(), message.getDeparture().getZ());
+    Vector3d altar = new Vector3d(message.getDestination().getX(), message.getDestination().getY(), message.getDestination().getZ());
 
     Vector3d direction = altar.subtract(crystal);
     direction.normalize();

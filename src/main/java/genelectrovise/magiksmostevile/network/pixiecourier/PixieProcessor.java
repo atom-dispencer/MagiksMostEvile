@@ -1,14 +1,19 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
+import java.util.List;
 import java.util.Map;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gson.Gson;
+import genelectrovise.magiksmostevile.network.pixiecourier.packet.TransferEnergyParticlePacket;
+import genelectrovise.magiksmostevile.network.pixiecourier.processor.TransferEnergyParticleProcessor;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 public interface PixieProcessor {
 
-  void process(PixiePacket packet, NetworkEvent.Context context);
+  void process(PixiePacket packet, NetworkEvent.Context context, Gson gson);
 
   public static class Registry {
 
@@ -65,9 +70,9 @@ public interface PixieProcessor {
       if (type == null) {
         throw new CourierException(CANNOT_GET_PROCESSOR_AS_TYPE_NULL);
       }
-      
+
       PixieProcessor processor = processors.get(type);
-      
+
       // Null check processor
       if (processor == null) {
         throw new CourierException(NO_PROCESSOR_FOR_TYPE + ": " + type.getName());
@@ -76,9 +81,14 @@ public interface PixieProcessor {
       return processor;
     }
 
+    /**
+     * @param event
+     * @throws CourierException If fails, should crash the game because not registering some packets
+     *         could be nasty later on
+     */
     @SubscribeEvent
-    void registerProcessors(FMLCommonSetupEvent event) {
-
+    void registerProcessors(FMLCommonSetupEvent event) throws CourierException {
+      register(TransferEnergyParticlePacket.class, new TransferEnergyParticleProcessor());
     }
   }
 }

@@ -30,7 +30,7 @@ public class PacketDistributorTest {
 
   @Test
   void testForwardPacketToProcessor() throws CourierException {
-    doNothing().when(processor).process(any(), any());
+    doNothing().when(processor).process(any(), any(), any());
     distributor.processPacketWithChecks(packet, context, processor);
   }
 
