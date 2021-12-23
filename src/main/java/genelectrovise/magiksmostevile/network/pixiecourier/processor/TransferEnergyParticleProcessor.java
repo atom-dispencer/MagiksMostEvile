@@ -1,5 +1,6 @@
 package genelectrovise.magiksmostevile.network.pixiecourier.processor;
 
+import com.google.common.base.Optional;
 import com.google.gson.Gson;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixieProcessor;

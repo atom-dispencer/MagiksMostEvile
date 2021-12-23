@@ -1,8 +1,7 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
-import java.util.List;
 import java.util.Map;
-import com.google.common.collect.Lists;
+import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import genelectrovise.magiksmostevile.network.pixiecourier.packet.TransferEnergyParticlePacket;
@@ -15,6 +14,22 @@ public interface PixieProcessor {
 
   void process(PixiePacket packet, NetworkEvent.Context context, Gson gson);
 
+  public static <T> Optional<T> getPacketInst(PixiePacket packet, Gson gson, T type) {
+    if (!TransferEnergyParticlePacket.class.isAssignableFrom(packet.getType())) {
+      return Optional.absent();
+    }
+
+    @SuppressWarnings("unchecked")
+    T particlePacket = (T) gson.fromJson(packet.getContent(), type.getClass());
+
+    return Optional.of(particlePacket);
+  }
+
+  /**
+   * 
+   * @author adam_
+   *
+   */
   public static class Registry {
 
     public static final String CANNOT_REGISTER_PROCESSOR_AS_TYPE_NULL = "Cannot register processor as type null";
@@ -27,7 +42,9 @@ public interface PixieProcessor {
     // Static
     protected static final Registry INSTANCE = new Registry();
 
-    public static Registry getInstance() { return INSTANCE; }
+    public static Registry getInstance() {
+      return INSTANCE;
+    }
 
     // Instance
     protected Map<Class<?>, PixieProcessor> processors = Maps.newHashMap();
