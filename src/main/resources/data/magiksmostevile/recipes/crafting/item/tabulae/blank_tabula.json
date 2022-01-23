@@ -1,19 +1,19 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        " S ",
-        "SWS",
-        " S "
-    ],
-    "key": {
-        "S": {
-            "item": "minecraft:stick"
-        },
-        "W": {
-            "item": "magiksmostevile:beeswax"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SWS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
     },
-    "result": {
-        "item": "magiksmostevile:blank_tabula"
+    "W": {
+      "item": "magiksmostevile:beeswax"
     }
+  },
+  "result": {
+    "item": "magiksmostevile:blank_tabula"
+  }
 }

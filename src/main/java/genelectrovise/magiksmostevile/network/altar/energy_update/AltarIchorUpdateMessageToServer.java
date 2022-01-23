@@ -23,20 +23,22 @@ import net.minecraft.network.PacketBuffer;
 @Deprecated
 public class AltarIchorUpdateMessageToServer {
 
-  private static boolean messageIsValid;
+    private static boolean messageIsValid;
 
-  public AltarIchorUpdateMessageToServer() {
-    messageIsValid = true;
-  }
+    public AltarIchorUpdateMessageToServer() {
+        messageIsValid = true;
+    }
 
-  public void encode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.debug("Encoding message to server");
-  }
+    public static AltarIchorUpdateMessageToServer decode(PacketBuffer buffer) {
+        MagiksMostEvile.LOGGER.debug("Decoding message to server");
+        return new AltarIchorUpdateMessageToServer();
+    }
 
-  public static AltarIchorUpdateMessageToServer decode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.debug("Decoding message to server");
-    return new AltarIchorUpdateMessageToServer();
-  }
+    public void encode(PacketBuffer buffer) {
+        MagiksMostEvile.LOGGER.debug("Encoding message to server");
+    }
 
-  public boolean isValid() { return messageIsValid; }
+    public boolean isValid() {
+        return messageIsValid;
+    }
 }

@@ -18,41 +18,36 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.template.AlwaysTrueRuleTest;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.RandomBlockMatchRuleTest;
-import net.minecraft.world.gen.feature.template.RuleEntry;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.feature.template.*;
 import net.minecraft.world.server.ServerWorld;
 
 /**
  * {@link Biome}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class StructureUtil {
 
-  public void placeStructure(ServerWorld serverWorld, ChunkPos chunkPos,
-      ResourceLocation templateLocation) {
+    public static RuleEntry randomBlockReplacementRule(Block replaceThis, float chance,
+                                                       Block replaceWith) {
+        return new RuleEntry(new RandomBlockMatchRuleTest(replaceThis, chance),
+                AlwaysTrueRuleTest.INSTANCE, replaceWith.defaultBlockState());
+    }
 
-    // Gets the world's structure template manager
-    TemplateManager templatemanager = serverWorld.getStructureManager();
+    public void placeStructure(ServerWorld serverWorld, ChunkPos chunkPos,
+                               ResourceLocation templateLocation) {
 
-    // Sets default placement settings
-    PlacementSettings placementsettings =
-        (new PlacementSettings()).setIgnoreEntities(true).setChunkPos((ChunkPos) null);
+        // Gets the world's structure template manager
+        TemplateManager templatemanager = serverWorld.getStructureManager();
 
-    // Gets the template and builds
-    templatemanager.get(templateLocation).placeInWorld(serverWorld, chunkPos.getWorldPosition(), placementsettings, serverWorld.getRandom());
+        // Sets default placement settings
+        PlacementSettings placementsettings =
+                (new PlacementSettings()).setIgnoreEntities(true).setChunkPos((ChunkPos) null);
 
-    // Alternatively use func_237152_b_ to avoid "placementSettings.setBoundingBoxFromChunk()"
-  }
+        // Gets the template and builds
+        templatemanager.get(templateLocation).placeInWorld(serverWorld, chunkPos.getWorldPosition(), placementsettings, serverWorld.getRandom());
 
-  public static RuleEntry randomBlockReplacementRule(Block replaceThis, float chance,
-      Block replaceWith) {
-    return new RuleEntry(new RandomBlockMatchRuleTest(replaceThis, chance),
-        AlwaysTrueRuleTest.INSTANCE, replaceWith.defaultBlockState());
-  }
+        // Alternatively use func_237152_b_ to avoid "placementSettings.setBoundingBoxFromChunk()"
+    }
 
 }

@@ -1,6 +1,6 @@
 {
-   "parent": "item/handheld",
-   "textures": {
-       "layer0": "magiksmostevile:items/staffs/debugging_staff"
-   }
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "magiksmostevile:items/staffs/debugging_staff"
+  }
 }

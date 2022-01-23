@@ -20,8 +20,8 @@ import net.minecraft.item.Rarity;
 
 public abstract class Tabula extends Item {
 
-  public Tabula() {
-    super(new Item.Properties().stacksTo(1).tab(EvileItemGroup.MAGIKS_MOST_EVILE).rarity(Rarity.UNCOMMON));
-  }
+    public Tabula() {
+        super(new Item.Properties().stacksTo(1).tab(EvileItemGroup.MAGIKS_MOST_EVILE).rarity(Rarity.UNCOMMON));
+    }
 
 }

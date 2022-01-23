@@ -28,30 +28,32 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class TileEntityOrbitalRegistry implements IOrbitalRegistry {
 
-  public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MagiksMostEvile.MODID);
+    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MagiksMostEvile.MODID);
 
-  public static final RegistryObject<TileEntityType<AmethystCrystalTileEntity>> TILE_ENTITY_AMETHYST_CRYSTAL =
-      TILE_ENTITIES.register("tile_entity_amethyst_crystal", () -> TileEntityType.Builder.of(AmethystCrystalTileEntity::new, BlockOrbitalRegistry.AMETHYST_CRYSTAL.get()).build(null));
-  public static final RegistryObject<TileEntityType<AltarTileEntity>> TILE_ENTITY_ALTAR =
-      TILE_ENTITIES.register("tile_entity_altar", () -> TileEntityType.Builder.of(AltarTileEntity::new, BlockOrbitalRegistry.ALTAR.get()).build(null));
-  public static final RegistryObject<TileEntityType<InscriptionTableTileEntity>> TILE_ENTITY_INSCRIPTION_TABLE =
-      TILE_ENTITIES.register("tile_entity_inscription_table", () -> TileEntityType.Builder.of(InscriptionTableTileEntity::new, BlockOrbitalRegistry.INSCRIPTION_TABLE.get()).build(null));
-  public static final RegistryObject<TileEntityType<MortarTileEntity>> TILE_ENTITY_MORTAR =
-      TILE_ENTITIES.register("tile_entity_mortar", () -> TileEntityType.Builder.of(MortarTileEntity::new, BlockOrbitalRegistry.MORTAR.get()).build(null));
+    @Override
+    public int priority() {
+        return 9;
+    }    public static final RegistryObject<TileEntityType<AmethystCrystalTileEntity>> TILE_ENTITY_AMETHYST_CRYSTAL =
+            TILE_ENTITIES.register("tile_entity_amethyst_crystal", () -> TileEntityType.Builder.of(AmethystCrystalTileEntity::new, BlockOrbitalRegistry.AMETHYST_CRYSTAL.get()).build(null));
 
-  @Override
-  public int priority() {
-    return 9;
-  }
+    @Override
+    public void initialise() {
+        OrbitalRegistryGenerator.registerDeferredRegister(TILE_ENTITIES);
+    }    public static final RegistryObject<TileEntityType<AltarTileEntity>> TILE_ENTITY_ALTAR =
+            TILE_ENTITIES.register("tile_entity_altar", () -> TileEntityType.Builder.of(AltarTileEntity::new, BlockOrbitalRegistry.ALTAR.get()).build(null));
 
-  @Override
-  public void initialise() {
-    OrbitalRegistryGenerator.registerDeferredRegister(TILE_ENTITIES);
-  }
+    @Override
+    public String name() {
+        return "tileentities";
+    }    public static final RegistryObject<TileEntityType<InscriptionTableTileEntity>> TILE_ENTITY_INSCRIPTION_TABLE =
+            TILE_ENTITIES.register("tile_entity_inscription_table", () -> TileEntityType.Builder.of(InscriptionTableTileEntity::new, BlockOrbitalRegistry.INSCRIPTION_TABLE.get()).build(null));
+    public static final RegistryObject<TileEntityType<MortarTileEntity>> TILE_ENTITY_MORTAR =
+            TILE_ENTITIES.register("tile_entity_mortar", () -> TileEntityType.Builder.of(MortarTileEntity::new, BlockOrbitalRegistry.MORTAR.get()).build(null));
 
-  @Override
-  public String name() {
-    return "tileentities";
-  }
+
+
+
+
+
 
 }

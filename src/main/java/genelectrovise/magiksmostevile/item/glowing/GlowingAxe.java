@@ -21,19 +21,18 @@ import net.minecraft.item.ItemStack;
 
 /**
  * {@link EnchantedBookItem}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class GlowingAxe extends AxeItem {
 
-  public GlowingAxe(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
-    super(tier, attackDamageIn, attackSpeedIn, builder);
-  }
+    public GlowingAxe(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
+        super(tier, attackDamageIn, attackSpeedIn, builder);
+    }
 
-  @Override
-  public boolean isFoil(ItemStack stack) {
-    return true;
-  }
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return true;
+    }
 
 }

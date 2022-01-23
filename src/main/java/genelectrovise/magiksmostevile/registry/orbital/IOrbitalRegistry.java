@@ -16,10 +16,10 @@ package genelectrovise.magiksmostevile.registry.orbital;
 
 public interface IOrbitalRegistry {
 
-  public String name();
+    public String name();
 
-  public int priority();
+    public int priority();
 
-  public void initialise();
+    public void initialise();
 
 }

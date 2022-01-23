@@ -1,34 +1,34 @@
 {
-	"display": {
-		"icon": {
-			"item": "magiksmostevile:amethyst"
-		},
-		"title": "Evile Magiks",
-		"frame": "task",
-		"background": "magiksmostevile:textures/advancements/magik_advancement.png",
-		"description": "Begin your journey into Evile Magiks"
-	},
-	"criteria": {
-		"gain_amethyst": {
-			"trigger": "minecraft:inventory_changed",
-			"conditions": {
-				"items": [
-					{
-						"item": "magiksmostevile:amethyst"
-					}
-				]
-			}
-		}
-	},
-	"rewards": {
-		"recipes": [
-			"magiksmostevile:lesser_power_stone",
-			"magiksmostevile:altar",
-			"magiksmostevile:powered_amethyst"
-		],
-		"experience": 500,
-		"loot": [
-			"magiksmostevile:magik_advancement_loot"
-		]
-	}
+  "display": {
+    "icon": {
+      "item": "magiksmostevile:amethyst"
+    },
+    "title": "Evile Magiks",
+    "frame": "task",
+    "background": "magiksmostevile:textures/advancements/magik_advancement.png",
+    "description": "Begin your journey into Evile Magiks"
+  },
+  "criteria": {
+    "gain_amethyst": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "magiksmostevile:amethyst"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "magiksmostevile:lesser_power_stone",
+      "magiksmostevile:altar",
+      "magiksmostevile:powered_amethyst"
+    ],
+    "experience": 500,
+    "loot": [
+      "magiksmostevile:magik_advancement_loot"
+    ]
+  }
 }

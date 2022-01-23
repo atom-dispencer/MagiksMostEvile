@@ -1,20 +1,20 @@
 {
-	"type": "minecraft:block",
-	"pools": [
-		{
-			"name": "amethyst_block_pool",
-			"rolls": 1,
-			"entries": [
-				{
-					"type": "minecraft:item",
-					"name": "magiksmostevile:amethyst_crystal"
-				}
-			],
-			"conditions": [
-				{
-					"condition": "minecraft:survives_explosion"
-				}
-			]
-		}
-	]
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "amethyst_block_pool",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "magiksmostevile:amethyst_crystal"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
 }

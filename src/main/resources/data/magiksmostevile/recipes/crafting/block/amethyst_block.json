@@ -1,16 +1,16 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "aaa",
-        "aaa",
-        "aaa"
-    ],
-    "key": {
-        "a": {
-            "item": "magiksmostevile:amethyst"
-        }
-    },
-    "result": {
-        "item": "magiksmostevile:amethyst_block"
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "magiksmostevile:amethyst"
     }
+  },
+  "result": {
+    "item": "magiksmostevile:amethyst_block"
+  }
 }

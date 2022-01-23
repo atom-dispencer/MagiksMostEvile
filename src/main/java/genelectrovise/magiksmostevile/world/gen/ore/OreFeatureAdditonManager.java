@@ -28,50 +28,50 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Bus.FORGE)
 public class OreFeatureAdditonManager {
 
-  /**
-   * Apply {@value #overworldOres()}, {@value #netherOres} and {@value #endOres} to {@link Biome}s of
-   * their various {@link Biome.Category}.
-   * 
-   * @param event
-   */
-  @SubscribeEvent(priority = EventPriority.HIGH)
-  public static void registerOres(final BiomeLoadingEvent event) {
-    MagiksMostEvile.LOGGER.debug("Adding MME ores to biome: " + event.getName());
+    /**
+     * Apply {@value #overworldOres()}, {@value #netherOres} and {@value #endOres} to {@link Biome}s of
+     * their various {@link Biome.Category}.
+     *
+     * @param event
+     */
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void registerOres(final BiomeLoadingEvent event) {
+        MagiksMostEvile.LOGGER.debug("Adding MME ores to biome: " + event.getName());
 
-    BiomeGenerationSettingsBuilder generation = event.getGeneration();
+        BiomeGenerationSettingsBuilder generation = event.getGeneration();
 
-    switch (event.getCategory()) {
-      case NETHER:
-        for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : OreFeatures.NETHER_ORES) {
-          registerTo(generation, simpleConfiguredOreFeature);
+        switch (event.getCategory()) {
+            case NETHER:
+                for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : OreFeatures.NETHER_ORES) {
+                    registerTo(generation, simpleConfiguredOreFeature);
+                }
+                break;
+
+            case THEEND:
+                for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : OreFeatures.END_ORES) {
+                    registerTo(generation, simpleConfiguredOreFeature);
+                }
+                break;
+
+            default:
+                for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : OreFeatures.OVERWORLD_ORES) {
+                    registerTo(generation, simpleConfiguredOreFeature);
+                }
+                break;
         }
-        break;
 
-      case THEEND:
-        for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : OreFeatures.END_ORES) {
-          registerTo(generation, simpleConfiguredOreFeature);
-        }
-        break;
-
-      default:
-        for (ConfiguredFeature<?, ?> simpleConfiguredOreFeature : OreFeatures.OVERWORLD_ORES) {
-          registerTo(generation, simpleConfiguredOreFeature);
-        }
-        break;
     }
 
-  }
+    /**
+     * Convenience method to tidy up {@link #registerOres(BiomeLoadingEvent)} by abstracting away
+     * {@link BiomeGenerationSettingsBuilder} calls.
+     *
+     * @param builder
+     * @param feature
+     */
+    private static void registerTo(BiomeGenerationSettingsBuilder builder,
+                                   ConfiguredFeature<?, ?> feature) {
 
-  /**
-   * Convenience method to tidy up {@link #registerOres(BiomeLoadingEvent)} by abstracting away
-   * {@link BiomeGenerationSettingsBuilder} calls.
-   * 
-   * @param builder
-   * @param feature
-   */
-  private static void registerTo(BiomeGenerationSettingsBuilder builder,
-      ConfiguredFeature<?, ?> feature) {
-
-    builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, feature);
-  }
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, feature);
+    }
 }

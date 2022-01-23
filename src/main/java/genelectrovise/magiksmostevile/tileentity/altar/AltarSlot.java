@@ -1,19 +1,19 @@
-/*******************************************************************************
+/**
  * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
- *
+ * <p>
  * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any later version.
- *
+ * <p>
  * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
- *******************************************************************************/
+ */
 /**
- * 
+ *
  */
 package genelectrovise.magiksmostevile.tileentity.altar;
 
@@ -26,19 +26,19 @@ import net.minecraftforge.items.SlotItemHandler;
  */
 public class AltarSlot extends SlotItemHandler {
 
-  /**
-   * @param itemHandler
-   * @param index
-   * @param xPosition
-   * @param yPosition
-   */
-  public AltarSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-    super(itemHandler, index, xPosition, yPosition);
-  }
+    /**
+     * @param itemHandler
+     * @param index
+     * @param xPosition
+     * @param yPosition
+     */
+    public AltarSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        super(itemHandler, index, xPosition, yPosition);
+    }
 
-  @Override
-  public boolean mayPlace(ItemStack stack) {
-    return true;
-  }
+    @Override
+    public boolean mayPlace(ItemStack stack) {
+        return true;
+    }
 
 }

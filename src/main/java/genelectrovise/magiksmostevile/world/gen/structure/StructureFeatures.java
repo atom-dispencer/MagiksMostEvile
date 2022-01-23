@@ -14,49 +14,49 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen.structure;
 
-import java.util.Locale;
-import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * {@link Structure}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class StructureFeatures {
 
-  public static final Logger LOGGER = LogManager.getLogger(StructureFeatures.class);
+    public static final Logger LOGGER = LogManager.getLogger(StructureFeatures.class);
 
-  // public static final Structure<NoFeatureConfig> SHRINE =
-  // register("MagiksMostEvile_Overground_Shrine", new ShrineStructure(),
-  // GenerationStage.Decoration.SURFACE_STRUCTURES);
+    // public static final Structure<NoFeatureConfig> SHRINE =
+    // register("MagiksMostEvile_Overground_Shrine", new ShrineStructure(),
+    // GenerationStage.Decoration.SURFACE_STRUCTURES);
 
-  private static Map<Structure<?>, GenerationStage.Decoration> STEP;
+    private static Map<Structure<?>, GenerationStage.Decoration> STEP;
 
-  @SuppressWarnings("deprecation")
-  private static <F extends Structure<?>> F register(String name, F structure, GenerationStage.Decoration decorationStage) {
+    @SuppressWarnings("deprecation")
+    private static <F extends Structure<?>> F register(String name, F structure, GenerationStage.Decoration decorationStage) {
 
-    LOGGER.info("Registering structure: " + name);
+        LOGGER.info("Registering structure: " + name);
 
-    if (STEP == null) {
-      LOGGER.info("STEP map null, must fetch...");
-      STEP = fetchStepMap(structure);
+        if (STEP == null) {
+            LOGGER.info("STEP map null, must fetch...");
+            STEP = fetchStepMap(structure);
+        }
+
+        Structure.STRUCTURES_REGISTRY.put(name.toLowerCase(Locale.ROOT), structure);
+        STEP.put(structure, decorationStage);
+        return Registry.register(Registry.STRUCTURE_FEATURE, name.toLowerCase(Locale.ROOT), structure);
     }
 
-    Structure.STRUCTURES_REGISTRY.put(name.toLowerCase(Locale.ROOT), structure);
-    STEP.put(structure, decorationStage);
-    return Registry.register(Registry.STRUCTURE_FEATURE, name.toLowerCase(Locale.ROOT), structure);
-  }
-
-  private static Map<Structure<?>, Decoration> fetchStepMap(Structure<?> structure) {
-    return ObfuscationReflectionHelper.getPrivateValue(Structure.class, structure, "STEP");
-  }
+    private static Map<Structure<?>, Decoration> fetchStepMap(Structure<?> structure) {
+        return ObfuscationReflectionHelper.getPrivateValue(Structure.class, structure, "STEP");
+    }
 
 }

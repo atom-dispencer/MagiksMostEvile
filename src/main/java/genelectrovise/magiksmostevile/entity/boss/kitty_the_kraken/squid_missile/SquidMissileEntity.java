@@ -14,7 +14,6 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.squid_missile;
 
-import java.util.function.Function;
 import com.google.common.primitives.Doubles;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
@@ -34,182 +33,187 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import java.util.function.Function;
+
 /**
  * {@link FireballEntity} {@link ArrowRenderer} {@link SquidEntity} {@link ArrowEntity}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class SquidMissileEntity extends MobEntity {
 
-  private boolean explosive = false;
-  private int ticksUntilIgnition = 0;
+    public static final int EXPLOSION_POWER = 2;
+    private static final int MAX_PARTICLES = 50;
+    /**
+     * Makes a salted double. 234 + (0.366 * (4 + 0.234)) = 235.549644
+     */
+    Function<Double, Double> positionSalter = (input) -> {
+        final int RANGE = 5;
+        return input + (random.nextDouble() * (random.nextInt(RANGE) + random.nextDouble()));
+    };
+    /**
+     * Makes a salted double. Random double, Contrain to RANGE, Subtract half the range
+     */
+    Function<Double, Double> velocitySalter = (input) -> {
+        final double RANGE = 0.5;
+        return Doubles.constrainToRange(random.nextDouble(), 0, RANGE) - (RANGE / 2);
+    };
+    private boolean explosive = false;
+    private int ticksUntilIgnition = 0;
+    private Vector3d direction = new Vector3d(0, 0, 0);
 
-  private Vector3d direction = new Vector3d(0, 0, 0);
-
-  public SquidMissileEntity(EntityType<? extends MobEntity> type, World worldIn) {
-    super(type, worldIn);
-  }
-
-  public static final int EXPLOSION_POWER = 2;
-  private static final int MAX_PARTICLES = 50;
-
-  /**
-   * Makes a salted double. 234 + (0.366 * (4 + 0.234)) = 235.549644
-   */
-  Function<Double, Double> positionSalter = (input) -> {
-    final int RANGE = 5;
-    return input + (random.nextDouble() * (random.nextInt(RANGE) + random.nextDouble()));
-  };
-
-  /**
-   * Makes a salted double. Random double, Contrain to RANGE, Subtract half the range
-   */
-  Function<Double, Double> velocitySalter = (input) -> {
-    final double RANGE = 0.5;
-    return Doubles.constrainToRange(random.nextDouble(), 0, RANGE) - (RANGE / 2);
-  };
-
-  /**
-   * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
-   */
-  public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
-    return MobEntity.createMobAttributes() //
-        .add(Attributes.MAX_HEALTH, 3.0D)
-        .add(Attributes.FLYING_SPEED, 2.0f);
-  }
-
-  @Override
-  public CompoundNBT serializeNBT() {
-    CompoundNBT superNbt = super.serializeNBT();
-    CompoundNBT squidNbt = new CompoundNBT();
-    CompoundNBT directionNbt = new CompoundNBT();
-
-    squidNbt.putInt("ticksUntilIgnition", ticksUntilIgnition);
-    squidNbt.putBoolean("explosive", explosive);
-
-    directionNbt.putDouble("x", direction.x);
-    directionNbt.putDouble("y", direction.y);
-    directionNbt.putDouble("z", direction.z);
-
-    squidNbt.put("Direction", directionNbt);
-    superNbt.put("SquidMissileData", squidNbt);
-    return superNbt;
-  }
-
-  @Override
-  public void deserializeNBT(CompoundNBT nbt) {
-    super.deserializeNBT(nbt);
-    CompoundNBT squidNbt = nbt.getCompound("SquidMissileData");
-    CompoundNBT directionNbt = squidNbt.getCompound("Direction");
-
-    double x = directionNbt.getDouble("x");
-    double y = directionNbt.getDouble("y");
-    double z = directionNbt.getDouble("z");
-    setDirection(new Vector3d(x, y, z));
-
-    this.setExplosive(squidNbt.getBoolean("explosive"));
-    this.setTicksUntilIgnition(squidNbt.getInt("ticksUntilIgnition"));
-  }
-
-  @Override
-  public void tick() {
-    super.tick();
-
-    handleMissileMovement();
-  }
-
-  @Override
-  public void aiStep() {
-    super.aiStep();
-
-    checkIgnitionTick();
-
-    checkExplosions();
-  }
-
-  private void handleMissileMovement() {
-
-    float speed = (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue();
-
-    // Position
-    Vector3d currentMotion = this.getDeltaMovement();
-    double newPosX = this.getX() + currentMotion.x;
-    double newPosY = this.getY() + currentMotion.y;
-    double newPosZ = this.getZ() + currentMotion.z;
-    this.setPos(newPosX, newPosY, newPosZ);
-
-    // Direction
-    this.setDeltaMovement(currentMotion.add(new Vector3d(direction.x * speed, direction.y * speed, direction.z * speed)).scale(0.01));
-  }
-
-  /**
-   * Check the ticks until this missile is rearmed, and re-arm if time is 0.
-   */
-  private void checkIgnitionTick() {
-    if (ticksUntilIgnition > 0) {
-      ticksUntilIgnition--;
-      return;
+    public SquidMissileEntity(EntityType<? extends MobEntity> type, World worldIn) {
+        super(type, worldIn);
     }
 
-    setExplosive(true);
-  }
-
-  /**
-   * Check if this entity is colliding, and explode if needed.
-   */
-  private void checkExplosions() {
-    if (!checkSpawnObstruction(this.level) && explosive) {
-
-      // Server
-      if (!this.level.isClientSide) {
-        ServerWorld serverWorld = (ServerWorld) level;
-
-        // Get the griefing event caused by this
-        boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level, this);
-
-        // flag = (causesFire), (mode ? DESTROY : NONE)
-        serverWorld.explode((Entity) null, this.getX(), this.getY(), this.getZ(), (float) SquidMissileEntity.EXPLOSION_POWER, flag,
-            flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
-
-        spawnInkBySendingPacketFromServer(serverWorld, MAX_PARTICLES);
-
-        this.remove();
-        return;
-      }
+    /**
+     * Static! Non-inherited! Create a map of attributes. Called from {@link EntityAttributeManager}.
+     */
+    public static AttributeModifierMap.MutableAttribute getEntityAttributes() {
+        return MobEntity.createMobAttributes() //
+                .add(Attributes.MAX_HEALTH, 3.0D)
+                .add(Attributes.FLYING_SPEED, 2.0f);
     }
-  }
 
-  public void spawnInkBySendingPacketFromServer(ServerWorld world, int particles) {
+    @Override
+    public CompoundNBT serializeNBT() {
+        CompoundNBT superNbt = super.serializeNBT();
+        CompoundNBT squidNbt = new CompoundNBT();
+        CompoundNBT directionNbt = new CompoundNBT();
 
-    for (int spawned = 0; spawned < particles; spawned++) {
+        squidNbt.putInt("ticksUntilIgnition", ticksUntilIgnition);
+        squidNbt.putBoolean("explosive", explosive);
 
-      // Get the position of this
-      double pX = positionSalter.apply(this.getX());
-      double pY = positionSalter.apply(this.getY());
-      double pZ = positionSalter.apply(this.getZ());
+        directionNbt.putDouble("x", direction.x);
+        directionNbt.putDouble("y", direction.y);
+        directionNbt.putDouble("z", direction.z);
 
-      // Clamp each in 0.0-0.5, then take 0.25 to give a possible negative
-      double vX = velocitySalter.apply(random.nextDouble());
-      double vY = velocitySalter.apply(random.nextDouble());
-      double vZ = velocitySalter.apply(random.nextDouble());
-
-      // Like SquidEntity (if this works its easier than making a custom packet handler)
-      // Maintains sided-ness because this method forces the server to send packets to the clients
-      world.sendParticles(ParticleTypes.SQUID_INK, pX, pY, pZ, 1, vX, vY, vZ, 1);
-
-      // ^ used to be spawnParticle idk what this does now
+        squidNbt.put("Direction", directionNbt);
+        superNbt.put("SquidMissileData", squidNbt);
+        return superNbt;
     }
-  }
 
-  // Get and set
+    @Override
+    public void deserializeNBT(CompoundNBT nbt) {
+        super.deserializeNBT(nbt);
+        CompoundNBT squidNbt = nbt.getCompound("SquidMissileData");
+        CompoundNBT directionNbt = squidNbt.getCompound("Direction");
 
-  public boolean isExplosive() { return explosive; }
+        double x = directionNbt.getDouble("x");
+        double y = directionNbt.getDouble("y");
+        double z = directionNbt.getDouble("z");
+        setDirection(new Vector3d(x, y, z));
 
-  public void setExplosive(boolean explosive) { this.explosive = explosive; }
+        this.setExplosive(squidNbt.getBoolean("explosive"));
+        this.setTicksUntilIgnition(squidNbt.getInt("ticksUntilIgnition"));
+    }
 
-  public void setTicksUntilIgnition(int i) { this.ticksUntilIgnition = i; }
+    @Override
+    public void tick() {
+        super.tick();
 
-  public void setDirection(Vector3d direction) { this.direction = direction; }
+        handleMissileMovement();
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        checkIgnitionTick();
+
+        checkExplosions();
+    }
+
+    private void handleMissileMovement() {
+
+        float speed = (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue();
+
+        // Position
+        Vector3d currentMotion = this.getDeltaMovement();
+        double newPosX = this.getX() + currentMotion.x;
+        double newPosY = this.getY() + currentMotion.y;
+        double newPosZ = this.getZ() + currentMotion.z;
+        this.setPos(newPosX, newPosY, newPosZ);
+
+        // Direction
+        this.setDeltaMovement(currentMotion.add(new Vector3d(direction.x * speed, direction.y * speed, direction.z * speed)).scale(0.01));
+    }
+
+    /**
+     * Check the ticks until this missile is rearmed, and re-arm if time is 0.
+     */
+    private void checkIgnitionTick() {
+        if (ticksUntilIgnition > 0) {
+            ticksUntilIgnition--;
+            return;
+        }
+
+        setExplosive(true);
+    }
+
+    /**
+     * Check if this entity is colliding, and explode if needed.
+     */
+    private void checkExplosions() {
+        if (!checkSpawnObstruction(this.level) && explosive) {
+
+            // Server
+            if (!this.level.isClientSide) {
+                ServerWorld serverWorld = (ServerWorld) level;
+
+                // Get the griefing event caused by this
+                boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level, this);
+
+                // flag = (causesFire), (mode ? DESTROY : NONE)
+                serverWorld.explode((Entity) null, this.getX(), this.getY(), this.getZ(), (float) SquidMissileEntity.EXPLOSION_POWER, flag,
+                        flag ? Explosion.Mode.DESTROY : Explosion.Mode.NONE);
+
+                spawnInkBySendingPacketFromServer(serverWorld, MAX_PARTICLES);
+
+                this.remove();
+                return;
+            }
+        }
+    }
+
+    public void spawnInkBySendingPacketFromServer(ServerWorld world, int particles) {
+
+        for (int spawned = 0; spawned < particles; spawned++) {
+
+            // Get the position of this
+            double pX = positionSalter.apply(this.getX());
+            double pY = positionSalter.apply(this.getY());
+            double pZ = positionSalter.apply(this.getZ());
+
+            // Clamp each in 0.0-0.5, then take 0.25 to give a possible negative
+            double vX = velocitySalter.apply(random.nextDouble());
+            double vY = velocitySalter.apply(random.nextDouble());
+            double vZ = velocitySalter.apply(random.nextDouble());
+
+            // Like SquidEntity (if this works its easier than making a custom packet handler)
+            // Maintains sided-ness because this method forces the server to send packets to the clients
+            world.sendParticles(ParticleTypes.SQUID_INK, pX, pY, pZ, 1, vX, vY, vZ, 1);
+
+            // ^ used to be spawnParticle idk what this does now
+        }
+    }
+
+    // Get and set
+
+    public boolean isExplosive() {
+        return explosive;
+    }
+
+    public void setExplosive(boolean explosive) {
+        this.explosive = explosive;
+    }
+
+    public void setTicksUntilIgnition(int i) {
+        this.ticksUntilIgnition = i;
+    }
+
+    public void setDirection(Vector3d direction) {
+        this.direction = direction;
+    }
 
 }

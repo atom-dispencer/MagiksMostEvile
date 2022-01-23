@@ -14,61 +14,65 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.world.gen;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.feature.structure.RuinedPortalPiece;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
  * {@link RuinedPortalPiece.Location}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public enum EnumFeatureLocation implements IStringSerializable {
-  DEFAULT("default", Category.NONE), //
-  DESERT("desert", Category.DESERT), //
-  JUNGLE("jungle", Category.JUNGLE), //
-  SWAMP("swamp", Category.SWAMP), //
-  ICY("mountain", Category.ICY), //
-  OCEAN("ocean", Category.OCEAN), //
-  NETHER("nether", Category.NETHER), //
-  END("end", Category.THEEND), //
-  ;
+    DEFAULT("default", Category.NONE), //
+    DESERT("desert", Category.DESERT), //
+    JUNGLE("jungle", Category.JUNGLE), //
+    SWAMP("swamp", Category.SWAMP), //
+    ICY("mountain", Category.ICY), //
+    OCEAN("ocean", Category.OCEAN), //
+    NETHER("nether", Category.NETHER), //
+    END("end", Category.THEEND), //
+    ;
 
-  // Codec
-  public static final Codec<EnumFeatureLocation> CODEC =
-      IStringSerializable.fromEnum(EnumFeatureLocation::values, EnumFeatureLocation::get);
+    // Map
+    private static final Map<String, EnumFeatureLocation> MAP =
+            Arrays.stream(values()).collect(Collectors.toMap(EnumFeatureLocation::getName, (location) -> {
+                return location;
+            }));
+    // Codec
+    public static final Codec<EnumFeatureLocation> CODEC =
+            IStringSerializable.fromEnum(EnumFeatureLocation::values, EnumFeatureLocation::get);
+    // Enum
+    private final String name;
+    private final Biome.Category biomeCategory;
 
-  // Map
-  private static final Map<String, EnumFeatureLocation> MAP =
-      Arrays.stream(values()).collect(Collectors.toMap(EnumFeatureLocation::getName, (location) -> {
-        return location;
-      }));
+    private EnumFeatureLocation(String name, Biome.Category biomeCategory) {
+        this.name = name;
+        this.biomeCategory = biomeCategory;
+    }
 
-  // Enum
-  private final String name;
-  private final Biome.Category biomeCategory;
+    public static EnumFeatureLocation get(String name) {
+        return MAP.get(name);
+    }
 
-  private EnumFeatureLocation(String name, Biome.Category biomeCategory) {
-    this.name = name;
-    this.biomeCategory = biomeCategory;
-  }
+    public String getName() {
+        return this.name;
+    }
 
-  public String getName() { return this.name; }
+    // IStringSerializable
 
-  public Biome.Category getBiomeCategory() { return biomeCategory; }
+    public Biome.Category getBiomeCategory() {
+        return biomeCategory;
+    }
 
-  // IStringSerializable
-
-  public static EnumFeatureLocation get(String name) {
-    return MAP.get(name);
-  }
-
-  @Override
-  public String getSerializedName() { return this.getName(); }
+    @Override
+    public String getSerializedName() {
+        return this.getName();
+    }
 }

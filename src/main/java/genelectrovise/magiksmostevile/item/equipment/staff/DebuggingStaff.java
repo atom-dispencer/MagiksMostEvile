@@ -24,25 +24,25 @@ import net.minecraft.util.text.TextComponentUtils;
 
 public class DebuggingStaff extends Item {
 
-  public DebuggingStaff(Properties properties) {
-    super(properties);
-  }
-
-  @Override
-  public ActionResultType useOn(ItemUseContext context) {
-
-    context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "ItemUsed"), Util.NIL_UUID);
-    context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> context.getLevel().getBlockState(context.getClickedPos()).getBlock().getTags().toString()), Util.NIL_UUID);
-
-    if (ModdedTags.AMETHYST_ORE_SPAWNABLE == null) {
-      context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "#A_O_S nulled"), Util.NIL_UUID);
-      return super.useOn(context);
+    public DebuggingStaff(Properties properties) {
+        super(properties);
     }
 
-    Block block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
-    context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "Block is in A_O_S: " + Boolean.valueOf(ModdedTags.AMETHYST_ORE_SPAWNABLE.contains(block)).toString()), Util.NIL_UUID);
+    @Override
+    public ActionResultType useOn(ItemUseContext context) {
 
-    return super.useOn(context);
-  }
+        context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "ItemUsed"), Util.NIL_UUID);
+        context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> context.getLevel().getBlockState(context.getClickedPos()).getBlock().getTags().toString()), Util.NIL_UUID);
+
+        if (ModdedTags.AMETHYST_ORE_SPAWNABLE == null) {
+            context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "#A_O_S nulled"), Util.NIL_UUID);
+            return super.useOn(context);
+        }
+
+        Block block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
+        context.getPlayer().sendMessage(TextComponentUtils.fromMessage(() -> "Block is in A_O_S: " + Boolean.valueOf(ModdedTags.AMETHYST_ORE_SPAWNABLE.contains(block)).toString()), Util.NIL_UUID);
+
+        return super.useOn(context);
+    }
 
 }

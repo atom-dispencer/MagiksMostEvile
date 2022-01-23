@@ -1,11 +1,11 @@
 {
-	"replace": false,
-	"values": [
-		"minecraft:end_stone",
-		"minecraft:stone",
-		"minecraft:andesite",
-		"minecraft:granite",
-		"minecraft:diorite",
-		"minecraft:netherrack"
-	]
+  "replace": false,
+  "values": [
+    "minecraft:end_stone",
+    "minecraft:stone",
+    "minecraft:andesite",
+    "minecraft:granite",
+    "minecraft:diorite",
+    "minecraft:netherrack"
+  ]
 }

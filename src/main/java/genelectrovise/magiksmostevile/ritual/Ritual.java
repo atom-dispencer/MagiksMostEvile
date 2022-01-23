@@ -1,19 +1,19 @@
-/*******************************************************************************
+/**
  * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
- *
+ * <p>
  * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any later version.
- *
+ * <p>
  * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
- *******************************************************************************/
+ */
 /**
- * 
+ *
  */
 package genelectrovise.magiksmostevile.ritual;
 
@@ -28,222 +28,244 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 /**
  * No longer abstract! Defines the base properties of a {@link Ritual}, but should not be
  * instantiated itself!
- * 
+ *
  * @author GenElectrovise 19 May 2020
  */
 public class Ritual extends ForgeRegistryEntry<Ritual> implements INBTSerializable<CompoundNBT> {
-  public static final ResourceLocation NONE = new ResourceLocation(MagiksMostEvile.MODID, "none");
+    public static final ResourceLocation NONE = new ResourceLocation(MagiksMostEvile.MODID, "none");
 
-  protected final String displayName;
-  protected final String description;
-  protected final String information;
-  protected final int ichorRequirement;
-  protected ResultHandler<?> resultHandler;
+    protected final String displayName;
+    protected final String description;
+    protected final String information;
+    protected final int ichorRequirement;
+    protected ResultHandler<?> resultHandler;
 
-  protected AltarTileEntity altar;
-  protected boolean done;
-  protected int tick;
+    protected AltarTileEntity altar;
+    protected boolean done;
+    protected int tick;
 
-  @Override
-  public String toString() {
-    return "Ritual{" + getRegistryName() + "}";
-  }
-
-  /**
-   * Takes some parameters to set the display variables for use in the {@link AltarContainerScreen}.
-   * Should <b><i>not</i></b> do anything critical to the {@link Ritual} itself, as that should be
-   * done in the {@link #begin()} method. This is only used for registering the {@link Ritual} in the
-   * {@link EvileDeferredRegistry}.
-   * 
-   * @param convertAmethystResultHandler
-   */
-  public Ritual(String displayName, String description, String information, int ichorRequirement) {
-    this.displayName = displayName;
-    this.description = description;
-    this.information = information;
-    this.ichorRequirement = ichorRequirement;
-  }
-
-  /**
-   * Starts casting the ritual. Shouldn't really <i>do</i> a lot, as that should take place in the
-   * {@link #tick()} method, but is perfect for preliminary setup!
-   */
-  public void begin() {
-    setTick((this.getTick() == 0) ? 0 : this.getTick());
-    setDone(false);
-    altar.setCasting(true);
-    altar.currentRitual = this;
-  }
-
-  /**
-   * Ends the {@link Ritual} and ties up loose ends.
-   */
-  public void end() {
-    setDone(true);
-    altar.setCasting(false);
-    altar.currentRitual = null;
-  }
-
-  /**
-   * Equivalent of a constructor, where one isn't easy to implement.
-   * 
-   * @param altarTileEntity
-   */
-  public void init(AltarTileEntity altarTileEntity) {
-    this.altar = altarTileEntity;
-  }
-
-  /**
-   * Attempts to start the ritual. Should do some preliminary checks here, then call
-   * <code>super.tryStart()</code> to run <code>if(this.canBegin){this.begin}</code>, if no custom
-   * implementation is needed.
-   */
-  public void tryStart() {
-    if (this.canStart() || this.getTick() != 0) {
-      this.begin();
-    }
-  }
-
-  /**
-   * @return Whether the ritual is able to start.
-   */
-  protected boolean canStart() {
-
-    if (!(altar.getIchorStored() > ichorRequirement / 2)) {
-      return false;
+    /**
+     * Takes some parameters to set the display variables for use in the {@link AltarContainerScreen}.
+     * Should <b><i>not</i></b> do anything critical to the {@link Ritual} itself, as that should be
+     * done in the {@link #begin()} method. This is only used for registering the {@link Ritual} in the
+     * {@link EvileDeferredRegistry}.
+     *
+     * @param convertAmethystResultHandler
+     */
+    public Ritual(String displayName, String description, String information, int ichorRequirement) {
+        this.displayName = displayName;
+        this.description = description;
+        this.information = information;
+        this.ichorRequirement = ichorRequirement;
     }
 
-    return true;
-  }
-
-  /**
-   * Ticks the next tick of this {@link Ritual} during casting. Called from
-   * {@link AltarTileEntity}#{@link #tick()}
-   */
-  protected RitualResult tick() {
-    return RitualResult.FAILURE;
-  }
-
-  /**
-   * @return Whether this {@link Ritual} should be ticked on this calling.
-   */
-  protected boolean shouldtick() {
-    if (isDone()) {
-      return false;
+    @Override
+    public String toString() {
+        return "Ritual{" + getRegistryName() + "}";
     }
 
-    return true;
-  }
-
-  /**
-   * The outward facing "ticking" method. Inner methods are encapsulated for greater simplicity!
-   * Should tick this {@link Ritual} if it should be ticked. If this {@link Ritual} should not be
-   * ticked, the tick variable is not incremented, i.e. the {@link Ritual} is frozen.
-   */
-  public void nextCycle() {
-    if (shouldtick()) {
-      getResultHandler().handle(tick());
-      tick++;
+    /**
+     * Starts casting the ritual. Shouldn't really <i>do</i> a lot, as that should take place in the
+     * {@link #tick()} method, but is perfect for preliminary setup!
+     */
+    public void begin() {
+        setTick((this.getTick() == 0) ? 0 : this.getTick());
+        setDone(false);
+        altar.setCasting(true);
+        altar.currentRitual = this;
     }
 
-    if (isDone()) {
-      end();
-    }
-  }
-
-  public boolean isBetweenTicks(int min, int max) {
-    return isBetweenTicks(min, max, false);
-  }
-
-  public boolean isBetweenTicks(int min, int max, boolean inclusive) {
-    if (inclusive) {
-      return (getTick() >= min) && (getTick() <= max);
+    /**
+     * Ends the {@link Ritual} and ties up loose ends.
+     */
+    public void end() {
+        setDone(true);
+        altar.setCasting(false);
+        altar.currentRitual = null;
     }
 
-    return (getTick() > min) && (getTick() < max);
-  }
+    /**
+     * Equivalent of a constructor, where one isn't easy to implement.
+     *
+     * @param altarTileEntity
+     */
+    public void init(AltarTileEntity altarTileEntity) {
+        this.altar = altarTileEntity;
+    }
 
-  @Override
-  public CompoundNBT serializeNBT() {
-    CompoundNBT tag = new CompoundNBT();
+    /**
+     * Attempts to start the ritual. Should do some preliminary checks here, then call
+     * <code>super.tryStart()</code> to run <code>if(this.canBegin){this.begin}</code>, if no custom
+     * implementation is needed.
+     */
+    public void tryStart() {
+        if (this.canStart() || this.getTick() != 0) {
+            this.begin();
+        }
+    }
 
-    tag.putInt("tick", getTick());
+    /**
+     * @return Whether the ritual is able to start.
+     */
+    protected boolean canStart() {
 
-    return tag;
-  }
+        if (!(altar.getIchorStored() > ichorRequirement / 2)) {
+            return false;
+        }
 
-  @Override
-  public void deserializeNBT(CompoundNBT nbt) {
-    setTick(nbt.getInt("tick"));
-  }
+        return true;
+    }
 
-  // Get and set
+    /**
+     * Ticks the next tick of this {@link Ritual} during casting. Called from
+     * {@link AltarTileEntity}#{@link #tick()}
+     */
+    protected RitualResult tick() {
+        return RitualResult.FAILURE;
+    }
 
-  /**
-   * @return The name
-   */
-  public final String getDisplayName() { return displayName; }
+    /**
+     * @return Whether this {@link Ritual} should be ticked on this calling.
+     */
+    protected boolean shouldtick() {
+        if (isDone()) {
+            return false;
+        }
 
-  /**
-   * @return The description of the ritual
-   */
-  public final String getDescription() { return description; }
+        return true;
+    }
 
-  /**
-   * @return the altar
-   */
-  public final AltarTileEntity getAltar() { return altar; }
+    /**
+     * The outward facing "ticking" method. Inner methods are encapsulated for greater simplicity!
+     * Should tick this {@link Ritual} if it should be ticked. If this {@link Ritual} should not be
+     * ticked, the tick variable is not incremented, i.e. the {@link Ritual} is frozen.
+     */
+    public void nextCycle() {
+        if (shouldtick()) {
+            getResultHandler().handle(tick());
+            tick++;
+        }
 
-  /**
-   * @param done the done to set
-   */
-  public void setDone(boolean done) { this.done = done; }
+        if (isDone()) {
+            end();
+        }
+    }
 
-  /**
-   * @return the done
-   */
-  public boolean isDone() { return done; }
+    public boolean isBetweenTicks(int min, int max) {
+        return isBetweenTicks(min, max, false);
+    }
 
-  /**
-   * @return the tick
-   */
-  public int getTick() { return tick; }
+    public boolean isBetweenTicks(int min, int max, boolean inclusive) {
+        if (inclusive) {
+            return (getTick() >= min) && (getTick() <= max);
+        }
 
-  /**
-   * @param tick the tick to set
-   */
-  public void setTick(int tick) { this.tick = tick; }
+        return (getTick() > min) && (getTick() < max);
+    }
 
-  /**
-   * @param resultHandler the resultHandler to set
-   */
-  public void setResultHandler(ResultHandler<?> resultHandler) { this.resultHandler = resultHandler; }
+    @Override
+    public CompoundNBT serializeNBT() {
+        CompoundNBT tag = new CompoundNBT();
 
-  /**
-   * @return the resultHandler
-   */
-  public ResultHandler<?> getResultHandler() { return resultHandler; }
+        tag.putInt("tick", getTick());
 
-  /**
-   * @return the energyRequirement
-   */
-  public final int getIchorRequirement() { return ichorRequirement; }
+        return tag;
+    }
 
-  /**
-   * @return the information
-   */
-  public final String getInformation() { return information; }
+    @Override
+    public void deserializeNBT(CompoundNBT nbt) {
+        setTick(nbt.getInt("tick"));
+    }
 
-  /**
-   * How can a {@link Ritual} end? <br>
-   * <br>
-   * <b>SUCCESS</b> - Where everything is happy and goes well (ish)<br>
-   * <b>FAILURE</b> - Where the ritual cannot start or fails happily<br>
-   * <b>CATACLYSM</b> - Where everything goes badly wrong, i.e. you ran out of amethyst flux
-   * 
-   * @author GenElectrovise 14 Jun 2020
-   */
-  public static enum RitualResult {
-    SUCCESS, CASTING, FAILURE, CATACLYSM;
-  }
+    // Get and set
+
+    /**
+     * @return The name
+     */
+    public final String getDisplayName() {
+        return displayName;
+    }
+
+    /**
+     * @return The description of the ritual
+     */
+    public final String getDescription() {
+        return description;
+    }
+
+    /**
+     * @return the altar
+     */
+    public final AltarTileEntity getAltar() {
+        return altar;
+    }
+
+    /**
+     * @return the done
+     */
+    public boolean isDone() {
+        return done;
+    }
+
+    /**
+     * @param done the done to set
+     */
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    /**
+     * @return the tick
+     */
+    public int getTick() {
+        return tick;
+    }
+
+    /**
+     * @param tick the tick to set
+     */
+    public void setTick(int tick) {
+        this.tick = tick;
+    }
+
+    /**
+     * @return the resultHandler
+     */
+    public ResultHandler<?> getResultHandler() {
+        return resultHandler;
+    }
+
+    /**
+     * @param resultHandler the resultHandler to set
+     */
+    public void setResultHandler(ResultHandler<?> resultHandler) {
+        this.resultHandler = resultHandler;
+    }
+
+    /**
+     * @return the energyRequirement
+     */
+    public final int getIchorRequirement() {
+        return ichorRequirement;
+    }
+
+    /**
+     * @return the information
+     */
+    public final String getInformation() {
+        return information;
+    }
+
+    /**
+     * How can a {@link Ritual} end? <br>
+     * <br>
+     * <b>SUCCESS</b> - Where everything is happy and goes well (ish)<br>
+     * <b>FAILURE</b> - Where the ritual cannot start or fails happily<br>
+     * <b>CATACLYSM</b> - Where everything goes badly wrong, i.e. you ran out of amethyst flux
+     *
+     * @author GenElectrovise 14 Jun 2020
+     */
+    public static enum RitualResult {
+        SUCCESS, CASTING, FAILURE, CATACLYSM;
+    }
 }

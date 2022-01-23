@@ -1,6 +1,5 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
-import java.util.Map;
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
@@ -10,102 +9,90 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkEvent;
 
+import java.util.Map;
+
 public interface PixieProcessor {
 
-  void process(PixiePacket packet, NetworkEvent.Context context, Gson gson);
-
-  public static <T> Optional<T> getPacketInst(PixiePacket packet, Gson gson, T type) {
-    if (!TransferEnergyParticlePacket.class.isAssignableFrom(packet.getType())) {
-      return Optional.absent();
-    }
-
-    @SuppressWarnings("unchecked")
-    T particlePacket = (T) gson.fromJson(packet.getContent(), type.getClass());
-
-    return Optional.of(particlePacket);
-  }
-
-  /**
-   * 
-   * @author adam_
-   *
-   */
-  public static class Registry {
-
-    public static final String CANNOT_REGISTER_PROCESSOR_AS_TYPE_NULL = "Cannot register processor as type null";
-    public static final String CANNOT_REGISTER_PROCESSOR_AS_PROCESSOR_NULL = "Cannot register processor as processor null";
-    public static final String NO_PROCESSOR_FOR_TYPE = "No processor for type";
-    public static final String CANNOT_GET_PROCESSOR_AS_TYPE_NULL = "Cannot get processor as type null";
-
-
-
-    // Static
-    protected static final Registry INSTANCE = new Registry();
-
-    public static Registry getInstance() {
-      return INSTANCE;
-    }
-
-    // Instance
-    protected Map<Class<?>, PixieProcessor> processors = Maps.newHashMap();
-
-    private Registry() {}
+    void process(PixiePacket packet, NetworkEvent.Context context, Gson gson);
 
     /**
-     * Associates the given type and processor in the {@link #processors} {@link Map}.
-     * 
-     * @param type
-     * @param processor
-     * @throws CourierException
+     * @author adam_
      */
-    public void register(Class<?> type, PixieProcessor processor) throws CourierException {
+    class Registry {
 
-      // Null check type
-      if (type == null) {
-        throw new CourierException(CANNOT_REGISTER_PROCESSOR_AS_TYPE_NULL);
-      }
+        public static final String CANNOT_REGISTER_PROCESSOR_AS_TYPE_NULL = "Cannot register processor as type null";
+        public static final String CANNOT_REGISTER_PROCESSOR_AS_PROCESSOR_NULL = "Cannot register processor as processor null";
+        public static final String NO_PROCESSOR_FOR_TYPE = "No processor for type";
+        public static final String CANNOT_GET_PROCESSOR_AS_TYPE_NULL = "Cannot get processor as type null";
 
-      // Null check processor
-      if (processor == null) {
-        throw new CourierException(CANNOT_REGISTER_PROCESSOR_AS_PROCESSOR_NULL);
-      }
 
-      // Put
-      processors.put(type, processor);
+        // Static
+        protected static final Registry INSTANCE = new Registry();
+        // Instance
+        protected Map<Class<?>, PixieProcessor> processors = Maps.newHashMap();
+
+        private Registry() {
+        }
+
+        public static Registry getInstance() {
+            return INSTANCE;
+        }
+
+        /**
+         * Associates the given type and processor in the {@link #processors} {@link Map}.
+         *
+         * @param type      The class of the packet to register
+         * @param processor A processor to process the given type of packet
+         * @throws CourierException If: type==null || processor==null
+         */
+        public void register(Class<?> type, PixieProcessor processor) throws CourierException {
+
+            // Null check type
+            if (type == null) {
+                throw new CourierException(CANNOT_REGISTER_PROCESSOR_AS_TYPE_NULL);
+            }
+
+            // Null check processor
+            if (processor == null) {
+                throw new CourierException(CANNOT_REGISTER_PROCESSOR_AS_PROCESSOR_NULL);
+            }
+
+            // Put
+            processors.put(type, processor);
+        }
+
+        /**
+         * Gets a processor for the given type from the {@link #processors} {@link Map}.
+         *
+         * @param type The type of packet for which to get a processor instance for
+         * @return The instance of PixieProcessor associated with the given type
+         * @throws CourierException If type==null || processor==null
+         */
+        public PixieProcessor get(Class<?> type) throws CourierException {
+
+            // Null check type
+            if (type == null) {
+                throw new CourierException(CANNOT_GET_PROCESSOR_AS_TYPE_NULL);
+            }
+
+            PixieProcessor processor = processors.get(type);
+
+            // Null check processor
+            if (processor == null) {
+                throw new CourierException(NO_PROCESSOR_FOR_TYPE + ": " + type.getName());
+            }
+
+            return processor;
+        }
+
+        /**
+         * @param event Injected FMLCommonSetupEvent instance
+         * @throws CourierException If fails, should crash the game because not registering some packets
+         *                          could be nasty later on
+         */
+        @SubscribeEvent
+        void registerProcessors(FMLCommonSetupEvent event) throws CourierException {
+            register(TransferEnergyParticlePacket.class, new TransferEnergyParticleProcessor());
+        }
     }
-
-    /**
-     * Gets a processor for the given type from the {@link #processors} {@link Map}.
-     * 
-     * @param type
-     * @return
-     * @throws CourierException
-     */
-    public PixieProcessor get(Class<?> type) throws CourierException {
-
-      // Null check type
-      if (type == null) {
-        throw new CourierException(CANNOT_GET_PROCESSOR_AS_TYPE_NULL);
-      }
-
-      PixieProcessor processor = processors.get(type);
-
-      // Null check processor
-      if (processor == null) {
-        throw new CourierException(NO_PROCESSOR_FOR_TYPE + ": " + type.getName());
-      }
-
-      return processor;
-    }
-
-    /**
-     * @param event
-     * @throws CourierException If fails, should crash the game because not registering some packets
-     *         could be nasty later on
-     */
-    @SubscribeEvent
-    void registerProcessors(FMLCommonSetupEvent event) throws CourierException {
-      register(TransferEnergyParticlePacket.class, new TransferEnergyParticleProcessor());
-    }
-  }
 }

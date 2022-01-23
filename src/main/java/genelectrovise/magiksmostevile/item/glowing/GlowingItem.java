@@ -19,13 +19,13 @@ import net.minecraft.item.ItemStack;
 
 public class GlowingItem extends Item {
 
-  public GlowingItem(Properties properties) {
-    super(properties);
-  }
+    public GlowingItem(Properties properties) {
+        super(properties);
+    }
 
-  @Override
-  public boolean isFoil(ItemStack stack) {
-    return true;
-  }
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return true;
+    }
 
 }

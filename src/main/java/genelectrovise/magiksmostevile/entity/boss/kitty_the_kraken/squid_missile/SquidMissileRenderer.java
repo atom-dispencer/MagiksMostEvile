@@ -29,38 +29,37 @@ import net.minecraft.util.math.vector.Quaternion;
 
 /**
  * {@link SquidRenderer} {@link ArrowRenderer} {@link SquidModel} {@link GiantModel}
- * 
- * @author GenElectrovise
  *
  * @param <T>
+ * @author GenElectrovise
  */
 public class SquidMissileRenderer extends MobRenderer<SquidMissileEntity, SquidMissileModel<SquidMissileEntity>> {
 
-  public SquidMissileRenderer(EntityRendererManager renderManagerIn) {
-    super(renderManagerIn, new SquidMissileModel<>(), 1);
-  }
+    public SquidMissileRenderer(EntityRendererManager renderManagerIn) {
+        super(renderManagerIn, new SquidMissileModel<>(), 1);
+    }
 
-  @Override
-  public ResourceLocation getTextureLocation(SquidMissileEntity entity) {
-    return new ResourceLocation(MagiksMostEvile.MODID, "textures/entity/squid_missile/squid_missile.png");
-  }
+    @Override
+    public ResourceLocation getTextureLocation(SquidMissileEntity entity) {
+        return new ResourceLocation(MagiksMostEvile.MODID, "textures/entity/squid_missile/squid_missile.png");
+    }
 
-  @Override
-  protected void setupRotations(SquidMissileEntity missile, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+    @Override
+    protected void setupRotations(SquidMissileEntity missile, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 
-    // + pitch squid backwards, - pitch squid forwards
-    // + yaw ??
-    // + rotate squid eyes to its left hand-side (do squid have hand-sides??)
+        // + pitch squid backwards, - pitch squid forwards
+        // + yaw ??
+        // + rotate squid eyes to its left hand-side (do squid have hand-sides??)
 
-    matrixStackIn.translate(0, 0, 0);
-    matrixStackIn.mulPose(new Quaternion(0, 0, 0, true));
-  }
+        matrixStackIn.translate(0, 0, 0);
+        matrixStackIn.mulPose(new Quaternion(0, 0, 0, true));
+    }
 
-  /**
-   * Defines what float the third param in setRotationAngles of ModelBase is
-   */
-  protected float handleRotationFloat(SquidEntity livingBase, float partialTicks) {
-    return MathHelper.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
-  }
+    /**
+     * Defines what float the third param in setRotationAngles of ModelBase is
+     */
+    protected float handleRotationFloat(SquidEntity livingBase, float partialTicks) {
+        return MathHelper.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
+    }
 
 }

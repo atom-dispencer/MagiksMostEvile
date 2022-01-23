@@ -27,88 +27,92 @@ import net.minecraft.world.server.ServerWorld;
 
 /**
  * {@link GhastEntity.FireballAttackGoal}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class SquidMissileAttackGoal extends Goal {
 
-  private final KittyTheKrakenEntity kraken;
-  private int attackTimer;
+    private static final int RANGE = 64;
+    private static final int ATTACK_AT = 200;
+    private final KittyTheKrakenEntity kraken;
+    private int attackTimer;
 
-  private static final int RANGE = 64;
-  private static final int ATTACK_AT = 200;
+    public SquidMissileAttackGoal(KittyTheKrakenEntity kraken) {
+        this.kraken = kraken;
+        this.attackTimer = 0;
+    }
 
-  public SquidMissileAttackGoal(KittyTheKrakenEntity kraken) {
-    this.kraken = kraken;
-    this.attackTimer = 0;
-  }
+    @Override
+    public boolean canUse() {
 
-  @Override
-  public boolean canUse() {
+        if (kraken.getTarget() == null)
+            return false;
+        if (kraken.getFirstUsableArm() == null)
+            return false;
 
-    if (kraken.getTarget() == null)
-      return false;
-    if (kraken.getFirstUsableArm() == null)
-      return false;
+        return true;
+    }
 
-    return true;
-  }
+    @Override
+    public void start() {
+        this.attackTimer = 0;
+    }
 
-  @Override
-  public void start() {
-    this.attackTimer = 0;
-  }
+    @Override
+    public void stop() {
+        kraken.setSquidMissileAttacking(false);
+    }
 
-  @Override
-  public void stop() {
-    kraken.setSquidMissileAttacking(false);
-  }
+    @Override
+    public void tick() {
+        LivingEntity target = kraken.getTarget();
 
-  @Override
-  public void tick() {
-    LivingEntity target = kraken.getTarget();
+        MagiksMostEvile.LOGGER.debug("attackTimer: " + attackTimer);
 
-    MagiksMostEvile.LOGGER.debug("attackTimer: " + attackTimer);
+        if (kraken.canSee(target) /* target visible */ && kraken.distanceToSqr(target) < (RANGE * RANGE) /* range */) {
 
-    if (kraken.canSee(target) /* target visible */ && kraken.distanceToSqr(target) < (RANGE * RANGE) /* range */) {
+            this.attackTimer++;
 
-      this.attackTimer++;
+            // Ghast: if attackTimer == 10 AND silent, play screech
 
-      // Ghast: if attackTimer == 10 AND silent, play screech
+            if (this.attackTimer == ATTACK_AT) {
+                attack(target);
+                attackTimer = 0;
+            }
 
-      if (this.attackTimer == ATTACK_AT) {
-        attack(target);
-        attackTimer = 0;
-      }
+        }
 
     }
 
-  }
+    private void attack(LivingEntity target) {
 
-  private void attack(LivingEntity target) {
+        if (!kraken.level.isClientSide) {
+            Vector3d targetPosition = target.position();
+            Vector3d krakenPosition = kraken.position();
 
-    if (!kraken.level.isClientSide) {
-      Vector3d targetPosition = target.position();
-      Vector3d krakenPosition = kraken.position();
+            Vector3d subtractedDirection = targetPosition.subtract(krakenPosition);
 
-      Vector3d subtractedDirection = targetPosition.subtract(krakenPosition);
+            SquidMissileEntity missile =
+                    (SquidMissileEntity) EntityOrbitalRegistry.SQUID_MISSILE.get().spawn((ServerWorld) kraken.level, null, null, kraken.blockPosition().above(5), SpawnReason.MOB_SUMMONED, false, false);
+            missile.setExplosive(false);
+            missile.setTicksUntilIgnition(20);
 
-      SquidMissileEntity missile =
-          (SquidMissileEntity) EntityOrbitalRegistry.SQUID_MISSILE.get().spawn((ServerWorld) kraken.level, null, null, kraken.blockPosition().above(5), SpawnReason.MOB_SUMMONED, false, false);
-      missile.setExplosive(false);
-      missile.setTicksUntilIgnition(20);
-
-      missile.setDirection(subtractedDirection);
+            missile.setDirection(subtractedDirection);
+        }
     }
-  }
 
-  // Get and set
+    // Get and set
 
-  public KittyTheKrakenEntity getKraken() { return kraken; }
+    public KittyTheKrakenEntity getKraken() {
+        return kraken;
+    }
 
-  public int getAttackTimer() { return attackTimer; }
+    public int getAttackTimer() {
+        return attackTimer;
+    }
 
-  public void setAttackTimer(int attackTimer) { this.attackTimer = attackTimer; }
+    public void setAttackTimer(int attackTimer) {
+        this.attackTimer = attackTimer;
+    }
 
 }

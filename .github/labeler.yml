@@ -2,18 +2,18 @@
 # Labels by affected paths
 
 core:
- - src/**/core/*
+  - src/**/core/*
 blocks:
- - src/**/block/*
+  - src/**/block/*
 items:
- - src/**/item/*
+  - src/**/item/*
 entities:
- - src/**/entity/*
+  - src/**/entity/*
 tile-entities:
- - src/**/tileentity/*
+  - src/**/tileentity/*
 networking:
- - src/**/network/*
+  - src/**/network/*
 particles:
- - src/**/particle/*
+  - src/**/particle/*
 rituals:
- - src/**/ritual/*
+  - src/**/ritual/*

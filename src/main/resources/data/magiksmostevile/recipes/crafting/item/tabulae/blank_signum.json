@@ -1,14 +1,14 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-			"tag": "minecraft:wooden_buttons"
-		},
-		{
-			"item": "minecraft:iron_nugget"
-		}
-	],
-	"result": {
-		"item": "magiksmostevile:blank_signum"
-	}
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "minecraft:wooden_buttons"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    }
+  ],
+  "result": {
+    "item": "magiksmostevile:blank_signum"
+  }
 }

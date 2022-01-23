@@ -27,26 +27,26 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public final class EntityAttributeManager {
 
-  @SubscribeEvent
-  public static void addEntityAttributes(EntityAttributeCreationEvent event) {
-    MagiksMostEvile.LOGGER.debug("Registering MME entity attributes");
+    @SubscribeEvent
+    public static void addEntityAttributes(EntityAttributeCreationEvent event) {
+        MagiksMostEvile.LOGGER.debug("Registering MME entity attributes");
 
-    // Vampire Bat
-    event.put(EntityOrbitalRegistry.VAMPIRE_BAT.get(), VampireBatEntity.getEntityAttributes().build());
+        // Vampire Bat
+        event.put(EntityOrbitalRegistry.VAMPIRE_BAT.get(), VampireBatEntity.getEntityAttributes().build());
 
-    // Egg Capone
-    event.put(EntityOrbitalRegistry.EGG_CAPONE.get(), EggCaponeEntity.getEntityAttributes().build());
+        // Egg Capone
+        event.put(EntityOrbitalRegistry.EGG_CAPONE.get(), EggCaponeEntity.getEntityAttributes().build());
 
-    // The Kraken
-    event.put(EntityOrbitalRegistry.THE_KRAKEN.get(), KittyTheKrakenEntity.getEntityAttributes().build());
+        // The Kraken
+        event.put(EntityOrbitalRegistry.THE_KRAKEN.get(), KittyTheKrakenEntity.getEntityAttributes().build());
 
-    // Tinder and Cinder
-    event.put(EntityOrbitalRegistry.TINDER_AND_CINDER.get(), TinderAndCinderEntity.getEntityAttributes().build());
+        // Tinder and Cinder
+        event.put(EntityOrbitalRegistry.TINDER_AND_CINDER.get(), TinderAndCinderEntity.getEntityAttributes().build());
 
-    // Tom the Troll
-    event.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(), TomTheTrollEntity.getEntityAttributes().build());
+        // Tom the Troll
+        event.put(EntityOrbitalRegistry.TOM_THE_TROLL.get(), TomTheTrollEntity.getEntityAttributes().build());
 
-    // Squid Missile
-    event.put(EntityOrbitalRegistry.SQUID_MISSILE.get(), SquidMissileEntity.getEntityAttributes().build());
-  }
+        // Squid Missile
+        event.put(EntityOrbitalRegistry.SQUID_MISSILE.get(), SquidMissileEntity.getEntityAttributes().build());
+    }
 }

@@ -7,17 +7,18 @@ import com.google.inject.AbstractModule;
 
 public class GuiceModule extends AbstractModule {
 
-  public GuiceModule() {}
+    public GuiceModule() {
+    }
 
-  @Override
-  protected void configure() {
-    super.configure();
+    @Override
+    protected void configure() {
+        super.configure();
 
-    // Configuration
+        // Configuration
 
-    bind(Gson.class).toProvider(() -> new GsonBuilder().create());
-    bind(JsonParser.class).toProvider(() -> new JsonParser());
+        bind(Gson.class).toProvider(() -> new GsonBuilder().create());
+        bind(JsonParser.class).toProvider(() -> new JsonParser());
 
-  }
+    }
 
 }

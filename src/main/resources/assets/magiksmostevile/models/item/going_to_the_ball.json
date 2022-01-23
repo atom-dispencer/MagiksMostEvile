@@ -1,6 +1,6 @@
 {
-   "parent": "item/generated",
-   "textures": {
-       "layer0": "magiksmostevile:items/general/going_to_the_ball"
-   }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "magiksmostevile:items/general/going_to_the_ball"
+  }
 }

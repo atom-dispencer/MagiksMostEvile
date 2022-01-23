@@ -23,9 +23,9 @@ import net.minecraft.util.text.ITextComponent;
  */
 public class AltarScreenManager implements IScreenFactory<AltarContainer, AltarContainerScreen> {
 
-  @Override
-  public AltarContainerScreen create(AltarContainer altarContainer, PlayerInventory playerInventory, ITextComponent title) {
-    return new AltarContainerScreen(altarContainer, playerInventory, title);
-  }
+    @Override
+    public AltarContainerScreen create(AltarContainer altarContainer, PlayerInventory playerInventory, ITextComponent title) {
+        return new AltarContainerScreen(altarContainer, playerInventory, title);
+    }
 
 }

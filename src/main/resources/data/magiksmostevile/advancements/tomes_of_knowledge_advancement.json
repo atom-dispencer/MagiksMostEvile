@@ -1,26 +1,26 @@
 {
-    "display": {
-        "icon": {
+  "display": {
+    "icon": {
+      "item": "magiksmostevile:tome_convert_amethyst"
+    },
+    "title": "Tomes of Knowledge",
+    "frame": "task",
+    "description": "Find a Tome of Knowledge"
+  },
+  "parent": "magiksmostevile:magik_advancement",
+  "criteria": {
+    "gain_tome": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
             "item": "magiksmostevile:tome_convert_amethyst"
-        },
-        "title": "Tomes of Knowledge",
-        "frame": "task",
-        "description": "Find a Tome of Knowledge"
-    },
-    "parent":"magiksmostevile:magik_advancement",
-    "criteria": {
-        "gain_tome": {
-            "trigger": "minecraft:inventory_changed",
-            "conditions": {
-                "items": [
-                    {
-                        "item": "magiksmostevile:tome_convert_amethyst"
-                    }
-                ]
-            }
-        }
-    },
-    "rewards": {
-        "experience":250
+          }
+        ]
+      }
     }
+  },
+  "rewards": {
+    "experience": 250
+  }
 }

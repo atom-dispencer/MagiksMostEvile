@@ -14,7 +14,6 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.item.equipment.tabulae;
 
-import java.util.List;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -24,23 +23,25 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class TabulaReachingGaze extends Tabula {
 
-  public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-    ItemStack stack = player.getItemInHand(hand);
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-    // conscious
-    // Only operate on the server
-    if (world.isClientSide) {
-      return ActionResult.pass(stack);
+        // conscious
+        // Only operate on the server
+        if (world.isClientSide) {
+            return ActionResult.pass(stack);
+        }
+
+        return ActionResult.success(stack);
     }
 
-    return ActionResult.success(stack);
-  }
-
-  @Override
-  public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-    tooltip.add(TextComponentUtils.fromMessage(() -> "You feel your consciousness expand, and you feel aware of your surroundings..."));
-    super.appendHoverText(stack, worldIn, tooltip, flagIn);
-  }
+    @Override
+    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(TextComponentUtils.fromMessage(() -> "You feel your consciousness expand, and you feel aware of your surroundings..."));
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+    }
 }

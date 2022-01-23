@@ -1,8 +1,8 @@
 {
-	"forge_marker": 1,
-	"variants": {
-		"": {
-			"model": "magiksmostevile:block/mortar/ceramic_mortar"
-		}
-	}
+  "forge_marker": 1,
+  "variants": {
+    "": {
+      "model": "magiksmostevile:block/mortar/ceramic_mortar"
+    }
+  }
 }

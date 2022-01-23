@@ -35,84 +35,84 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class AmethystCrystalTileEntity extends TileEntity implements ITickableTileEntity {
 
-  private World world;
-  private int iteration = 1;
+    private World world;
+    private int iteration = 1;
 
-  public AmethystCrystalTileEntity() {
-    super(TileEntityOrbitalRegistry.TILE_ENTITY_AMETHYST_CRYSTAL.get());
-    MagiksMostEvile.LOGGER.debug("Constructing class : TileEntityAmethystCrystal");
-  }
+    public AmethystCrystalTileEntity() {
+        super(TileEntityOrbitalRegistry.TILE_ENTITY_AMETHYST_CRYSTAL.get());
+        MagiksMostEvile.LOGGER.debug("Constructing class : TileEntityAmethystCrystal");
+    }
 
-  @Override
-  public void load(BlockState state, CompoundNBT compound) {
-    super.load(state, compound);
-  }
+    @Override
+    public void load(BlockState state, CompoundNBT compound) {
+        super.load(state, compound);
+    }
 
-  @Override
-  public CompoundNBT save(CompoundNBT compound) {
-    return super.save(compound);
-  }
+    @Override
+    public CompoundNBT save(CompoundNBT compound) {
+        return super.save(compound);
+    }
 
-  @Override
-  public void onLoad() {
-    this.world = this.getLevel();
-  }
+    @Override
+    public void onLoad() {
+        this.world = this.getLevel();
+    }
 
-  @Override
-  public void tick() {
-    int posX = this.getBlockPos().getX();
-    int posY = this.getBlockPos().getY();
-    int posZ = this.getBlockPos().getZ();
-    int i = posX;
-    int j = posY;
-    int k = posZ;
+    @Override
+    public void tick() {
+        int posX = this.getBlockPos().getX();
+        int posY = this.getBlockPos().getY();
+        int posZ = this.getBlockPos().getZ();
+        int i = posX;
+        int j = posY;
+        int k = posZ;
 
-    if (iteration % 10 == 0) {
-      try {
-        for (i = posX - 2; i < posX + 3; i++) {
-          for (j = posY - 1; j < posY + 1; j++) {
-            for (k = posZ - 2; k < posZ + 3; k++) {
-              BlockPos blockPos = new BlockPos(i, j, k);
-              Block block = world.getBlockState(blockPos).getBlock();
-              checkAndStartBlockReplacement(block, blockPos);
+        if (iteration % 10 == 0) {
+            try {
+                for (i = posX - 2; i < posX + 3; i++) {
+                    for (j = posY - 1; j < posY + 1; j++) {
+                        for (k = posZ - 2; k < posZ + 3; k++) {
+                            BlockPos blockPos = new BlockPos(i, j, k);
+                            Block block = world.getBlockState(blockPos).getBlock();
+                            checkAndStartBlockReplacement(block, blockPos);
+                        }
+
+                    }
+                }
+                iteration = 1;
+            } catch (NullPointerException e) {
+                MagiksMostEvile.LOGGER.error("NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-          }
+            ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(), new EnderParticleMessageToClient(this.getBlockPos(), 1));
         }
-        iteration = 1;
-      } catch (NullPointerException e) {
-        MagiksMostEvile.LOGGER.error("NullPointerException! world.getBlockState(blockPos).getBlock() returned null? ");
-        e.printStackTrace();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
 
-      ParticleNetworkingManager.CEnderParticle.send(PacketDistributor.ALL.noArg(), new EnderParticleMessageToClient(this.getBlockPos(), 1));
+        iteration++;
     }
 
-    iteration++;
-  }
+    private void checkAndStartBlockReplacement(Block block, BlockPos blockPos) {
+        if (block instanceof PotatoBlock) {
 
-  private void checkAndStartBlockReplacement(Block block, BlockPos blockPos) {
-    if (block instanceof PotatoBlock) {
+            if ((int) world.getBlockState(blockPos).getValue(PotatoBlock.AGE) == 7) {
+                replacePotatoAtPosition(blockPos);
+            }
 
-      if ((int) world.getBlockState(blockPos).getValue(PotatoBlock.AGE) == 7) {
-        replacePotatoAtPosition(blockPos);
-      }
-
+        }
     }
-  }
 
-  private void replacePotatoAtPosition(BlockPos blockPos) {
-    BlockState air = Blocks.AIR.defaultBlockState();
-    world.setBlock(blockPos, air, 4);
-    spawnEntityItemAmethystPotato(blockPos);
-  }
-
-  private void spawnEntityItemAmethystPotato(BlockPos blockPos) {
-    if (!world.isClientSide) {
-      Entity entity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(FoodOrbitalRegistry.AMETHYST_POTATO.get(), 1));
-      world.addFreshEntity(entity);
+    private void replacePotatoAtPosition(BlockPos blockPos) {
+        BlockState air = Blocks.AIR.defaultBlockState();
+        world.setBlock(blockPos, air, 4);
+        spawnEntityItemAmethystPotato(blockPos);
     }
-  }
+
+    private void spawnEntityItemAmethystPotato(BlockPos blockPos) {
+        if (!world.isClientSide) {
+            Entity entity = new ItemEntity(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(FoodOrbitalRegistry.AMETHYST_POTATO.get(), 1));
+            world.addFreshEntity(entity);
+        }
+    }
 }

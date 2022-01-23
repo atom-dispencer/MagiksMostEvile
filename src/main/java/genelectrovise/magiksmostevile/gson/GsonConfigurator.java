@@ -7,16 +7,17 @@ import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
 
 public class GsonConfigurator {
 
-  private GsonConfigurator() {}
+    private GsonConfigurator() {
+    }
 
-  public static Gson newConfiguredInstance() {
+    public static Gson newConfiguredInstance() {
 
-    GsonBuilder builder = new GsonBuilder();
-    builder.registerTypeAdapter(Flags.class, new FlagsSerializer());
-    builder.registerTypeAdapter(PixiePacket.class, new PixiePacketJsonDeserializer());
-    builder.registerTypeAdapter(PixiePacket.class, new PixiePacketJsonSerializer());
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Flags.class, new FlagsSerializer());
+        builder.registerTypeAdapter(PixiePacket.class, new PixiePacketJsonDeserializer());
+        builder.registerTypeAdapter(PixiePacket.class, new PixiePacketJsonSerializer());
 
-    return builder.create();
-  }
+        return builder.create();
+    }
 
 }

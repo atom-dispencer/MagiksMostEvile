@@ -1,42 +1,42 @@
 {
-	"parent": "item/handheld",
-	"textures": {
-		"layer0": "magiksmostevile:items/tabulae/blank_tabula"
-	},
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [
-				-60,
-				-60,
-				0
-			],
-			"translation": [
-				1,
-				2,
-				0
-			],
-			"scale": [
-				1,
-				1,
-				1
-			]
-		},
-		"firstperson_righthand": {
-			"rotation": [
-				-60,
-				-60,
-				0
-			],
-			"translation": [
-				2,
-				2,
-				-2
-			],
-			"scale": [
-				1,
-				1,
-				1
-			]
-		}
-	}
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "magiksmostevile:items/tabulae/blank_tabula"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -60,
+        -60,
+        0
+      ],
+      "translation": [
+        1,
+        2,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        -60,
+        -60,
+        0
+      ],
+      "translation": [
+        2,
+        2,
+        -2
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
 }

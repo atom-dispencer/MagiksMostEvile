@@ -14,61 +14,62 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken;
 
-import java.util.Arrays;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
+import java.util.Arrays;
+
 public class KittyTheKrakenModel<T extends Entity> extends SegmentedModel<T> {
-  private final ModelRenderer body;
-  private final ModelRenderer[] legs = new ModelRenderer[8];
-  private final ImmutableList<ModelRenderer> renderers;
+    private final ModelRenderer body;
+    private final ModelRenderer[] legs = new ModelRenderer[8];
+    private final ImmutableList<ModelRenderer> renderers;
 
-  public KittyTheKrakenModel() {
-    this.body = new ModelRenderer(this, 0, 0);
-    this.body.addBox(-6.0F, -8.0F, -6.0F, 12.0F, 16.0F, 12.0F);
-    this.body.y += 8.0F;
+    public KittyTheKrakenModel() {
+        this.body = new ModelRenderer(this, 0, 0);
+        this.body.addBox(-6.0F, -8.0F, -6.0F, 12.0F, 16.0F, 12.0F);
+        this.body.y += 8.0F;
 
-    for (int j = 0; j < this.legs.length; ++j) {
-      this.legs[j] = new ModelRenderer(this, 48, 0);
-      double d0 = (double) j * Math.PI * 2.0D / (double) this.legs.length;
-      float f = (float) Math.cos(d0) * 5.0F;
-      float f1 = (float) Math.sin(d0) * 5.0F;
-      this.legs[j].addBox(-1.0F, 0.0F, -1.0F, 2.0F, 18.0F, 2.0F);
-      this.legs[j].x = f;
-      this.legs[j].z = f1;
-      this.legs[j].y = 15.0F;
-      d0 = (double) j * Math.PI * -2.0D / (double) this.legs.length + (Math.PI / 2D);
-      this.legs[j].yRot = (float) d0;
+        for (int j = 0; j < this.legs.length; ++j) {
+            this.legs[j] = new ModelRenderer(this, 48, 0);
+            double d0 = (double) j * Math.PI * 2.0D / (double) this.legs.length;
+            float f = (float) Math.cos(d0) * 5.0F;
+            float f1 = (float) Math.sin(d0) * 5.0F;
+            this.legs[j].addBox(-1.0F, 0.0F, -1.0F, 2.0F, 18.0F, 2.0F);
+            this.legs[j].x = f;
+            this.legs[j].z = f1;
+            this.legs[j].y = 15.0F;
+            d0 = (double) j * Math.PI * -2.0D / (double) this.legs.length + (Math.PI / 2D);
+            this.legs[j].yRot = (float) d0;
+        }
+
+        Builder<ModelRenderer> builder = ImmutableList.builder();
+        builder.add(this.body);
+        builder.addAll(Arrays.asList(this.legs));
+        this.renderers = builder.build();
     }
 
-    Builder<ModelRenderer> builder = ImmutableList.builder();
-    builder.add(this.body);
-    builder.addAll(Arrays.asList(this.legs));
-    this.renderers = builder.build();
-  }
+    /**
+     * Sets this entity's model rotation angles
+     */
+    public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount,
+                          float ageInTicks, float netHeadYaw, float headPitch) {
 
-  /**
-   * Sets this entity's model rotation angles
-   */
-  public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount,
-      float ageInTicks, float netHeadYaw, float headPitch) {
-
-    try {
-      for (ModelRenderer modelrenderer : this.legs) {
-        modelrenderer.xRot = (float) (((Math.sin(ageInTicks / 10)) / 2) + 0.5);
-      }
+        try {
+            for (ModelRenderer modelrenderer : this.legs) {
+                modelrenderer.xRot = (float) (((Math.sin(ageInTicks / 10)) / 2) + 0.5);
+            }
 
 
-    } catch (Exception e) {
-      e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-  }
-
-  public Iterable<ModelRenderer> parts() {
-    return this.renderers;
-  }
+    public Iterable<ModelRenderer> parts() {
+        return this.renderers;
+    }
 }

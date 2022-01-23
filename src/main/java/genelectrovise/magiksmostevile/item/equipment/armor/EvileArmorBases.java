@@ -26,102 +26,102 @@ import net.minecraft.world.World;
 
 public class EvileArmorBases {
 
-  public static class AmethystArmorBase extends ArmorItem {
+    public static class AmethystArmorBase extends ArmorItem {
 
-    public AmethystArmorBase(IArmorMaterial materialIn, EquipmentSlotType slot,
-        Properties builder) {
-      super(materialIn, slot, builder);
-    }
-
-    @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-      if (player.inventory.getArmor(0) != null && player.inventory.getArmor(1) != null
-          && player.inventory.getArmor(2) != null
-          && player.inventory.getArmor(3) != null) {
-        if (player.inventory.getArmor(3).getItem() == ArmorOrbitalRegistry.AMETHYST_HELMET
-            .get()
-            && player.inventory.getArmor(2)
-                .getItem() == ArmorOrbitalRegistry.AMETHYST_CHESTPLATE.get()
-            && player.inventory.getArmor(1)
-                .getItem() == ArmorOrbitalRegistry.AMETHYST_LEGGINGS.get()
-            && player.inventory.getArmor(0).getItem() == ArmorOrbitalRegistry.AMETHYST_BOOTS
-                .get()) {
-
-          player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 20, 0, false, false));
-          player.addEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));
-
+        public AmethystArmorBase(IArmorMaterial materialIn, EquipmentSlotType slot,
+                                 Properties builder) {
+            super(materialIn, slot, builder);
         }
-      }
-    }
 
-  }
+        @Override
+        public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+            if (player.inventory.getArmor(0) != null && player.inventory.getArmor(1) != null
+                    && player.inventory.getArmor(2) != null
+                    && player.inventory.getArmor(3) != null) {
+                if (player.inventory.getArmor(3).getItem() == ArmorOrbitalRegistry.AMETHYST_HELMET
+                        .get()
+                        && player.inventory.getArmor(2)
+                        .getItem() == ArmorOrbitalRegistry.AMETHYST_CHESTPLATE.get()
+                        && player.inventory.getArmor(1)
+                        .getItem() == ArmorOrbitalRegistry.AMETHYST_LEGGINGS.get()
+                        && player.inventory.getArmor(0).getItem() == ArmorOrbitalRegistry.AMETHYST_BOOTS
+                        .get()) {
 
-  public static class PoweredAmethystArmorBase extends ArmorItem {
+                    player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 20, 0, false, false));
+                    player.addEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));
 
-    public PoweredAmethystArmorBase(IArmorMaterial materialIn, EquipmentSlotType slot,
-        Properties builder) {
-      super(materialIn, slot, builder);
-    }
-
-    @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-      if (player.inventory.getArmor(0) != null && player.inventory.getArmor(1) != null
-          && player.inventory.getArmor(2) != null
-          && player.inventory.getArmor(3) != null) {
-        if (player.inventory.getArmor(3)
-            .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_HELMET.get()
-            && player.inventory.getArmor(2)
-                .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_CHESTPLATE.get()
-            && player.inventory.getArmor(1)
-                .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_LEGGINGS.get()
-            && player.inventory.getArmor(0)
-                .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_BOOTS.get()) {
-
-          player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 20, 1, false, false));
-          player.addEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));
-          player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 20, 0, false, false));
-          player.addEffect(new EffectInstance(Effects.DIG_SPEED, 20, 0, false, false));
-
+                }
+            }
         }
-      }
+
     }
 
-  }
+    public static class PoweredAmethystArmorBase extends ArmorItem {
 
-  public static class OverPoweredAmethystArmorBase extends ArmorItem {
-
-    public OverPoweredAmethystArmorBase(IArmorMaterial materialIn, EquipmentSlotType slot,
-        Properties builder) {
-      super(materialIn, slot, builder);
-    }
-
-    @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-      if (player.inventory.getArmor(0) != null && player.inventory.getArmor(1) != null
-          && player.inventory.getArmor(2) != null
-          && player.inventory.getArmor(3) != null) {
-        if (player.inventory.getArmor(3)
-            .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_HELMET.get()
-            && player.inventory.getArmor(2)
-                .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_CHESTPLATE.get()
-            && player.inventory.getArmor(1)
-                .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_LEGGINGS.get()
-            && player.inventory.getArmor(0)
-                .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_BOOTS.get()) {
-
-          player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 20, 2, false, false));
-          player.addEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));
-          player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 20, 0, false, false));
-          player.addEffect(new EffectInstance(Effects.DIG_SPEED, 20, 1, false, false));
-          player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 20, 2, false, false));
-          player.addEffect(new EffectInstance(Effects.REGENERATION, 20, 20, false, false));
-          player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 20, 2, false, false));
-          player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 20, 0, false, false));
-
+        public PoweredAmethystArmorBase(IArmorMaterial materialIn, EquipmentSlotType slot,
+                                        Properties builder) {
+            super(materialIn, slot, builder);
         }
-      }
+
+        @Override
+        public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+            if (player.inventory.getArmor(0) != null && player.inventory.getArmor(1) != null
+                    && player.inventory.getArmor(2) != null
+                    && player.inventory.getArmor(3) != null) {
+                if (player.inventory.getArmor(3)
+                        .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_HELMET.get()
+                        && player.inventory.getArmor(2)
+                        .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_CHESTPLATE.get()
+                        && player.inventory.getArmor(1)
+                        .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_LEGGINGS.get()
+                        && player.inventory.getArmor(0)
+                        .getItem() == ArmorOrbitalRegistry.POWERED_AMETHYST_BOOTS.get()) {
+
+                    player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 20, 1, false, false));
+                    player.addEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));
+                    player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 20, 0, false, false));
+                    player.addEffect(new EffectInstance(Effects.DIG_SPEED, 20, 0, false, false));
+
+                }
+            }
+        }
+
     }
 
-  }
+    public static class OverPoweredAmethystArmorBase extends ArmorItem {
+
+        public OverPoweredAmethystArmorBase(IArmorMaterial materialIn, EquipmentSlotType slot,
+                                            Properties builder) {
+            super(materialIn, slot, builder);
+        }
+
+        @Override
+        public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+            if (player.inventory.getArmor(0) != null && player.inventory.getArmor(1) != null
+                    && player.inventory.getArmor(2) != null
+                    && player.inventory.getArmor(3) != null) {
+                if (player.inventory.getArmor(3)
+                        .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_HELMET.get()
+                        && player.inventory.getArmor(2)
+                        .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_CHESTPLATE.get()
+                        && player.inventory.getArmor(1)
+                        .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_LEGGINGS.get()
+                        && player.inventory.getArmor(0)
+                        .getItem() == ArmorOrbitalRegistry.OVER_POWERED_AMETHYST_BOOTS.get()) {
+
+                    player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 20, 2, false, false));
+                    player.addEffect(new EffectInstance(Effects.NIGHT_VISION, 201, 0, false, false));
+                    player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 20, 0, false, false));
+                    player.addEffect(new EffectInstance(Effects.DIG_SPEED, 20, 1, false, false));
+                    player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 20, 2, false, false));
+                    player.addEffect(new EffectInstance(Effects.REGENERATION, 20, 20, false, false));
+                    player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 20, 2, false, false));
+                    player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 20, 0, false, false));
+
+                }
+            }
+        }
+
+    }
 
 }

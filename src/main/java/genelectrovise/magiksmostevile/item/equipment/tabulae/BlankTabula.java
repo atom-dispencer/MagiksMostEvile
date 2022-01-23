@@ -22,13 +22,13 @@ import net.minecraft.world.World;
 
 public class BlankTabula extends Tabula {
 
-  public BlankTabula() {
-    super();
-  }
+    public BlankTabula() {
+        super();
+    }
 
-  @Override
-  public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-    return ActionResult.success(playerIn.getItemInHand(handIn));
-  }
+    @Override
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        return ActionResult.success(playerIn.getItemInHand(handIn));
+    }
 
 }

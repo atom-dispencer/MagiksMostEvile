@@ -14,9 +14,6 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.tileentity.mortar;
 
-import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
 import genelectrovise.magiksmostevile.data.recipe.Usage;
 import genelectrovise.magiksmostevile.registry.orbital.registries.RecipeSerializerOrbitalRegistry;
@@ -41,143 +38,149 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Map;
 
 public class MortarTileEntity extends TileEntity {
 
-  public static final Logger LOGGER = LogManager.getLogger(MortarTileEntity.class);
+    public static final Logger LOGGER = LogManager.getLogger(MortarTileEntity.class);
 
-  private ItemStackHandler slot = new ItemStackHandler() {
-    protected void onContentsChanged(int slot) {
-      setChanged();
-    };
-  };
-  protected final LazyOptional<IItemHandler> slotHandler = LazyOptional.of(() -> slot);
-  protected final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot));
-
-  public MortarTileEntity() {
-    super(TileEntityOrbitalRegistry.TILE_ENTITY_MORTAR.get());
-  }
-
-  @Override
-  public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
-
-    // IItemHandler
-    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-      this.setChanged();
-
-      // if the block at myself isn't myself, allow full access (Block Broken)
-      if (level != null && level.getBlockState(getBlockPos()).getBlock() != this.getBlockState().getBlock()) {
-        return allSlots.cast();
-      }
-
-      // If accessing from the top or bottom
-      if (side == Direction.UP || side == Direction.DOWN) {
-        return allSlots.cast();
-      }
-    }
-
-    return super.getCapability(capability, side);
-  }
-
-  /**
-   * Pops the current contents out of the mortar, and adds the new {@link ItemStack} in. Calls
-   * {@link #inner_recieveItemStack(ItemStack, IItemHandler) to actually handle the action because
-   * debugging within lambdas is a pain.
-   * 
-   * @param playerHeldStack
-   */
-  public void recieveItemStack(ItemStack playerHeldStack) {
-    if (!this.level.isClientSide()) {
-      slotHandler.ifPresent((handler) -> {
-        inner_recieveItemStack(playerHeldStack, handler);
-      });
-    }
-  }
-
-  /**
-   * Only called on server. Pops the current contents out of the mortar, and adds the new
-   * {@link ItemStack} in. Called from the lambda of {@link #recieveItemStack(ItemStack)}.
-   */
-  private void inner_recieveItemStack(ItemStack playerHeldStack, IItemHandler handler) {
-    if (!this.level.isClientSide()) {
-      popContents();
-      handler.insertItem(0, new ItemStack(playerHeldStack.getItem(), 1), false);
-      playerHeldStack.shrink(1);
-      setChanged();
-    }
-  }
-
-  /**
-   * Pops the contents of this mortar out as an {@link ItemEntity}. Calls
-   * {@link #inner_popContents(IItemHandler)} to actually handle the action as debugging within
-   * lambdas is a pain.
-   */
-  public void popContents() {
-    if (!this.level.isClientSide()) {
-      slotHandler.ifPresent((handler) -> {
-        inner_popContents(handler);
-      });
-    }
-  }
-
-  /**
-   * Only on server. Pops the contents of the given {@link IItemHandler} out as an {@link ItemEntity}.
-   * Called from the lambda of {@link #popContents()} <br>
-   * <br>
-   * {@link Block#spawnDrops(BlockState, World, BlockPos, TileEntity, Entity, ItemStack)}
-   * 
-   * @param handler
-   */
-  private void inner_popContents(IItemHandler handler) {
-    if (!this.level.isClientSide()) {
-      ItemStack out = handler.extractItem(0, 1, false);
-
-      ItemEntity entity = (ItemEntity) EntityType.ITEM.spawn((ServerWorld) level, null, null, getBlockPos().offset(0, 1, 0), SpawnReason.EVENT, false, false);
-      entity.setItem(out);
-
-      setChanged();
-    }
-  }
-
-  /**
-   * Called to process the contents of the mortar as a recipe. Checks the contents against all of the
-   * usable recipes, and processes the first one it comes across.
-   */
-  public void recipe() {
-
-    // Do nothing on the client
-    if (level.isClientSide()) {
-      return;
-    }
-
-    // Handle the recipe on the server. Don't let exceptions leak!
-    try {
-      Map<ResourceLocation, IRecipe<?>> recipes = RecipeSerializerOrbitalRegistry.getRecipes(this.level).get(RecipeSerializerOrbitalRegistry.SIMPLE_TYPE);
-      for (IRecipe<?> recipe : recipes.values()) {
-        if (recipe instanceof SimpleRecipe) {
-
-          SimpleRecipe castRecipe = (SimpleRecipe) recipe;
-
-          if (!castRecipe.craftable((CombinedInvWrapper) allSlots.resolve().orElse(null), Usage.MORTAR)) {
-            return;
-          }
-
-          IItemHandler handlerRealised = slotHandler.orElse(null);
-          if (handlerRealised == null) {
-            MortarTileEntity.LOGGER.error("Slot handler has been realised to null - unable to process recipe");
-            return;
-          }
-
-          handlerRealised.extractItem(0, 6400, false);
-          handlerRealised.insertItem(0, castRecipe.getResultItem(), false);
-
-          popContents();
-          break;
+    private ItemStackHandler slot = new ItemStackHandler() {
+        protected void onContentsChanged(int slot) {
+            setChanged();
         }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+
+        ;
+    };
+    protected final LazyOptional<IItemHandler> slotHandler = LazyOptional.of(() -> slot);
+    protected final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot));
+
+    public MortarTileEntity() {
+        super(TileEntityOrbitalRegistry.TILE_ENTITY_MORTAR.get());
     }
-  }
+
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
+
+        // IItemHandler
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            this.setChanged();
+
+            // if the block at myself isn't myself, allow full access (Block Broken)
+            if (level != null && level.getBlockState(getBlockPos()).getBlock() != this.getBlockState().getBlock()) {
+                return allSlots.cast();
+            }
+
+            // If accessing from the top or bottom
+            if (side == Direction.UP || side == Direction.DOWN) {
+                return allSlots.cast();
+            }
+        }
+
+        return super.getCapability(capability, side);
+    }
+
+    /**
+     * Pops the current contents out of the mortar, and adds the new {@link ItemStack} in. Calls
+     * {@link #inner_recieveItemStack(ItemStack, IItemHandler) to actually handle the action because
+     * debugging within lambdas is a pain.
+     *
+     * @param playerHeldStack
+     */
+    public void recieveItemStack(ItemStack playerHeldStack) {
+        if (!this.level.isClientSide()) {
+            slotHandler.ifPresent((handler) -> {
+                inner_recieveItemStack(playerHeldStack, handler);
+            });
+        }
+    }
+
+    /**
+     * Only called on server. Pops the current contents out of the mortar, and adds the new
+     * {@link ItemStack} in. Called from the lambda of {@link #recieveItemStack(ItemStack)}.
+     */
+    private void inner_recieveItemStack(ItemStack playerHeldStack, IItemHandler handler) {
+        if (!this.level.isClientSide()) {
+            popContents();
+            handler.insertItem(0, new ItemStack(playerHeldStack.getItem(), 1), false);
+            playerHeldStack.shrink(1);
+            setChanged();
+        }
+    }
+
+    /**
+     * Pops the contents of this mortar out as an {@link ItemEntity}. Calls
+     * {@link #inner_popContents(IItemHandler)} to actually handle the action as debugging within
+     * lambdas is a pain.
+     */
+    public void popContents() {
+        if (!this.level.isClientSide()) {
+            slotHandler.ifPresent((handler) -> {
+                inner_popContents(handler);
+            });
+        }
+    }
+
+    /**
+     * Only on server. Pops the contents of the given {@link IItemHandler} out as an {@link ItemEntity}.
+     * Called from the lambda of {@link #popContents()} <br>
+     * <br>
+     * {@link Block#spawnDrops(BlockState, World, BlockPos, TileEntity, Entity, ItemStack)}
+     *
+     * @param handler
+     */
+    private void inner_popContents(IItemHandler handler) {
+        if (!this.level.isClientSide()) {
+            ItemStack out = handler.extractItem(0, 1, false);
+
+            ItemEntity entity = (ItemEntity) EntityType.ITEM.spawn((ServerWorld) level, null, null, getBlockPos().offset(0, 1, 0), SpawnReason.EVENT, false, false);
+            entity.setItem(out);
+
+            setChanged();
+        }
+    }
+
+    /**
+     * Called to process the contents of the mortar as a recipe. Checks the contents against all of the
+     * usable recipes, and processes the first one it comes across.
+     */
+    public void recipe() {
+
+        // Do nothing on the client
+        if (level.isClientSide()) {
+            return;
+        }
+
+        // Handle the recipe on the server. Don't let exceptions leak!
+        try {
+            Map<ResourceLocation, IRecipe<?>> recipes = RecipeSerializerOrbitalRegistry.getRecipes(this.level).get(RecipeSerializerOrbitalRegistry.SIMPLE_TYPE);
+            for (IRecipe<?> recipe : recipes.values()) {
+                if (recipe instanceof SimpleRecipe) {
+
+                    SimpleRecipe castRecipe = (SimpleRecipe) recipe;
+
+                    if (!castRecipe.craftable((CombinedInvWrapper) allSlots.resolve().orElse(null), Usage.MORTAR)) {
+                        return;
+                    }
+
+                    IItemHandler handlerRealised = slotHandler.orElse(null);
+                    if (handlerRealised == null) {
+                        MortarTileEntity.LOGGER.error("Slot handler has been realised to null - unable to process recipe");
+                        return;
+                    }
+
+                    handlerRealised.extractItem(0, 6400, false);
+                    handlerRealised.insertItem(0, castRecipe.getResultItem(), false);
+
+                    popContents();
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

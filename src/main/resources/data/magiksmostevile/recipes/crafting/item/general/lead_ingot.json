@@ -1,12 +1,12 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "magiksmostevile:lead_block"
-        }
-    ],
-    "result": {
-        "item": "magiksmostevile:lead_ingot",
-        "count": 9
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "magiksmostevile:lead_block"
     }
+  ],
+  "result": {
+    "item": "magiksmostevile:lead_ingot",
+    "count": 9
+  }
 }

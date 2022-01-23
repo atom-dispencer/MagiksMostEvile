@@ -1,19 +1,19 @@
-/*******************************************************************************
+/**
  * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
- *
+ * <p>
  * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any later version.
- *
+ * <p>
  * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
- *******************************************************************************/
+ */
 /**
- * 
+ *
  */
 package genelectrovise.magiksmostevile.entity.vampire_bat;
 
@@ -28,37 +28,37 @@ import net.minecraft.world.World;
  */
 public class VampireBatPathNavigator extends PathNavigator {
 
-  /**
-   * @param entityIn
-   * @param worldIn
-   */
-  public VampireBatPathNavigator(MobEntity entityIn, World worldIn) {
-    super(entityIn, worldIn);
-  }
+    /**
+     * @param entityIn
+     * @param worldIn
+     */
+    public VampireBatPathNavigator(MobEntity entityIn, World worldIn) {
+        super(entityIn, worldIn);
+    }
 
-  @Override
-  protected PathFinder createPathFinder(int p_179679_1_) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+    @Override
+    protected PathFinder createPathFinder(int p_179679_1_) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-  @Override
-  protected Vector3d getTempMobPos() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+    @Override
+    protected Vector3d getTempMobPos() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-  @Override
-  protected boolean canUpdatePath() {
-    // TODO Auto-generated method stub
-    return false;
-  }
+    @Override
+    protected boolean canUpdatePath() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-  @Override
-  protected boolean canMoveDirectly(Vector3d posVec31, Vector3d posVec32, int sizeX,
-      int sizeY, int sizeZ) {
-    // TODO Auto-generated method stub
-    return false;
-  }
+    @Override
+    protected boolean canMoveDirectly(Vector3d posVec31, Vector3d posVec32, int sizeX,
+                                      int sizeY, int sizeZ) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

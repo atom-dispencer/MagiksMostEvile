@@ -1,12 +1,12 @@
 {
-    "type": "minecraft:blasting",
-    "ingredient": [
-        {
-            "tag": "magiksmostevile:ores/lead"
-        }
-    ],
-    "result": {
-        "item": "magiksmostevile:lead_ingot",
-        "count": 2
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "tag": "magiksmostevile:ores/lead"
     }
+  ],
+  "result": {
+    "item": "magiksmostevile:lead_ingot",
+    "count": 2
+  }
 }

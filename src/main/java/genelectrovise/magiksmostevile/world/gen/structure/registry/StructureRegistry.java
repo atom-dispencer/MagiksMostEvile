@@ -24,9 +24,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Bus.MOD)
 public class StructureRegistry {
 
-  @SubscribeEvent
-  public static void registerStructures(RegistryEvent.Register<Structure<?>> event) {
-    ModStructures.registerStructures(event);
-    ModConfiguredStructures.registerConfiguredStructures();
-  }
+    @SubscribeEvent
+    public static void registerStructures(RegistryEvent.Register<Structure<?>> event) {
+        ModStructures.registerStructures(event);
+        ModConfiguredStructures.registerConfiguredStructures();
+    }
 }

@@ -29,57 +29,57 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class SummonFlappyResultHandler extends ResultHandler<SummonFlappyRitual> {
 
-  private AltarTileEntity altar;
-  private SummonFlappyRitual ritual;
+    private AltarTileEntity altar;
+    private SummonFlappyRitual ritual;
 
-  /**
-   * @param altar
-   * @param ritual
-   */
-  public SummonFlappyResultHandler(AltarTileEntity altar, SummonFlappyRitual ritual) {
-    super(altar, ritual);
-    this.altar = altar;
-    this.ritual = ritual;
-  }
+    /**
+     * @param altar
+     * @param ritual
+     */
+    public SummonFlappyResultHandler(AltarTileEntity altar, SummonFlappyRitual ritual) {
+        super(altar, ritual);
+        this.altar = altar;
+        this.ritual = ritual;
+    }
 
-  @Override
-  public void handleSuccess() {
+    @Override
+    public void handleSuccess() {
 
-    ritual.setDone(true);
+        ritual.setDone(true);
 
-    VampireBatEntity bat = EntityOrbitalRegistry.VAMPIRE_BAT.get().create(altar.getLevel());
+        VampireBatEntity bat = EntityOrbitalRegistry.VAMPIRE_BAT.get().create(altar.getLevel());
 
-    BlockPos altarPosUp = altar.getBlockPos().above(3);
-    bat.setPos(altarPosUp.getX(), altarPosUp.getY(), altarPosUp.getZ());
+        BlockPos altarPosUp = altar.getBlockPos().above(3);
+        bat.setPos(altarPosUp.getX(), altarPosUp.getY(), altarPosUp.getZ());
 
-    altar.getLevel().addFreshEntity(bat);
+        altar.getLevel().addFreshEntity(bat);
 
-    GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
-        new GlyphMessageToClient(
-            new ResourceLocation(MagiksMostEvile.MODID,
-                "textures/items/general/vampire_bat_tooth.png"),
-            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
-  }
+        GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
+                new GlyphMessageToClient(
+                        new ResourceLocation(MagiksMostEvile.MODID,
+                                "textures/items/general/vampire_bat_tooth.png"),
+                        GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
+    }
 
-  @Override
-  public void handleCasting() {
+    @Override
+    public void handleCasting() {
 
-  }
+    }
 
-  @Override
-  public void handleFailure() {
-    GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
-        new GlyphMessageToClient(
-            new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
-  }
+    @Override
+    public void handleFailure() {
+        GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
+                new GlyphMessageToClient(
+                        new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
+                        GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
+    }
 
-  @Override
-  public void handleCataclysm() {
-    GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
-        new GlyphMessageToClient(
-            new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
-            GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
-  }
+    @Override
+    public void handleCataclysm() {
+        GlyphNetworkingManager.CGlyph.send(PacketDistributor.ALL.noArg(),
+                new GlyphMessageToClient(
+                        new ResourceLocation(MagiksMostEvile.MODID, "textures/ritual/fail.png"),
+                        GlyphOrientation.VERTICAL, altar.getBlockPos().above(5), true, 0.5));
+    }
 
 }

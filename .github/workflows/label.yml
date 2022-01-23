@@ -6,13 +6,13 @@
 # https://github.com/actions/labeler
 
 name: Pull Request Labeler (GitHub - Label by paths)
-on: 
-    -   pull_request
+on:
+  - pull_request
 
 jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v3
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/labeler@v3
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"

@@ -23,9 +23,9 @@ import net.minecraft.util.text.ITextComponent;
  */
 public class InscriptionTableScreenManager implements IScreenFactory<InscriptionTableContainer, InscriptionTableContainerScreen> {
 
-  @Override
-  public InscriptionTableContainerScreen create(InscriptionTableContainer inscriptionTable, PlayerInventory playerInventory, ITextComponent title) {
-    return new InscriptionTableContainerScreen(inscriptionTable, playerInventory, title);
-  }
+    @Override
+    public InscriptionTableContainerScreen create(InscriptionTableContainer inscriptionTable, PlayerInventory playerInventory, ITextComponent title) {
+        return new InscriptionTableContainerScreen(inscriptionTable, playerInventory, title);
+    }
 
 }

@@ -4,21 +4,29 @@ import net.minecraft.util.math.BlockPos;
 
 public class TransferEnergyParticlePacket {
 
-  private BlockPos departure;
-  private BlockPos destination;
+    private BlockPos departure;
+    private BlockPos destination;
 
-  public TransferEnergyParticlePacket(BlockPos departure, BlockPos destination) {
-    this.departure = departure;
-    this.destination = destination;
-  }
+    public TransferEnergyParticlePacket(BlockPos departure, BlockPos destination) {
+        this.departure = departure;
+        this.destination = destination;
+    }
 
-  public BlockPos getDeparture() { return departure; }
+    public BlockPos getDeparture() {
+        return departure;
+    }
 
-  public void setDeparture(BlockPos departure) { this.departure = departure; }
+    public void setDeparture(BlockPos departure) {
+        this.departure = departure;
+    }
 
-  public BlockPos getDestination() { return destination; }
+    public BlockPos getDestination() {
+        return destination;
+    }
 
-  public void setDestination(BlockPos destination) { this.destination = destination; }
+    public void setDestination(BlockPos destination) {
+        this.destination = destination;
+    }
 
 
 }

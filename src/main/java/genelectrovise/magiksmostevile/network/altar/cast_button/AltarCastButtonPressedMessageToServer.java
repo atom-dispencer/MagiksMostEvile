@@ -23,34 +23,38 @@ import net.minecraft.util.ResourceLocation;
  */
 public class AltarCastButtonPressedMessageToServer {
 
-  private static boolean messageIsValid;
+    private static boolean messageIsValid;
 
-  private ResourceLocation ritualResourceLocation;
+    private ResourceLocation ritualResourceLocation;
 
-  public AltarCastButtonPressedMessageToServer(ResourceLocation ritualResourceLocation) {
-    messageIsValid = true;
+    public AltarCastButtonPressedMessageToServer(ResourceLocation ritualResourceLocation) {
+        messageIsValid = true;
 
-    this.ritualResourceLocation = ritualResourceLocation;
-  }
+        this.ritualResourceLocation = ritualResourceLocation;
+    }
 
-  public void encode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.debug("Encoding AltarCastButtonPressedMessageToServer.");
+    public static AltarCastButtonPressedMessageToServer decode(PacketBuffer buffer) {
+        MagiksMostEvile.LOGGER.debug("Decoding AltarCastButtonPressedMessageToServer");
 
-    buffer.writeResourceLocation(ritualResourceLocation);
-  }
+        ResourceLocation ritualResourceLocation = buffer.readResourceLocation();
 
-  public static AltarCastButtonPressedMessageToServer decode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.debug("Decoding AltarCastButtonPressedMessageToServer");
+        return new AltarCastButtonPressedMessageToServer(ritualResourceLocation);
+    }
 
-    ResourceLocation ritualResourceLocation = buffer.readResourceLocation();
+    public void encode(PacketBuffer buffer) {
+        MagiksMostEvile.LOGGER.debug("Encoding AltarCastButtonPressedMessageToServer.");
 
-    return new AltarCastButtonPressedMessageToServer(ritualResourceLocation);
-  }
+        buffer.writeResourceLocation(ritualResourceLocation);
+    }
 
-  public boolean isValid() { return messageIsValid; }
+    public boolean isValid() {
+        return messageIsValid;
+    }
 
-  /**
-   * @return the ritualName
-   */
-  public ResourceLocation getRitualResourceLocation() { return ritualResourceLocation; }
+    /**
+     * @return the ritualName
+     */
+    public ResourceLocation getRitualResourceLocation() {
+        return ritualResourceLocation;
+    }
 }

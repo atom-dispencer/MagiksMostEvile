@@ -1,8 +1,8 @@
 {
-	"forge_marker": 1,
-	"variants": {
-		"": {
-			"model": "magiksmostevile:block/amethyst_ore/amethyst_ore_end"
-		}
-	}
+  "forge_marker": 1,
+  "variants": {
+    "": {
+      "model": "magiksmostevile:block/amethyst_ore/amethyst_ore_end"
+    }
+  }
 }

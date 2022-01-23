@@ -1,6 +1,6 @@
 {
-   "parent": "item/generated",
-   "textures": {
-       "layer0": "magiksmostevile:items/tabulae/blank_signum"
-   }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "magiksmostevile:items/tabulae/blank_signum"
+  }
 }

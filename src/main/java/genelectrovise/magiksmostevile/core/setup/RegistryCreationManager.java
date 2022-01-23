@@ -21,9 +21,9 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 public class RegistryCreationManager {
 
-  public void create() {
-    new RegistryBuilder<Ritual>().setType(Ritual.class)
-        .setName(new ResourceLocation(MagiksMostEvile.MODID, "ritual")).create();
-  }
+    public void create() {
+        new RegistryBuilder<Ritual>().setType(Ritual.class)
+                .setName(new ResourceLocation(MagiksMostEvile.MODID, "ritual")).create();
+    }
 
 }

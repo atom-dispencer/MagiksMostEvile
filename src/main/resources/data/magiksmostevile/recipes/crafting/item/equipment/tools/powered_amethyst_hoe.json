@@ -1,19 +1,19 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "aa ",
-        " s ",
-        " s "
-    ],
-    "key": {
-        "a": {
-            "item": "magiksmostevile:powered_amethyst"
-        },
-        "s": {
-            "item": "minecraft:stick"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aa ",
+    " s ",
+    " s "
+  ],
+  "key": {
+    "a": {
+      "item": "magiksmostevile:powered_amethyst"
     },
-    "result": {
-        "item": "magiksmostevile:powered_amethyst_hoe"
+    "s": {
+      "item": "minecraft:stick"
     }
+  },
+  "result": {
+    "item": "magiksmostevile:powered_amethyst_hoe"
+  }
 }

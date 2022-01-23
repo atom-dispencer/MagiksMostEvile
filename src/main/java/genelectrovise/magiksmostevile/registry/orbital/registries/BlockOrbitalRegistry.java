@@ -33,58 +33,57 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * {@link Blocks}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class BlockOrbitalRegistry implements IOrbitalRegistry {
 
-  public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MagiksMostEvile.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MagiksMostEvile.MODID);
 
-  // =========BLOCKS======================================================================================================================
-  public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block", () -> new Block(
-      Block.Properties.of(Material.GLASS, MaterialColor.COLOR_MAGENTA).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).lightLevel((state) -> 5 / 16).strength(3F, 3F)));
-  public static final RegistryObject<Block> LEAD_BLOCK =
-      BLOCKS.register("lead_block", () -> new Block(Block.Properties.of(Material.METAL, MaterialColor.METAL).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).strength(5F, 6F)));
+    // =========BLOCKS======================================================================================================================
+    public static final RegistryObject<Block> AMETHYST_BLOCK = BLOCKS.register("amethyst_block", () -> new Block(
+            Block.Properties.of(Material.GLASS, MaterialColor.COLOR_MAGENTA).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).lightLevel((state) -> 5 / 16).strength(3F, 3F)));
+    public static final RegistryObject<Block> LEAD_BLOCK =
+            BLOCKS.register("lead_block", () -> new Block(Block.Properties.of(Material.METAL, MaterialColor.METAL).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).strength(5F, 6F)));
 
-  // Amethyst Ore
-  public static final RegistryObject<Block> AMETHYST_ORE_OVERWORLD = BLOCKS.register("amethyst_ore_overworld",
-      () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(1.5F, 6F).requiresCorrectToolForDrops()));
-  public static final RegistryObject<Block> AMETHYST_ORE_NETHER = BLOCKS.register("amethyst_ore_nether",
-      () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.NETHER).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(0.4F, 0.4F).requiresCorrectToolForDrops()));
-  public static final RegistryObject<Block> AMETHYST_ORE_END = BLOCKS.register("amethyst_ore_end",
-      () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(3F, 9F).requiresCorrectToolForDrops()));
+    // Amethyst Ore
+    public static final RegistryObject<Block> AMETHYST_ORE_OVERWORLD = BLOCKS.register("amethyst_ore_overworld",
+            () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(1.5F, 6F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> AMETHYST_ORE_NETHER = BLOCKS.register("amethyst_ore_nether",
+            () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.NETHER).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(0.4F, 0.4F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> AMETHYST_ORE_END = BLOCKS.register("amethyst_ore_end",
+            () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(3F, 9F).requiresCorrectToolForDrops()));
 
-  // Lead Ore
-  public static final RegistryObject<Block> LEAD_ORE_OVERWORLD = BLOCKS.register("lead_ore_overworld",
-      () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(1.5F, 6F).requiresCorrectToolForDrops()));
-  public static final RegistryObject<Block> LEAD_ORE_NETHER = BLOCKS.register("lead_ore_nether",
-      () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.NETHER).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(0.4F, 0.4F).requiresCorrectToolForDrops()));
-  public static final RegistryObject<Block> LEAD_ORE_END = BLOCKS.register("lead_ore_end",
-      () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(3F, 9F).requiresCorrectToolForDrops()));
+    // Lead Ore
+    public static final RegistryObject<Block> LEAD_ORE_OVERWORLD = BLOCKS.register("lead_ore_overworld",
+            () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(1.5F, 6F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> LEAD_ORE_NETHER = BLOCKS.register("lead_ore_nether",
+            () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.NETHER).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(0.4F, 0.4F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> LEAD_ORE_END = BLOCKS.register("lead_ore_end",
+            () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(3F, 9F).requiresCorrectToolForDrops()));
 
-  // Tile entities
-  public static final RegistryObject<Block> AMETHYST_CRYSTAL = BLOCKS.register("amethyst_crystal",
-      () -> new AmethystCrystalBlock(Block.Properties.of(Material.GLASS, MaterialColor.COLOR_MAGENTA).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).strength(2F, 10F)));
-  public static final RegistryObject<Block> ALTAR =
-      BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.of(Material.GLASS, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.WOOL).strength(6F, 10F)));
-  public static final RegistryObject<Block> INSCRIPTION_TABLE =
-      BLOCKS.register("inscription_table", () -> new InscriptionTableBlock(Block.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD)));
-  public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(Block.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    // Tile entities
+    public static final RegistryObject<Block> AMETHYST_CRYSTAL = BLOCKS.register("amethyst_crystal",
+            () -> new AmethystCrystalBlock(Block.Properties.of(Material.GLASS, MaterialColor.COLOR_MAGENTA).harvestTool(ToolType.PICKAXE).sound(SoundType.GLASS).strength(2F, 10F)));
+    public static final RegistryObject<Block> ALTAR =
+            BLOCKS.register("altar", () -> new AltarBlock(Block.Properties.of(Material.GLASS, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.WOOL).strength(6F, 10F)));
+    public static final RegistryObject<Block> INSCRIPTION_TABLE =
+            BLOCKS.register("inscription_table", () -> new InscriptionTableBlock(Block.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(Block.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
 
-  @Override
-  public int priority() {
-    return 1;
-  }
+    @Override
+    public int priority() {
+        return 1;
+    }
 
-  @Override
-  public void initialise() {
-    OrbitalRegistryGenerator.registerDeferredRegister(BLOCKS);
-  }
+    @Override
+    public void initialise() {
+        OrbitalRegistryGenerator.registerDeferredRegister(BLOCKS);
+    }
 
-  @Override
-  public String name() {
-    return "blocks";
-  }
+    @Override
+    public String name() {
+        return "blocks";
+    }
 
 }

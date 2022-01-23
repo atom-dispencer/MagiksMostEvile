@@ -5,8 +5,8 @@ import org.mockito.MockitoAnnotations;
 
 public class PixieCourierTest {
 
-  @BeforeEach
-  void beforeEach() {
-    MockitoAnnotations.openMocks(this);
-  }
+    @BeforeEach
+    void beforeEach() {
+        MockitoAnnotations.openMocks(this);
+    }
 }

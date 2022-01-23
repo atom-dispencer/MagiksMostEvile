@@ -1,19 +1,19 @@
-/*******************************************************************************
+/**
  * Magiks Most Evile Copyright (c) 2020, 2021 GenElectrovise
- *
+ * <p>
  * This file is part of Magiks Most Evile. Magiks Most Evile is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any later version.
- *
+ * <p>
  * Magiks Most Evile is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
- *******************************************************************************/
+ */
 /**
- * 
+ *
  */
 package genelectrovise.magiksmostevile.network.particle;
 
@@ -39,46 +39,45 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 @Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ParticleNetworkingManager {
 
-  // Glyph
-  public static SimpleChannel CEnderParticle;
-  public static final ResourceLocation RLEnderParticle =
-      new ResourceLocation(MagiksMostEvile.MODID, "ender_particle");
-  public static final String ENDER_PARTICLE_MESSAGE_PROTOCOL_VERSION = "1.0";
-  public static final int ENDER_PARTICLE_TO_SERVER = 11;
-  public static final int ENDER_PARTICLE_TO_CLIENT = 12;
+    public static final ResourceLocation RLEnderParticle =
+            new ResourceLocation(MagiksMostEvile.MODID, "ender_particle");
+    public static final String ENDER_PARTICLE_MESSAGE_PROTOCOL_VERSION = "1.0";
+    public static final int ENDER_PARTICLE_TO_SERVER = 11;
+    public static final int ENDER_PARTICLE_TO_CLIENT = 12;
+    public static final ResourceLocation RLEnergyTransfer =
+            new ResourceLocation(MagiksMostEvile.MODID, "energy_transfer");
+    public static final String TRANSFER_ENERGY_MESSAGE_PROTOCOL_VERSION = "1.0";
+    public static final int TRANSFER_ENERGY_TO_SERVER = 11;
+    public static final int TRANSFER_ENERGY_TO_CLIENT = 12;
+    // Glyph
+    public static SimpleChannel CEnderParticle;
+    // Energy Tranfer
+    public static SimpleChannel CTransferEnergy;
 
-  // Energy Tranfer
-  public static SimpleChannel CTransferEnergy;
-  public static final ResourceLocation RLEnergyTransfer =
-      new ResourceLocation(MagiksMostEvile.MODID, "energy_transfer");
-  public static final String TRANSFER_ENERGY_MESSAGE_PROTOCOL_VERSION = "1.0";
-  public static final int TRANSFER_ENERGY_TO_SERVER = 11;
-  public static final int TRANSFER_ENERGY_TO_CLIENT = 12;
+    @SubscribeEvent
+    public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
+        MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by GlyphNetworkManager!");
+        CEnderParticle = NetworkRegistry.newSimpleChannel(RLEnderParticle,
+                () -> ENDER_PARTICLE_MESSAGE_PROTOCOL_VERSION,
+                EnderParticleMessageHandlerOnClient::isProtocolAccepted,
+                EnderParticleMessageHandlerOnServer::isProtocolAccepted);
+        CEnderParticle.registerMessage(ENDER_PARTICLE_TO_SERVER, EnderParticleMessageToServer.class,
+                EnderParticleMessageToServer::encode, EnderParticleMessageToServer::decode,
+                EnderParticleMessageHandlerOnServer::onMessageReceived);
+        CEnderParticle.registerMessage(ENDER_PARTICLE_TO_CLIENT, EnderParticleMessageToClient.class,
+                EnderParticleMessageToClient::encode, EnderParticleMessageToClient::decode,
+                EnderParticleMessageHandlerOnClient::onMessageReceived);
 
-  @SubscribeEvent
-  public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
-    MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by GlyphNetworkManager!");
-    CEnderParticle = NetworkRegistry.newSimpleChannel(RLEnderParticle,
-        () -> ENDER_PARTICLE_MESSAGE_PROTOCOL_VERSION,
-        EnderParticleMessageHandlerOnClient::isProtocolAccepted,
-        EnderParticleMessageHandlerOnServer::isProtocolAccepted);
-    CEnderParticle.registerMessage(ENDER_PARTICLE_TO_SERVER, EnderParticleMessageToServer.class,
-        EnderParticleMessageToServer::encode, EnderParticleMessageToServer::decode,
-        EnderParticleMessageHandlerOnServer::onMessageReceived);
-    CEnderParticle.registerMessage(ENDER_PARTICLE_TO_CLIENT, EnderParticleMessageToClient.class,
-        EnderParticleMessageToClient::encode, EnderParticleMessageToClient::decode,
-        EnderParticleMessageHandlerOnClient::onMessageReceived);
-
-    CTransferEnergy = NetworkRegistry.newSimpleChannel(RLEnergyTransfer,
-        () -> TRANSFER_ENERGY_MESSAGE_PROTOCOL_VERSION,
-        TransferEnergyMessageHandlerOnClient::isProtocolAccepted,
-        TransferEnergyMessageHandlerOnServer::isProtocolAccepted);
-    CTransferEnergy.registerMessage(TRANSFER_ENERGY_TO_SERVER, TransferEnergyMessageToServer.class,
-        TransferEnergyMessageToServer::encode, TransferEnergyMessageToServer::decode,
-        TransferEnergyMessageHandlerOnServer::onMessageReceived);
-    CTransferEnergy.registerMessage(TRANSFER_ENERGY_TO_CLIENT, TransferEnergyMessageToClient.class,
-        TransferEnergyMessageToClient::encode, TransferEnergyMessageToClient::decode,
-        TransferEnergyMessageHandlerOnClient::onMessageReceived);
-  }
+        CTransferEnergy = NetworkRegistry.newSimpleChannel(RLEnergyTransfer,
+                () -> TRANSFER_ENERGY_MESSAGE_PROTOCOL_VERSION,
+                TransferEnergyMessageHandlerOnClient::isProtocolAccepted,
+                TransferEnergyMessageHandlerOnServer::isProtocolAccepted);
+        CTransferEnergy.registerMessage(TRANSFER_ENERGY_TO_SERVER, TransferEnergyMessageToServer.class,
+                TransferEnergyMessageToServer::encode, TransferEnergyMessageToServer::decode,
+                TransferEnergyMessageHandlerOnServer::onMessageReceived);
+        CTransferEnergy.registerMessage(TRANSFER_ENERGY_TO_CLIENT, TransferEnergyMessageToClient.class,
+                TransferEnergyMessageToClient::encode, TransferEnergyMessageToClient::decode,
+                TransferEnergyMessageHandlerOnClient::onMessageReceived);
+    }
 
 }

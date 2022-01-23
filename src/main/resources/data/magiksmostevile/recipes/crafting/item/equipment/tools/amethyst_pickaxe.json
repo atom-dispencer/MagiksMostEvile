@@ -1,19 +1,19 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "aaa",
-        " s ",
-        " s "
-    ],
-    "key": {
-        "a": {
-            "item": "magiksmostevile:amethyst"
-        },
-        "s": {
-            "item": "minecraft:stick"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    " s ",
+    " s "
+  ],
+  "key": {
+    "a": {
+      "item": "magiksmostevile:amethyst"
     },
-    "result": {
-        "item": "magiksmostevile:amethyst_pickaxe"
+    "s": {
+      "item": "minecraft:stick"
     }
+  },
+  "result": {
+    "item": "magiksmostevile:amethyst_pickaxe"
+  }
 }

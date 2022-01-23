@@ -30,57 +30,64 @@ import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * {@link FurnaceContainer}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class InscriptionTableContainer extends CommonContainer {
 
-  private InscriptionTableTileEntity inscriptionTable;
-  private PlayerInventory playerInventory;
+    private InscriptionTableTileEntity inscriptionTable;
+    private PlayerInventory playerInventory;
 
-  public InscriptionTableContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
-    this(windowId, inv, new ItemStackHandler(4), (InscriptionTableTileEntity) Minecraft.getInstance().level.getBlockEntity(data.readBlockPos()));
-  }
-
-  public InscriptionTableContainer(int windowId, PlayerInventory inv, IItemHandler handler, InscriptionTableTileEntity inscriptionTable) {
-    super(ContainerOrbitalRegistry.INSCRIPTION_TABLE_CONTAINER.get(), windowId, 1);
-
-    setInscriptionTable(inscriptionTable);
-    setPlayerInventory(inv);
-
-    addSlots(inv, handler);
-  }
-
-  private void addSlots(PlayerInventory playerInventory, IItemHandler handler) {
-
-    // Player inventory
-    for (int i = 0; i < 3; ++i) {
-      for (int j = 0; j < 9; ++j) {
-        this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-      }
+    public InscriptionTableContainer(int windowId, PlayerInventory inv, PacketBuffer data) {
+        this(windowId, inv, new ItemStackHandler(4), (InscriptionTableTileEntity) Minecraft.getInstance().level.getBlockEntity(data.readBlockPos()));
     }
 
-    for (int k = 0; k < 9; ++k) {
-      this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
+    public InscriptionTableContainer(int windowId, PlayerInventory inv, IItemHandler handler, InscriptionTableTileEntity inscriptionTable) {
+        super(ContainerOrbitalRegistry.INSCRIPTION_TABLE_CONTAINER.get(), windowId, 1);
+
+        setInscriptionTable(inscriptionTable);
+        setPlayerInventory(inv);
+
+        addSlots(inv, handler);
     }
 
-    // Inscription table
-    addSlot(new SlotItemHandler(handler, 0, 137, 33));
-  }
+    private void addSlots(PlayerInventory playerInventory, IItemHandler handler) {
 
-  // Get and set
+        // Player inventory
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+            }
+        }
 
-  public InscriptionTableTileEntity getInscriptionTable() { return inscriptionTable; }
+        for (int k = 0; k < 9; ++k) {
+            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
+        }
 
-  public PlayerInventory getPlayerInventory() { return playerInventory; }
+        // Inscription table
+        addSlot(new SlotItemHandler(handler, 0, 137, 33));
+    }
 
-  public void setInscriptionTable(InscriptionTableTileEntity inscriptionTable) { this.inscriptionTable = inscriptionTable; }
+    // Get and set
 
-  public void setPlayerInventory(PlayerInventory playerInventory) { this.playerInventory = playerInventory; }
+    public InscriptionTableTileEntity getInscriptionTable() {
+        return inscriptionTable;
+    }
 
-  public void buttonPressed(ResourceLocation signumName) {
-    InscriptionTableNetworkingManager.CButtonPressed.sendToServer(new ButtonPressedMessageToServer(signumName));
-  }
+    public void setInscriptionTable(InscriptionTableTileEntity inscriptionTable) {
+        this.inscriptionTable = inscriptionTable;
+    }
+
+    public PlayerInventory getPlayerInventory() {
+        return playerInventory;
+    }
+
+    public void setPlayerInventory(PlayerInventory playerInventory) {
+        this.playerInventory = playerInventory;
+    }
+
+    public void buttonPressed(ResourceLocation signumName) {
+        InscriptionTableNetworkingManager.CButtonPressed.sendToServer(new ButtonPressedMessageToServer(signumName));
+    }
 
 }

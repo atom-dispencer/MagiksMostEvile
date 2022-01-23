@@ -14,13 +14,8 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.item.spawn_egg;
 
-import java.util.Objects;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.block.*;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
@@ -49,155 +44,157 @@ import net.minecraft.world.spawner.AbstractSpawner;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import java.util.Objects;
+
 /**
+ * @author GenElectrovise 4 Jun 2020
  * @see SpawnEggItem
  * @see DispenserTileEntity
  * @see DispenserBlock
- * @author GenElectrovise 4 Jun 2020
  */
 @EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public abstract class EvileSpawnEgg extends Item {
 
-  /**
-   * Should mean that entities spawn when the egg is fired from a dispenser.
-   */
-  public static final IDispenseItemBehavior DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
+    /**
+     * Should mean that entities spawn when the egg is fired from a dispenser.
+     */
+    public static final IDispenseItemBehavior DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior() {
+
+        /**
+         * Dispense the specified stack, play the dispense sound and spawn particles.
+         */
+        @Override
+        public ItemStack execute(IBlockSource source, ItemStack stack) {
+            try {
+                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+                EntityType<?> entitytype = ((EvileSpawnEgg) stack.getItem()).getEntityType();
+                entitytype.spawn(source.getLevel(), stack, (PlayerEntity) null,
+                        source.getPos().relative(direction), SpawnReason.DISPENSER,
+                        direction != Direction.UP, false);
+                stack.shrink(1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return stack;
+        }
+
+    };
+
+    public EvileSpawnEgg(Item.Properties properties) {
+        super(properties);
+
+        DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
+    }
 
     /**
-     * Dispense the specified stack, play the dispense sound and spawn particles.
+     * Called when this item is used when targetting a Block
      */
-    @Override
-    public ItemStack execute(IBlockSource source, ItemStack stack) {
-      try {
-        Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-        EntityType<?> entitytype = ((EvileSpawnEgg) stack.getItem()).getEntityType();
-        entitytype.spawn(source.getLevel(), stack, (PlayerEntity) null,
-            source.getPos().relative(direction), SpawnReason.DISPENSER,
-            direction != Direction.UP, false);
-        stack.shrink(1);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-      return stack;
-    }
+    public ActionResultType onItemUse(ItemUseContext context) {
+        World world = context.getLevel();
 
-  };
-
-  public EvileSpawnEgg(Item.Properties properties) {
-    super(properties);
-
-    DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
-  }
-
-  /**
-   * Called when this item is used when targetting a Block
-   */
-  public ActionResultType onItemUse(ItemUseContext context) {
-    World world = context.getLevel();
-
-    // If client, return
-    if (world.isClientSide) {
-      return ActionResultType.SUCCESS;
-    }
-
-    // If server
-    else {
-      ItemStack itemstack = context.getItemInHand();
-      BlockPos blockpos = context.getClickedPos();
-      Direction direction = context.getClickedFace();
-      BlockState blockstate = world.getBlockState(blockpos);
-      Block block = blockstate.getBlock();
-      if (block == Blocks.SPAWNER) {
-        TileEntity tileentity = world.getBlockEntity(blockpos);
-        if (tileentity instanceof MobSpawnerTileEntity) {
-          AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
-          EntityType<?> entitytype1 = this.getEntityType();
-          abstractspawner.setEntityId(entitytype1);
-          tileentity.setChanged();
-          world.sendBlockUpdated(blockpos, blockstate, blockstate, 3);
-          itemstack.shrink(1);
-          return ActionResultType.SUCCESS;
+        // If client, return
+        if (world.isClientSide) {
+            return ActionResultType.SUCCESS;
         }
-      }
 
-      BlockPos blockpos1;
-      if (blockstate.getCollisionShape(world, blockpos).isEmpty()) {
-        blockpos1 = blockpos;
-      } else {
-        blockpos1 = blockpos.relative(direction);
-      }
-
-      EntityType<?> entitytype = this.getEntityType();
-      if (entitytype.spawn((ServerWorld) world, itemstack, context.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG, true, (!Objects.equals(blockpos, blockpos1) && direction == Direction.UP)) != null) {
-        itemstack.shrink(1);
-      }
-
-      return ActionResultType.SUCCESS;
-    }
-  }
-
-  /**
-   * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a
-   * Block, see {@link #onItemUse}.
-   */
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn,
-      Hand handIn) {
-
-    // Hand
-    ItemStack itemstack = playerIn.getItemInHand(handIn);
-
-    // What are they looking at
-    RayTraceResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
-
-    // If is not a block return pass
-    if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
-      return ActionResult.pass(itemstack);
-    }
-    // Otherwise give the client success
-    else if (worldIn.isClientSide) {
-      return ActionResult.success(itemstack);
-    }
-    // And give the server spawning logic
-    else {
-      BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
-      BlockPos blockpos = blockraytraceresult.getBlockPos();
-
-      // If not a fluid
-      if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
-        return ActionResult.pass(itemstack);
-      }
-      // Can the targetted block be modified by the player? Can the player edit the targetted face
-      // with this itemstack?
-      else if (worldIn.mayInteract(playerIn, blockpos)
-          && playerIn.mayUseItemAt(blockpos, blockraytraceresult.getDirection(), itemstack)) {
-
-        // Type to spawn
-        EntityType<?> entitytype = this.getEntityType();
-
-        // If null spawned, pass
-        if (entitytype.spawn((ServerWorld) worldIn, itemstack, playerIn, blockpos,
-            SpawnReason.SPAWN_EGG, false, false) == null) {
-          return ActionResult.pass(itemstack);
-        }
-        // Else shrink the stack if the player is not creative
+        // If server
         else {
-          if (!playerIn.abilities.mayfly) {
-            itemstack.shrink(1);
-          }
+            ItemStack itemstack = context.getItemInHand();
+            BlockPos blockpos = context.getClickedPos();
+            Direction direction = context.getClickedFace();
+            BlockState blockstate = world.getBlockState(blockpos);
+            Block block = blockstate.getBlock();
+            if (block == Blocks.SPAWNER) {
+                TileEntity tileentity = world.getBlockEntity(blockpos);
+                if (tileentity instanceof MobSpawnerTileEntity) {
+                    AbstractSpawner abstractspawner = ((MobSpawnerTileEntity) tileentity).getSpawner();
+                    EntityType<?> entitytype1 = this.getEntityType();
+                    abstractspawner.setEntityId(entitytype1);
+                    tileentity.setChanged();
+                    world.sendBlockUpdated(blockpos, blockstate, blockstate, 3);
+                    itemstack.shrink(1);
+                    return ActionResultType.SUCCESS;
+                }
+            }
 
-          // Record usage and succeed
-          playerIn.awardStat(Stats.ITEM_USED.get(this));
-          return ActionResult.success(itemstack);
+            BlockPos blockpos1;
+            if (blockstate.getCollisionShape(world, blockpos).isEmpty()) {
+                blockpos1 = blockpos;
+            } else {
+                blockpos1 = blockpos.relative(direction);
+            }
+
+            EntityType<?> entitytype = this.getEntityType();
+            if (entitytype.spawn((ServerWorld) world, itemstack, context.getPlayer(), blockpos1, SpawnReason.SPAWN_EGG, true, (!Objects.equals(blockpos, blockpos1) && direction == Direction.UP)) != null) {
+                itemstack.shrink(1);
+            }
+
+            return ActionResultType.SUCCESS;
         }
-      }
-
-      // If the block was not modifiable, fail
-      else {
-        return ActionResult.fail(itemstack);
-      }
     }
-  }
 
-  public abstract EntityType<?> getEntityType();
+    /**
+     * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a
+     * Block, see {@link #onItemUse}.
+     */
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn,
+                                                    Hand handIn) {
+
+        // Hand
+        ItemStack itemstack = playerIn.getItemInHand(handIn);
+
+        // What are they looking at
+        RayTraceResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
+
+        // If is not a block return pass
+        if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
+            return ActionResult.pass(itemstack);
+        }
+        // Otherwise give the client success
+        else if (worldIn.isClientSide) {
+            return ActionResult.success(itemstack);
+        }
+        // And give the server spawning logic
+        else {
+            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
+            BlockPos blockpos = blockraytraceresult.getBlockPos();
+
+            // If not a fluid
+            if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
+                return ActionResult.pass(itemstack);
+            }
+            // Can the targetted block be modified by the player? Can the player edit the targetted face
+            // with this itemstack?
+            else if (worldIn.mayInteract(playerIn, blockpos)
+                    && playerIn.mayUseItemAt(blockpos, blockraytraceresult.getDirection(), itemstack)) {
+
+                // Type to spawn
+                EntityType<?> entitytype = this.getEntityType();
+
+                // If null spawned, pass
+                if (entitytype.spawn((ServerWorld) worldIn, itemstack, playerIn, blockpos,
+                        SpawnReason.SPAWN_EGG, false, false) == null) {
+                    return ActionResult.pass(itemstack);
+                }
+                // Else shrink the stack if the player is not creative
+                else {
+                    if (!playerIn.abilities.mayfly) {
+                        itemstack.shrink(1);
+                    }
+
+                    // Record usage and succeed
+                    playerIn.awardStat(Stats.ITEM_USED.get(this));
+                    return ActionResult.success(itemstack);
+                }
+            }
+
+            // If the block was not modifiable, fail
+            else {
+                return ActionResult.fail(itemstack);
+            }
+        }
+    }
+
+    public abstract EntityType<?> getEntityType();
 
 }

@@ -19,11 +19,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 public class EvileItemGroup {
-  public static final ItemGroup MAGIKS_MOST_EVILE = new ItemGroup("itemgroup_evile") {
+    public static final ItemGroup MAGIKS_MOST_EVILE = new ItemGroup("itemgroup_evile") {
 
-    @Override
-    public ItemStack makeIcon() {
-      return new ItemStack(ItemOrbitalRegistry.AMETHYST.get());
-    }
-  };
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(ItemOrbitalRegistry.AMETHYST.get());
+        }
+    };
 }

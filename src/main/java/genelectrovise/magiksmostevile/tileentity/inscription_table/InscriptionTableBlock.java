@@ -33,41 +33,40 @@ import net.minecraft.world.World;
 
 /**
  * {@link LoomBlock}
- * 
- * @author GenElectrovise
  *
+ * @author GenElectrovise
  */
 public class InscriptionTableBlock extends HorizontalBlock {
 
-  public InscriptionTableBlock(Properties properties) {
-    super(properties);
-  }
-
-  @Override
-  public boolean hasTileEntity(BlockState state) {
-    return true;
-  }
-
-  @Override
-  public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-    return new InscriptionTableTileEntity();
-  }
-
-  public BlockState getStateForPlacement(BlockItemUseContext context) {
-    return this.defaultBlockState().setValue(FACING, context.getClickedFace().getOpposite());
-  }
-
-  protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-    builder.add(FACING);
-  }
-
-  public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
-    if (!worldIn.isClientSide) {
-      final ICustomContainer tileEntity = (ICustomContainer) worldIn.getBlockEntity(pos);
-      tileEntity.openGUI((ServerPlayerEntity) player);
+    public InscriptionTableBlock(Properties properties) {
+        super(properties);
     }
 
-    return ActionResultType.SUCCESS;
-  }
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new InscriptionTableTileEntity();
+    }
+
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getClickedFace().getOpposite());
+    }
+
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult rayTraceResult) {
+        if (!worldIn.isClientSide) {
+            final ICustomContainer tileEntity = (ICustomContainer) worldIn.getBlockEntity(pos);
+            tileEntity.openGUI((ServerPlayerEntity) player);
+        }
+
+        return ActionResultType.SUCCESS;
+    }
 
 }

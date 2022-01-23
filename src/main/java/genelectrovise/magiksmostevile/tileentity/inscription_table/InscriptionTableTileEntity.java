@@ -40,76 +40,78 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 public class InscriptionTableTileEntity extends TileEntity implements ICustomContainer {
 
-  // IItemHandler
-  private ItemStackHandler slot;
-  protected final LazyOptional<IItemHandler> slot_handler = LazyOptional.of(() -> slot);
-  protected final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot));
-
-  public InscriptionTableTileEntity() {
-    super(TileEntityOrbitalRegistry.TILE_ENTITY_INSCRIPTION_TABLE.get());
-
-    slot = new ItemStackHandler() {
-      @Override
-      protected void onContentsChanged(int slot) {
-        setChanged();
-      }
-    };
-  }
-
-  @Override
-  public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
-
     // IItemHandler
-    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-      this.setChanged();
+    private ItemStackHandler slot;
+    protected final LazyOptional<IItemHandler> slot_handler = LazyOptional.of(() -> slot);
+    protected final LazyOptional<IItemHandler> allSlots = LazyOptional.of(() -> new CombinedInvWrapper(slot));
 
-      // if the block at myself isn't myself, allow full access (Block Broken)
-      if (level != null && level.getBlockState(worldPosition).getBlock() != this.getBlockState().getBlock()) {
-        return allSlots.cast();
-      }
-      if (side == null) {
-        return allSlots.cast();
-      }
+    public InscriptionTableTileEntity() {
+        super(TileEntityOrbitalRegistry.TILE_ENTITY_INSCRIPTION_TABLE.get());
+
+        slot = new ItemStackHandler() {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+            }
+        };
     }
 
-    return super.getCapability(capability, side);
-  }
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
 
-  @Override
-  public void setRemoved() {
-    slot_handler.invalidate();
-    allSlots.invalidate();
-    super.setRemoved();
-  }
+        // IItemHandler
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            this.setChanged();
 
-  @Override
-  public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
-    String exceptionMessage = "InscriptionTableTileEntity found null allSlots! allSlots.orElseThrow(Exception) found null, so threw. id=" + id + " player=" + player.getName().getString();
-    return new InscriptionTableContainer(id, playerInv, allSlots.orElseThrow(() -> new NullPointerException(exceptionMessage)), this);
-  }
+            // if the block at myself isn't myself, allow full access (Block Broken)
+            if (level != null && level.getBlockState(worldPosition).getBlock() != this.getBlockState().getBlock()) {
+                return allSlots.cast();
+            }
+            if (side == null) {
+                return allSlots.cast();
+            }
+        }
 
-  @Override
-  public void openGUI(ServerPlayerEntity player) {
-    NetworkHooks.openGui(player, this, getBlockPos());
-  }
+        return super.getCapability(capability, side);
+    }
 
-  @Override
-  public ITextComponent getDisplayName() { return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.inscription_table"); }
+    @Override
+    public void setRemoved() {
+        slot_handler.invalidate();
+        allSlots.invalidate();
+        super.setRemoved();
+    }
 
-  public void recipe(ResourceLocation signumName) {
-    Signum signum = Signa.SIGNA.get(signumName);
+    @Override
+    public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
+        String exceptionMessage = "InscriptionTableTileEntity found null allSlots! allSlots.orElseThrow(Exception) found null, so threw. id=" + id + " player=" + player.getName().getString();
+        return new InscriptionTableContainer(id, playerInv, allSlots.orElseThrow(() -> new NullPointerException(exceptionMessage)), this);
+    }
 
-    slot_handler.ifPresent((itemHandler) -> {
+    @Override
+    public void openGUI(ServerPlayerEntity player) {
+        NetworkHooks.openGui(player, this, getBlockPos());
+    }
 
-      ItemStack stackInSlot = itemHandler.getStackInSlot(0).getStack();
+    @Override
+    public ITextComponent getDisplayName() {
+        return new TranslationTextComponent(MagiksMostEvile.MODID + ":container.inscription_table");
+    }
 
-      if (stackInSlot.getItem() == ItemOrbitalRegistry.BLANK_SIGNUM.get()) {
-        itemHandler.extractItem(0, 64, false);
-        itemHandler.insertItem(0, new ItemStack(signum.getItem().get(), 1), false);
-      }
-    });
+    public void recipe(ResourceLocation signumName) {
+        Signum signum = Signa.SIGNA.get(signumName);
 
-  }
+        slot_handler.ifPresent((itemHandler) -> {
+
+            ItemStack stackInSlot = itemHandler.getStackInSlot(0).getStack();
+
+            if (stackInSlot.getItem() == ItemOrbitalRegistry.BLANK_SIGNUM.get()) {
+                itemHandler.extractItem(0, 64, false);
+                itemHandler.insertItem(0, new ItemStack(signum.getItem().get(), 1), false);
+            }
+        });
+
+    }
 }
 
 

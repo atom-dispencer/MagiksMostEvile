@@ -14,7 +14,6 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.registry;
 
-import static net.minecraft.util.RegistryKey.createRegistryKey;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.ritual.Ritual;
 import net.minecraft.util.RegistryKey;
@@ -23,9 +22,11 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryManager;
 
+import static net.minecraft.util.RegistryKey.createRegistryKey;
+
 public class EvileRegistries {
 
-  public static final IForgeRegistry<Ritual> RITUALS = RegistryManager.ACTIVE.getRegistry(Ritual.class);
-  public static final RegistryKey<Registry<Ritual>> RITUALS_KEY = createRegistryKey(new ResourceLocation(MagiksMostEvile.MODID, "ritual"));
+    public static final IForgeRegistry<Ritual> RITUALS = RegistryManager.ACTIVE.getRegistry(Ritual.class);
+    public static final RegistryKey<Registry<Ritual>> RITUALS_KEY = createRegistryKey(new ResourceLocation(MagiksMostEvile.MODID, "ritual"));
 
 }

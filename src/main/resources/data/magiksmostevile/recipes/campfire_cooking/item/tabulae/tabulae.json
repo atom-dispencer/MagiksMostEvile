@@ -1,11 +1,11 @@
 {
-    "type": "minecraft:campfire_cooking",
-    "ingredient": [
-        {
-            "tag": "magiksmostevile:tabulae"
-        }
-    ],
-    "result": {
-        "item": "magiksmostevile:blank_tabula"
+  "type": "minecraft:campfire_cooking",
+  "ingredient": [
+    {
+      "tag": "magiksmostevile:tabulae"
     }
+  ],
+  "result": {
+    "item": "magiksmostevile:blank_tabula"
+  }
 }

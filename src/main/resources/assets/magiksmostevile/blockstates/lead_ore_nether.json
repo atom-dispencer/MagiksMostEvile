@@ -1,8 +1,8 @@
 {
-	"forge_marker": 1,
-	"variants": {
-		"": {
-			"model": "magiksmostevile:block/lead_ore/lead_ore_nether"
-		}
-	}
+  "forge_marker": 1,
+  "variants": {
+    "": {
+      "model": "magiksmostevile:block/lead_ore/lead_ore_nether"
+    }
+  }
 }

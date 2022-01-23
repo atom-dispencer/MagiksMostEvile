@@ -34,52 +34,52 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityOrbitalRegistry implements IOrbitalRegistry {
 
-  public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MagiksMostEvile.MODID);
 
-  // =========MOBS====================================================================================================================
-  public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT =
-      ENTITIES.register("vampire_bat", () -> EntityType.Builder.of(VampireBatEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(0.5f, 0.5f).build("vampire_bat"));
-  public static final RegistryObject<Item> VAMPIRE_BAT_EGG =
-      ItemOrbitalRegistry.ITEMS.register("vampire_bat_egg", () -> new VampireBatSpawnEgg(new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE).stacksTo(64)));
+    // =========MOBS====================================================================================================================
+    public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT =
+            ENTITIES.register("vampire_bat", () -> EntityType.Builder.of(VampireBatEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(0.5f, 0.5f).build("vampire_bat"));
+    public static final RegistryObject<Item> VAMPIRE_BAT_EGG =
+            ItemOrbitalRegistry.ITEMS.register("vampire_bat_egg", () -> new VampireBatSpawnEgg(new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE).stacksTo(64)));
 
-  // =========BOSSES====================================================================================================================
-  public static final RegistryObject<EntityType<TomTheTrollEntity>> TOM_THE_TROLL =
-      ENTITIES.register("tom_the_troll", () -> EntityType.Builder.of(TomTheTrollEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(0.5f, 0.5f)
-          .build("tom_the_troll"));
+    // =========BOSSES====================================================================================================================
+    public static final RegistryObject<EntityType<TomTheTrollEntity>> TOM_THE_TROLL =
+            ENTITIES.register("tom_the_troll", () -> EntityType.Builder.of(TomTheTrollEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(0.5f, 0.5f)
+                    .build("tom_the_troll"));
 
-  public static final RegistryObject<EntityType<EggCaponeEntity>> EGG_CAPONE =
-      ENTITIES.register("egg_capone", () -> EntityType.Builder.of(EggCaponeEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(0.5f, 0.5f)
-          .build("egg_capone"));
+    public static final RegistryObject<EntityType<EggCaponeEntity>> EGG_CAPONE =
+            ENTITIES.register("egg_capone", () -> EntityType.Builder.of(EggCaponeEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(0.5f, 0.5f)
+                    .build("egg_capone"));
 
-  public static final RegistryObject<EntityType<KittyTheKrakenEntity>> THE_KRAKEN =
-      ENTITIES.register("kitty_the_kraken", () -> EntityType.Builder.of(KittyTheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(6f, 8f)
-          .build("kitty_the_kraken"));
+    public static final RegistryObject<EntityType<KittyTheKrakenEntity>> THE_KRAKEN =
+            ENTITIES.register("kitty_the_kraken", () -> EntityType.Builder.of(KittyTheKrakenEntity::new, EntityClassification.MONSTER).setTrackingRange(64).sized(6f, 8f)
+                    .build("kitty_the_kraken"));
 
-  public static final RegistryObject<EntityType<TinderAndCinderEntity>> TINDER_AND_CINDER =
-      ENTITIES.register("tinder_and_cinder", () -> EntityType.Builder.of(TinderAndCinderEntity::new, EntityClassification.MONSTER).fireImmune().setTrackingRange(64).sized(0.5f, 0.5f)
-          .build("tinder_and_cinder"));
+    public static final RegistryObject<EntityType<TinderAndCinderEntity>> TINDER_AND_CINDER =
+            ENTITIES.register("tinder_and_cinder", () -> EntityType.Builder.of(TinderAndCinderEntity::new, EntityClassification.MONSTER).fireImmune().setTrackingRange(64).sized(0.5f, 0.5f)
+                    .build("tinder_and_cinder"));
 
-  // =========MISC====================================================================================================================
-  public static final RegistryObject<EntityType<SquidMissileEntity>> SQUID_MISSILE =
-      ENTITIES.register("squid_missile", () -> EntityType.Builder.<SquidMissileEntity>of(SquidMissileEntity::new, EntityClassification.MISC).setTrackingRange(80).sized(1f, 1f).updateInterval(2) /*
-                                                                                                                                                                                                   * Update
-                                                                                                                                                                                                   * interval
-                                                                                                                                                                                                   */
-          .build("squid_missile"));
+    // =========MISC====================================================================================================================
+    public static final RegistryObject<EntityType<SquidMissileEntity>> SQUID_MISSILE =
+            ENTITIES.register("squid_missile", () -> EntityType.Builder.<SquidMissileEntity>of(SquidMissileEntity::new, EntityClassification.MISC).setTrackingRange(80).sized(1f, 1f).updateInterval(2) /*
+             * Update
+             * interval
+             */
+                    .build("squid_missile"));
 
-  @Override
-  public int priority() {
-    return 11;
-  }
+    @Override
+    public int priority() {
+        return 11;
+    }
 
-  @Override
-  public void initialise() {
-    OrbitalRegistryGenerator.registerDeferredRegister(ENTITIES);
-  }
+    @Override
+    public void initialise() {
+        OrbitalRegistryGenerator.registerDeferredRegister(ENTITIES);
+    }
 
-  @Override
-  public String name() {
-    return "entities";
-  }
+    @Override
+    public String name() {
+        return "entities";
+    }
 
 }

@@ -22,18 +22,20 @@ import net.minecraft.network.PacketBuffer;
  */
 public class EnderParticleMessageToServer {
 
-  protected EnderParticleMessageToServer() {
+    protected EnderParticleMessageToServer() {
 
-  }
+    }
 
-  public void encode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.debug("Encoding message to server");
-  }
+    public static EnderParticleMessageToServer decode(PacketBuffer buffer) {
+        MagiksMostEvile.LOGGER.debug("Decoding message to server");
+        return new EnderParticleMessageToServer();
+    }
 
-  public static EnderParticleMessageToServer decode(PacketBuffer buffer) {
-    MagiksMostEvile.LOGGER.debug("Decoding message to server");
-    return new EnderParticleMessageToServer();
-  }
+    public void encode(PacketBuffer buffer) {
+        MagiksMostEvile.LOGGER.debug("Encoding message to server");
+    }
 
-  public boolean isValid() { return true; }
+    public boolean isValid() {
+        return true;
+    }
 }

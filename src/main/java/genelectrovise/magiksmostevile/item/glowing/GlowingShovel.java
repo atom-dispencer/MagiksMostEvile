@@ -20,14 +20,14 @@ import net.minecraft.item.ShovelItem;
 
 public class GlowingShovel extends ShovelItem {
 
-  public GlowingShovel(IItemTier tier, float attackDamageIn, float attackSpeedIn,
-      Properties builder) {
-    super(tier, attackDamageIn, attackSpeedIn, builder);
-  }
+    public GlowingShovel(IItemTier tier, float attackDamageIn, float attackSpeedIn,
+                         Properties builder) {
+        super(tier, attackDamageIn, attackSpeedIn, builder);
+    }
 
-  @Override
-  public boolean isFoil(ItemStack stack) {
-    return true;
-  }
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return true;
+    }
 
 }

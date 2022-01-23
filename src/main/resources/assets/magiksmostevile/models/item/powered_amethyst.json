@@ -1,6 +1,6 @@
 {
-   "parent": "item/generated",
-   "textures": {
-       "layer0": "magiksmostevile:items/material/powered_amethyst"
-   }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "magiksmostevile:items/material/powered_amethyst"
+  }
 }

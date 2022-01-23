@@ -20,13 +20,13 @@ import net.minecraft.item.SwordItem;
 
 public class GlowingSword extends SwordItem {
 
-  public GlowingSword(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
-    super(tier, attackDamageIn, attackSpeedIn, builder);
-  }
+    public GlowingSword(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+        super(tier, attackDamageIn, attackSpeedIn, builder);
+    }
 
-  @Override
-  public boolean isFoil(ItemStack stack) {
-    return true;
-  }
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return true;
+    }
 
 }
