@@ -1,6 +1,5 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import genelectrovise.magiksmostevile.network.pixiecourier.packet.TransferEnergyParticlePacket;
@@ -12,6 +11,9 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.Map;
 
 public interface PixieProcessor {
+
+    PixieProcessor DO_NOTHING = (packet, context, gson) -> {
+    };
 
     void process(PixiePacket packet, NetworkEvent.Context context, Gson gson);
 
@@ -28,6 +30,7 @@ public interface PixieProcessor {
 
         // Static
         protected static final Registry INSTANCE = new Registry();
+
         // Instance
         protected Map<Class<?>, PixieProcessor> processors = Maps.newHashMap();
 
@@ -75,7 +78,7 @@ public interface PixieProcessor {
                 throw new CourierException(CANNOT_GET_PROCESSOR_AS_TYPE_NULL);
             }
 
-            PixieProcessor processor = processors.get(type);
+            PixieProcessor processor = n_get(type);
 
             // Null check processor
             if (processor == null) {
@@ -83,6 +86,14 @@ public interface PixieProcessor {
             }
 
             return processor;
+        }
+
+        protected PixieProcessor n_get(Class<?> type) {
+            return getProcessors().get(type);
+        }
+
+        protected Map<Class<?>, PixieProcessor> getProcessors() {
+            return processors;
         }
 
         /**

@@ -1,11 +1,16 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
+import com.google.common.collect.Maps;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class PixieProcessorTest {
 
@@ -28,7 +33,7 @@ public class PixieProcessorTest {
     }
 
     @Test
-    void testRegister_throwsCourier_whenNoType() throws CourierException {
+    void testRegister_throwsCourier_whenNoType() {
         assertThrows(CourierException.class, () -> {
             PixieProcessor.Registry registry = PixieProcessor.Registry.getInstance();
             PixieProcessor processor = Mockito.mock(PixieProcessor.class);
@@ -37,7 +42,7 @@ public class PixieProcessorTest {
     }
 
     @Test
-    void testRegister_throwsCourier_whenNoProcessor() throws CourierException {
+    void testRegister_throwsCourier_whenNoProcessor() {
         assertThrows(CourierException.class, () -> {
             PixieProcessor.Registry registry = PixieProcessor.Registry.getInstance();
             registry.register(String.class, null);
@@ -54,7 +59,7 @@ public class PixieProcessorTest {
     }
 
     @Test
-    void testGet_throwsCourier_whenNoType() throws CourierException {
+    void testGet_throwsCourier_whenNullType() {
         assertThrows(CourierException.class, () -> {
             PixieProcessor.Registry registry = PixieProcessor.Registry.getInstance();
             PixieProcessor expected_processor = Mockito.mock(PixieProcessor.class);
@@ -62,5 +67,29 @@ public class PixieProcessorTest {
             PixieProcessor actual_processor = registry.get(null); // No type
             assertEquals(expected_processor, actual_processor);
         });
+    }
+
+    @Test
+    void testGet_throwsCourier_whenNullProcessorReturned() {
+        assertThrows(CourierException.class, () -> {
+            PixieProcessor.Registry registry = Mockito.mock(PixieProcessor.Registry.class);
+            when(registry.n_get(any())).thenReturn(null); // Null processor
+            when(registry.get(any())).thenCallRealMethod();
+
+            registry.get(String.class); // Should throw Courier
+        });
+    }
+
+    @Test
+    void testN_Get() {
+        PixieProcessor.Registry registry = Mockito.mock(PixieProcessor.Registry.class);
+        Map<Class<?>, PixieProcessor> map = Maps.newHashMap();
+        map.put(PixieProcessor.class, PixieProcessor.DO_NOTHING);
+
+        when(registry.getProcessors()).thenReturn(map);
+        when(registry.n_get(any())).thenCallRealMethod();
+
+        PixieProcessor gotten = registry.n_get(PixieProcessor.class);
+        assertEquals(PixieProcessor.DO_NOTHING, gotten);
     }
 }
