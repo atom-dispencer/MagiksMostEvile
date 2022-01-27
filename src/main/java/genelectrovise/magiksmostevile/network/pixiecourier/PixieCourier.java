@@ -1,8 +1,12 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -26,6 +30,7 @@ public class PixieCourier {
     // Processing
     protected PacketDistributor distributor = new PacketDistributor();
     protected PacketEncoder encoder = new PacketEncoder();
+
     private PixieCourier() {
     }
 
@@ -59,6 +64,13 @@ public class PixieCourier {
                 },
                 // Recieve packet
                 PixieCourier::recieve);
+
+        // A register CourierHandshakePacket
+        INSTANCE.channel.registerMessage(1_569_373, // A big random-ish number
+                CourierHandshakePacket.class, //
+                CourierHandshakePacket::encode, //
+                CourierHandshakePacket::decode, //
+                CourierHandshakePacket::handleMessage);
     }
 
     public static void recieve(final PixiePacket message, Supplier<NetworkEvent.Context> contextSupplier) {
@@ -75,6 +87,25 @@ public class PixieCourier {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @SubscribeEvent
+    // Alternatively EntityJoinWorldEvent
+    public static void onClientJoinServerRequestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent event) {
+
+        // Only run when on the dedicated server.
+        DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER, () -> {
+
+            // Target must be a ServerPlayerEntity
+            if (!(event.getEntity() instanceof ServerPlayerEntity)) {
+                return null;
+            }
+            ServerPlayerEntity player = (ServerPlayerEntity) event.getEntity();
+
+            // Start a new exchange with the target
+            INSTANCE.channel.send(net.minecraftforge.fml.network.PacketDistributor.PLAYER.with(() -> player), CourierHandshakePacket.getNewExchangePacket());
+            return null;
+        });
     }
 
 }
