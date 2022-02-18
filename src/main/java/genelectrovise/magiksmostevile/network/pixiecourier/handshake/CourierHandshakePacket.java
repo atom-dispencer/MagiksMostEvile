@@ -9,8 +9,8 @@ import java.util.function.Supplier;
 
 public class CourierHandshakePacket {
 
-    protected String clientRegistryHash = "<>";
-    protected String serverResponse = "";
+    protected String clientRegistryHash = "<H>";
+    protected String serverResponse = "<R>";
 
     private CourierHandshakePacket() {
     }

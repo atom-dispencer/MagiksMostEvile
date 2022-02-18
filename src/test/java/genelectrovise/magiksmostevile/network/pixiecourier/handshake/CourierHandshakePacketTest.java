@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.network.pixiecourier;
+package genelectrovise.magiksmostevile.network.pixiecourier.handshake;
 
 import genelectrovise.magiksmostevile.network.pixiecourier.handshake.CourierHandshakePacket;
 import net.minecraftforge.fml.network.NetworkDirection;
