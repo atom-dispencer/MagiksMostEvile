@@ -1,23 +1,23 @@
 modLoader="javafml"
-loaderVersion="[31,)"
-license="LGPL 2.1"
-issueTrackerURL="https://github.com/GenElectrovise/MagiksMostEvile/"
+loaderVersion="[36,)"
+license="GNU GPL 3"
+issueTrackerURL="https://github.com/GenElectrovise/MagiksMostEvile/issues"
 [[mods]]
 modId="magiksmostevile"
 version="${file.jarVersion}"
 displayName="Magiks Most Evile"
 #updateJSONURL="http://example.net/"
-displayURL="https://magiksmostevile.fandom.com/wiki/Magiks_Most_Evile_Wiki"
+displayURL="https://github.com/GenElectrovise/MagiksMostEvile/"
 logoFile="magiksmostevile.png"
-credits="Thanks to my alpha testers: machotoast, KoalaManiac & Minion3665 (You should go sub to Minion...); to everyone who helped and gave inspiration (Too many to name, but lookin' at you, Eddywinkles!); and to y'all who actually downloaded my pet project! And to Flappy! We can never forget Flappy!" #optional
+credits="All credit to Flappy.                        And no others." #optional
 authors="GenElectrovise"
 description='''
-Ever wanted to summon massive all consuming elementals to destroy that one Minecraft world you've had since 2012 and would do anything to save? No? Huh... Well you should still get Magiks Most Evile! It does way more cool stuff that just blow stuff up! I think... --\_(~_~)_/-- 
+Makes Minecraft a bit more evile and a lot more magiky.
 '''
 [[dependencies.magiksmostevile]] #optional
     modId="forge" 
     mandatory=true
-    versionRange="[31,)" #mandatory
+    versionRange="[36,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -26,6 +26,6 @@ Ever wanted to summon massive all consuming elementals to destroy that one Minec
 [[dependencies.magiksmostevile]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.4]"
+    versionRange="[1.16.5]"
     ordering="NONE"
     side="BOTH"
