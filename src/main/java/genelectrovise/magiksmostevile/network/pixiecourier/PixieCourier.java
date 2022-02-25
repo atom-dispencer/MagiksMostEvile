@@ -33,7 +33,7 @@ public class PixieCourier {
     public SimpleChannel channel;
     // Processing
     protected PacketDistributor distributor = new PacketDistributor();
-    protected volatile HandshakeManager handshakeManager = FMLEnvironment.dist == Dist.CLIENT ? new ClientHandshakeManager() : new ServerHandshakeManager();
+    protected volatile HandshakeManager handshakeManager = (FMLEnvironment.dist == Dist.CLIENT ? new ClientHandshakeManager() : new ServerHandshakeManager());
 
     private PixieCourier() {
     }
