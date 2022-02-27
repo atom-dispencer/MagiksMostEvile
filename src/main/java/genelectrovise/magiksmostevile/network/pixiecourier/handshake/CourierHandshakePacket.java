@@ -1,12 +1,14 @@
 package genelectrovise.magiksmostevile.network.pixiecourier.handshake;
 
 import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
+import lombok.Data;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+@Data
 public class CourierHandshakePacket {
 
     protected String clientRegistryHash = "<H>";
