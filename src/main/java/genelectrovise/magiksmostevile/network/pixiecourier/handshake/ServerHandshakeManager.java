@@ -42,7 +42,14 @@ public class ServerHandshakeManager implements HandshakeManager {
     @Override
     public CourierHandshakePacket getResponse(CourierHandshakePacket packet, OngoingHandshake ongoingHandshake, NetworkEvent.Context context) {
 
+        HandshakePhase phase = resolveHandshakePhase(packet, ongoingHandshake, context);
+
         //TODO Get server response to handshake
+        return null;
+    }
+
+    private HandshakePhase resolveHandshakePhase(CourierHandshakePacket packet, OngoingHandshake ongoingHandshake, NetworkEvent.Context context) {
+
         return null;
     }
 
