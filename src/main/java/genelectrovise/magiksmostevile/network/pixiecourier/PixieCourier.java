@@ -36,6 +36,7 @@ public class PixieCourier {
     protected volatile HandshakeManager handshakeManager = ((FMLEnvironment.dist == Dist.DEDICATED_SERVER) ? new ServerHandshakeManager() : new ClientHandshakeManager());
 
     private PixieCourier() {
+        //
     }
 
     public static PixieCourier getInstance() {
