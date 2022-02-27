@@ -37,8 +37,9 @@ public class CourierHandshakePacket {
      */
     public static void handleMessage(CourierHandshakePacket message, Supplier<NetworkEvent.Context> ctxSupplier) {
         ServerPlayerEntity sender = ctxSupplier.get().getSender();
-        OngoingHandshake ongoingHandshake = PixieCourier.getInstance().getHandshakeManager().getOngoingHandshake(sender);
-        CourierHandshakePacket response = PixieCourier.getInstance().getHandshakeManager().getResponse(message, ongoingHandshake, ctxSupplier.get());
+        HandshakeManager handshakeManager = PixieCourier.getInstance().getHandshakeManager();
+        OngoingHandshake ongoingHandshake = handshakeManager.getOngoingHandshake(sender);
+        CourierHandshakePacket response = handshakeManager.getResponse(message, ongoingHandshake, ctxSupplier.get());
         PixieCourier.getInstance().channel.send(net.minecraftforge.fml.network.PacketDistributor.PLAYER.with(() -> sender), response);
     }
 }
