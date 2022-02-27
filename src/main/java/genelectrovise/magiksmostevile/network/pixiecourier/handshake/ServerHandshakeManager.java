@@ -14,22 +14,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * ({@link ServerHandshakeManager#onClientJoinServerRequestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent)}) Client joins. Server requests hash of {@link PixieCourier} registry contents. Client responds with hash. If hash matches server hash, client is allowed to join. Else, server replies with error code.
- */
 public class ServerHandshakeManager implements HandshakeManager {
 
     public static final Logger LOGGER = LogManager.getLogger(ServerHandshakeManager.class);
 
     protected volatile Map<UUID, OngoingHandshake> ongoingHandshakes = Maps.newHashMap();
-
-    @SubscribeEvent
-    // Alternatively EntityJoinWorldEvent
-    public static void onClientJoinServerRequestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent event) {
-        // Only run when on the dedicated server.
-        DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER,
-                /* Supplier returning a SafeRunnable */ () -> (() -> PixieCourier.getInstance().initiateNewHandshake(event)));
-    }
 
     @Override
     public CourierHandshakePacket getResponse(CourierHandshakePacket packet, OngoingHandshake ongoingHandshake, NetworkEvent.Context context) {
@@ -41,5 +30,25 @@ public class ServerHandshakeManager implements HandshakeManager {
     public OngoingHandshake getOngoingHandshake(ServerPlayerEntity sender) {
         UUID uuid = sender.getUUID();
         return ongoingHandshakes.get(uuid);
+    }
+
+
+
+    /**
+     * When the event is fired, starts a new handshake interaction.
+     *
+     * @param event {@link PlayerEvent.PlayerLoggedInEvent}
+     */
+    public void initiateNewHandshake(PlayerEvent.PlayerLoggedInEvent event) {
+        // Target must be a ServerPlayerEntity
+        if (!(event.getPlayer() instanceof ServerPlayerEntity)) {
+            return;
+        }
+
+        // This method is only called on the dedicated server, so it should be working with ServerPlayerEntities.
+        ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+
+        // Send an empty exchange packet to the client
+        PixieCourier.getInstance().channel.send(net.minecraftforge.fml.network.PacketDistributor.PLAYER.with(() -> player), CourierHandshakePacket.getNewExchangePacket());
     }
 }

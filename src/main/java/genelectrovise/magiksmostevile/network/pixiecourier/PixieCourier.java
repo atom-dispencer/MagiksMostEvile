@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -98,21 +99,11 @@ public class PixieCourier {
         }
     }
 
-    /**
-     * When the event is fired, starts a new handshake interaction.
-     *
-     * @param event {@link PlayerEvent.PlayerLoggedInEvent}
-     */
-    public void initiateNewHandshake(PlayerEvent.PlayerLoggedInEvent event) {
-        // Target must be a ServerPlayerEntity
-        if (!(event.getPlayer() instanceof ServerPlayerEntity)) {
-            return;
-        }
-
-        // This method is only called on the dedicated server, so it should be working with ServerPlayerEntities.
-        ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
-
-        // Send an empty exchange packet to the client
-        PixieCourier.getInstance().channel.send(net.minecraftforge.fml.network.PacketDistributor.PLAYER.with(() -> player), CourierHandshakePacket.getNewExchangePacket());
+    @SubscribeEvent
+    // Alternatively EntityJoinWorldEvent
+    public static void onClientJoinServerRequestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent event) {
+        // Only run when on the dedicated server.
+        DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER,
+                /* Supplier returning a SafeRunnable */ () -> (() -> getInstance().getHandshakeManager().initiateNewHandshake(event)));
     }
 }
