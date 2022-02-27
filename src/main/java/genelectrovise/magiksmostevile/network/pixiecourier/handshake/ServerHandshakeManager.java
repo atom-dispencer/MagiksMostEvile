@@ -42,6 +42,11 @@ public class ServerHandshakeManager implements HandshakeManager {
     @Override
     public CourierHandshakePacket getResponse(CourierHandshakePacket packet, OngoingHandshake ongoingHandshake, NetworkEvent.Context context) {
 
+        if (!packet.getClientRegistryHash().equals(CourierHandshakePacket.DEFAULT_CLIENT_REGISTRY_HASH)) {
+            // TODO Check hash and reply success or failure
+            return null;
+        }
+
         //TODO Get server response to handshake
         return null;
     }
