@@ -48,7 +48,7 @@ public class PixieCourier {
     }
 
     @SubscribeEvent
-    public static void onCommonSetupEvent(FMLCommonSetupEvent event) throws CourierException {
+    public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
         MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by PixieCourier!");
 
         INSTANCE.channel = NetworkRegistry.newSimpleChannel(channelLocationSupplier.get(), () -> MESSAGE_PROTOCOL_VERSION, PacketEncoder::isValidVersion, PacketEncoder::isValidVersion);
