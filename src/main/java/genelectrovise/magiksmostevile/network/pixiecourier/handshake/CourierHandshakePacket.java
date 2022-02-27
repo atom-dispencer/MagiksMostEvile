@@ -11,8 +11,11 @@ import java.util.function.Supplier;
 @Data
 public class CourierHandshakePacket {
 
-    protected String clientRegistryHash = "<H>";
-    protected String serverResponse = "<R>";
+    protected boolean serverRequestingHash = false;
+    public static final String DEFAULT_CLIENT_REGISTRY_HASH = "<H>";
+    protected String clientRegistryHash = DEFAULT_CLIENT_REGISTRY_HASH;
+    public static final String DEFAULT_SERVER_STATUS_RESPONSE = "<R>";
+    protected String serverStatusResponse = DEFAULT_SERVER_STATUS_RESPONSE;
 
     private CourierHandshakePacket() {
     }

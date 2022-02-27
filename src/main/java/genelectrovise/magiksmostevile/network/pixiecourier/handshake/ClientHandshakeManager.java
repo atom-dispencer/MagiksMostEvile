@@ -14,7 +14,16 @@ public class ClientHandshakeManager implements HandshakeManager {
 
     @Override
     public CourierHandshakePacket getResponse(CourierHandshakePacket packet, OngoingHandshake ongoingHandshake, NetworkEvent.Context context) {
-        //TODO Get client response to handshake
+        if (packet.isServerRequestingHash()) {
+            // TODO Reply with hash
+            return null;
+        }
+
+        if (!packet.getServerStatusResponse().equals(CourierHandshakePacket.DEFAULT_SERVER_STATUS_RESPONSE)){
+            // TODO Process the response (handshake success or failure)
+            return null;
+        }
+
         return null;
     }
 
