@@ -76,8 +76,16 @@ public class MagiksMostEvile {
         new RegistryCreationManager().create();
     }
 
+    public static void registerCommonEvents() {
+        LOGGER.debug("Registering MagiksMostEvile common events");
+        MOD_EVENT_BUS.register(EntityAttributeManager.class);
+        MOD_EVENT_BUS.register(RecipeSetup.class);
+        MOD_EVENT_BUS.addListener(PixieCourier::onCommonSetupEvent);
+        FORGE_EVENT_BUS.addListener(PixieCourier::onClientJoinServer_requestCourierHashPacket);
+    }
+
     @SubscribeEvent
-    public static void registerClientOnlyEvents(final FMLClientSetupEvent event) {
+    public static void registerClientEvents(final FMLClientSetupEvent event) {
         LOGGER.debug("Registering MME client only events");
         MOD_EVENT_BUS.register(ParticleClientStartup.class);
     }
@@ -98,14 +106,6 @@ public class MagiksMostEvile {
             LOGGER.info("MagiksMostEvile Inter-Mod Communications is active");
             return "Success";
         });
-    }
-
-    public static void registerCommonEvents() {
-        LOGGER.debug("Registering MagiksMostEvile common events");
-        MOD_EVENT_BUS.register(EntityAttributeManager.class);
-        MOD_EVENT_BUS.register(RecipeSetup.class);
-        MOD_EVENT_BUS.addListener(PixieCourier::onCommonSetupEvent);
-        FORGE_EVENT_BUS.addListener(PixieCourier::onClientJoinServer_requestCourierHashPacket);
     }
 
     @SubscribeEvent
