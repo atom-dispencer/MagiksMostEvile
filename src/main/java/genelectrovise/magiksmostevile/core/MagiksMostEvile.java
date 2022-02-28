@@ -24,7 +24,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -48,11 +50,18 @@ public class MagiksMostEvile {
     public static IEventBus FORGE_EVENT_BUS;
 
     public MagiksMostEvile() {
+
+        // Hello there!
         LOGGER.info("Magiks Most Evile is being loaded by FML");
 
+        // Get event bus instances
         MOD_EVENT_BUS = FMLJavaModLoadingContext.get().getModEventBus();
         FORGE_EVENT_BUS = MinecraftForge.EVENT_BUS;
 
+        // Register config file
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
+
+        // Register event listeners
         registerCommonEvents();
 
         // Handle orbital registries
@@ -74,7 +83,12 @@ public class MagiksMostEvile {
 
     @SubscribeEvent
     public static void processIMC(final InterModProcessEvent event) {
-        LOGGER.info(MagiksMostEvile.MODID + " recieved IMC {}", event.getIMCStream().map(m -> m.getMessageSupplier().get()).collect(Collectors.toList()));
+        LOGGER.info(MagiksMostEvile.MODID + " recieved IMC {}", event
+                .getIMCStream()
+                .map(m -> m
+                        .getMessageSupplier()
+                        .get())
+                .collect(Collectors.toList()));
     }
 
     @SubscribeEvent
