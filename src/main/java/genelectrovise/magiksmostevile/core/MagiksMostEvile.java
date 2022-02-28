@@ -24,6 +24,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -88,6 +89,14 @@ public class MagiksMostEvile {
     public static void registerClientEvents(final FMLClientSetupEvent event) {
         LOGGER.debug("Registering MME client only events");
         MOD_EVENT_BUS.register(ParticleClientStartup.class);
+
+        ModLoadingContext.get().registerExtensionPoint(
+                ExtensionPoint.CONFIGGUIFACTORY, // ExtensionPoint<T> of type BiFunction<Minecraft, Screen, Screen>>
+                () -> { // Supplier of a BiFunction<Minecraft, Screen, Screen>>
+                    return (minecraft, screenIn) -> { // Takes in Minecraft, Screen
+                        return new ForgeConfigGuiScreen();
+                    };
+                });
     }
 
     @SubscribeEvent
