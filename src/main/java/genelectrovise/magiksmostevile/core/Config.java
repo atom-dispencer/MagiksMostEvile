@@ -17,7 +17,7 @@ public class Config {
             this.runIntegrationTests = builder
                     .comment("Runs a suite of integration tests during mod loading, allowing testing of mod systems in a runtime environment. Impacts startup time.")
                     .worldRestart()
-                    .define("Run Integration Tests During Loading", false);
+                    .define("runIntegrationTests", false);
             builder.pop();
         }
 

@@ -6,7 +6,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 
 /**
  * <ol>
- *     <li> ({@link PixieCourier#onClientJoinServerRequestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent)}) Client joins.
+ *     <li> ({@link PixieCourier#onClientJoinServer_requestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent)}) Client joins.
  *     <li> Server requests hash of {@link PixieCourier} registry contents.
  *     <li> Client responds with hash.
  *     <li> If hash matches server hash, client is allowed to join. Else, server replies with error code.

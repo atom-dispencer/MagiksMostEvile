@@ -29,6 +29,7 @@ public class ServerHandshakeManager implements HandshakeManager {
     public void initiateNewHandshake(PlayerEvent.PlayerLoggedInEvent event) {
         // Target must be a ServerPlayerEntity
         if (!(event.getPlayer() instanceof ServerPlayerEntity)) {
+            LOGGER.debug("Aborting handshake as PlayerLoggedInEvent was not fired by a ServerPlayerEntity.");
             return;
         }
 

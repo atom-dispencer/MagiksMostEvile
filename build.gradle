@@ -88,6 +88,7 @@ dependencies {
 
     // Compile
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
 
     // Test
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'

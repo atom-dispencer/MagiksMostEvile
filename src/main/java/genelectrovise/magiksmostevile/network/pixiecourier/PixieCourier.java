@@ -5,24 +5,25 @@ import genelectrovise.magiksmostevile.network.pixiecourier.handshake.ClientHands
 import genelectrovise.magiksmostevile.network.pixiecourier.handshake.CourierHandshakePacket;
 import genelectrovise.magiksmostevile.network.pixiecourier.handshake.HandshakeManager;
 import genelectrovise.magiksmostevile.network.pixiecourier.handshake.ServerHandshakeManager;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+//@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PixieCourier {
+
+    public static final Logger LOGGER = LogManager.getLogger(PixieCourier.class);
 
     // Protocol
     public static final String MESSAGE_PROTOCOL_VERSION = "1.0";
@@ -48,7 +49,7 @@ public class PixieCourier {
         return handshakeManager;
     }
 
-    @SubscribeEvent
+    // @SubscribeEvent // Subscribed manually
     public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
         MagiksMostEvile.LOGGER.debug("FMLCommonSetupEvent heard by PixieCourier!");
 
@@ -99,11 +100,15 @@ public class PixieCourier {
         }
     }
 
-    @SubscribeEvent
+    // @SubscribeEvent // Subscribed manually
     // Alternatively EntityJoinWorldEvent
-    public static void onClientJoinServerRequestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent event) {
+    public static void onClientJoinServer_requestCourierHashPacket(PlayerEvent.PlayerLoggedInEvent event) {
+        LOGGER.debug("PlayerLoggedInEvent heard by PixieCourier. Will attempt handshake.");
+
         // Only run when on the dedicated server.
         DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER,
-                /* Supplier returning a SafeRunnable */ () -> (() -> getInstance().getHandshakeManager().initiateNewHandshake(event)));
+                /* Supplier returning a SafeRunnable */ () -> (() -> getInstance()
+                        .getHandshakeManager()
+                        .initiateNewHandshake(event)));
     }
 }

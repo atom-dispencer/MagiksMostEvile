@@ -17,6 +17,7 @@ package genelectrovise.magiksmostevile.core;
 import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
+import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -100,14 +101,16 @@ public class MagiksMostEvile {
     }
 
     public static void registerCommonEvents() {
-        LOGGER.debug("Registering MME common events");
+        LOGGER.debug("Registering MagiksMostEvile common events");
         MOD_EVENT_BUS.register(EntityAttributeManager.class);
         MOD_EVENT_BUS.register(RecipeSetup.class);
+        MOD_EVENT_BUS.addListener(PixieCourier::onCommonSetupEvent);
+        FORGE_EVENT_BUS.addListener(PixieCourier::onClientJoinServer_requestCourierHashPacket);
     }
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("MagiksMostEvile is starting on the server...");
     }
 
 }
