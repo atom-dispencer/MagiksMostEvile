@@ -1,9 +1,9 @@
-package genelectrovise.magiksmostevile.item.pixiecourier;
+package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
-import genelectrovise.magiksmostevile.item.pixiecourier.packet.TransferEnergyParticlePacket;
-import genelectrovise.magiksmostevile.item.pixiecourier.processor.TransferEnergyParticleProcessor;
+import genelectrovise.magiksmostevile.network.pixiecourier.packet.TransferEnergyParticlePacket;
+import genelectrovise.magiksmostevile.network.pixiecourier.processor.TransferEnergyParticleProcessor;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkEvent;

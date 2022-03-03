@@ -2,10 +2,6 @@ package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import genelectrovise.magiksmostevile.item.pixiecourier.CourierException;
-import genelectrovise.magiksmostevile.item.pixiecourier.Flags;
-import genelectrovise.magiksmostevile.item.pixiecourier.PacketEncoder;
-import genelectrovise.magiksmostevile.item.pixiecourier.PixiePacket;
 import net.minecraft.network.PacketBuffer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

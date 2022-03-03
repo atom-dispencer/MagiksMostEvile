@@ -1,10 +1,10 @@
-package genelectrovise.magiksmostevile.item.pixiecourier;
+package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.item.pixiecourier.handshake.ClientHandshakeManager;
-import genelectrovise.magiksmostevile.item.pixiecourier.handshake.CourierHandshakePacket;
-import genelectrovise.magiksmostevile.item.pixiecourier.handshake.HandshakeManager;
-import genelectrovise.magiksmostevile.item.pixiecourier.handshake.ServerHandshakeManager;
+import genelectrovise.magiksmostevile.network.pixiecourier.handshake.ClientHandshakeManager;
+import genelectrovise.magiksmostevile.network.pixiecourier.handshake.CourierHandshakePacket;
+import genelectrovise.magiksmostevile.network.pixiecourier.handshake.HandshakeManager;
+import genelectrovise.magiksmostevile.network.pixiecourier.handshake.ServerHandshakeManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerEvent;

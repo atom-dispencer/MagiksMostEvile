@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.gson;
 
 import com.google.gson.*;
-import genelectrovise.magiksmostevile.item.pixiecourier.PixiePacket;
+import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
 
 import java.lang.reflect.Type;
 

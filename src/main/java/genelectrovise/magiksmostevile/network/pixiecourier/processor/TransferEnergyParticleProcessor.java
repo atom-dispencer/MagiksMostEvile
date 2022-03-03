@@ -1,9 +1,9 @@
-package genelectrovise.magiksmostevile.item.pixiecourier.processor;
+package genelectrovise.magiksmostevile.network.pixiecourier.processor;
 
 import com.google.gson.Gson;
-import genelectrovise.magiksmostevile.item.pixiecourier.PixiePacket;
-import genelectrovise.magiksmostevile.item.pixiecourier.PixieProcessor;
-import genelectrovise.magiksmostevile.item.pixiecourier.packet.TransferEnergyParticlePacket;
+import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
+import genelectrovise.magiksmostevile.network.pixiecourier.PixieProcessor;
+import genelectrovise.magiksmostevile.network.pixiecourier.packet.TransferEnergyParticlePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.vector.Vector3d;

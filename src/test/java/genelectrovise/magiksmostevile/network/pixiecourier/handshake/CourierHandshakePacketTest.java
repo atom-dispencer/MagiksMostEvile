@@ -1,6 +1,5 @@
 package genelectrovise.magiksmostevile.network.pixiecourier.handshake;
 
-import genelectrovise.magiksmostevile.item.pixiecourier.handshake.CourierHandshakePacket;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import org.junit.jupiter.api.BeforeAll;

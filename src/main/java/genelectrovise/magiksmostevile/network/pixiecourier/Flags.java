@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.item.pixiecourier;
+package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.ArrayUtils;

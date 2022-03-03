@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.item.pixiecourier;
+package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import com.google.gson.Gson;
 import genelectrovise.magiksmostevile.gson.GsonConfigurator;

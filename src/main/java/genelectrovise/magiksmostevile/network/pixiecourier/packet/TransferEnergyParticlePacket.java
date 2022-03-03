@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.item.pixiecourier.packet;
+package genelectrovise.magiksmostevile.network.pixiecourier.packet;
 
 import net.minecraft.util.math.BlockPos;
 

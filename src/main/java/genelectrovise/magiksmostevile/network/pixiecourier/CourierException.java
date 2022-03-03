@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.item.pixiecourier;
+package genelectrovise.magiksmostevile.network.pixiecourier;
 
 public class CourierException extends Exception {
     private static final long serialVersionUID = 1L;

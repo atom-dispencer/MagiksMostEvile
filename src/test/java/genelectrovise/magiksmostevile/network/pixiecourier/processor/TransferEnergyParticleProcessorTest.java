@@ -1,8 +1,7 @@
 package genelectrovise.magiksmostevile.network.pixiecourier.processor;
 
 import com.google.gson.Gson;
-import genelectrovise.magiksmostevile.item.pixiecourier.PixiePacket;
-import genelectrovise.magiksmostevile.item.pixiecourier.processor.TransferEnergyParticleProcessor;
+import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 import org.junit.jupiter.api.BeforeEach;
