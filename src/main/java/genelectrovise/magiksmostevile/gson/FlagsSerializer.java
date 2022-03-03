@@ -1,8 +1,8 @@
 package genelectrovise.magiksmostevile.gson;
 
 import com.google.gson.*;
-import genelectrovise.magiksmostevile.network.pixiecourier.Flags;
-import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
+import genelectrovise.magiksmostevile.item.pixiecourier.Flags;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixiePacket;
 
 import java.lang.reflect.Type;
 

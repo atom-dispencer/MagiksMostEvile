@@ -1,6 +1,8 @@
 package genelectrovise.magiksmostevile.network.pixiecourier;
 
 import com.google.common.collect.Maps;
+import genelectrovise.magiksmostevile.item.pixiecourier.CourierException;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixieProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

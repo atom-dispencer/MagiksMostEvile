@@ -1,6 +1,6 @@
-package genelectrovise.magiksmostevile.network.pixiecourier.handshake;
+package genelectrovise.magiksmostevile.item.pixiecourier.handshake;
 
-import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixieCourier;
 import lombok.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 

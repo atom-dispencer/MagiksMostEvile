@@ -1,9 +1,9 @@
-package genelectrovise.magiksmostevile.network.pixiecourier;
+package genelectrovise.magiksmostevile.item.pixiecourier;
 
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
-import genelectrovise.magiksmostevile.network.pixiecourier.packet.TransferEnergyParticlePacket;
-import genelectrovise.magiksmostevile.network.pixiecourier.processor.TransferEnergyParticleProcessor;
+import genelectrovise.magiksmostevile.item.pixiecourier.packet.TransferEnergyParticlePacket;
+import genelectrovise.magiksmostevile.item.pixiecourier.processor.TransferEnergyParticleProcessor;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -32,7 +32,7 @@ public interface PixieProcessor {
         protected static final Registry INSTANCE = new Registry();
 
         // Instance
-        protected Map<Class<?>, PixieProcessor> processors = Maps.newHashMap();
+        public Map<Class<?>, PixieProcessor> processors = Maps.newHashMap();
 
         private Registry() {
         }
@@ -88,11 +88,11 @@ public interface PixieProcessor {
             return processor;
         }
 
-        protected PixieProcessor n_get(Class<?> type) {
+        public PixieProcessor n_get(Class<?> type) {
             return getProcessors().get(type);
         }
 
-        protected Map<Class<?>, PixieProcessor> getProcessors() {
+        public Map<Class<?>, PixieProcessor> getProcessors() {
             return processors;
         }
 

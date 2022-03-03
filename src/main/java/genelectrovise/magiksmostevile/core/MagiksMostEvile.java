@@ -17,7 +17,7 @@ package genelectrovise.magiksmostevile.core;
 import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
-import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixieCourier;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -62,6 +62,7 @@ public class MagiksMostEvile {
 
         // Register config file
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
 
         // Register event listeners
         registerCommonEvents();

@@ -1,5 +1,6 @@
-package genelectrovise.magiksmostevile.network.pixiecourier;
+package genelectrovise.magiksmostevile.item.pixiecourier;
 
+import com.google.gson.Gson;
 import genelectrovise.magiksmostevile.gson.GsonConfigurator;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +18,7 @@ public class PacketDistributor {
     }
 
     /**
-     * Uses {@link PixieProcessor#process(PixiePacket, Context)}, with added validity checks.
+     * Uses {@link PixieProcessor#process(PixiePacket, Context, Gson)}, with added validity checks.
      *
      * @param packet
      * @param context
@@ -43,7 +44,7 @@ public class PacketDistributor {
 
     }
 
-    protected PixieProcessor findProcessor(PixiePacket packet, PixieProcessor.Registry registry) throws CourierException {
+    public PixieProcessor findProcessor(PixiePacket packet, PixieProcessor.Registry registry) throws CourierException {
         PixieProcessor processor = registry.get(packet.getType());
         return processor;
     }

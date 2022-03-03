@@ -5,10 +5,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class Config {
 
-    /**
-     * Doesn't need to be protected, just encapsulating :)
-     */
-    protected static class Common {
+    // Common config
+    public static class Common {
 
         public final ForgeConfigSpec.ConfigValue<Boolean> runIntegrationTests;
 
@@ -23,9 +21,32 @@ public class Config {
 
     }
 
+    /**
+     * Server-only config
+     */
+    public static class Server {
+
+        public final ForgeConfigSpec.ConfigValue<Boolean> useCourierHandshake;
+
+        protected Server(ForgeConfigSpec.Builder builder) {
+            builder.push("Courier");
+            this.useCourierHandshake = builder
+                    .comment("Require joining clients to complete a handshake to check the compatibility of items in their registry.")
+                    .worldRestart()
+                    .define("useCourierHandshake", true);
+            builder.pop();
+        }
+
+    }
+
+    // ========================================== STATIC ==========================================
+
     // Common
     public static final Common COMMON;
     public static final ForgeConfigSpec COMMON_SPEC;
+    // Server
+    public static final Server SERVER;
+    public static final ForgeConfigSpec SERVER_SPEC;
 
     static {
 
@@ -33,5 +54,10 @@ public class Config {
         Pair<Common, ForgeConfigSpec> commonForgeSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
         COMMON = commonForgeSpecPair.getLeft();
         COMMON_SPEC = commonForgeSpecPair.getRight();
+
+        // Server
+        Pair<Server, ForgeConfigSpec> serverForgeSpecPair = new ForgeConfigSpec.Builder().configure(Server::new);
+        SERVER = serverForgeSpecPair.getLeft();
+        SERVER_SPEC = serverForgeSpecPair.getRight();
     }
 }

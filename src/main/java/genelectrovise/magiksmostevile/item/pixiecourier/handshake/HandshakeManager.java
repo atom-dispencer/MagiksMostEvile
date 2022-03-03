@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.network.pixiecourier.handshake;
+package genelectrovise.magiksmostevile.item.pixiecourier.handshake;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.event.entity.player.PlayerEvent;

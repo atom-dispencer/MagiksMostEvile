@@ -1,7 +1,8 @@
-package genelectrovise.magiksmostevile.network.pixiecourier.handshake;
+package genelectrovise.magiksmostevile.item.pixiecourier.handshake;
 
 import com.google.common.collect.Maps;
-import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
+import genelectrovise.magiksmostevile.core.Config;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixieCourier;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -27,9 +28,16 @@ public class ServerHandshakeManager implements HandshakeManager {
      */
     @Override
     public void initiateNewHandshake(PlayerEvent.PlayerLoggedInEvent event) {
+
         // Target must be a ServerPlayerEntity
         if (!(event.getPlayer() instanceof ServerPlayerEntity)) {
             LOGGER.debug("Aborting handshake as PlayerLoggedInEvent was not fired by a ServerPlayerEntity.");
+            return;
+        }
+
+        // Abort handshake if configured to
+        if(!Config.SERVER.useCourierHandshake.get()){
+            LOGGER.debug("Player joining, but handshake is disabled.");
             return;
         }
 

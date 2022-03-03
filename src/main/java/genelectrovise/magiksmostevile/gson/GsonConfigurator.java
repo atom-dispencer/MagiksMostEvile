@@ -2,8 +2,8 @@ package genelectrovise.magiksmostevile.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import genelectrovise.magiksmostevile.network.pixiecourier.Flags;
-import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
+import genelectrovise.magiksmostevile.item.pixiecourier.Flags;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixiePacket;
 
 public class GsonConfigurator {
 

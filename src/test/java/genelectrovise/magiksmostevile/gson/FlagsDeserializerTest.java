@@ -3,7 +3,7 @@ package genelectrovise.magiksmostevile.gson;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import genelectrovise.magiksmostevile.network.pixiecourier.Flags;
+import genelectrovise.magiksmostevile.item.pixiecourier.Flags;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

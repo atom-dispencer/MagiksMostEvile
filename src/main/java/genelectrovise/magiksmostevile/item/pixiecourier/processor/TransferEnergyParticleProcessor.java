@@ -1,9 +1,9 @@
-package genelectrovise.magiksmostevile.network.pixiecourier.processor;
+package genelectrovise.magiksmostevile.item.pixiecourier.processor;
 
 import com.google.gson.Gson;
-import genelectrovise.magiksmostevile.network.pixiecourier.PixiePacket;
-import genelectrovise.magiksmostevile.network.pixiecourier.PixieProcessor;
-import genelectrovise.magiksmostevile.network.pixiecourier.packet.TransferEnergyParticlePacket;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixiePacket;
+import genelectrovise.magiksmostevile.item.pixiecourier.PixieProcessor;
+import genelectrovise.magiksmostevile.item.pixiecourier.packet.TransferEnergyParticlePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.vector.Vector3d;
@@ -24,7 +24,7 @@ public class TransferEnergyParticleProcessor implements PixieProcessor {
     }
 
     @SuppressWarnings("resource")
-    protected void enqueueParticleSpawn(PixiePacket packet, Context context, Gson gson) {
+    public void enqueueParticleSpawn(PixiePacket packet, Context context, Gson gson) {
         context.enqueueWork(() -> {
             TransferEnergyParticlePacket particlePacket = gson.fromJson(packet.getContent(), TransferEnergyParticlePacket.class);
 
