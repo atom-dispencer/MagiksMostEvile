@@ -106,7 +106,8 @@ public class PixieCourier {
         LOGGER.debug("PlayerLoggedInEvent heard by PixieCourier. Will attempt handshake.");
 
         // Only run when on the dedicated server.
-        DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER,
+        // DistExecutor.safeRunWhenOn causes unsafe referent (RuntimeException), but my code is safe! (so I have to call unsafely, how ironic...)
+        DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER,
                 /* Supplier returning a SafeRunnable */ () -> (() -> getInstance()
                         .getHandshakeManager()
                         .initiateNewHandshake(event)));

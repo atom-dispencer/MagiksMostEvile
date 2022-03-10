@@ -17,7 +17,6 @@
  */
 package genelectrovise.magiksmostevile.tileentity;
 
-import genelectrovise.magiksmostevile.core.support.TrackableIntegerHolder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fluids.FluidStack;
@@ -27,85 +26,7 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class IchorFluidStorage extends SingleTankFluidStorage {
 
-    public TrackableIntegerHolder maxIchor;
-    public TrackableIntegerHolder currentIchor;
-    public String nbtKey;
-
-    /**
-     * @param capacity
-     * @param maxReceive
-     * @param maxExtract
-     * @param energy
-     */
     public IchorFluidStorage(int capacity, String nbtKey) {
-        super(capacity, nbtKey);
+        super(capacity, nbtKey, (fluidStack) -> fluidStack.getFluid() == Fluids.LAVA);
     }
-
-    public void update() {
-        this.currentIchor.set(this.getFluidAmount());
-        this.maxIchor.set(this.getCapacity());
-    }
-
-    /**
-     * @param compound
-     */
-    public void fromNbt(CompoundNBT compound) {
-        currentIchor.set(compound.getInt("currentIchor"));
-        setCapacity(compound.getInt("capacity"));
-    }
-
-    /**
-     * @return
-     */
-    public CompoundNBT toNbt() {
-        CompoundNBT tag = new CompoundNBT();
-        tag.putInt("currentIchor", currentIchor.get());
-        tag.putInt("capacity", getCapacity());
-
-        return tag;
-    }
-
-    @Override
-    public boolean isFluidValid(FluidStack stack) {
-        return super.isFluidValid(stack) && stack.getFluid() == Fluids.LAVA;
-    }
-
-    @Override
-    public int fill(FluidStack resource, FluidAction action) {
-        int filled = super.fill(resource, action);
-        update();
-        return filled;
-    }
-
-    @Override
-    public FluidStack drain(FluidStack resource, FluidAction action) {
-        FluidStack drained = super.drain(resource, action);
-        update();
-        return drained;
-    }
-
-    public TrackableIntegerHolder getMaxIchor() {
-        return maxIchor;
-    }
-
-    public void setMaxIchor(TrackableIntegerHolder maxIchor) {
-        this.maxIchor = maxIchor;
-    }
-
-    public TrackableIntegerHolder getCurrentIchor() {
-        return currentIchor;
-    }
-
-    public void setCurrentIchor(TrackableIntegerHolder currentIchor) {
-        this.currentIchor = currentIchor;
-    }
-
-    public String getNbtKey() {
-        return nbtKey;
-    }
-
-    public void setNbtKey(String nbtKey) {
-        this.nbtKey = nbtKey;
-    }
-
 }

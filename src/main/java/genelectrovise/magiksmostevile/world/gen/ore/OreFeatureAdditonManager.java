@@ -15,6 +15,7 @@
 package genelectrovise.magiksmostevile.world.gen.ore;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
+import genelectrovise.magiksmostevile.world.gen.customore.CustomOreFeature;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -59,6 +60,8 @@ public class OreFeatureAdditonManager {
                 }
                 break;
         }
+
+        registerTo(generation, CustomOreFeature.CONFIGURED_ORE);
 
     }
 

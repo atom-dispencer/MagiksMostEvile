@@ -17,8 +17,12 @@
  */
 package genelectrovise.magiksmostevile.tileentity;
 
-import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.support.TrackableIntegerHolder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
+import lombok.ToString;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -30,6 +34,7 @@ import java.util.function.Predicate;
 /**
  * @author GenElectrovise 20 May 2020
  */
+@Data
 public class SingleTankFluidStorage implements IFluidHandler, IFluidTank {
 
     public TrackableIntegerHolder maxIchor;
@@ -39,48 +44,31 @@ public class SingleTankFluidStorage implements IFluidHandler, IFluidTank {
     private Predicate<FluidStack> validator;
     private FluidStack fluidStack;
 
-    /**
-     * @param capacity
-     * @param maxReceive
-     * @param maxExtract
-     * @param energy
-     */
-    public SingleTankFluidStorage(int capacity, String nbtKey) {
-        this.nbtKey = nbtKey;
-
-        currentIchor = new TrackableIntegerHolder(10, MagiksMostEvile.MODID + ":currentIchor");
-        maxIchor = new TrackableIntegerHolder(50, MagiksMostEvile.MODID + ":capacity");
+    public SingleTankFluidStorage(int capacity, String nbtKey, Predicate<FluidStack> validator) {
+        setNbtKey(nbtKey);
+        setValidator(validator);
+        setCurrentIchor(new TrackableIntegerHolder(0, nbtKey + "/currentIchor"));
+        setMaxIchor(new TrackableIntegerHolder(capacity, nbtKey + "/capacity"));
 
         update();
     }
 
     public void update() {
-        this.currentIchor.set(this.getFluidAmount());
-        this.maxIchor.set(this.getCapacity());
+        getCurrentIchor().set(this.getFluidAmount());
+        getMaxIchor().set(this.getCapacity());
     }
 
-    /**
-     * @param compound
-     */
     public void fromNbt(CompoundNBT compound) {
-        currentIchor.set(compound.getInt("currentIchor"));
-        capacity = compound.getInt("capacity");
+        getCurrentIchor().set(compound.getInt("currentIchor"));
+        setCapacity(compound.getInt("capacity"));
     }
 
-    /**
-     * @return
-     */
     public CompoundNBT toNbt() {
         CompoundNBT tag = new CompoundNBT();
         tag.putInt("currentIchor", currentIchor.get());
         tag.putInt("capacity", capacity);
 
         return tag;
-    }
-
-    @Override
-    public boolean isFluidValid(FluidStack stack) {
-        return validator.test(stack);
     }
 
     @Override
@@ -156,12 +144,12 @@ public class SingleTankFluidStorage implements IFluidHandler, IFluidTank {
     }
 
     @Override
-    public FluidStack getFluid() {
-        return fluidStack;
-    }
-
-    @Override
     public int getFluidAmount() {
+
+        if (fluidStack == null) {
+            fluidStack = new FluidStack(Fluids.LAVA, 1);
+        }
+
         return fluidStack.getAmount();
     }
 
@@ -179,9 +167,10 @@ public class SingleTankFluidStorage implements IFluidHandler, IFluidTank {
         return 1;
     }
 
+    @Nonnull
     @Override
     public FluidStack getFluidInTank(int tank) {
-        return null;
+        return fluidStack;
     }
 
     @Override
@@ -189,9 +178,25 @@ public class SingleTankFluidStorage implements IFluidHandler, IFluidTank {
         return capacity;
     }
 
+    @Nonnull
     @Override
-    public boolean isFluidValid(int tank, FluidStack stack) {
+    public FluidStack getFluid() {
+        return fluidStack;
+    }
+
+
+    public Predicate<FluidStack> getValidator() {
+        return validator;
+    }
+
+    @Override
+    public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
         return isFluidValid(stack);
+    }
+
+    @Override
+    public boolean isFluidValid(FluidStack stack) {
+        return getValidator().test(stack);
     }
 
 }
