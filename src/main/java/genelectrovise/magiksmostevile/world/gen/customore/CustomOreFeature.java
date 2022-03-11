@@ -4,6 +4,8 @@ import com.google.common.primitives.Ints;
 import com.mojang.serialization.Codec;
 import genelectrovise.magiksmostevile.core.reference.WorldReference;
 import net.minecraft.block.Blocks;
+import net.minecraft.resources.IResource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -15,6 +17,7 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.apache.commons.math3.random.RandomGenerator;
+import org.apache.commons.math3.random.RandomGeneratorFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,19 +45,15 @@ public class CustomOreFeature extends Feature<NoFeatureConfig> {
      */
     @Override
     public boolean place(ISeedReader iSeedReader, @Nonnull ChunkGenerator chunkGenerator, @Nonnull Random random, BlockPos blockPos, @Nonnull NoFeatureConfig noFeatureConfig) {
-        LOGGER.info("100321 Placing gold block at " + blockPos.toShortString());
 
-        final int TRIALS = 10;
-        final float PROBABILITY = 0.1f;
-
-        RandomGenerator randomGenerator = new JDKRandomGenerator();
-        randomGenerator.setSeed(iSeedReader.getSeed());
+        RandomGenerator randomGenerator = RandomGeneratorFactory.createRandomGenerator(random);
 
         final int desiredSpawnLevel = 50;
         final float eccentricity = 1f;
         int y = generateSpawnHeight(desiredSpawnLevel, eccentricity, randomGenerator);
 
         BlockPos realPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
+        LOGGER.info("100321 Placing gold block at " + realPos.toShortString());
         iSeedReader.setBlock(realPos, Blocks.GOLD_BLOCK.defaultBlockState(), 4);
         return false;
     }
@@ -78,7 +77,7 @@ public class CustomOreFeature extends Feature<NoFeatureConfig> {
         final double percentageOfMaxHeight = (double) howFarAboveMinY / (double) worldHeight;
 
         // Distribution
-        BinomialDistribution binomialDistribution = new BinomialDistribution(randomGenerator, (int) (worldHeight / eccentricity), percentageOfMaxHeight);
+        BinomialDistribution binomialDistribution = new BinomialDistribution(randomGenerator, (int) Math.ceil(worldHeight / eccentricity), percentageOfMaxHeight);
 
         // Scale
         int sample = binomialDistribution.sample();

@@ -22,12 +22,12 @@ public class TestClass {
         RandomGenerator randomGenerator = new JDKRandomGenerator();
 
         // Configuration
-        final int desiredSpawningLevel = 128; // The desired height for an ore to spawn at.
+        final int desiredSpawningLevel = 50; // The desired height for an ore to spawn at.
         final float eccentricity = 1f; // Increases the irregularity of height by reducing accuracy.
 
         // World height params
-        final int maxY = 320;
-        final int minY = -64;
+        final int maxY = 256;
+        final int minY = 0;
         final float worldHeight = maxY - minY; // Distance from min to max
 
         // Spawning level
@@ -38,7 +38,8 @@ public class TestClass {
         BinomialDistribution binomialDistribution = new BinomialDistribution(randomGenerator, (int) (worldHeight / eccentricity), percentageOfMaxHeight);
 
         for (int i = 0; i < 10; i++) {
-            IntStream stream = Arrays.stream(binomialDistribution.sample(100));
+            int[] sample = binomialDistribution.sample(100);
+            IntStream stream = Arrays.stream(sample);
             double[] primArr = stream.asDoubleStream().toArray();
             Double[] sampleArr = ArrayUtils.toObject(primArr);
             List<Double> sampleList = Arrays.asList(sampleArr);
