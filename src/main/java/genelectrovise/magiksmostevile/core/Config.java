@@ -35,6 +35,7 @@ public class Config {
                     .worldRestart()
                     .define("useCourierHandshake", true);
             builder.pop();
+
         }
 
     }

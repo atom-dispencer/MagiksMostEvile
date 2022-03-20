@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.world.gen.customore;
+package genelectrovise.magiksmostevile.world.gen.noisy_ore;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.distribution.BinomialDistribution;

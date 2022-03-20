@@ -1,0 +1,38 @@
+{
+  "__comment__": "Configure globally",
+  "normal": {
+    "level": 60,
+    "eccentricity": 5.6,
+    "minSize": 5,
+    "maxSize": 24
+  },
+  "dimensions": {
+    "__comment__": "Configure per dimension",
+    "exclude": [
+      "minecraft:the_nether",
+      "minecraft:the_end"
+    ],
+    "settings": {
+      "minecraft:overworld": {
+        "level": 50,
+        "eccentricity": 1.3,
+        "minSize": 5,
+        "maxSize": 24
+      }
+    }
+  },
+  "biomes": {
+    "__comment__": "Configure per biome",
+    "exclude": [
+      "minecraft:taiga"
+    ],
+    "settings": {
+      "minecraft:forest": {
+        "level": 40,
+        "eccentricity": 2.0,
+        "minSize": 5,
+        "maxSize": 24
+      }
+    }
+  }
+}

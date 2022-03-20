@@ -1,21 +1,17 @@
-package genelectrovise.magiksmostevile.world.gen.customore;
+package genelectrovise.magiksmostevile.world.gen.noisy_ore;
 
 import com.google.common.primitives.Ints;
 import com.mojang.serialization.Codec;
-import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.reference.WorldReference;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.IResource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.SimplexNoiseGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -26,14 +22,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 
 /**
  * Generates ores customly.
  * <p>
- * Configurable through datapacks/resourcepacks (see {@link CustomOreFeature#CUSTOM_ORE_GENERATION_SETTINGS_LOCATION}).
+ * Configurable through datapacks/resourcepacks (see {@link NoisyOreFeature#CUSTOM_ORE_GENERATION_SETTINGS_LOCATION}).
  * <p>
  * Uses {@link net.minecraft.world.gen.SimplexNoiseGenerator} to generate a chunk-by-chunk map of probabilities of placement for each type of ore, in order to allow ores to generate in regional clusters.
  * <p>
@@ -43,21 +37,20 @@ import java.util.Random;
  */
 @Getter
 @Setter
-public class CustomOreFeature extends Feature<NoFeatureConfig> {
+public class NoisyOreFeature extends Feature<NoFeatureConfig> {
 
-    public static final Logger LOGGER = LogManager.getLogger(CustomOreFeature.class);
-    public static final ResourceLocation CUSTOM_ORE_GENERATION_SETTINGS_LOCATION = new ResourceLocation(MagiksMostEvile.MODID, "worldgen/custom_ore_feature");
+    public static final Logger LOGGER = LogManager.getLogger(NoisyOreFeature.class);
 
-    public static final ConfiguredFeature<NoFeatureConfig, CustomOreFeature> CONFIGURED_ORE = Registry.register( //
+    public static final ConfiguredFeature<NoFeatureConfig, NoisyOreFeature> CONFIGURED_ORE = Registry.register( //
             WorldGenRegistries.CONFIGURED_FEATURE, //
             "magiksmostevile_custom_ore_feature", //
-            new ConfiguredFeature<>(new CustomOreFeature(NoFeatureConfig.CODEC), new NoFeatureConfig()));
+            new ConfiguredFeature<>(new NoisyOreFeature(NoFeatureConfig.CODEC), new NoFeatureConfig()));
 
-    private CustomOreGenerationSettings settings;
+    private NoisyOreConfiguration settings;
 
-    public CustomOreFeature(Codec<NoFeatureConfig> noFeatureConfigCodec) {
+    public NoisyOreFeature(Codec<NoFeatureConfig> noFeatureConfigCodec) {
         super(noFeatureConfigCodec);
-        CustomOreGenerationSettings settings = new CustomOreGenerationSettings(CUSTOM_ORE_GENERATION_SETTINGS_LOCATION);
+        NoisyOreConfiguration settings = NoisyOreConfigurationFactory.fromResources(Minecraft.getInstance().getResourceManager());
     }
 
     /**
@@ -73,15 +66,6 @@ public class CustomOreFeature extends Feature<NoFeatureConfig> {
         final int desiredSpawnLevel = 50;
         final float eccentricity = 1f;
 
-        try {
-            IResource resource = Minecraft
-                    .getInstance()
-                    .getResourceManager()
-                    .getResource(CUSTOM_ORE_GENERATION_SETTINGS_LOCATION);
-            InputStream stream = resource.getInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         int y = generateSpawnHeight(desiredSpawnLevel, eccentricity, randomGenerator);
 
         BlockPos realPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
