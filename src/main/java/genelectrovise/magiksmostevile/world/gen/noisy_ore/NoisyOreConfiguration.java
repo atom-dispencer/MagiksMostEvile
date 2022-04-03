@@ -1,7 +1,9 @@
 package genelectrovise.magiksmostevile.world.gen.noisy_ore;
 
+import com.google.common.collect.Maps;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.minecraftforge.event.AddReloadListenerEvent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.ParametersAreNullableByDefault;
@@ -11,6 +13,12 @@ import java.util.Map;
 @AllArgsConstructor
 @ParametersAreNonnullByDefault
 public class NoisyOreConfiguration {
+
+    protected static volatile NoisyOreConfiguration INSTANCE;
+
+    public static void onResourceManagerReload(AddReloadListenerEvent event) {
+        event.addListener(new NoisyOreResourceManagerReloadListener(INSTANCE));
+    }
 
     /**
      * Maps a JSON resource file to a Generation object, i.e. "amethyst_ore_overworld.json": POJO"
@@ -24,6 +32,11 @@ public class NoisyOreConfiguration {
     @AllArgsConstructor
     @ParametersAreNullableByDefault
     public static class Generation {
+        public static final Generation DUMMY = new Generation(0, Settings.DUMMY, SituationalSettings.DUMMY, SituationalSettings.DUMMY);
+        /**
+         * The number of times the seed for the simplex noise generator should be hashed. This means that each generation type can have a unique worldwide distribution.
+         */
+        private int simplexSeedHashes;
         private Settings normal;
         private SituationalSettings dimensions;
         private SituationalSettings biomes;
@@ -36,6 +49,8 @@ public class NoisyOreConfiguration {
     @AllArgsConstructor
     @ParametersAreNonnullByDefault
     public static class SituationalSettings {
+        public static final SituationalSettings DUMMY = new SituationalSettings(new String[]{}, Maps.newHashMap());
+
         private String[] exclude;
         private Map<String, Settings> settings;
     }
@@ -47,6 +62,8 @@ public class NoisyOreConfiguration {
     @AllArgsConstructor
     @ParametersAreNullableByDefault
     public static class Settings {
+        public static final Settings DUMMY = new Settings(0, 0, 0, 0, new String[]{}, "minecraft:stone");
+
         private int level;
         private float eccentricity;
         private int minSize;

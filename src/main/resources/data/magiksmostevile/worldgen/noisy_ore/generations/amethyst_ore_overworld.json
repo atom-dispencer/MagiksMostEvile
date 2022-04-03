@@ -1,5 +1,6 @@
 {
   "__comment__": "Configure globally",
+  "simplexSeedHashes": 1,
   "normal": {
     "level": 60,
     "eccentricity": 5.6,

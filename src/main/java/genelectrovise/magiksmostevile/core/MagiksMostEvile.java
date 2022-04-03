@@ -20,6 +20,7 @@ import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
+import genelectrovise.magiksmostevile.world.gen.noisy_ore.NoisyOreConfiguration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -84,6 +85,7 @@ public class MagiksMostEvile {
         MOD_EVENT_BUS.register(RecipeSetup.class);
         MOD_EVENT_BUS.addListener(PixieCourier::onCommonSetupEvent);
         FORGE_EVENT_BUS.addListener(PixieCourier::onClientJoinServer_requestCourierHashPacket);
+        FORGE_EVENT_BUS.addListener(NoisyOreConfiguration::onResourceManagerReload);
     }
 
     @SubscribeEvent
