@@ -1,6 +1,7 @@
 package genelectrovise.magiksmostevile.world.gen.noisy_ore;
 
 import com.google.common.collect.Maps;
+import genelectrovise.magiksmostevile.gson.GsonConfigurator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -17,7 +18,7 @@ public class NoisyOreConfiguration {
     protected static volatile NoisyOreConfiguration INSTANCE;
 
     public static void onResourceManagerReload(AddReloadListenerEvent event) {
-        event.addListener(new NoisyOreResourceManagerReloadListener(INSTANCE));
+        event.addListener(new NoisyOreResourceManagerReloadListener(GsonConfigurator.newConfiguredInstance(), "unknown"));
     }
 
     /**

@@ -1,9 +1,12 @@
 package genelectrovise.magiksmostevile.world.gen.noisy_ore;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import genelectrovise.magiksmostevile.gson.GsonConfigurator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.minecraft.client.resources.JsonReloadListener;
+import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.resource.IResourceType;
@@ -11,17 +14,16 @@ import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@Data
-@AllArgsConstructor
-public class NoisyOreResourceManagerReloadListener implements ISelectiveResourceReloadListener {
+@ParametersAreNonnullByDefault
+public class NoisyOreResourceManagerReloadListener extends JsonReloadListener {
 
     public static final Logger LOGGER = LogManager.getLogger(NoisyOreResourceManagerReloadListener.class);
 
@@ -30,8 +32,16 @@ public class NoisyOreResourceManagerReloadListener implements ISelectiveResource
 
     protected NoisyOreConfiguration config;
 
+    public NoisyOreResourceManagerReloadListener(Gson gson, String s) {
+        super(gson, s);
+    }
+
     @Override
-    public void onResourceManagerReload(IResourceManager resourceManager, Predicate<IResourceType> resourcePredicate) {
+    protected void apply(Map<ResourceLocation, JsonElement> mapIn, IResourceManager resourceManager, IProfiler profiler) {
+
+        //TODO See whats in mapIn
+        //TODO What is profiler
+
         Collection<ResourceLocation> resources = resourceManager.listResources(ROOT_PATH, path -> (path.contains(MIDDLE_PATH) && path.endsWith(".json")));
         Gson gson = GsonConfigurator.newConfiguredInstance();
         Map<String, NoisyOreConfiguration.Generation> map = resources.stream().collect(Collectors.toMap(

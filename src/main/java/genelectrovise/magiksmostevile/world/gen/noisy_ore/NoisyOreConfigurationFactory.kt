@@ -15,6 +15,7 @@ class NoisyOreConfigurationFactory {
         fun fromResources(manager: IResourceManager): NoisyOreConfiguration? {
 
             logger.info("Kotlin test logger")
+            manager.listResources("world/gen/noisy_ore") { true }
 
             return null
         }
