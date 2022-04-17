@@ -24,7 +24,7 @@ class NoisyOreConfigurationFactory {
             logger.info("Reloading Noisy Ore configuration from datapacks...")
 
             val generations = Maps.newHashMap<String, NoisyOreConfiguration.Generation>()
-            val gson = GsonConfigurator.newConfiguredInstance();
+            val gson = GsonConfigurator.newConfiguredInstance()
 
             for ((rl, elem) in resources) {
                 try {
