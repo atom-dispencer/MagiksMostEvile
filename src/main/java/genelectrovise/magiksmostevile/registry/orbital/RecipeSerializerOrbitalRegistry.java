@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital;
 
 import com.google.common.collect.ImmutableMap;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;

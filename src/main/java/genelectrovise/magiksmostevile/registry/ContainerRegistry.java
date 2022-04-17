@@ -18,7 +18,7 @@
 package genelectrovise.magiksmostevile.registry;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.registry.orbital.registries.ContainerOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarScreenManager;
 import genelectrovise.magiksmostevile.tileentity.inscription_table.InscriptionTableScreenManager;
 import net.minecraft.client.gui.ScreenManager;

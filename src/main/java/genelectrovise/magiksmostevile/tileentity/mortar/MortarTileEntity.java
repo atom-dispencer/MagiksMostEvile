@@ -16,8 +16,8 @@ package genelectrovise.magiksmostevile.tileentity.mortar;
 
 import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
 import genelectrovise.magiksmostevile.data.recipe.Usage;
-import genelectrovise.magiksmostevile.registry.orbital.registries.RecipeSerializerOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.registries.TileEntityOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.RecipeSerializerOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.TileEntityOrbitalRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;

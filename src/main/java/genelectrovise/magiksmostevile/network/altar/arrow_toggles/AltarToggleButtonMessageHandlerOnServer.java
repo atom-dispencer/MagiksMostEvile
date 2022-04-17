@@ -20,7 +20,7 @@ package genelectrovise.magiksmostevile.network.altar.arrow_toggles;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.network.altar.AltarNetworkingManager;
 import genelectrovise.magiksmostevile.network.altar.arrow_toggles.AltarToggleButtonMessageToServer.ToggleDirection;
-import genelectrovise.magiksmostevile.registry.orbital.registries.RitualOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.RitualOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.Ritual;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.player.ServerPlayerEntity;

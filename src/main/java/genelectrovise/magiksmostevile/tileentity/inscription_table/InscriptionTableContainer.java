@@ -16,7 +16,7 @@ package genelectrovise.magiksmostevile.tileentity.inscription_table;
 
 import genelectrovise.magiksmostevile.network.inscription_table.InscriptionTableNetworkingManager;
 import genelectrovise.magiksmostevile.network.inscription_table.button_pressed.ButtonPressedMessageToServer;
-import genelectrovise.magiksmostevile.registry.orbital.registries.ContainerOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.tileentity.CommonContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;

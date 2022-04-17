@@ -18,7 +18,7 @@
 package genelectrovise.magiksmostevile.registry;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.registry.orbital.registries.EntityOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.EntityOrbitalRegistry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;

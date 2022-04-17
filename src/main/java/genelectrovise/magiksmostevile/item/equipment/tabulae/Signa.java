@@ -18,7 +18,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.item.equipment.tabulae.Signum.EnumSignumMaterialType;
-import genelectrovise.magiksmostevile.registry.orbital.registries.ItemOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ItemOrbitalRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 

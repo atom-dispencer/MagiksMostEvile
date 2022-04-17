@@ -12,14 +12,13 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.support.EnumEvileArmorMaterial;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.equipment.armor.EvileArmorBases.AmethystArmorBase;
 import genelectrovise.magiksmostevile.item.equipment.armor.EvileArmorBases.OverPoweredAmethystArmorBase;
 import genelectrovise.magiksmostevile.item.equipment.armor.EvileArmorBases.PoweredAmethystArmorBase;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;

@@ -14,7 +14,7 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.core.support;
 
-import genelectrovise.magiksmostevile.registry.orbital.registries.ItemOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ItemOrbitalRegistry;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;

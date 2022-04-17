@@ -15,7 +15,7 @@
 package genelectrovise.magiksmostevile.tileentity.altar;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.registry.orbital.registries.RitualOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.RitualOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.Ritual;
 import net.minecraft.util.ResourceLocation;
 

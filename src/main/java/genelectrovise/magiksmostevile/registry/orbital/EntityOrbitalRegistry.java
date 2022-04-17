@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
@@ -23,8 +23,6 @@ import genelectrovise.magiksmostevile.entity.boss.tinder_and_cinder.TinderAndCin
 import genelectrovise.magiksmostevile.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.entity.vampire_bat.VampireBatEntity;
 import genelectrovise.magiksmostevile.item.spawn_egg.VampireBatSpawnEgg;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;

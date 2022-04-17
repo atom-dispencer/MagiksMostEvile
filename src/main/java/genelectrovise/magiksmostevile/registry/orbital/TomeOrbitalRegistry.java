@@ -12,27 +12,25 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import net.minecraft.item.Food;
 import net.minecraft.item.Item;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.RegistryObject;
 
-public class FoodOrbitalRegistry implements IOrbitalRegistry {
+public class TomeOrbitalRegistry implements IOrbitalRegistry {
 
-    // =========FOOD========================================================================================================================
-    public static final RegistryObject<Item> AMETHYST_POTATO =
-            ItemOrbitalRegistry.ITEMS.register("amethyst_potato",
-                    () -> new Item(new Item.Properties().food((new Food.Builder()).nutrition(3).saturationMod(0.8F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 400, 1), 1.0F).fast().build())
-                            .tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    // =========TOMES======================================================================================================================
+    public static final RegistryObject<Item> TOME_CONVERT_AMETHYST =
+            ItemOrbitalRegistry.ITEMS.register("tome_convert_amethyst",
+                    () -> new Item(new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    public static final RegistryObject<Item> TOME_SUMMON_FLAPPY =
+            ItemOrbitalRegistry.ITEMS.register("tome_summon_flappy",
+                    () -> new Item(new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
     @Override
     public int priority() {
-        return 8;
+        return 6;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class FoodOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public String name() {
-        return "foods";
+        return "tomes";
     }
 
 }

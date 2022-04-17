@@ -12,13 +12,12 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.equipment.staff.AmethystStaff;
 import genelectrovise.magiksmostevile.item.equipment.staff.DebuggingStaff;
 import genelectrovise.magiksmostevile.item.equipment.staff.DimensionWarpingStaff;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.RegistryObject;

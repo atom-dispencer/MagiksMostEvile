@@ -19,7 +19,7 @@ package genelectrovise.magiksmostevile.particle;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.particle.glyph.GlyphParticleFactory;
-import genelectrovise.magiksmostevile.registry.orbital.registries.ParticleOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ParticleOrbitalRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

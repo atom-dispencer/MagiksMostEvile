@@ -22,7 +22,7 @@ import genelectrovise.magiksmostevile.network.glyph.GlyphMessageToClient;
 import genelectrovise.magiksmostevile.network.glyph.GlyphNetworkingManager;
 import genelectrovise.magiksmostevile.network.particle.ParticleNetworkingManager;
 import genelectrovise.magiksmostevile.network.particle.ender.EnderParticleMessageToClient;
-import genelectrovise.magiksmostevile.registry.orbital.registries.ItemOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ItemOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.ritual.result.SummonFlappyResultHandler;
 import net.minecraft.item.ItemStack;

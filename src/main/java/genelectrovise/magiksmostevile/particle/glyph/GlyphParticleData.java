@@ -19,7 +19,7 @@ package genelectrovise.magiksmostevile.particle.glyph;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import genelectrovise.magiksmostevile.registry.orbital.registries.ParticleOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ParticleOrbitalRegistry;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;

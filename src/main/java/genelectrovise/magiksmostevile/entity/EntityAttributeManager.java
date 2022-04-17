@@ -21,7 +21,7 @@ import genelectrovise.magiksmostevile.entity.boss.kitty_the_kraken.squid_missile
 import genelectrovise.magiksmostevile.entity.boss.tinder_and_cinder.TinderAndCinderEntity;
 import genelectrovise.magiksmostevile.entity.boss.tom_the_troll.TomTheTrollEntity;
 import genelectrovise.magiksmostevile.entity.vampire_bat.VampireBatEntity;
-import genelectrovise.magiksmostevile.registry.orbital.registries.EntityOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.EntityOrbitalRegistry;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 

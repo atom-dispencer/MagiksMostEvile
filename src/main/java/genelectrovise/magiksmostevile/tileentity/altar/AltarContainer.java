@@ -18,7 +18,7 @@
 package genelectrovise.magiksmostevile.tileentity.altar;
 
 import genelectrovise.magiksmostevile.core.support.TrackableIntegerHolder;
-import genelectrovise.magiksmostevile.registry.orbital.registries.ContainerOrbitalRegistry;
+import genelectrovise.magiksmostevile.registry.orbital.ContainerOrbitalRegistry;
 import genelectrovise.magiksmostevile.tileentity.CommonContainer;
 import genelectrovise.magiksmostevile.tileentity.IchorFluidStorage;
 import net.minecraft.client.Minecraft;

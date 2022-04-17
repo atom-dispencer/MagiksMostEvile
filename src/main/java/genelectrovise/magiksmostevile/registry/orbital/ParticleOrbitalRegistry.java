@@ -13,7 +13,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package genelectrovise.magiksmostevile.registry.orbital.registries;
+package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.particle.glyph.GlyphParticleData;
