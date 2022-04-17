@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.world.noisy_ore;
+package genelectrovise.magiksmostevile.world.noisyore;
 
 import com.google.common.primitives.Ints;
 import genelectrovise.magiksmostevile.core.reference.WorldReference;

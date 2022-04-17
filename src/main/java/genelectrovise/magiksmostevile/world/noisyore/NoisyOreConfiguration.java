@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.world.noisy_ore;
+package genelectrovise.magiksmostevile.world.noisyore;
 
 import com.google.common.collect.Maps;
 import genelectrovise.magiksmostevile.gson.GsonConfigurator;

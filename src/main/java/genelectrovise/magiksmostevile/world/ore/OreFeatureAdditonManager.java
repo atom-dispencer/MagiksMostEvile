@@ -15,7 +15,7 @@
 package genelectrovise.magiksmostevile.world.ore;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.world.noisy_ore.NoisyOreFeature;
+import genelectrovise.magiksmostevile.world.noisyore.NoisyOreFeature;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -30,10 +30,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class OreFeatureAdditonManager {
 
     /**
-     * Apply {@value #overworldOres()}, {@value #netherOres} and {@value #endOres} to {@link Biome}s of
+     * Apply ores to {@link Biome}s of
      * their various {@link Biome.Category}.
-     *
-     * @param event
      */
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void registerOres(final BiomeLoadingEvent event) {
@@ -69,8 +67,6 @@ public class OreFeatureAdditonManager {
      * Convenience method to tidy up {@link #registerOres(BiomeLoadingEvent)} by abstracting away
      * {@link BiomeGenerationSettingsBuilder} calls.
      *
-     * @param builder
-     * @param feature
      */
     private static void registerTo(BiomeGenerationSettingsBuilder builder,
                                    ConfiguredFeature<?, ?> feature) {

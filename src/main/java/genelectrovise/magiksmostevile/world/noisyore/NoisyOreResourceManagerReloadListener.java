@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.world.noisy_ore;
+package genelectrovise.magiksmostevile.world.noisyore;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

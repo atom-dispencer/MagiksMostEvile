@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.world.noisy_ore;
+package genelectrovise.magiksmostevile.world.noisyore;
 
 import com.mojang.serialization.Codec;
 import lombok.Getter;
@@ -20,7 +20,7 @@ import java.util.Random;
 /**
  * Generates ores customly.
  * <p>
- * Configurable through datapacks/resourcepacks (see {@link NoisyOreFeature#CUSTOM_ORE_GENERATION_SETTINGS_LOCATION}).
+ * Configurable through datapacks/resourcepacks.
  * <p>
  * Uses {@link net.minecraft.world.gen.SimplexNoiseGenerator} to generate a chunk-by-chunk map of probabilities of placement for each type of ore, in order to allow ores to generate in regional clusters.
  * <p>
