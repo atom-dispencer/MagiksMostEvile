@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.world.gen.noisy_ore;
+package genelectrovise.magiksmostevile.world.noisy_ore;
 
 import net.minecraft.resources.IResourceManager
 import org.apache.logging.log4j.LogManager

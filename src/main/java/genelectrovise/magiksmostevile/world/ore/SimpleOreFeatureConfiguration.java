@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen.ore;
+package genelectrovise.magiksmostevile.world.ore;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.feature.OreFeatureConfig;

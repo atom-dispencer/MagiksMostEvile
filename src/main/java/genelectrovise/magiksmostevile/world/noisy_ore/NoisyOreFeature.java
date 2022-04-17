@@ -1,9 +1,8 @@
-package genelectrovise.magiksmostevile.world.gen.noisy_ore;
+package genelectrovise.magiksmostevile.world.noisy_ore;
 
 import com.mojang.serialization.Codec;
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;

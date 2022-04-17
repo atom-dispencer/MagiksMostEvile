@@ -12,10 +12,10 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen.structure.shrine;
+package genelectrovise.magiksmostevile.world.structure.shrine;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.world.gen.EnumFeatureLocation;
+import genelectrovise.magiksmostevile.world.EnumFeatureLocation;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;

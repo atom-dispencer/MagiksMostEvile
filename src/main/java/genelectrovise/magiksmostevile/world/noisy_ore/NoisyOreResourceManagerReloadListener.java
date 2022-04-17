@@ -1,16 +1,12 @@
-package genelectrovise.magiksmostevile.world.gen.noisy_ore;
+package genelectrovise.magiksmostevile.world.noisy_ore;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import genelectrovise.magiksmostevile.gson.GsonConfigurator;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.resource.IResourceType;
-import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

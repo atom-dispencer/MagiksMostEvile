@@ -12,13 +12,13 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen.structure.shrine;
+package genelectrovise.magiksmostevile.world.structure.shrine;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Dynamic;
-import genelectrovise.magiksmostevile.world.gen.EnumFeatureLocation;
-import genelectrovise.magiksmostevile.world.gen.StructureUtil;
-import genelectrovise.magiksmostevile.world.gen.structure.registry.StructurePieces;
+import genelectrovise.magiksmostevile.world.EnumFeatureLocation;
+import genelectrovise.magiksmostevile.world.StructureUtil;
+import genelectrovise.magiksmostevile.world.structure.registry.StructurePieces;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTDynamicOps;

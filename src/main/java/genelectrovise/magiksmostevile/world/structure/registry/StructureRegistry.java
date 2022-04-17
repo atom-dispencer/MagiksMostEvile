@@ -12,26 +12,21 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen.structure.registry;
+package genelectrovise.magiksmostevile.world.structure.registry;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.world.gen.structure.shrine.OvergroundShrineStructurePiece;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.structure.IStructurePieceType;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-public class StructurePieces {
+@Mod.EventBusSubscriber(modid = MagiksMostEvile.MODID, bus = Bus.MOD)
+public class StructureRegistry {
 
-    public static void registerAllPieces() {
-        registerStructurePiece(OVERGROUND_SHRINE_PIECE,
-                new ResourceLocation(MagiksMostEvile.MODID, "overground_shrine_piece"));
-    }    public static final IStructurePieceType OVERGROUND_SHRINE_PIECE =
-            OvergroundShrineStructurePiece::new;
-
-    public static void registerStructurePiece(IStructurePieceType structurePiece,
-                                              ResourceLocation rl) {
-        Registry.register(Registry.STRUCTURE_PIECE, rl, structurePiece);
+    @SubscribeEvent
+    public static void registerStructures(RegistryEvent.Register<Structure<?>> event) {
+        ModStructures.registerStructures(event);
+        ModConfiguredStructures.registerConfiguredStructures();
     }
-
-
 }

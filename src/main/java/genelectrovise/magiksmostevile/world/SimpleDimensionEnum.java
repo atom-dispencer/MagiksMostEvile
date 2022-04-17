@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen;
+package genelectrovise.magiksmostevile.world;
 
 public enum SimpleDimensionEnum {
     OVERWORLD, NETHER, END;

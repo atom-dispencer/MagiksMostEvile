@@ -12,11 +12,11 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen.structure.registry;
+package genelectrovise.magiksmostevile.world.structure.registry;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.world.gen.EnumFeatureLocation;
-import genelectrovise.magiksmostevile.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
+import genelectrovise.magiksmostevile.world.EnumFeatureLocation;
+import genelectrovise.magiksmostevile.world.structure.shrine.OvergroundShrineFeatureConfig;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;

@@ -14,7 +14,7 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.registry.orbital;
 
-import genelectrovise.magiksmostevile.world.gen.EnumFeatureLocation;
+import genelectrovise.magiksmostevile.world.EnumFeatureLocation;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.Structure;

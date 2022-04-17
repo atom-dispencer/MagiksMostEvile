@@ -20,7 +20,7 @@ import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
-import genelectrovise.magiksmostevile.world.gen.noisy_ore.NoisyOreConfiguration;
+import genelectrovise.magiksmostevile.world.noisy_ore.NoisyOreConfiguration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

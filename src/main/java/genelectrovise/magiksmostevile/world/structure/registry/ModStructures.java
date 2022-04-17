@@ -12,13 +12,13 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen.structure.registry;
+package genelectrovise.magiksmostevile.world.structure.registry;
 
 import com.google.common.collect.ImmutableMap;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.reference.ReflectionUtil;
-import genelectrovise.magiksmostevile.world.gen.structure.shrine.OvergroundShrineFeatureConfig;
-import genelectrovise.magiksmostevile.world.gen.structure.shrine.OvergroundShrineStructure;
+import genelectrovise.magiksmostevile.world.structure.shrine.OvergroundShrineFeatureConfig;
+import genelectrovise.magiksmostevile.world.structure.shrine.OvergroundShrineStructure;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.feature.structure.Structure;

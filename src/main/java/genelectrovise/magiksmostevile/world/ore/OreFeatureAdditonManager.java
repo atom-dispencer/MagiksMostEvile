@@ -12,10 +12,10 @@
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
  * If not, see <https://www.gnu.org/licenses/>.
  *******************************************************************************/
-package genelectrovise.magiksmostevile.world.gen.ore;
+package genelectrovise.magiksmostevile.world.ore;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.world.gen.noisy_ore.NoisyOreFeature;
+import genelectrovise.magiksmostevile.world.noisy_ore.NoisyOreFeature;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
