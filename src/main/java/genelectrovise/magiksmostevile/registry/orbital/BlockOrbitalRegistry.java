@@ -15,8 +15,6 @@
 package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarBlock;
 import genelectrovise.magiksmostevile.tileentity.amethyst_crystal.AmethystCrystalBlock;
 import genelectrovise.magiksmostevile.tileentity.inscription_table.InscriptionTableBlock;
@@ -47,19 +45,19 @@ public class BlockOrbitalRegistry implements IOrbitalRegistry {
             BLOCKS.register("lead_block", () -> new Block(Block.Properties.of(Material.METAL, MaterialColor.METAL).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL).strength(5F, 6F)));
 
     // Amethyst Ore
-    public static final RegistryObject<Block> AMETHYST_ORE_OVERWORLD = BLOCKS.register("amethyst_ore_overworld",
+    public static final RegistryObject<Block> AMETHYST_ORE_STONE = BLOCKS.register("amethyst_ore_stone",
             () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(1.5F, 6F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> AMETHYST_ORE_NETHER = BLOCKS.register("amethyst_ore_nether",
+    public static final RegistryObject<Block> AMETHYST_ORE_NETHERRACK = BLOCKS.register("amethyst_ore_netherrack",
             () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.NETHER).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(0.4F, 0.4F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> AMETHYST_ORE_END = BLOCKS.register("amethyst_ore_end",
+    public static final RegistryObject<Block> AMETHYST_ORE_END_STONE = BLOCKS.register("amethyst_ore_end_stone",
             () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(3F, 9F).requiresCorrectToolForDrops()));
 
     // Lead Ore
-    public static final RegistryObject<Block> LEAD_ORE_OVERWORLD = BLOCKS.register("lead_ore_overworld",
+    public static final RegistryObject<Block> LEAD_ORE_STONE = BLOCKS.register("lead_ore_stone",
             () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(1.5F, 6F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> LEAD_ORE_NETHER = BLOCKS.register("lead_ore_nether",
+    public static final RegistryObject<Block> LEAD_ORE_NETHERRACK = BLOCKS.register("lead_ore_netherrack",
             () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.NETHER).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(0.4F, 0.4F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> LEAD_ORE_END = BLOCKS.register("lead_ore_end",
+    public static final RegistryObject<Block> LEAD_ORE_END_STONE = BLOCKS.register("lead_ore_end_stone",
             () -> new Block(Block.Properties.of(Material.STONE, MaterialColor.SAND).harvestTool(ToolType.PICKAXE).sound(SoundType.CORAL_BLOCK).strength(3F, 9F).requiresCorrectToolForDrops()));
 
     // Tile entities

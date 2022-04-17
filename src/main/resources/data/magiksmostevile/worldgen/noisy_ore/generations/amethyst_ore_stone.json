@@ -9,7 +9,7 @@
     "replace": [
       "minecraft:stone"
     ],
-    "with": "magiksmostevile:amethyst_ore_overworld"
+    "with": "magiksmostevile:amethyst_ore_stone"
   },
   "dimensions": {
     "__comment__": "Configure per dimension",

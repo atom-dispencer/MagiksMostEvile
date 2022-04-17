@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#magiksmostevile:ores/amethyst"
+    "#magiksmostevile:ores/amethyst",
+    "#magiksmostevile:ores/lead"
   ]
 }

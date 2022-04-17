@@ -27,20 +27,20 @@ public class BlockItemOrbitalRegistry implements IOrbitalRegistry {
             ItemOrbitalRegistry.ITEMS.register("lead_block", () -> new BlockItem(BlockOrbitalRegistry.LEAD_BLOCK.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
     // Amethyst Ore
-    public static final RegistryObject<Item> AMETHYST_ORE_OVERWORLD_ITEM = ItemOrbitalRegistry.ITEMS.register("amethyst_ore_overworld",
-            () -> new BlockItem(BlockOrbitalRegistry.AMETHYST_ORE_OVERWORLD.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
-    public static final RegistryObject<Item> AMETHYST_ORE_NETHER_ITEM =
-            ItemOrbitalRegistry.ITEMS.register("amethyst_ore_nether", () -> new BlockItem(BlockOrbitalRegistry.AMETHYST_ORE_NETHER.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
-    public static final RegistryObject<Item> AMETHYST_ORE_END_ITEM =
-            ItemOrbitalRegistry.ITEMS.register("amethyst_ore_end", () -> new BlockItem(BlockOrbitalRegistry.AMETHYST_ORE_END.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    public static final RegistryObject<Item> AMETHYST_ORE_STONE_ITEM = ItemOrbitalRegistry.ITEMS.register("amethyst_ore_stone",
+            () -> new BlockItem(BlockOrbitalRegistry.AMETHYST_ORE_STONE.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    public static final RegistryObject<Item> AMETHYST_ORE_NETHERRACK_ITEM =
+            ItemOrbitalRegistry.ITEMS.register("amethyst_ore_netherrack", () -> new BlockItem(BlockOrbitalRegistry.AMETHYST_ORE_NETHERRACK.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    public static final RegistryObject<Item> AMETHYST_ORE_END_STONE_ITEM =
+            ItemOrbitalRegistry.ITEMS.register("amethyst_ore_end_stone", () -> new BlockItem(BlockOrbitalRegistry.AMETHYST_ORE_END_STONE.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
     // Lead Ore
-    public static final RegistryObject<Item> LEAD_ORE_OVERWORLD_ITEM =
-            ItemOrbitalRegistry.ITEMS.register("lead_ore_overworld", () -> new BlockItem(BlockOrbitalRegistry.LEAD_ORE_OVERWORLD.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
-    public static final RegistryObject<Item> LEAD_ORE_NETHER_ITEM =
-            ItemOrbitalRegistry.ITEMS.register("lead_ore_nether", () -> new BlockItem(BlockOrbitalRegistry.LEAD_ORE_NETHER.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
-    public static final RegistryObject<Item> LEAD_ORE_END_ITEM =
-            ItemOrbitalRegistry.ITEMS.register("lead_ore_end", () -> new BlockItem(BlockOrbitalRegistry.LEAD_ORE_END.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    public static final RegistryObject<Item> LEAD_ORE_STONE_ITEM =
+            ItemOrbitalRegistry.ITEMS.register("lead_ore_stone", () -> new BlockItem(BlockOrbitalRegistry.LEAD_ORE_STONE.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    public static final RegistryObject<Item> LEAD_ORE_NETHERRACK_ITEM =
+            ItemOrbitalRegistry.ITEMS.register("lead_ore_netherrack", () -> new BlockItem(BlockOrbitalRegistry.LEAD_ORE_NETHERRACK.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
+    public static final RegistryObject<Item> LEAD_ORE_END_STONE_ITEM =
+            ItemOrbitalRegistry.ITEMS.register("lead_ore_end_stone", () -> new BlockItem(BlockOrbitalRegistry.LEAD_ORE_END_STONE.get(), new Item.Properties().tab(EvileItemGroup.MAGIKS_MOST_EVILE)));
 
     // Tile entity
     public static final RegistryObject<Item> AMETHYST_CRYSTAL_ITEM =

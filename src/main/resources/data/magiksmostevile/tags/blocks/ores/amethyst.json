@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "magiksmostevile:amethyst_ore_overworld",
-    "magiksmostevile:amethyst_ore_nether",
-    "magiksmostevile:amethyst_ore_end"
+    "magiksmostevile:amethyst_ore_stone",
+    "magiksmostevile:amethyst_ore_netherrack",
+    "magiksmostevile:amethyst_ore_end_stone"
   ]
 }
