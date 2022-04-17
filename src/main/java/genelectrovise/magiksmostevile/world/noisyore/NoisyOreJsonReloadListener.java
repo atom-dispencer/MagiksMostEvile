@@ -19,16 +19,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
-public class NoisyOreResourceManagerReloadListener extends JsonReloadListener {
+public class NoisyOreJsonReloadListener extends JsonReloadListener {
 
-    public static final Logger LOGGER = LogManager.getLogger(NoisyOreResourceManagerReloadListener.class);
+    public static final Logger LOGGER = LogManager.getLogger(NoisyOreJsonReloadListener.class);
 
     public static final String ROOT_PATH = "path";
     public static final String MIDDLE_PATH = "worldgen/noisy_ore/generations";
 
     protected NoisyOreConfiguration config;
 
-    public NoisyOreResourceManagerReloadListener(Gson gson, String s) {
+    public NoisyOreJsonReloadListener(Gson gson, String s) {
         super(gson, s);
     }
 
@@ -41,7 +41,7 @@ public class NoisyOreResourceManagerReloadListener extends JsonReloadListener {
         Collection<ResourceLocation> resources = resourceManager.listResources(ROOT_PATH, path -> (path.contains(MIDDLE_PATH) && path.endsWith(".json")));
         Gson gson = GsonConfigurator.newConfiguredInstance();
         Map<String, NoisyOreConfiguration.Generation> map = resources.stream().collect(Collectors.toMap(
-                NoisyOreResourceManagerReloadListener::mapKey,
+                NoisyOreJsonReloadListener::mapKey,
                 rl -> mapValue(rl, gson, resourceManager)
         ));
         NoisyOreConfiguration.INSTANCE = new NoisyOreConfiguration(map);

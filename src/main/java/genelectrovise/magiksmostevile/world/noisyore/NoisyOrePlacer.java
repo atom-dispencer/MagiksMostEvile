@@ -16,9 +16,9 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-public class NoisyOrePlacementHandler {
+public class NoisyOrePlacer {
 
-    public static final Logger LOGGER = LogManager.getLogger(NoisyOrePlacementHandler.class);
+    public static final Logger LOGGER = LogManager.getLogger(NoisyOrePlacer.class);
 
     /**
      * Places a {@link NoisyOreFeature} in the world. Abstracted from {@link NoisyOreFeature#place(ISeedReader, ChunkGenerator, Random, BlockPos, NoFeatureConfig)}

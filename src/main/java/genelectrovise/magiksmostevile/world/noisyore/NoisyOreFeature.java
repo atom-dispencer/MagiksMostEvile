@@ -50,6 +50,6 @@ public class NoisyOreFeature extends Feature<NoFeatureConfig> {
      */
     @Override
     public boolean place(@Nonnull ISeedReader iSeedReader, @Nonnull ChunkGenerator chunkGenerator, @Nonnull Random random, @Nonnull BlockPos blockPos, @Nonnull NoFeatureConfig noFeatureConfig) {
-        return NoisyOrePlacementHandler.place(iSeedReader, chunkGenerator, random, blockPos, noFeatureConfig);
+        return NoisyOrePlacer.place(iSeedReader, chunkGenerator, random, blockPos, noFeatureConfig);
     }
 }
