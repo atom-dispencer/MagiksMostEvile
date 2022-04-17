@@ -30,9 +30,9 @@ public class RitualOrbitalRegistry implements IOrbitalRegistry {
 
     // =========RITUALS=====================================================================================================================
     public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL =
-            RITUALS.register("convert_amethyst_ritual", () -> new ConvertAmethystRitual());
+            RITUALS.register("convert_amethyst_ritual", ConvertAmethystRitual::new);
     public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL =
-            RITUALS.register("summon_flappy_ritual", () -> new SummonFlappyRitual());
+            RITUALS.register("summon_flappy_ritual", SummonFlappyRitual::new);
 
     @Override
     public int priority() {
