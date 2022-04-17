@@ -18,7 +18,7 @@ public class NoisyOreConfiguration {
     protected static volatile NoisyOreConfiguration INSTANCE;
 
     public static void onResourceManagerReload(AddReloadListenerEvent event) {
-        event.addListener(new NoisyOreJsonReloadListener(GsonConfigurator.newConfiguredInstance(), "unknown"));
+        event.addListener(new NoisyOreJsonReloadListener(GsonConfigurator.newConfiguredInstance(), NoisyOreJsonReloadListener.ROOT_DIRECTORY));
     }
 
     /**
