@@ -3,17 +3,27 @@ package genelectrovise.magiksmostevile.config;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextComponentUtils;
+
+import javax.annotation.Nonnull;
 
 /**
  * Allows editing common and client config in game. Currently, freezes the game GUI and you have to ESC out.
+ *
+ * @see net.minecraft.client.gui.widget.Widget
  */
 public class ForgeConfigGuiScreen extends Screen {
 
-    public ForgeConfigGuiScreen(Minecraft minecraft, Screen screenIn) {
+    private Minecraft minecraft;
+    private Screen parentScreen;
+
+    /**
+     * @param minecraft    The global {@link Minecraft} instance.
+     * @param parentScreen I suppose that this is the parent screen which spawned this screen?
+     */
+    public ForgeConfigGuiScreen(Minecraft minecraft, Screen parentScreen) {
         super(new StringTextComponent(MagiksMostEvile.MODID + " Configuration"));
     }
 
@@ -31,21 +41,36 @@ public class ForgeConfigGuiScreen extends Screen {
 
     @Override
     public void onClose() {
-         super.onClose();
+        super.onClose();
+    }
+
+    /**
+     * @param keyId       The numerical ID of the key pressed.
+     * @param unknownInt1 Unknown purpose. Other GUIs ignore so I will too.
+     * @param unknownInt2 Unknown purpose. Other GUIs ignore so I will too.
+     * @return Whatever the endless chain of super.keyPressed passes back down.
+     */
+    @Override
+    public boolean keyPressed(int keyId, int unknownInt1, int unknownInt2) {
+        return super.keyPressed(keyId, unknownInt1, unknownInt2);
+    }
+
+    /**
+     * Don't forget about {@link AbstractGui#blit(MatrixStack, int, int, int, int, int, int)}
+     *
+     * @param stack        The stack on which to render things.
+     * @param unknownInt1  Unknown purpose. Other GUIs ignore so I will too.
+     * @param unknownInt2  Unknown purpose. Other GUIs ignore so I will too.
+     * @param unknownFloat Unknown purpose. Other GUIs ignore so I will too.
+     */
+    @Override
+    public void render(@Nonnull MatrixStack stack, int unknownInt1, int unknownInt2, float unknownFloat) {
+
+        super.render(stack, unknownInt1, unknownInt2, unknownFloat);
     }
 
     @Override
-    public boolean keyPressed(int keyId, int p_231046_2_, int p_231046_3_) {
-        return super.keyPressed(keyId, p_231046_2_, p_231046_3_);
-    }
-
-    @Override
-    public void render(MatrixStack stack, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-        super.render(stack, p_230430_2_, p_230430_3_, p_230430_4_);
-    }
-
-    @Override
-    public void renderBackground(MatrixStack p_230446_1_) {
-        super.renderBackground(p_230446_1_);
+    public void renderBackground(@Nonnull MatrixStack stack) {
+        super.renderBackground(stack);
     }
 }
