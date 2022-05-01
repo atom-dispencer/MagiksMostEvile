@@ -98,7 +98,7 @@ public class MagiksMostEvile {
         // Register ExtensionPoint<T> of type BiFunction<Minecraft, Screen, Screen>>
         // Factory supplies a BiFunction<Minecraft, Screen, Screen>>
         // ForgeConfigGuiScreen takes Minecraft, Screen. () -> ((mc, sc) -> new)
-        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> ForgeConfigGuiScreen::new);
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (mc, sc) -> new ForgeConfigGuiScreen());
     }
 
     @SubscribeEvent
