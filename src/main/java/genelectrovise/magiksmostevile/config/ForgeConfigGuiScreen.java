@@ -1,4 +1,4 @@
-package genelectrovise.magiksmostevile.core;
+package genelectrovise.magiksmostevile.config;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.Screen;

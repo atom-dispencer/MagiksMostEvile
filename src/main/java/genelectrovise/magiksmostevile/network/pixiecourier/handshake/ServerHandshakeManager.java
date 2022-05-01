@@ -1,7 +1,7 @@
 package genelectrovise.magiksmostevile.network.pixiecourier.handshake;
 
 import com.google.common.collect.Maps;
-import genelectrovise.magiksmostevile.core.Config;
+import genelectrovise.magiksmostevile.config.Config;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;

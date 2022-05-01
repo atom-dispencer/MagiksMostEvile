@@ -14,6 +14,8 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.core;
 
+import genelectrovise.magiksmostevile.config.Config;
+import genelectrovise.magiksmostevile.config.ForgeConfigGuiScreen;
 import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
