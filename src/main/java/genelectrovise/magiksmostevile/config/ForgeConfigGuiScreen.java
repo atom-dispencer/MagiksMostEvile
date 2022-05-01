@@ -1,16 +1,20 @@
 package genelectrovise.magiksmostevile.config;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import genelectrovise.magiksmostevile.core.MagiksMostEvile;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextComponentUtils;
 
 /**
  * Allows editing common and client config in game. Currently, freezes the game GUI and you have to ESC out.
  */
 public class ForgeConfigGuiScreen extends Screen {
 
-    public ForgeConfigGuiScreen() {
-        super(new StringTextComponent("Magiks Most Evile Config"));
+    public ForgeConfigGuiScreen(Minecraft minecraft, Screen screenIn) {
+        super(new StringTextComponent(MagiksMostEvile.MODID + " Configuration"));
     }
 
     @Override

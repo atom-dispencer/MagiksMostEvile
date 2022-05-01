@@ -95,13 +95,10 @@ public class MagiksMostEvile {
         LOGGER.debug("Registering MME client only events");
         MOD_EVENT_BUS.register(ParticleClientStartup.class);
 
-        ModLoadingContext.get().registerExtensionPoint(
-                ExtensionPoint.CONFIGGUIFACTORY, // ExtensionPoint<T> of type BiFunction<Minecraft, Screen, Screen>>
-                () -> { // Supplier of a BiFunction<Minecraft, Screen, Screen>>
-                    return (minecraft, screenIn) -> { // Takes in Minecraft, Screen
-                        return new ForgeConfigGuiScreen();
-                    };
-                });
+        // Register ExtensionPoint<T> of type BiFunction<Minecraft, Screen, Screen>>
+        // Factory supplies a BiFunction<Minecraft, Screen, Screen>>
+        // ForgeConfigGuiScreen takes Minecraft, Screen
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> ForgeConfigGuiScreen::new);
     }
 
     @SubscribeEvent
