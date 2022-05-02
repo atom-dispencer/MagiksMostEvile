@@ -1,6 +1,8 @@
 package genelectrovise.magiksmostevile.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class Config {
@@ -8,9 +10,9 @@ public class Config {
     // Common config
     public static class Common {
 
-        public final ForgeConfigSpec.ConfigValue<Boolean> runIntegrationTests;
+        public final BooleanValue runIntegrationTests;
 
-        protected Common(ForgeConfigSpec.Builder builder) {
+        protected Common(Builder builder) {
             builder.push("Developer Options");
             this.runIntegrationTests = builder
                     .comment("Runs a suite of integration tests during mod loading, allowing testing of mod systems in a runtime environment. Impacts startup time.")
@@ -26,9 +28,9 @@ public class Config {
      */
     public static class Server {
 
-        public final ForgeConfigSpec.ConfigValue<Boolean> useCourierHandshake;
+        public final BooleanValue useCourierHandshake;
 
-        protected Server(ForgeConfigSpec.Builder builder) {
+        protected Server(Builder builder) {
             builder.push("Courier");
             this.useCourierHandshake = builder
                     .comment("Require joining clients to complete a handshake to check the compatibility of items in their registry.")
