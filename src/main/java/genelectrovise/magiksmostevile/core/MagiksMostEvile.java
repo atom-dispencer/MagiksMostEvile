@@ -16,6 +16,7 @@ package genelectrovise.magiksmostevile.core;
 
 import genelectrovise.magiksmostevile.config.Config;
 import genelectrovise.magiksmostevile.config.ForgeConfigGuiScreen;
+import genelectrovise.magiksmostevile.config.PrimitiveWidgetFactory;
 import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
@@ -98,7 +99,7 @@ public class MagiksMostEvile {
         // Register ExtensionPoint<T> of type BiFunction<Minecraft, Screen, Screen>>
         // Factory supplies a BiFunction<Minecraft, Screen, Screen>>
         // ForgeConfigGuiScreen takes Minecraft, Screen. () -> ((mc, sc) -> new)
-        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (mc, sc) -> new ForgeConfigGuiScreen());
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (mc, sc) -> new ForgeConfigGuiScreen(new PrimitiveWidgetFactory()));
     }
 
     @SubscribeEvent

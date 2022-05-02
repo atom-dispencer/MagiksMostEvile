@@ -13,6 +13,7 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,21 +32,39 @@ public class ForgeConfigGuiScreen extends Screen {
     private static final Logger LOGGER = LogManager.getLogger(ForgeConfigGuiScreen.class);
 
     private Set<? extends UnmodifiableConfig.Entry> values;
+    private IWidgetFactory factory;
     private Map<String, Widget> widgets = Maps.newHashMap();
 
-    public ForgeConfigGuiScreen() {
+    public ForgeConfigGuiScreen(IWidgetFactory factory) {
         super(new StringTextComponent(MagiksMostEvile.MODID + " Configuration"));
-        values = Sets.newHashSet();
+        this.factory = factory;
+        this.values = Sets.newHashSet();
     }
 
     @Override
     protected void init() {
         super.init();
 
-        UnmodifiableConfig commonValues = Config.COMMON_SPEC.getValues();
-        values = commonValues.entrySet();
+        values = Config.COMMON_SPEC.getValues().entrySet();
+        generateWidgets(values, widgets);
 
         // onClose();
+    }
+
+    private void generateWidgets(Set<? extends UnmodifiableConfig.Entry> values, Map<String, Widget> widgets) {
+
+
+        for (UnmodifiableConfig.Entry entry : values) {
+            Object value = entry.getValue();
+
+            if (value instanceof ForgeConfigSpec.ConfigValue) {
+                ForgeConfigSpec.ConfigValue<?> configValue = (ForgeConfigSpec.ConfigValue<?>) value;
+                Widget widget = factory.create(configValue
+                        .getPath()
+                        .get(configValue.getPath().size() - 1), configValue);
+                widgets.put(String.join("/", configValue.getPath()), widget);
+            }
+        }
     }
 
     @Override
