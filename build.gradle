@@ -1,12 +1,14 @@
 buildscript {
-    ext.kotlin_version = '1.0.0'
+    ext.kotlin_version = '1.6.10'
     repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.parchmentmc.org' }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 
@@ -19,10 +21,10 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'kotlin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-// apply plugin: 'maven' // Removed in Gradle 7
 apply plugin: 'java'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-def mcVersion = "1.16.5"
+def mcVersion = "1.18.2"
 def modVersion = "1.0"
 def buildVersion = "0007"
 def buildType = "alpha" // alpha, beta, release
@@ -36,7 +38,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'parchment', version: '2022.05.02-1.18.2'
 
     runs {
         client {
@@ -96,8 +98,8 @@ dependencies {
 
     // Test
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
-    testImplementation 'org.mockito:mockito-inline:4.4.0'
-    testImplementation 'net.bytebuddy:byte-buddy-agent:1.12.9'
+    testImplementation 'org.mockito:mockito-inline:4.5.1'
+    testImplementation 'net.bytebuddy:byte-buddy-agent:1.12.10'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
