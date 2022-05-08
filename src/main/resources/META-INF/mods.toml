@@ -9,23 +9,21 @@ displayName="Magiks Most Evile"
 #updateJSONURL="http://example.net/"
 displayURL="https://github.com/GenElectrovise/MagiksMostEvile/"
 logoFile="magiksmostevile.png"
-credits="All credit to Flappy.                        And no others." #optional
+credits="All credit to Flappy.                        And no others."
 authors="GenElectrovise"
 description='''
 Makes Minecraft a bit more evile and a lot more magiky.
 '''
-[[dependencies.magiksmostevile]] #optional
+[[dependencies.magiksmostevile]]
     modId="forge" 
     mandatory=true
-    versionRange="[36,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    versionRange="[40,)"
     ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
 [[dependencies.magiksmostevile]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5]"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"

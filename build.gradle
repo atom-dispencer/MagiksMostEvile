@@ -24,6 +24,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
+def forgeVersion = "40.1.19"
 def mcVersion = "1.18.2"
 def modVersion = "1.0"
 def buildVersion = "0007"
@@ -33,7 +34,7 @@ group = "genelectrovise.magiksmostevile"
 archivesBaseName = "magiksmostevile"
 version = "MC-" + mcVersion + "_" + buildType + "-" + modVersion + "-" + buildVersion
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 17 to end users, so your mod should target Java 8.
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
@@ -90,7 +91,7 @@ dependencies {
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version:'1.18.22'
 
     // General
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
+    minecraft 'net.minecraftforge:forge:' + mcVersion + '-' + forgeVersion
     implementation group: 'org.reflections', name: 'reflections', version: '0.9.12'
     implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
     implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
@@ -163,26 +164,7 @@ publishing {
     }
 }
 
-// Cursegradle - Publish the artifact to curseforge https://www.curseforge.com/minecraft/mc-mods/magiksmostevile/
-curseforge {
-    project {
-        apiKey = project.findProperty("curseforge.key") // This should really be in a gradle.properties file
-        id = '391212' // Project description -> 'About Project' sidebar -> Project ID
-        changelog = file('changelog.md')
-        releaseType = buildType
 
-        mainArtifact(jar) {
-            displayName = archivesBaseName + '-' + version
-            //relations {
-            //requiredDependency 'railcraft' // Railcraft is required
-            //embeddedLibrary 'cofhlib' // CoFH Lib is shipped with the artifact
-            //optionalDependency 'notenoughitems' // Not Enough Items is an optional addon
-            //tool 'worldedit' // World Edit is a compatible tool
-            //incompatible 'buildcraft' // BuildCraft is not compatible
-            //}
-        }
-    }
-}
 
 // Configure the test task
 test {
