@@ -15,24 +15,26 @@
 package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.ritual.ConvertAmethystRitual;
 import genelectrovise.magiksmostevile.ritual.Ritual;
 import genelectrovise.magiksmostevile.ritual.SummonFlappyRitual;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryBuilder;
+import net.minecraftforge.registries.RegistryObject;
 
 public class RitualOrbitalRegistry implements IOrbitalRegistry {
 
-    public static final DeferredRegister<Ritual> RITUALS =
-            DeferredRegister.create(Ritual.class, MagiksMostEvile.MODID);
+    public static final DeferredRegister<Ritual> RITUALS = DeferredRegister.create(new ResourceLocation(MagiksMostEvile.MODID, "rituals"), MagiksMostEvile.MODID);
+
+    static {
+        RITUALS.makeRegistry(Ritual.class, RegistryBuilder::new);
+    }
 
     // =========RITUALS=====================================================================================================================
-    public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL =
-            RITUALS.register("convert_amethyst_ritual", ConvertAmethystRitual::new);
-    public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL =
-            RITUALS.register("summon_flappy_ritual", SummonFlappyRitual::new);
+    public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS.register("convert_amethyst_ritual", ConvertAmethystRitual::new);
+    public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL = RITUALS.register("summon_flappy_ritual", SummonFlappyRitual::new);
 
     @Override
     public int priority() {

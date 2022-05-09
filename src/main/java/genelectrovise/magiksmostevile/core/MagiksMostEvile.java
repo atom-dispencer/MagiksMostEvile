@@ -15,28 +15,23 @@
 package genelectrovise.magiksmostevile.core;
 
 import genelectrovise.magiksmostevile.config.Config;
-import genelectrovise.magiksmostevile.config.ForgeConfigGuiScreen;
-import genelectrovise.magiksmostevile.config.PrimitiveWidgetFactory;
 import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
-import genelectrovise.magiksmostevile.core.setup.RegistryCreationManager;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
 import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.world.noisyore.NoisyOreConfiguration;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -76,12 +71,6 @@ public class MagiksMostEvile {
 
     }
 
-    @SubscribeEvent
-    public static void createRegistries(RegistryEvent.NewRegistry event) {
-        LOGGER.debug("Creating MME registries");
-        new RegistryCreationManager().create();
-    }
-
     public static void registerCommonEvents() {
         LOGGER.debug("Registering MagiksMostEvile common events");
         MOD_EVENT_BUS.register(EntityAttributeManager.class);
@@ -95,11 +84,6 @@ public class MagiksMostEvile {
     public static void registerClientEvents(final FMLClientSetupEvent event) {
         LOGGER.debug("Registering MME client only events");
         MOD_EVENT_BUS.register(ParticleClientStartup.class);
-
-        // Register ExtensionPoint<T> of type BiFunction<Minecraft, Screen, Screen>>
-        // Factory supplies a BiFunction<Minecraft, Screen, Screen>>
-        // ForgeConfigGuiScreen takes Minecraft, Screen. () -> ((mc, sc) -> new)
-        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (mc, sc) -> new ForgeConfigGuiScreen(new PrimitiveWidgetFactory()));
     }
 
     @SubscribeEvent
@@ -121,7 +105,7 @@ public class MagiksMostEvile {
     }
 
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(FMLDedicatedServerSetupEvent event) {
         LOGGER.info("MagiksMostEvile is starting on the server...");
     }
 
