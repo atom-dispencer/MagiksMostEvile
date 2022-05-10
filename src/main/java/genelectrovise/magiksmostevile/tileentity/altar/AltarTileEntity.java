@@ -147,7 +147,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
         MagiksMostEvile.LOGGER.debug("getting ritual by resource location! : " + resourceLocation);
 
         ArrayList<Supplier<Ritual>> all = new ArrayList<Supplier<Ritual>>();
-        RitualOrbitalRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
+        RitualOrbitalRegistry.RITUALS_DEFERRED.getEntries().forEach((ritualSupplier) -> all.add(ritualSupplier));
 
         for (Supplier<Ritual> ritualSupplier : all) {
             if (ritualSupplier.get().getRegistryName().toString()

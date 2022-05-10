@@ -19,11 +19,10 @@ package genelectrovise.magiksmostevile.entity.boss.tom_the_troll;
 
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.entity.boss.BossMob;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.world.entity.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
 
 /**
  * @author GenElectrovise 23 Jun 2020

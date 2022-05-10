@@ -55,7 +55,7 @@ public class AltarRitualSelector {
 
         ArrayList<Supplier<Ritual>> ritualSuppliers = new ArrayList<Supplier<Ritual>>();
 
-        RitualOrbitalRegistry.RITUALS.getEntries().forEach((ritualSupplier) -> {
+        RitualOrbitalRegistry.RITUALS_DEFERRED.getEntries().forEach((ritualSupplier) -> {
             ritualSuppliers.add(ritualSupplier);
         });
 
@@ -66,7 +66,7 @@ public class AltarRitualSelector {
         }
 
         MagiksMostEvile.LOGGER.error("No valid ritual of ID " + location + " in ritual registry!");
-        MagiksMostEvile.LOGGER.debug("Registry: \n " + RitualOrbitalRegistry.RITUALS);
+        MagiksMostEvile.LOGGER.debug("Registry: \n " + RitualOrbitalRegistry.RITUALS_DEFERRED);
         return null;
     }
 }

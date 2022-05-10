@@ -14,8 +14,9 @@
  *******************************************************************************/
 package genelectrovise.magiksmostevile.registry.orbital;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
+import lombok.Data;
 import net.minecraftforge.registries.DeferredRegister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,8 +24,14 @@ import org.reflections.Configuration;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <ol>
@@ -48,16 +55,19 @@ import java.util.*;
  *
  * @author GenElectrovise
  */
+@Data
 public class OrbitalRegistryGenerator {
 
     public static final ConfigurationBuilder REFLECTIONS_CONFIGURATION = new ConfigurationBuilder().forPackages("genelectrovise");
     private static final Logger LOGGER = LogManager.getLogger(OrbitalRegistryGenerator.class);
     private boolean initialised;
     private Reflections reflections;
+    private LinkedHashMap<OrbitalRegistry, Object> registries;
 
     public OrbitalRegistryGenerator(@Nullable Configuration configuration) {
         this.setInitialised(false);
         this.reflections = new Reflections(configuration == null ? REFLECTIONS_CONFIGURATION : configuration);
+        registries = Maps.newLinkedHashMap();
     }
 
     public static void registerDeferredRegister(DeferredRegister<?> register) {
@@ -67,11 +77,38 @@ public class OrbitalRegistryGenerator {
 
     public void collectOrbitalRegistries() {
 
-        if (this.isInitialised()) {
+        if (isInitialised()) {
             throw new IllegalStateException("OrbitalRegistries already initialised");
         }
+        setInitialised(true);
 
         try {
+            // Get Set of Class
+            Set<Class<?>> types = reflections.getTypesAnnotatedWith(OrbitalRegistry.class);
+
+            Map<Class<?>, OrbitalRegistry> map = getClassOrbitalRegistryMap(types);
+
+            // Stream
+            // Sort by priority
+            // Process each
+            map.entrySet().stream()
+               .sorted(Comparator.comparingInt((e) -> e.getValue().priority()))
+               .forEach((e) -> {
+                   try {
+                       Object inst = getOrbitalRegistryInstance(e);
+                       DeferredRegister<?> register = getDeferredRegisterInstance(e, inst);
+                       registerDeferredRegister(register);
+                   } catch (Exception ex) {
+                       LOGGER.error(ex);
+                       throw new OrbitalRegistryException(ex);
+                   }
+               })
+            ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*try {
 
             MagiksMostEvile.LOGGER.debug("Collecting OrbitalRegistries");
 
@@ -95,27 +132,50 @@ public class OrbitalRegistryGenerator {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }*/
+    }
+
+    @Nonnull
+    private Map<Class<?>, OrbitalRegistry> getClassOrbitalRegistryMap(Set<Class<?>> types) {
+        Map<Class<?>, OrbitalRegistry> map = Maps.newHashMap();
+        types.forEach((c) -> map.put(c, c.getAnnotation(OrbitalRegistry.class)));
+        return map;
+    }
+
+    private DeferredRegister<?> getDeferredRegisterInstance(Map.Entry<Class<?>, OrbitalRegistry> e, Object inst) throws NoSuchFieldException, IllegalAccessException {
+        // Register contained register
+        String registryFieldName = e.getValue().registryField();
+        Field registryField = inst.getClass().getField(registryFieldName);
+
+        if (!registryField.canAccess(inst)) {
+            throw new OrbitalRegistryException("The registryField "
+                    + registryFieldName
+                    + " cannot be accessed for the OrbitalRegistry "
+                    + e.getValue().name());
         }
 
-        this.setInitialised(true);
+        if (!DeferredRegister.class.isAssignableFrom(registryField.getType())) {
+            throw new OrbitalRegistryException("The registryField "
+                    + registryFieldName
+                    + " from OrbitalRegistry "
+                    + e.getValue().name()
+                    + " is not assignable from DeferredRegister. Given type is "
+                    + registryField.getType());
+        }
 
+        return (DeferredRegister<?>) registryField.get(inst);
     }
 
-    // Get and set
-
-    public boolean isInitialised() {
-        return initialised;
-    }
-
-    public void setInitialised(boolean initialised) {
-        this.initialised = initialised;
-    }
-
-    public Reflections getReflections() {
-        return reflections;
-    }
-
-    public void setReflections(Reflections reflections) {
-        this.reflections = reflections;
+    @Nonnull
+    private Object getOrbitalRegistryInstance(Map.Entry<Class<?>, OrbitalRegistry> e) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        // Instantiate
+        LOGGER.info("Generating OrbitalRegistry: "
+                + e.getValue().priority()
+                + ") ["
+                + e.getValue().name()
+                + "]");
+        Object inst = e.getKey().getConstructor().newInstance();
+        registries.put(e.getValue(), inst);
+        return inst;
     }
 }

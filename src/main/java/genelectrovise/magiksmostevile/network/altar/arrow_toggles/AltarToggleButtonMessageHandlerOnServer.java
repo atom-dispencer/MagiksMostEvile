@@ -62,7 +62,7 @@ public class AltarToggleButtonMessageHandlerOnServer {
         ArrayList<ResourceLocation> possibleRitualKeys = new ArrayList<ResourceLocation>();
 
         // Create a list of all the rituals
-        RitualOrbitalRegistry.RITUALS.getEntries().forEach((ritual) -> {
+        RitualOrbitalRegistry.RITUALS_DEFERRED.getEntries().forEach((ritual) -> {
             allRituals.add(ritual);
         });
 

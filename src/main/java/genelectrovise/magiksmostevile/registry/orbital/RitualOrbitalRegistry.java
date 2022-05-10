@@ -20,21 +20,21 @@ import genelectrovise.magiksmostevile.ritual.Ritual;
 import genelectrovise.magiksmostevile.ritual.SummonFlappyRitual;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Supplier;
+
+@OrbitalRegistry(name = "rituals", priority = 12, registryField = "RITUALS_DEFERRED")
 public class RitualOrbitalRegistry implements IOrbitalRegistry {
 
-    public static final DeferredRegister<Ritual> RITUALS = DeferredRegister.create(new ResourceLocation(MagiksMostEvile.MODID, "rituals"), MagiksMostEvile.MODID);
-
-    static {
-        RITUALS.makeRegistry(Ritual.class, RegistryBuilder::new);
-    }
+    public static final DeferredRegister<Ritual> RITUALS_DEFERRED = DeferredRegister.create(new ResourceLocation(MagiksMostEvile.MODID, "rituals"), MagiksMostEvile.MODID);
+    public static final Supplier<IForgeRegistry<Ritual>> RITUALS_REGISTER = RITUALS_DEFERRED.makeRegistry(Ritual.class, RegistryBuilder::new);
 
     // =========RITUALS=====================================================================================================================
-    public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS.register("convert_amethyst_ritual", ConvertAmethystRitual::new);
-    public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL = RITUALS.register("summon_flappy_ritual", SummonFlappyRitual::new);
+    public static final RegistryObject<ConvertAmethystRitual> CONVERT_AMETHYST_RITUAL = RITUALS_DEFERRED.register("convert_amethyst_ritual", ConvertAmethystRitual::new);
+    public static final RegistryObject<SummonFlappyRitual> SUMMON_FLAPPY_RITUAL = RITUALS_DEFERRED.register("summon_flappy_ritual", SummonFlappyRitual::new);
 
     @Override
     public int priority() {
@@ -43,7 +43,7 @@ public class RitualOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(RITUALS);
+        OrbitalRegistryGenerator.registerDeferredRegister(RITUALS_DEFERRED);
     }
 
     @Override
