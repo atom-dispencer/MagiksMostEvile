@@ -19,7 +19,7 @@ import genelectrovise.magiksmostevile.core.setup.RecipeSetup;
 import genelectrovise.magiksmostevile.entity.EntityAttributeManager;
 import genelectrovise.magiksmostevile.network.pixiecourier.PixieCourier;
 import genelectrovise.magiksmostevile.particle.ParticleClientStartup;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
+import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryHandler;
 import genelectrovise.magiksmostevile.world.noisyore.NoisyOreConfiguration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -47,6 +47,8 @@ public class MagiksMostEvile {
     public static final String NAME = "Magiks Most Evile";
     public static final String ACCEPTED_VERSIONS = "1.16.4";
 
+    public static OrbitalRegistryHandler ORBITAL_REGISTRY_MANAGER;
+
     public static IEventBus MOD_EVENT_BUS;
     public static IEventBus FORGE_EVENT_BUS;
 
@@ -67,7 +69,8 @@ public class MagiksMostEvile {
         registerCommonEvents();
 
         // Handle orbital registries
-        new OrbitalRegistryGenerator(OrbitalRegistryGenerator.REFLECTIONS_CONFIGURATION).collectOrbitalRegistries();
+        ORBITAL_REGISTRY_MANAGER = new OrbitalRegistryHandler(OrbitalRegistryHandler.REFLECTIONS_CONFIGURATION);
+        ORBITAL_REGISTRY_MANAGER.generateOrbitals();
 
     }
 

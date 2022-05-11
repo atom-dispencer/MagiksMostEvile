@@ -15,8 +15,6 @@
 package genelectrovise.magiksmostevile.registry.orbital;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarContainer;
 import genelectrovise.magiksmostevile.tileentity.inscription_table.InscriptionTableContainer;
 import net.minecraft.inventory.container.ContainerType;
@@ -36,7 +34,7 @@ public class ContainerOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(CONTAINERS);
+        OrbitalRegistryHandler.registerDeferredRegister(CONTAINERS);
     }    public static final RegistryObject<ContainerType<InscriptionTableContainer>> INSCRIPTION_TABLE_CONTAINER =
             CONTAINERS.register("inscription_table", () -> IForgeContainerType.create(InscriptionTableContainer::new));
 

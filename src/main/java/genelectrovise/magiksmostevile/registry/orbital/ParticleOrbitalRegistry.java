@@ -18,8 +18,6 @@ package genelectrovise.magiksmostevile.registry.orbital;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.particle.glyph.GlyphParticleData;
 import genelectrovise.magiksmostevile.particle.glyph.GlyphParticleType;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraft.particles.ParticleType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -41,7 +39,7 @@ public class ParticleOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(PARTICLES);
+        OrbitalRegistryHandler.registerDeferredRegister(PARTICLES);
     }
 
     @Override

@@ -73,7 +73,7 @@ public class EntityOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(ENTITIES);
+        OrbitalRegistryHandler.registerDeferredRegister(ENTITIES);
     }
 
     @Override

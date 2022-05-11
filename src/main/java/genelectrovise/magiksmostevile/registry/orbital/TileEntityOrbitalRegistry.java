@@ -36,7 +36,7 @@ public class TileEntityOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(TILE_ENTITIES);
+        OrbitalRegistryHandler.registerDeferredRegister(TILE_ENTITIES);
     }    public static final RegistryObject<TileEntityType<AltarTileEntity>> TILE_ENTITY_ALTAR =
             TILE_ENTITIES.register("tile_entity_altar", () -> TileEntityType.Builder.of(AltarTileEntity::new, BlockOrbitalRegistry.ALTAR.get()).build(null));
 

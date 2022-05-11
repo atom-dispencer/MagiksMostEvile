@@ -10,102 +10,71 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with Magiks Most Evile.
- * If not, see <https://www.gnu.org/licenses/>.
- *******************************************************************************/
-package genelectrovise.magiksmostevile.registry.orbital;
+ * If not, see <https:></https:>//www.gnu.org/licenses/>.
+ */
+package genelectrovise.magiksmostevile.registry.orbital
 
-import com.google.common.collect.Maps;
-import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import lombok.Data;
-import net.minecraftforge.registries.DeferredRegister;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.reflections.Configuration;
-import org.reflections.Reflections;
-import org.reflections.util.ConfigurationBuilder;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import com.google.common.collect.Maps
+import genelectrovise.magiksmostevile.core.MagiksMostEvile
+import lombok.Data
+import net.minecraftforge.registries.DeferredRegister
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
+import org.reflections.Configuration
+import org.reflections.Reflections
+import org.reflections.util.ConfigurationBuilder
+import java.lang.reflect.InvocationTargetException
+import java.util.function.Consumer
+import javax.annotation.Nonnull
 
 /**
- * <ol>
- * <li>blocks (BLOCKS)
- * <li>items (ITEMS)
- * <li>blockitems
- * <li>tools
- * <li>staffs
- * <li>tomes
- * <li>armor
- * <li>foods
- * <li>tileentities (TILEENTITIES)
- * <li>containers (CONTAINERS)
- * <li>entities (ENTITIES)
- * <li>rituals (RITUALS)
- * <li>particles (PARTICLES)
- * <li>structures (STRUCTURES)
- * <li>(WIP: features)
- * <li>recipes (RECIPES)
- * </ol>
+ *
+ *  1. blocks (BLOCKS)
+ *  1. items (ITEMS)
+ *  1. blockitems
+ *  1. tools
+ *  1. staffs
+ *  1. tomes
+ *  1. armor
+ *  1. foods
+ *  1. tileentities (TILEENTITIES)
+ *  1. containers (CONTAINERS)
+ *  1. entities (ENTITIES)
+ *  1. rituals (RITUALS)
+ *  1. particles (PARTICLES)
+ *  1. structures (STRUCTURES)
+ *  1. (WIP: features)
+ *  1. recipes (RECIPES)
+ *
  *
  * @author GenElectrovise
  */
 @Data
-public class OrbitalRegistryGenerator {
+open class OrbitalRegistryHandler(configuration: Configuration?) {
+    private var initialised = false
+    private var reflections: Reflections
+    private var registries: LinkedHashMap<OrbitalRegistry, Any>
 
-    public static final ConfigurationBuilder REFLECTIONS_CONFIGURATION = new ConfigurationBuilder().forPackages("genelectrovise");
-    private static final Logger LOGGER = LogManager.getLogger(OrbitalRegistryGenerator.class);
-    private boolean initialised;
-    private Reflections reflections;
-    private LinkedHashMap<OrbitalRegistry, Object> registries;
-
-    public OrbitalRegistryGenerator(@Nullable Configuration configuration) {
-        this.setInitialised(false);
-        this.reflections = new Reflections(configuration == null ? REFLECTIONS_CONFIGURATION : configuration);
-        registries = Maps.newLinkedHashMap();
+    init {
+        initialised = false
+        reflections = Reflections(configuration ?: REFLECTIONS_CONFIGURATION)
+        registries = Maps.newLinkedHashMap()
     }
 
-    public static void registerDeferredRegister(DeferredRegister<?> register) {
-        OrbitalRegistryGenerator.LOGGER.info("Registering MagiksMostEvile DeferredRegister<?> " + register.toString() + " to the MOD_EVENT_BUS");
-        register.register(MagiksMostEvile.MOD_EVENT_BUS);
-    }
-
-    public void collectOrbitalRegistries() {
-
-        if (isInitialised()) {
-            throw new IllegalStateException("OrbitalRegistries already initialised");
-        }
-        setInitialised(true);
-
+    fun generateOrbitals() {
+        check(!initialised) { "OrbitalRegistries already initialised" }
+        initialised = true
         try {
             // Get Set of Class
-            Set<Class<?>> types = reflections.getTypesAnnotatedWith(OrbitalRegistry.class);
-
-            Map<Class<?>, OrbitalRegistry> map = getClassOrbitalRegistryMap(types);
+            val types = reflections.getTypesAnnotatedWith(OrbitalRegistry::class.java)
+            val map = getClassOrbitalRegistryMap(types)
 
             // Stream
             // Sort by priority
             // Process each
-            map.entrySet().stream()
-               .sorted(Comparator.comparingInt((e) -> e.getValue().priority()))
-               .forEach((e) -> {
-                   try {
-                       Object inst = getOrbitalRegistryInstance(e);
-                       DeferredRegister<?> register = getDeferredRegisterInstance(e, inst);
-                       registerDeferredRegister(register);
-                   } catch (Exception ex) {
-                       LOGGER.error(ex);
-                       throw new OrbitalRegistryException(ex);
-                   }
-               })
-            ;
-        } catch (Exception e) {
-            e.printStackTrace();
+            instantiateAndRegisterOrbitals(map)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
         /*try {
@@ -135,47 +104,92 @@ public class OrbitalRegistryGenerator {
         }*/
     }
 
-    @Nonnull
-    private Map<Class<?>, OrbitalRegistry> getClassOrbitalRegistryMap(Set<Class<?>> types) {
-        Map<Class<?>, OrbitalRegistry> map = Maps.newHashMap();
-        types.forEach((c) -> map.put(c, c.getAnnotation(OrbitalRegistry.class)));
-        return map;
+    protected fun instantiateAndRegisterOrbitals(map: Map<Class<*>, OrbitalRegistry>) {
+        map.entries.stream()
+            .sorted(
+                Comparator.comparingInt { (_, value) -> value.priority }
+            )
+            .forEach { e: Map.Entry<Class<*>, OrbitalRegistry> ->
+                try {
+                    val inst = getOrbitalRegistryInstance(e)
+                    val register = getDeferredRegisterInstance(e, inst)
+                    registerDeferredRegister(register)
+                } catch (ex: Exception) {
+                    LOGGER.error(ex)
+                    throw OrbitalRegistryException(ex)
+                }
+            }
     }
 
-    private DeferredRegister<?> getDeferredRegisterInstance(Map.Entry<Class<?>, OrbitalRegistry> e, Object inst) throws NoSuchFieldException, IllegalAccessException {
+    @Nonnull
+    protected fun getClassOrbitalRegistryMap(types: Set<Class<*>>): Map<Class<*>, OrbitalRegistry> {
+        val map: MutableMap<Class<*>, OrbitalRegistry> = Maps.newHashMap()
+        types.forEach(Consumer { c: Class<*> ->
+            map[c] = c.getAnnotation(
+                OrbitalRegistry::class.java
+            )
+        })
+        return map
+    }
+
+    @Throws(NoSuchFieldException::class, IllegalAccessException::class)
+    protected fun getDeferredRegisterInstance(e: Map.Entry<Class<*>, OrbitalRegistry>, inst: Any): DeferredRegister<*> {
         // Register contained register
-        String registryFieldName = e.getValue().registryField();
-        Field registryField = inst.getClass().getField(registryFieldName);
-
+        val registryFieldName: String = e.value.registryField
+        val registryField = inst.javaClass.getField(registryFieldName)
         if (!registryField.canAccess(inst)) {
-            throw new OrbitalRegistryException("The registryField "
-                    + registryFieldName
-                    + " cannot be accessed for the OrbitalRegistry "
-                    + e.getValue().name());
+            throw OrbitalRegistryException(
+                "The registryField "
+                        + registryFieldName
+                        + " cannot be accessed for the OrbitalRegistry "
+                        + e.value.name
+            )
         }
-
-        if (!DeferredRegister.class.isAssignableFrom(registryField.getType())) {
-            throw new OrbitalRegistryException("The registryField "
-                    + registryFieldName
-                    + " from OrbitalRegistry "
-                    + e.getValue().name()
-                    + " is not assignable from DeferredRegister. Given type is "
-                    + registryField.getType());
+        if (!DeferredRegister::class.java.isAssignableFrom(registryField.type)) {
+            throw OrbitalRegistryException(
+                "The registryField "
+                        + registryFieldName
+                        + " from OrbitalRegistry "
+                        + e.value.name
+                        + " is not assignable from DeferredRegister. Given type is "
+                        + registryField.type
+            )
         }
-
-        return (DeferredRegister<?>) registryField.get(inst);
+        return registryField[inst] as DeferredRegister<*>
     }
 
     @Nonnull
-    private Object getOrbitalRegistryInstance(Map.Entry<Class<?>, OrbitalRegistry> e) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+    @Throws(
+        InstantiationException::class,
+        IllegalAccessException::class,
+        InvocationTargetException::class,
+        NoSuchMethodException::class
+    )
+    protected fun getOrbitalRegistryInstance(e: Map.Entry<Class<*>, OrbitalRegistry>): Any {
         // Instantiate
-        LOGGER.info("Generating OrbitalRegistry: "
-                + e.getValue().priority()
-                + ") ["
-                + e.getValue().name()
-                + "]");
-        Object inst = e.getKey().getConstructor().newInstance();
-        registries.put(e.getValue(), inst);
-        return inst;
+        LOGGER.info(
+            "Generating OrbitalRegistry: "
+                    + e.value.priority
+                    + ") ["
+                    + e.value.name
+                    + "]"
+        )
+        val inst = e.key.getConstructor().newInstance()
+        registries[e.value] = inst
+        return inst
+    }
+
+    companion object {
+        @JvmField
+        val REFLECTIONS_CONFIGURATION = ConfigurationBuilder().forPackages("genelectrovise")
+        protected val LOGGER: Logger = LogManager.getLogger(
+            OrbitalRegistryHandler::class.java
+        )
+
+        @JvmStatic
+        protected fun registerDeferredRegister(register: DeferredRegister<*>) {
+            LOGGER.info("Registering MagiksMostEvile DeferredRegister<?> $register to the MOD_EVENT_BUS")
+            register.register(MagiksMostEvile.MOD_EVENT_BUS)
+        }
     }
 }

@@ -76,7 +76,7 @@ public class BlockOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(BLOCKS);
+        OrbitalRegistryHandler.registerDeferredRegister(BLOCKS);
     }
 
     @Override

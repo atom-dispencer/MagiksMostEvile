@@ -17,8 +17,6 @@ package genelectrovise.magiksmostevile.registry.orbital;
 import com.google.common.collect.ImmutableMap;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.data.recipe.SimpleRecipe;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -81,7 +79,7 @@ public class RecipeSerializerOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(RECIPE_SERIALIZERS);
+        OrbitalRegistryHandler.registerDeferredRegister(RECIPE_SERIALIZERS);
     }
 
 }

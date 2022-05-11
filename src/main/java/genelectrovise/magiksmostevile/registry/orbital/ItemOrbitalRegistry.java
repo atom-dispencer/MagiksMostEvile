@@ -18,8 +18,6 @@ import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.support.EvileItemGroup;
 import genelectrovise.magiksmostevile.item.equipment.tabulae.*;
 import genelectrovise.magiksmostevile.item.glowing.GlowingItem;
-import genelectrovise.magiksmostevile.registry.orbital.IOrbitalRegistry;
-import genelectrovise.magiksmostevile.registry.orbital.OrbitalRegistryGenerator;
 import genelectrovise.magiksmostevile.tileentity.mortar.EnumPestleLevel;
 import genelectrovise.magiksmostevile.tileentity.mortar.Pestle;
 import net.minecraft.item.Item;
@@ -72,7 +70,7 @@ public class ItemOrbitalRegistry implements IOrbitalRegistry {
 
     @Override
     public void initialise() {
-        OrbitalRegistryGenerator.registerDeferredRegister(ITEMS);
+        OrbitalRegistryHandler.registerDeferredRegister(ITEMS);
     }
 
     @Override
