@@ -6,10 +6,10 @@ import org.mockito.Mockito
 class OrbitalRegistryHandlerTest {
 
     @Test
-    fun whens() {
-        val generator = Mockito.mock(OrbitalRegistryHandler::class.java)
-        Mockito.`when`(generator.generateOrbitals()).thenCallRealMethod()
+    fun when_getClassOrbitalRegistryMap_thenReturn () {
+        val handler = Mockito.mock(OrbitalRegistryHandler::class.java)
+        Mockito.`when`(handler.mapOrbitalsToClasses(Mockito.any())).thenCallRealMethod()
 
-        generator.
+        handler.
     }
 }

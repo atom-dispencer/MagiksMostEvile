@@ -24,7 +24,7 @@ import org.reflections.Configuration
 import org.reflections.Reflections
 import org.reflections.util.ConfigurationBuilder
 import java.lang.reflect.InvocationTargetException
-import java.util.function.Consumer
+import java.util.stream.Collectors
 import javax.annotation.Nonnull
 
 /**
@@ -65,84 +65,51 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
         check(!initialised) { "OrbitalRegistries already initialised" }
         initialised = true
         try {
-            // Get Set of Class
-            val types = reflections.getTypesAnnotatedWith(OrbitalRegistry::class.java)
-            val map = getClassOrbitalRegistryMap(types)
+            reflections
+                // Get Classes with Orbital annotation
+                .getTypesAnnotatedWith(OrbitalRegistry::class.java)
+                // Make stream of Classes
+                .stream()
+                // Collect the Stream into a <Class, Orbital> Map
+                .collect(
+                    Collectors.toMap(
+                        { c -> c },
+                        { c -> c.getAnnotation(OrbitalRegistry::class.java) }
+                    ))
 
-            // Stream
-            // Sort by priority
-            // Process each
-            instantiateAndRegisterOrbitals(map)
+                // Get a Set of the entries in the Class, Orbital map
+                .entries
+                // Sort the entries to their natural order by priority
+                .sortedBy { (_, value) -> value.priority }
+                // Instantiate each
+                .forEach { (e, r) -> instantiateAndRegisterOrbital(e, r) }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        /*try {
-
-            MagiksMostEvile.LOGGER.debug("Collecting OrbitalRegistries");
-
-            Set<Class<? extends IOrbitalRegistry>> orbitals = reflections.getSubTypesOf(IOrbitalRegistry.class);
-
-            Map<Integer, IOrbitalRegistry> registries = new HashMap<Integer, IOrbitalRegistry>();
-
-            for (Class<? extends IOrbitalRegistry> clazz : orbitals) {
-                IOrbitalRegistry instance = clazz.newInstance();
-                registries.put(instance.priority(), instance);
-            }
-
-            ArrayList<Integer> keys = Lists.newArrayList(registries.keySet());
-            Collections.sort(keys);
-
-            for (Integer integer : keys) {
-                IOrbitalRegistry registry = registries.get(integer);
-                MagiksMostEvile.LOGGER.info("Initialising MagiksMostEvile OrbitalRegistry: (" + registry.priority() + ") [" + registry.name() + "]");
-                registry.initialise();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
-    protected fun instantiateAndRegisterOrbitals(map: Map<Class<*>, OrbitalRegistry>) {
-        map.entries.stream()
-            .sorted(
-                Comparator.comparingInt { (_, value) -> value.priority }
-            )
-            .forEach { e: Map.Entry<Class<*>, OrbitalRegistry> ->
-                try {
-                    val inst = getOrbitalRegistryInstance(e)
-                    val register = getDeferredRegisterInstance(e, inst)
-                    registerDeferredRegister(register)
-                } catch (ex: Exception) {
-                    LOGGER.error(ex)
-                    throw OrbitalRegistryException(ex)
-                }
-            }
-    }
-
-    @Nonnull
-    protected fun getClassOrbitalRegistryMap(types: Set<Class<*>>): Map<Class<*>, OrbitalRegistry> {
-        val map: MutableMap<Class<*>, OrbitalRegistry> = Maps.newHashMap()
-        types.forEach(Consumer { c: Class<*> ->
-            map[c] = c.getAnnotation(
-                OrbitalRegistry::class.java
-            )
-        })
-        return map
+    private fun instantiateAndRegisterOrbital(e: Class<*>, o: OrbitalRegistry) {
+        try {
+            val inst = getOrbitalRegistryInstance(e, o)
+            val register = getDeferredRegisterInstance(o, inst)
+            registerDeferredRegister(register)
+        } catch (ex: Exception) {
+            LOGGER.error(ex)
+            throw OrbitalRegistryException(ex)
+        }
     }
 
     @Throws(NoSuchFieldException::class, IllegalAccessException::class)
-    protected fun getDeferredRegisterInstance(e: Map.Entry<Class<*>, OrbitalRegistry>, inst: Any): DeferredRegister<*> {
+    protected fun getDeferredRegisterInstance(o: OrbitalRegistry, inst: Any): DeferredRegister<*> {
         // Register contained register
-        val registryFieldName: String = e.value.registryField
+        val registryFieldName: String = o.registryField
         val registryField = inst.javaClass.getField(registryFieldName)
         if (!registryField.canAccess(inst)) {
             throw OrbitalRegistryException(
                 "The registryField "
                         + registryFieldName
                         + " cannot be accessed for the OrbitalRegistry "
-                        + e.value.name
+                        + o.name
             )
         }
         if (!DeferredRegister::class.java.isAssignableFrom(registryField.type)) {
@@ -150,7 +117,7 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
                 "The registryField "
                         + registryFieldName
                         + " from OrbitalRegistry "
-                        + e.value.name
+                        + o.name
                         + " is not assignable from DeferredRegister. Given type is "
                         + registryField.type
             )
@@ -165,17 +132,17 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
         InvocationTargetException::class,
         NoSuchMethodException::class
     )
-    protected fun getOrbitalRegistryInstance(e: Map.Entry<Class<*>, OrbitalRegistry>): Any {
+    protected fun getOrbitalRegistryInstance(e: Class<*>, o: OrbitalRegistry): Any {
         // Instantiate
         LOGGER.info(
             "Generating OrbitalRegistry: "
-                    + e.value.priority
+                    + o.priority
                     + ") ["
-                    + e.value.name
+                    + o.name
                     + "]"
         )
-        val inst = e.key.getConstructor().newInstance()
-        registries[e.value] = inst
+        val inst = e.getConstructor().newInstance()
+        registries[o] = inst
         return inst
     }
 
