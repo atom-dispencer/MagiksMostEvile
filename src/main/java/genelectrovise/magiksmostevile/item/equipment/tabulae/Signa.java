@@ -20,7 +20,7 @@ import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.item.equipment.tabulae.Signum.EnumSignumMaterialType;
 import genelectrovise.magiksmostevile.registry.orbital.ItemOrbitalRegistry;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Supplier;
 

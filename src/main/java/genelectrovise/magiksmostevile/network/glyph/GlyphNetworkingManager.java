@@ -18,7 +18,7 @@
 package genelectrovise.magiksmostevile.network.glyph;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;

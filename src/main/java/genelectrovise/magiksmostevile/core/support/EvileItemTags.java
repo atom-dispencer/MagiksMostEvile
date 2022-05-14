@@ -18,7 +18,7 @@ import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import net.minecraft.item.Item;
 import net.minecraft.tags.*;
 import net.minecraft.tags.ITag.INamedTag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 
 import javax.annotation.Nullable;

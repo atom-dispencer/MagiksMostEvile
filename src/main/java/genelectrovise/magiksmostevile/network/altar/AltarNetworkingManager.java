@@ -30,7 +30,7 @@ import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpda
 import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpdateMessageHandlerOnServer;
 import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpdateMessageToClient;
 import genelectrovise.magiksmostevile.network.altar.energy_update.AltarIchorUpdateMessageToServer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;

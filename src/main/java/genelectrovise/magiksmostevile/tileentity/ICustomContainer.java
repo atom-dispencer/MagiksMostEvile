@@ -23,6 +23,7 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 /**
  * @author GenElectrovise 18 May 2020
  */
-public interface ICustomContainer extends INamedContainerProvider {
+// public interface ICustomContainer extends INamedContainerProvider {
+    public interface ICustomContainer {
     void openGUI(ServerPlayerEntity player);
 }

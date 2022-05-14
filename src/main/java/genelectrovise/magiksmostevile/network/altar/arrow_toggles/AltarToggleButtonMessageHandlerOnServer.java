@@ -24,7 +24,7 @@ import genelectrovise.magiksmostevile.registry.orbital.RitualOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.Ritual;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 import net.minecraftforge.fml.network.PacketDistributor;

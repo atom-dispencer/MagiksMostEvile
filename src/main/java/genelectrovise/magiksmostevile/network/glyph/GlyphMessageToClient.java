@@ -19,7 +19,7 @@ package genelectrovise.magiksmostevile.network.glyph;
 
 import genelectrovise.magiksmostevile.ritual.glyph.Glyph.GlyphOrientation;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 /**

@@ -16,7 +16,7 @@ package genelectrovise.magiksmostevile.network.inscription_table.button_pressed;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class ButtonPressedMessageToServer {
     private static boolean messageIsValid;

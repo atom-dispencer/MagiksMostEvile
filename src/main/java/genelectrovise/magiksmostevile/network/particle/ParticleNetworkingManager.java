@@ -26,7 +26,7 @@ import genelectrovise.magiksmostevile.network.particle.transfer_energy.TransferE
 import genelectrovise.magiksmostevile.network.particle.transfer_energy.TransferEnergyMessageHandlerOnServer;
 import genelectrovise.magiksmostevile.network.particle.transfer_energy.TransferEnergyMessageToClient;
 import genelectrovise.magiksmostevile.network.particle.transfer_energy.TransferEnergyMessageToServer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;

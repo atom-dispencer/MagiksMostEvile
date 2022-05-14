@@ -22,7 +22,7 @@ import genelectrovise.magiksmostevile.network.altar.cast_button.AltarCastButtonP
 import genelectrovise.magiksmostevile.network.altar.cast_button.AltarCastButtonPressedMessageHandlerOnServer;
 import genelectrovise.magiksmostevile.network.inscription_table.button_pressed.ButtonPressedMessageHandlerOnServer;
 import genelectrovise.magiksmostevile.network.inscription_table.button_pressed.ButtonPressedMessageToServer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;

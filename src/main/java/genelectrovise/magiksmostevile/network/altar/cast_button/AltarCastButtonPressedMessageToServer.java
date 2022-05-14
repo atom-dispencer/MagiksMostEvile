@@ -16,7 +16,7 @@ package genelectrovise.magiksmostevile.network.altar.cast_button;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author GenElectrovise 24 May 2020

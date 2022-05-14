@@ -15,7 +15,7 @@
 package genelectrovise.magiksmostevile.core.reference;
 
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class StructureReference {
 

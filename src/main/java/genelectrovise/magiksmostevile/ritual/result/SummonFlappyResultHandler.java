@@ -23,7 +23,7 @@ import genelectrovise.magiksmostevile.ritual.ResultHandler;
 import genelectrovise.magiksmostevile.ritual.SummonFlappyRitual;
 import genelectrovise.magiksmostevile.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.tileentity.altar.AltarTileEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.PacketDistributor;
 

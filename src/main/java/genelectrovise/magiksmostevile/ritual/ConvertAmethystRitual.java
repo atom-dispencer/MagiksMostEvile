@@ -24,7 +24,7 @@ import genelectrovise.magiksmostevile.registry.orbital.ItemOrbitalRegistry;
 import genelectrovise.magiksmostevile.ritual.glyph.Glyph.GlyphOrientation;
 import genelectrovise.magiksmostevile.ritual.result.ConvertAmethystResultHandler;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;

@@ -18,7 +18,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import java.util.ArrayList;

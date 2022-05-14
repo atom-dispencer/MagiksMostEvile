@@ -17,7 +17,7 @@ package genelectrovise.magiksmostevile.world.structure.registry;
 import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.world.EnumFeatureLocation;
 import genelectrovise.magiksmostevile.world.structure.shrine.OvergroundShrineFeatureConfig;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.StructureFeature;

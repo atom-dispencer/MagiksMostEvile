@@ -27,13 +27,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class AmethystCrystalTileEntity extends TileEntity implements ITickableTileEntity {
+public class AmethystCrystalTileEntity extends BlockEntity {
 
     private World world;
     private int iteration = 1;

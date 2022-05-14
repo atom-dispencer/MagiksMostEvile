@@ -18,7 +18,7 @@ import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import net.minecraft.block.Block;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class ModdedTags {
     public static final ITag<Block> AMETHYST_ORE_SPAWNABLE = BlockTags.bind(new ResourceLocation(MagiksMostEvile.MODID, "amethyst_ore_spawnable").toString());

@@ -5,7 +5,7 @@ import genelectrovise.magiksmostevile.network.pixiecourier.handshake.ClientHands
 import genelectrovise.magiksmostevile.network.pixiecourier.handshake.CourierHandshakePacket;
 import genelectrovise.magiksmostevile.network.pixiecourier.handshake.HandshakeManager;
 import genelectrovise.magiksmostevile.network.pixiecourier.handshake.ServerHandshakeManager;
-import net.minecraft.util.ResourceLocation;
+
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.DistExecutor;

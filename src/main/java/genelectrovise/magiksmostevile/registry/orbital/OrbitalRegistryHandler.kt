@@ -53,12 +53,10 @@ import javax.annotation.Nonnull
 open class OrbitalRegistryHandler(configuration: Configuration?) {
     private var initialised = false
     private var reflections: Reflections
-    private var registries: LinkedHashMap<OrbitalRegistry, Any>
 
     init {
         initialised = false
         reflections = Reflections(configuration ?: REFLECTIONS_CONFIGURATION)
-        registries = Maps.newLinkedHashMap()
     }
 
     fun generateOrbitals() {
@@ -88,7 +86,7 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
         }
     }
 
-    private fun instantiateAndRegisterOrbital(e: Class<*>, o: OrbitalRegistry) {
+    internal fun instantiateAndRegisterOrbital(e: Class<*>, o: OrbitalRegistry) {
         try {
             val inst = getOrbitalRegistryInstance(e, o)
             val register = getDeferredRegisterInstance(o, inst)
@@ -100,7 +98,7 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
     }
 
     @Throws(NoSuchFieldException::class, IllegalAccessException::class)
-    protected fun getDeferredRegisterInstance(o: OrbitalRegistry, inst: Any): DeferredRegister<*> {
+    internal fun getDeferredRegisterInstance(o: OrbitalRegistry, inst: Any): DeferredRegister<*> {
         // Register contained register
         val registryFieldName: String = o.registryField
         val registryField = inst.javaClass.getField(registryFieldName)
@@ -132,7 +130,7 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
         InvocationTargetException::class,
         NoSuchMethodException::class
     )
-    protected fun getOrbitalRegistryInstance(e: Class<*>, o: OrbitalRegistry): Any {
+    internal fun getOrbitalRegistryInstance(e: Class<*>, o: OrbitalRegistry): Any {
         // Instantiate
         LOGGER.info(
             "Generating OrbitalRegistry: "
@@ -141,9 +139,7 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
                     + o.name
                     + "]"
         )
-        val inst = e.getConstructor().newInstance()
-        registries[o] = inst
-        return inst
+        return e.getConstructor().newInstance()
     }
 
     companion object {
@@ -154,7 +150,7 @@ open class OrbitalRegistryHandler(configuration: Configuration?) {
         )
 
         @JvmStatic
-        protected fun registerDeferredRegister(register: DeferredRegister<*>) {
+        internal fun registerDeferredRegister(register: DeferredRegister<*>) {
             LOGGER.info("Registering MagiksMostEvile DeferredRegister<?> $register to the MOD_EVENT_BUS")
             register.register(MagiksMostEvile.MOD_EVENT_BUS)
         }

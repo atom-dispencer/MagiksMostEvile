@@ -18,7 +18,7 @@
 package genelectrovise.magiksmostevile.network.altar.arrow_toggles;
 
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author GenElectrovise 12 Jun 2020

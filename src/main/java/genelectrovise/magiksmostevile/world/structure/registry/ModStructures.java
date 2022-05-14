@@ -19,7 +19,7 @@ import genelectrovise.magiksmostevile.core.MagiksMostEvile;
 import genelectrovise.magiksmostevile.core.reference.ReflectionUtil;
 import genelectrovise.magiksmostevile.world.structure.shrine.OvergroundShrineFeatureConfig;
 import genelectrovise.magiksmostevile.world.structure.shrine.OvergroundShrineStructure;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;

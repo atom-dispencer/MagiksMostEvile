@@ -39,10 +39,11 @@ import net.minecraft.tileentity.EnchantingTableTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -70,8 +71,9 @@ import java.util.function.Supplier;
  * @see EnchantmentScreen
  * @see EnchantingTableBlock
  * @see EnchantingTableTileEntity
+ * @see net.minecraft.world.level.block.entity.FurnaceBlockEntity
  */
-public class AltarTileEntity extends TileEntity implements ITickableTileEntity, ICustomContainer {
+public class AltarTileEntity extends BlockEntity implements ICustomContainer {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
@@ -248,7 +250,7 @@ public class AltarTileEntity extends TileEntity implements ITickableTileEntity, 
 
     // ITickableTileEntity
     @Override
-    public void tick() {
+    public void serverTick() {
 
         if (!level.isClientSide) {
             if (tickIncr % 100 == 0) {

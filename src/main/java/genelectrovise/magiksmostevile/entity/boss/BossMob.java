@@ -21,20 +21,13 @@ package genelectrovise.magiksmostevile.entity.boss;
  * @see GlobalEntityTypeAttributes#put
  */
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.world.BossInfo;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerBossInfo;
+import net.minecraft.world.entity.monster.Monster;
 
 /**
  * @author GenElectrovise 23 Jun 2020
  * @see WitherEntity
  */
-public class BossMob extends MonsterEntity {
+public class BossMob extends Monster {
 
     protected ServerBossInfo serverBossInfo;
 
