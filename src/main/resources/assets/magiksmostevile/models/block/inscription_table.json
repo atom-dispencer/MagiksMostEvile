@@ -1,9 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "top": "magiksmostevile:blocks/inscription_table/inscription_table_top",
-    "bottom": "magiksmostevile:blocks/inscription_table/inscription_table_bottom",
-    "front": "magiksmostevile:blocks/inscription_table/inscription_table_front",
-    "side": "magiksmostevile:blocks/inscription_table/inscription_table_sides"
-  }
-}
